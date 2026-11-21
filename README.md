@@ -69,8 +69,8 @@ For v0.111.0, do the same inside `game-v0.111.0/` with `V=v0.111.0`. [docs/17](d
 
 | Paper row | Code | Network (release, file) | Seeds | Per-seed results |
 |---|---|---|---|---|
-| Table 3, Defect | `game-v0.111.0/`: `tools/sim_pimc_eval.py` (greedy trunk and PIMC) | `weights-v1`, `student_e_v165018.pt` | W1, entries 6,901–8,400 (`seeds/W1_6901-8400.txt`) | not in this release: the per-seed records are in an offline backup ([results/README](results/README.md#records-that-no-longer-exist-on-the-machines)) |
-| Table 3, Regent | same | `weights-v2`, `regent_student_e8.pt` | W1, first 1,000 | `results/table3/`: 174 of the 1,000 original records, and a full rerun that reproduces them |
+| Table 3, Defect | `game-v0.111.0/`: `tools/sim_pimc_eval.py` (greedy trunk and PIMC) | `weights-v1`, `student_e_v165018.pt` | W1, entries 6,901–8,400 (`seeds/W1_6901-8400.txt`) | `results/table3/` |
+| Table 3, Regent | same | `weights-v2`, `regent_student_e8.pt` | W1, first 1,000 | `results/table3/` |
 | Table 3, Silent | same | `weights-v4`, `silent_ema_v26428.pt` | W1, first 1,000 | `results/table3/` |
 | Table 3, Fool | top level: `tools/future/run_search.py` (`--sims 0` greedy; `--sims 32 --rooms Boss,Elite`) | `weights-v5`, `fool_ema_v24181.pt` | P2-future, first 3,000 | `results/table3/` |
 | Table 3, Ironclad | top level: `tools/ability_test.py` (greedy), `tools/future/run_search.py` (search) | `weights-v6`, `ironclad_ema_v24782.pt` | R1 | `results/table3/` |

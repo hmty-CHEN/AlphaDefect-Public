@@ -402,3 +402,7 @@ e531c54d4df41004e5ca6353b56aceb4632124b7e0ad60029823ef8023d623ef  B:/root/paper_
 04b24fb95f8417c5661deff675300a2588ae6f094d36d3b8d9e3b9ea835a6cad  B:/root/paper_exp/ironclad_rv1_greedy/runs_s3.jsonl
 e40614856cf88f4ff1dc6e69609fab8293b9fcf7dd2ec644bc586ace1d53dbba  B:/root/paper_exp/ironclad_rv1_greedy/runs_s4.jsonl
 5ee9707f916a8b44dabd0262c803353dcf5814a1f0ba1e256452dd521af39707  B:/root/paper_exp/ironclad_rv1_greedy/runs_s5.jsonl
+
+# Recovered 2026-11-22 from the offline backup (chunk SHA-256 as recorded at backup time and verified after download)
+f0f73fbf1ddaae8c682c2cc7770baafdfe2df613c0188ce63ac7e0ca56bfd6dd  backup:b/full-20261109/part-0006.tar.zst (Defect: b3s/e1500_merged/{seeds,items}_s0.jsonl, diag/CYC1_e/runs_s0-3.jsonl)
+108fc16c1e40fb4bb02219d158983092db95757e09a495c904f49a8172bd037b  backup:b/l2-20261120/part-0032.tar.zst (Regent: pimc_regent/student_e8{,_A,_B2,_B3}/{seeds,items}_s*.jsonl)

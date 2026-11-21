@@ -36,9 +36,12 @@ python3 paper/scripts/paper_stats.py --seeds seeds/RV1.json --n 1000 greedy=resu
 
 | File | Paper row | Seeds | Wins / runs | Source (machine:path) | SHA-256 of the CSV |
 |---|---|---|---|---|---|
-| `table3/table3_regent_w1_trunk-PARTIAL.csv` | Table 3, Regent (distilled student e8), greedy: 741/1,000. **Partial: 174 of the 1,000 seeds** (the 9 shards run on machine A). | W1 first 1,000 | 124 / 174 (826 missing) | `B:/root/from_a/root/pimc_regent/student_e8/{seeds,items}_s15–23.jsonl` | `2d3be1d9a8c1fa8c…` |
-| `table3/table3_regent_w1_pimc-PARTIAL.csv` | Table 3, Regent, Act-3 PIMC: 772/1,000. **Partial: the same 174 seeds** (127 wins there, vs 124 greedy). | W1 first 1,000 | 127 / 174 (826 missing) | `same as above` | `123129589fbbd9c6…` |
-| `table3/table3_regent_w1_greedy-rerun-20261122.csv` | Re-run of the Regent greedy row, not the original record: 741/1,000. Same deploy, checkpoint and settings (stall rules off), 2026-11-22. Identical to the original on all 174 surviving seeds. | W1 first 1,000 | 741 / 1,000 | `B:/root/paper_exp/v111_repro/regent_rules_off/runs_s0–5.jsonl` | `1fb1586c78560901…` |
+| `table3/table3_defect_w1-6901-8400_trunk.csv` | Table 3, Defect (distilled student e), greedy trunk of the PIMC evaluation (Defect log DR #290): 1,151/1,500. Recovered from the offline backup on 2026-11-22. | W1 entries 6,901–8,400 | 1,151 / 1,500 | offline backup, chunk `b/full-20261109/part-0006` (SHA-256 `f0f73fbf1ddaae8c…`): `b3s/e1500_merged/{seeds,items}_s0.jsonl` | `9b37e7f1f5f34b47…` |
+| `table3/table3_defect_w1-6901-8400_pimc.csv` | Table 3, Defect, Act-3 PIMC: 1,205/1,500 (1,392 seeds reached the first Act-3 boss). | W1 entries 6,901–8,400 | 1,205 / 1,500 | same as above | `76994cb4a059c701…` |
+| `table3/table3_defect_w1-6901-8400_greedy-ability.csv` | The Defect's separate greedy test of the same network on the same seeds (`ability_test`): 1,151/1,500, identical to the trunk on every seed. | W1 entries 6,901–8,400 | 1,151 / 1,500 | offline backup, same chunk: `diag/CYC1_e/runs_s0–3.jsonl` | `0c2e7adad7adabc7…` |
+| `table3/table3_regent_w1_trunk.csv` | Table 3, Regent (distilled student e8), greedy trunk (Regent log #29): 741/1,000. Merged from four pieces of the original run: machine B's shards 0–14, machine A's shards 15–23 (174 seeds), B's rerun of the rest of shards 15–23 and two single-seed reruns; the 18 seeds present in two pieces have the same outcome in both. | W1 first 1,000 | 741 / 1,000 | offline backup, chunk `b/l2-20261120/part-0032` (SHA-256 `108fc16c1e40fb4b…`): `pimc_regent/student_e8{,_A,_B2,_B3}/{seeds,items}_s*.jsonl` | `afceb91e3da8f8c8…` |
+| `table3/table3_regent_w1_pimc.csv` | Table 3, Regent, Act-3 PIMC: 772/1,000. | W1 first 1,000 | 772 / 1,000 | same as above | `dacbbd2e3afe5ac5…` |
+| `table3/table3_regent_w1_greedy-rerun-20261122.csv` | Re-run of the Regent greedy row, not the original record: 741/1,000. Same deploy, checkpoint and settings (stall rules off), 2026-11-22. Identical to the original on all 1,000 seeds. | W1 first 1,000 | 741 / 1,000 | `B:/root/paper_exp/v111_repro/regent_rules_off/runs_s0–5.jsonl` | `1fb1586c78560901…` |
 | `table3/table3_silent_w1_trunk.csv` | Table 3, Silent (v26,428 EMA), greedy: 713/1,000 (greedy trunk of the PIMC evaluation, stall rules off). | W1 first 1,000 | 713 / 1,000 | `local copy of B:/root/pimc_silent/m26428/items_s*.jsonl` | `94b40f372acc179f…` |
 | `table3/table3_silent_w1_pimc.csv` | Table 3, Silent, Act-3 PIMC: 740/1,000. | W1 first 1,000 | 740 / 1,000 | `same as above` | `a8377302f27e0de0…` |
 | `table3/table3_silent_w1_greedy-rules-on.csv` | Silent standalone greedy test with stall rules on: 712/1,000 (Silent log #22; the paper notes the one-run difference). | W1 first 1,000 | 712 / 1,000 | `local copy of B:/root/ens_silent/r26428/M/runs_s0–5.jsonl` | `2c3f87401d1450a1…` |
@@ -68,13 +71,11 @@ python3 paper/scripts/paper_stats.py --seeds seeds/RV1.json --n 1000 greedy=resu
 
 Full SHA-256 values are in `SHA256SUMS`.
 
-## Records that no longer exist on the machines
+## Records recovered from the offline backup
 
-These were not reconstructed. The originals are in an offline backup of the training machines that was not retrieved for this release.
+The Defect's records of Table 3 (both arms) and 826 of the Regent's 1,000 were no longer on the training machines. They were recovered on 2026-11-22 from the offline backup of the machines, made on 2026-11-09 and 2026-11-20: each backup chunk was downloaded, checked against the SHA-256 recorded when it was made, and only the evaluation files were extracted. Recomputed from them: the Defect +3.60 points (paired Wald 95% +2.11 to +5.09; 93 seeds won only with PIMC, 39 only greedily; p = 2.9e-6) and the Regent +3.10 (+1.18 to +5.02; 64 vs 33; p = 0.0022), as in Table 3.
 
-- **Defect (distilled student e), Table 3: greedy 1,151/1,500 and PIMC 1,205/1,500 on W1 entries 6,901–8,400** (Defect log DR #290). Both arms are missing. The per-seed files (`b3s/e1500_merged/{seeds,items}_s0.jsonl`, and the original greedy test `diag/CYC1_e/runs_s*.jsonl`) are in `full-20261109/part-0006.tar.zst`. The seed list is in `../seeds/W1_6901-8400.txt`.
-- **Regent, Table 3: 826 of the 1,000 seeds** of the PIMC evaluation (greedy trunk and PIMC). Only the 174 seeds of the shards run on machine A survive (the `-PARTIAL` files). The rest are in `l2-20261120/part-0031` and `part-0032.tar.zst`. The 2026-11-22 re-run reproduces the total (741) and every surviving seed, but it is a re-run, not the original record.
-- **Silent, Table 3: the trunk's per-seed file** (`seeds_s*.jsonl`) is missing. The PIMC items file covers the 862 seeds that reached the first Act-3 boss; the other 138 seeds were lost before it in both arms, so their `win` is 0 and their `floor`/`act` are blank. The re-run file gives the floor of every run and matches the original trunk on all 1,000 seeds.
+The Silent's trunk records in `table3/table3_silent_w1_trunk.csv` come from the PIMC items file, which covers the 862 seeds that reached the first Act-3 boss; the other 138 seeds were lost before it in both arms, so their `win` is 0 and their `floor`/`act` are blank. The re-run file gives the floor of every run and matches the original trunk on all 1,000 seeds.
 
 ## Not yet included (2026-11-22)
 
