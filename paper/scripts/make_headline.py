@@ -34,9 +34,9 @@ plt.rcParams.update({
 
 CHARS = ["Defect", "Regent", "Silent", "Fool", "Ironclad", "Necrobinder"]
 GREEDY = {"Defect": (1151, 1500), "Regent": (741, 1000), "Silent": (713, 1000), "Fool": (1864, 3000),
-          "Ironclad": (679, 1000), "Necrobinder": (2699, 4608)}   # 铁甲：R1 上与搜索同种子（11-21 补测）
+          "Ironclad": (679, 1000), "Necrobinder": (631, 1000)}   # 亡灵：v25,875 在 RV1 前 1,000 个新种子上（11-22 补测）   # 铁甲：R1 上与搜索同种子（11-21 补测）
 SEARCH = {"Defect": (1205, 1500), "Regent": (772, 1000), "Silent": (740, 1000), "Fool": (2051, 3000),
-          "Ironclad": (731, 1000)}
+          "Ironclad": (731, 1000), "Necrobinder": (676, 1000)}
 # 玩家：v0.111.0 三个角色用正文 3.5 节的数（10-26、11-06、11-09 取得）；v0.113.1 三个角色用同版本的数
 # （.notes/data/codex/cards_*_solo_a10_v0.113.1.json，2026-11-21 取得：愚者 410/3,056，铁甲 214/1,961，亡灵 81/707）
 PLAYERS = {"Defect": (2354, 15948), "Regent": (2791, 16303), "Silent": (5373, 27025),
@@ -66,7 +66,7 @@ def main():
             ax.plot(100 * w / n, y, "s", ms=4.8, mfc="white", mew=1.2, color=ORANGE, zorder=4)
         w, n = GREEDY[c]
         lo, hi = wilson(w, n); p = 100 * w / n
-        hollow = c == "Necrobinder"
+        hollow = False   # 亡灵 11-22 起有新种子上的正式测试（原来是 24 轮常规评测的平均，画空心、不给区间）
         if not hollow:      # 亡灵是 24 个检查点在同 192 个种子上的平均，不给区间（表 3 脚注；第 5 轮核对 3）
             ax.plot([lo, hi], [y + 0.13] * 2, color=BLUE, lw=1.2, zorder=4)
         ax.plot(p, y + 0.13, "o", ms=5, color=BLUE, mfc="white" if hollow else BLUE, mew=1.2, zorder=5)

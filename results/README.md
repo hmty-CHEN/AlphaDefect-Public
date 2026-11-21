@@ -62,6 +62,9 @@ python3 paper/scripts/paper_stats.py --seeds seeds/RV1.json --n 1000 greedy=resu
 | `table4/table4_fool_rv1_search-boss-elite.csv` | Table 4, Fool, tree search in boss and elite fights: 667/1,000. | RV1 first 1,000 | 667 / 1,000 | `D:~/paper_exp/fool/BE/runs_s0–11.jsonl` | `36b3eb78b220afbf…` |
 | `table4/table4_fool_rv1_search-act3-bosses.csv` | Table 4, Fool, tree search in the two Act-3 boss fights only (`--rooms Boss --acts 2`): 649/1,000. | RV1 first 1,000 | 649 / 1,000 | `D:~/paper_exp/fool/B3/runs_s0–11.jsonl` | `4e2bcfed5985a9aa…` |
 | `table4/table4_ironclad_rv1_greedy.csv` | Table 4, Ironclad v24,782 EMA, greedy: 665/1,000. | RV1 first 1,000 | 665 / 1,000 | `B:/root/paper_exp/ironclad_rv1_greedy/runs_s0–5.jsonl` | `6f7b00cbcaefecb6…` |
+| `table3/table3_necrobinder_rv1_greedy-sims0.csv` | Table 3, Necrobinder v25,875 (raw weights), greedy through the search tool's path (`--sims 0`): 631/1,000; pairs with the search row. | RV1 first 1,000 | 631 / 1,000 | `B:/root/paper_exp/necro_rv1/Z/runs_s0–15.jsonl` | `40f1cedadc6eb0bd…` |
+| `table3/table3_necrobinder_rv1_search-boss-elite.csv` | Table 3, Necrobinder, tree search in boss and elite fights: 676/1,000. | RV1 first 1,000 | 676 / 1,000 | `B:/root/paper_exp/necro_rv1/S/runs_s0–15.jsonl` | `afcf4bac1d5dba4e…` |
+| `table3/table3_necrobinder_rv1_greedy-ability.csv` | Table 3, Necrobinder, `ability_test` greedy (4 × 8, stall rules on, as in routine evaluation): 631/1,000; identical to the `--sims 0` run on every seed. | RV1 first 1,000 | 631 / 1,000 | `B:/root/paper_exp/necro_rv1/G/runs_s0–3.jsonl` | `40f1cedadc6eb0bd…` |
 
 Full SHA-256 values are in `SHA256SUMS`.
 
@@ -75,7 +78,6 @@ These were not reconstructed. The originals are in an offline backup of the trai
 
 ## Not yet included (2026-11-22)
 
-- Necrobinder v25,875 on RV1 (greedy and tree search in boss and elite fights): running at the time of export; to be added.
 - Defect student e on game v0.113.1 with tree search in boss and elite fights (RV1 first 1,000): running at the time of export.
 
 ## Other results in this folder

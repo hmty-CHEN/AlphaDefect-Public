@@ -15,7 +15,7 @@ Win rates (%) at Ascension 10 in the headless engine, greedy play and with searc
 | Silent | v0.111.0 | EMA, update 26,428 | 71.3 | 74.0 | 71.2 / 73.6 |
 | Fool | v0.113.1 | EMA, update 24,181 | 62.1 | 68.4 | 62.5 / 66.7 |
 | Ironclad | v0.113.1 | EMA, update 24,782 | 67.9 | 73.1 | 66.5 / – |
-| Necrobinder | v0.113.1 | raw, update 25,875 | 58.6 (routine evaluations) | – | see `results/` |
+| Necrobinder | v0.113.1 | raw, update 25,875 | 63.1 | 67.6 | tested only on fresh seeds (RV1) |
 
 In 801 runs of the released game, played through a mod on a public livestream, the networks won 595 against 596.0 expected from these headless results.
 
@@ -74,7 +74,7 @@ For v0.111.0, do the same inside `game-v0.111.0/` with `V=v0.111.0`. [docs/17](d
 | Table 3, Silent | same | `weights-v4`, `silent_ema_v26428.pt` | W1, first 1,000 | `results/table3/` |
 | Table 3, Fool | top level: `tools/future/run_search.py` (`--sims 0` greedy; `--sims 32 --rooms Boss,Elite`) | `weights-v5`, `fool_ema_v24181.pt` | P2-future, first 3,000 | `results/table3/` |
 | Table 3, Ironclad | top level: `tools/ability_test.py` (greedy), `tools/future/run_search.py` (search) | `weights-v6`, `ironclad_ema_v24782.pt` | R1 | `results/table3/` |
-| Table 3, Necrobinder | routine evaluation during training | `weights-v6`, `necrobinder_raw_v25875.pt` | P1 evaluation subset, first 192 | `paper/data/curves_v0113_raw.json` |
+| Table 3, Necrobinder | top level: `tools/future/run_search.py` (`--sims 0` greedy; `--sims 32 --rooms Boss,Elite`) | `weights-v6`, `necrobinder_raw_v25875.pt` | RV1, first 1,000 | `results/table3/` |
 | Table 4 (retests) | as in Table 3 | as in Table 3 | RV1, first 1,000 | `results/table4/` |
 | Table 5 (released game) | the livestream mod (not released) | as in Table 3 | the game's own seeds | `results/live/` (`python3 results/live/table5.py`) |
 | Section 3.4 (solver positions) | `results/solver_baseline/scripts/` | `weights-v1`, `student_e_v165018.pt` | 241 positions | `results/solver_baseline/` |
