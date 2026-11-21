@@ -1,0 +1,19 @@
+{
+  "time": 1793711321.9323523,
+  "version_start": 157569,
+  "version_end": 157574,
+  "reward_id": "5d21abfd540dd8ac9c7677ecc0db0854adb62b5e0f25747277b8f25c9e9b29fb",
+  "bv_fields_in_metadata": [],
+  "shaping_components": {
+    "reward_component_buildvalue_potential": {
+      "sum": 0.16938716173171997,
+      "absolute_sum": 0.9321246147155762
+    },
+    "reward_component_buildvalue_potential_terminal": {
+      "sum": -0.4913901090621948,
+      "absolute_sum": 0.4913901090621948
+    }
+  },
+  "source_file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/d479017a530e-3-2107.npz",
+  "actor_sha256": "a3516c47540529024a3491aa7dd38f81f46d3bcc08aff02e24ab2bc20d1e112a"
+}

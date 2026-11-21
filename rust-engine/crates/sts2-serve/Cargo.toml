@@ -1,0 +1,13 @@
+[package]
+name = "sts2-serve"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Rust 等价引擎的引擎进程：与 C# 无头引擎同一套 JSON 行协议（M0：只有战斗模式，响应为 JSON 文本）。"
+
+[dependencies]
+sts2-core = { workspace = true }
+sts2-content = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+ahash = { workspace = true }

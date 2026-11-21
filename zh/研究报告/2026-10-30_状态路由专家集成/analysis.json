@@ -1,0 +1,1378 @@
+{
+  "summary": [
+    {
+      "model": "v44820",
+      "n": 1000,
+      "wins": 88,
+      "rate": 0.088,
+      "wilson95": [
+        0.07198099794232085,
+        0.10717225104977657
+      ],
+      "prefixes": [
+        "TEST"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v49460",
+      "n": 1000,
+      "wins": 119,
+      "rate": 0.119,
+      "wilson95": [
+        0.10037518436701058,
+        0.1405408055989824
+      ],
+      "prefixes": [
+        "TEST"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v66040",
+      "n": 1000,
+      "wins": 294,
+      "rate": 0.294,
+      "wilson95": [
+        0.2665940090203127,
+        0.3229826154757359
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v66500",
+      "n": 1000,
+      "wins": 232,
+      "rate": 0.232,
+      "wilson95": [
+        0.20689343939858929,
+        0.2591577031496683
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v66980",
+      "n": 1000,
+      "wins": 262,
+      "rate": 0.262,
+      "wilson95": [
+        0.23569393157936605,
+        0.2901276054597582
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v68850",
+      "n": 1000,
+      "wins": 319,
+      "rate": 0.319,
+      "wilson95": [
+        0.29085168384683435,
+        0.3485336027249366
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v70580",
+      "n": 1000,
+      "wins": 366,
+      "rate": 0.366,
+      "wilson95": [
+        0.3367094419466035,
+        0.3963161293275252
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v72460",
+      "n": 1000,
+      "wins": 339,
+      "rate": 0.339,
+      "wilson95": [
+        0.3103265911536923,
+        0.36890562507865643
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v74360",
+      "n": 1000,
+      "wins": 382,
+      "rate": 0.382,
+      "wilson95": [
+        0.35239145536552613,
+        0.4125116596370649
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v75320",
+      "n": 1000,
+      "wins": 408,
+      "rate": 0.408,
+      "wilson95": [
+        0.3779477218755777,
+        0.43875640168576435
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v77300",
+      "n": 1000,
+      "wins": 367,
+      "rate": 0.367,
+      "wilson95": [
+        0.33768854423226846,
+        0.3973293735248892
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v79300",
+      "n": 1000,
+      "wins": 402,
+      "rate": 0.402,
+      "wilson95": [
+        0.3720422335603109,
+        0.4327078111028579
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v81243",
+      "n": 1000,
+      "wins": 359,
+      "rate": 0.359,
+      "wilson95": [
+        0.32985959695418837,
+        0.38921954893873817
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v82160",
+      "n": 1000,
+      "wins": 396,
+      "rate": 0.396,
+      "wilson95": [
+        0.36614144983616576,
+        0.4266545159288297
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v83900",
+      "n": 1000,
+      "wins": 431,
+      "rate": 0.431,
+      "wilson95": [
+        0.40062844376747236,
+        0.46189964890353424
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v83900-采样T1",
+      "n": 500,
+      "wins": 134,
+      "rate": 0.268,
+      "wilson95": [
+        0.23105397343634806,
+        0.30848372053781226
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v83900-采样T1-改选",
+      "n": 500,
+      "wins": 91,
+      "rate": 0.182,
+      "wilson95": [
+        0.1506464452041556,
+        0.2182026353293916
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v83900-验收HO",
+      "n": 1000,
+      "wins": 424,
+      "rate": 0.424,
+      "wilson95": [
+        0.3937184466169774,
+        0.4548632206728269
+      ],
+      "prefixes": [
+        "HO"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v84667-计划外",
+      "n": 1000,
+      "wins": 446,
+      "rate": 0.446,
+      "wilson95": [
+        0.4154564661655095,
+        0.47695682375093046
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    },
+    {
+      "model": "v85620",
+      "n": 1000,
+      "wins": 407,
+      "rate": 0.407,
+      "wilson95": [
+        0.3769631485524506,
+        0.4377486285258626
+      ],
+      "prefixes": [
+        "RT"
+      ],
+      "stuck": 0
+    }
+  ],
+  "selected_pairs": [
+    {
+      "a": "v79300",
+      "b": "v82160",
+      "n": 1000,
+      "both": 234,
+      "only_a": 168,
+      "only_b": 162,
+      "neither": 436,
+      "union": 564,
+      "difference": 0.006,
+      "approximate_paired_ci": [
+        -0.029621040986486637,
+        0.041621040986486633
+      ],
+      "exact_mcnemar_p": 0.7831807185495768
+    },
+    {
+      "a": "v79300",
+      "b": "v83900",
+      "n": 1000,
+      "both": 243,
+      "only_a": 159,
+      "only_b": 188,
+      "neither": 410,
+      "union": 590,
+      "difference": -0.029,
+      "approximate_paired_ci": [
+        -0.06548473036696242,
+        0.007484730366962417
+      ],
+      "exact_mcnemar_p": 0.13269128850838124
+    },
+    {
+      "a": "v79300",
+      "b": "v84667-计划外",
+      "n": 1000,
+      "both": 245,
+      "only_a": 157,
+      "only_b": 201,
+      "neither": 397,
+      "union": 603,
+      "difference": -0.044,
+      "approximate_paired_ci": [
+        -0.08100303618741422,
+        -0.006996963812585771
+      ],
+      "exact_mcnemar_p": 0.022915881746646754
+    },
+    {
+      "a": "v79300",
+      "b": "v85620",
+      "n": 1000,
+      "both": 232,
+      "only_a": 170,
+      "only_b": 175,
+      "neither": 423,
+      "union": 577,
+      "difference": -0.005,
+      "approximate_paired_ci": [
+        -0.04142228085310614,
+        0.031422280853106145
+      ],
+      "exact_mcnemar_p": 0.8295311379342254
+    },
+    {
+      "a": "v82160",
+      "b": "v83900",
+      "n": 1000,
+      "both": 251,
+      "only_a": 145,
+      "only_b": 180,
+      "neither": 424,
+      "union": 576,
+      "difference": -0.035,
+      "approximate_paired_ci": [
+        -0.07028539498289765,
+        0.00028539498289765347
+      ],
+      "exact_mcnemar_p": 0.05913066669041096
+    },
+    {
+      "a": "v82160",
+      "b": "v84667-计划外",
+      "n": 1000,
+      "both": 252,
+      "only_a": 144,
+      "only_b": 194,
+      "neither": 410,
+      "union": 590,
+      "difference": -0.05,
+      "approximate_paired_ci": [
+        -0.08591861560454338,
+        -0.014081384395456628
+      ],
+      "exact_mcnemar_p": 0.007601205918708272
+    },
+    {
+      "a": "v82160",
+      "b": "v85620",
+      "n": 1000,
+      "both": 248,
+      "only_a": 148,
+      "only_b": 159,
+      "neither": 445,
+      "union": 555,
+      "difference": -0.011,
+      "approximate_paired_ci": [
+        -0.04535238642151157,
+        0.023352386421511575
+      ],
+      "exact_mcnemar_p": 0.5682539026767549
+    },
+    {
+      "a": "v83900",
+      "b": "v84667-计划外",
+      "n": 1000,
+      "both": 272,
+      "only_a": 159,
+      "only_b": 174,
+      "neither": 395,
+      "union": 605,
+      "difference": -0.015,
+      "approximate_paired_ci": [
+        -0.050772449009092294,
+        0.020772449009092295
+      ],
+      "exact_mcnemar_p": 0.4430128724568538
+    },
+    {
+      "a": "v83900",
+      "b": "v85620",
+      "n": 1000,
+      "both": 256,
+      "only_a": 175,
+      "only_b": 151,
+      "neither": 418,
+      "union": 582,
+      "difference": 0.024,
+      "approximate_paired_ci": [
+        -0.011375135881557245,
+        0.059375135881557246
+      ],
+      "exact_mcnemar_p": 0.20264424802405565
+    },
+    {
+      "a": "v84667-计划外",
+      "b": "v85620",
+      "n": 1000,
+      "both": 269,
+      "only_a": 177,
+      "only_b": 138,
+      "neither": 416,
+      "union": 584,
+      "difference": 0.039,
+      "approximate_paired_ci": [
+        0.004280172915280912,
+        0.07371982708471908
+      ],
+      "exact_mcnemar_p": 0.03210533746595663
+    }
+  ],
+  "portfolios": [
+    {
+      "models": [
+        "v83900",
+        "v84667-计划外",
+        "v85620"
+      ],
+      "n": 1000,
+      "hindsight_union": 678,
+      "rate": 0.678
+    },
+    {
+      "models": [
+        "v82160",
+        "v83900",
+        "v84667-计划外",
+        "v85620"
+      ],
+      "n": 1000,
+      "hindsight_union": 730,
+      "rate": 0.73
+    },
+    {
+      "models": [
+        "v79300",
+        "v82160",
+        "v83900",
+        "v84667-计划外",
+        "v85620"
+      ],
+      "n": 1000,
+      "hindsight_union": 781,
+      "rate": 0.781
+    },
+    {
+      "models": [
+        "v66040",
+        "v66500",
+        "v66980",
+        "v68850",
+        "v70580",
+        "v72460",
+        "v74360",
+        "v75320",
+        "v77300",
+        "v79300",
+        "v81243",
+        "v82160",
+        "v83900",
+        "v84667-计划外",
+        "v85620"
+      ],
+      "n": 1000,
+      "hindsight_union": 901,
+      "rate": 0.901
+    }
+  ],
+  "boss_exam": {
+    "n": 175,
+    "source_seeds": 175,
+    "wins": {
+      "v83900": 60,
+      "v84667-计划外": 70,
+      "v85620": 69
+    },
+    "hindsight_union": 85,
+    "pairs": [
+      {
+        "a": "v83900",
+        "b": "v84667-计划外",
+        "n": 175,
+        "both": 51,
+        "only_a": 9,
+        "only_b": 19,
+        "neither": 96,
+        "union": 79,
+        "difference": -0.05714285714285714,
+        "approximate_paired_ci": [
+          -0.11596813906401285,
+          0.0016824247782985594
+        ],
+        "exact_mcnemar_p": 0.08715855330228806
+      },
+      {
+        "a": "v83900",
+        "b": "v85620",
+        "n": 175,
+        "both": 51,
+        "only_a": 9,
+        "only_b": 18,
+        "neither": 97,
+        "union": 78,
+        "difference": -0.05142857142857143,
+        "approximate_paired_ci": [
+          -0.10929004690947829,
+          0.006432904052335431
+        ],
+        "exact_mcnemar_p": 0.12207812070846558
+      },
+      {
+        "a": "v84667-计划外",
+        "b": "v85620",
+        "n": 175,
+        "both": 60,
+        "only_a": 10,
+        "only_b": 9,
+        "neither": 96,
+        "union": 79,
+        "difference": 0.005714285714285714,
+        "approximate_paired_ci": [
+          -0.04323810494974762,
+          0.05466667637831905
+        ],
+        "exact_mcnemar_p": 1.0
+      }
+    ],
+    "exploratory_grouped_cv": [
+      {
+        "rule": "constant",
+        "wins": 65,
+        "n": 175,
+        "chosen": {
+          "v84667-计划外": 109,
+          "v85620": 66
+        },
+        "fold_selected_constant_wins": 65,
+        "comparison": {
+          "n": 175,
+          "both": 65,
+          "only_a": 0,
+          "only_b": 0,
+          "neither": 110,
+          "union": 65,
+          "difference": 0.0,
+          "approximate_paired_ci": [
+            0.0,
+            0.0
+          ],
+          "exact_mcnemar_p": 1.0
+        }
+      },
+      {
+        "rule": "boss_pair",
+        "wins": 67,
+        "n": 175,
+        "chosen": {
+          "v85620": 74,
+          "v84667-计划外": 90,
+          "v83900": 11
+        },
+        "fold_selected_constant_wins": 65,
+        "comparison": {
+          "n": 175,
+          "both": 60,
+          "only_a": 7,
+          "only_b": 5,
+          "neither": 103,
+          "union": 72,
+          "difference": 0.011428571428571429,
+          "approximate_paired_ci": [
+            -0.027443621155869173,
+            0.05030076401301203
+          ],
+          "exact_mcnemar_p": 0.7744140625
+        }
+      },
+      {
+        "rule": "boss_pair_hp_potions",
+        "wins": 67,
+        "n": 175,
+        "chosen": {
+          "v84667-计划外": 93,
+          "v85620": 64,
+          "v83900": 18
+        },
+        "fold_selected_constant_wins": 65,
+        "comparison": {
+          "n": 175,
+          "both": 60,
+          "only_a": 7,
+          "only_b": 5,
+          "neither": 103,
+          "union": 72,
+          "difference": 0.011428571428571429,
+          "approximate_paired_ci": [
+            -0.027443621155869173,
+            0.05030076401301203
+          ],
+          "exact_mcnemar_p": 0.7744140625
+        }
+      }
+    ],
+    "limitations": [
+      "既有考卷、非独立验收",
+      "每个状态仅一个未来随机实现",
+      "重建的战斗模式不是完整原局续跑",
+      "三种浅层规则的探索性比较；未训练神经路由器"
+    ]
+  },
+  "sources": [
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s0.jsonl",
+      "sha256": "357c076a7a8d1451ff3b33c9d6be842380a07820dddb2faf4245cad01f3a637e",
+      "bytes": 4195649
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s1.jsonl",
+      "sha256": "fbc3a6cd41f0f8e810a48dcbba514a859912e261bc495c623e34aa90222b53b6",
+      "bytes": 4140020
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s10.jsonl",
+      "sha256": "3d2b06d269442a007510c2f6c0f969650436fe2be77b3a6128ebc2d42b6f1668",
+      "bytes": 4195124
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s11.jsonl",
+      "sha256": "e4ba829bdea9df1d3dc8a38d3a3feba2df3398bd67f02c33b3d13fcdeb9709c9",
+      "bytes": 4166092
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s12.jsonl",
+      "sha256": "690093c2095a62519381695d16fc5d35de023ed6fc3be5227da51e221b084eb6",
+      "bytes": 4165065
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s13.jsonl",
+      "sha256": "50f79b23845570234645c0be184d350b4edb46dd17ca3f0e900722c34af585e5",
+      "bytes": 4107368
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s14.jsonl",
+      "sha256": "dc72c94b67d98ab8883cee482ccee68482e862a412a1d72912b2578365b0b106",
+      "bytes": 4140918
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s15.jsonl",
+      "sha256": "9d49e846249813439812aa50aacceb8b17c3cc9df808f80c3786229cb580cc8d",
+      "bytes": 4201493
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s2.jsonl",
+      "sha256": "c78e08f81c5a9e5fcb30af3ce6a0cf10363ec715d93945ea3c7b9909a72a7647",
+      "bytes": 4202683
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s3.jsonl",
+      "sha256": "a13d3cedb5ba191e71fbd168ef5bfc0f13c0b42f6946812a71f57ef03dc30524",
+      "bytes": 4164435
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s4.jsonl",
+      "sha256": "6b65dcc00a55a9178e8722cdfe1f464adb09d0b5fb73525941669f695d1e6f6a",
+      "bytes": 4168103
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s5.jsonl",
+      "sha256": "127740dd34f2aac095723b6fafdefcfe85b9059f22f32221ae3b53c3cfe6b188",
+      "bytes": 4112708
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s6.jsonl",
+      "sha256": "58aee3b8a0f74a990b0b1ad53afdea677edf05cfd23be1392df8f711522a626b",
+      "bytes": 4139366
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s7.jsonl",
+      "sha256": "f753d8af70f21b63d3013f8f724d851f610c40e8df1e15c02990a2aea5e53cf6",
+      "bytes": 4184486
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s8.jsonl",
+      "sha256": "ba92cf55b7e03dc2435f8097c61c0bdc986eec4ff048cd89a1790ce402163410",
+      "bytes": 4194179
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v44820/runs_s9.jsonl",
+      "sha256": "c33d17380c21cad448424b4087b41e23489a745afadfc51e7962205a1eddfa23",
+      "bytes": 4138354
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s0.jsonl",
+      "sha256": "0be08fff0b2be68163a39bcefece3e644430278f57f83b41705037407d8382f2",
+      "bytes": 4199804
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s1.jsonl",
+      "sha256": "0c9d4e7a0d3e46f550c702e68d281576ab472c238a69d0dc2718b78bf985b047",
+      "bytes": 4145034
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s10.jsonl",
+      "sha256": "f405459e17299ef6ea4277773652ccab0687bfc584de2a3d0e5b7667f63469e7",
+      "bytes": 4168358
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s11.jsonl",
+      "sha256": "1cfd931dec7ec33f9ff586f25293cce8ef34e493964ea0f4a770752bc0bb4277",
+      "bytes": 4119653
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s12.jsonl",
+      "sha256": "a0cdbb0254ce473084383312a57387e068ea007d5ee29d74f555b067d8adcd49",
+      "bytes": 4162811
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s13.jsonl",
+      "sha256": "ff4981798eea8a189690c61a5b710915f5d6165d06d564c17b4bee0a57ab111b",
+      "bytes": 4123988
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s14.jsonl",
+      "sha256": "3df6e60795dadd7bfee18141a606eafb48505c324dd67a9abbc805bc2b504405",
+      "bytes": 4176209
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s15.jsonl",
+      "sha256": "9871eedfed4ac925117111b81389b191dba60cc3a962c44b1b63b7a320f97b49",
+      "bytes": 4154904
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s2.jsonl",
+      "sha256": "9dfb8e830eec8a801deab79092f0f0e718a50d2f3ba5ffb1577a97f9b05d36e2",
+      "bytes": 4179054
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s3.jsonl",
+      "sha256": "39a186a9105aa7c0cf79b6fcccbe4d2ceb74aca4971f9490d367be09efcb324e",
+      "bytes": 4115722
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s4.jsonl",
+      "sha256": "f37cec84842b340d6167990515d3a2867b3d9a056cf22b0dc33bc20f21080edd",
+      "bytes": 4157714
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s5.jsonl",
+      "sha256": "37a0906d613127c20f05fadcf599f872972ca39e14d75a872b5872a63f497f39",
+      "bytes": 4126695
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s6.jsonl",
+      "sha256": "12681ede430139dfa5dc648bc72aa825df3324fd20c9f1063db346b0656d89b3",
+      "bytes": 4190674
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s7.jsonl",
+      "sha256": "5d58656dd7baabeb575f0039d19812810b591f6865f058450367fac06b9d1e4e",
+      "bytes": 4148957
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s8.jsonl",
+      "sha256": "74a0b08805d3786496b41fe55498f411a6ef397050ff8902e767cf7832eaf626",
+      "bytes": 4201201
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v49460/runs_s9.jsonl",
+      "sha256": "92bfa10ac1759b9cc7fc48d33144e83f1a98173782d4187340a0e9a28885d193",
+      "bytes": 4137466
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66040/runs_s0.jsonl",
+      "sha256": "906373c3e2481f0b0ff3726069d838a03f51075986aab246e789b0ca2b1018fd",
+      "bytes": 756063
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66040/runs_s1.jsonl",
+      "sha256": "c8c454202fed22fa81e1bb7fd1a99a93d6dda880d3743baf40a3932a8c6091a3",
+      "bytes": 730529
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66040/runs_s2.jsonl",
+      "sha256": "9b2de0c90fb4af3532964e87ecfcad7e9acd9c3241947d5ae168b670023289f4",
+      "bytes": 725734
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66040/runs_s3.jsonl",
+      "sha256": "b2e95b438e303ab9f93ecef96839e77f2405fc49ab84835cc9edc27317a8e210",
+      "bytes": 744081
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66040/runs_s4.jsonl",
+      "sha256": "4a24de532eddd6d11b7b75592232dda80006651208a9006d8240bdf71e6a687c",
+      "bytes": 761479
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66040/runs_s5.jsonl",
+      "sha256": "2517832eeb295ce4c577ffed5eeb4924355205dc14f0541372787241521ef21e",
+      "bytes": 731297
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66040/runs_s6.jsonl",
+      "sha256": "14345aa1dbb4e74b0663755b9ce282e42792794d6e9933e5038d6760afed3c3a",
+      "bytes": 755280
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66040/runs_s7.jsonl",
+      "sha256": "d8b9efdbffc95e2718d9c4a09d9d2f8f7eeb22410cc52594710d594c38fc52da",
+      "bytes": 725908
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66500/runs_s0.jsonl",
+      "sha256": "aaa51ed4cee2bbbd3c4a1479e7f471a5a269f4d824770c3815c8390793a0fe19",
+      "bytes": 723527
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66500/runs_s1.jsonl",
+      "sha256": "a67c33867c79d5cca49c3e7eab125f33b9f549a98747d361f30607c5e39ee5e8",
+      "bytes": 744791
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66500/runs_s2.jsonl",
+      "sha256": "8dc889f4712491997e80964e3da14887bc6b6ca8ed16cb61d16dfa5f0bb0379c",
+      "bytes": 714493
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66500/runs_s3.jsonl",
+      "sha256": "3765b0e95db1fa2be36f1304b4179b629a21b200080c50863df820193bac9d1f",
+      "bytes": 710746
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66500/runs_s4.jsonl",
+      "sha256": "59a2776ea9e1e424d418d995caaa431360aee0f0c08ddd44fa30cbb754200cf2",
+      "bytes": 727921
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66500/runs_s5.jsonl",
+      "sha256": "33f0c396ed2656f85af80a5ce8ac19144948b2c66abbadb27a1afe1f797a734a",
+      "bytes": 715209
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66500/runs_s6.jsonl",
+      "sha256": "0d2fb369453c482791f037772006f97589971f72543a0c9fc2ef2d0839ffbe0e",
+      "bytes": 730388
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66500/runs_s7.jsonl",
+      "sha256": "52e61331ff25e1870486378d843d8cdf8ec03b622058785b27eb7857331df775",
+      "bytes": 726747
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66980/runs_s0.jsonl",
+      "sha256": "189b43c6d4a57ad8f8695dda37cbc9658f381f2454f8b4d4ff3daac83b2592c7",
+      "bytes": 741336
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66980/runs_s1.jsonl",
+      "sha256": "a4efd1d8c74b9c88f1c3f8fbec6cae2912c6ffa31ee55fab4f1a5050d2b6a8e3",
+      "bytes": 753475
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66980/runs_s2.jsonl",
+      "sha256": "4b6ce0a935fc354e2b79e685a8de2e8e8d09eb5f79e1a39fe434167f4a4d3656",
+      "bytes": 719218
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66980/runs_s3.jsonl",
+      "sha256": "882e4f8a5b2ef3538ff368e8e4b610e29d0065da22e9ed5ea4b144dbef648df6",
+      "bytes": 732994
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66980/runs_s4.jsonl",
+      "sha256": "7e40d34372a8657dbb881561aeef1cfb05a068aaf3e94ad50f0c83d6f5f0287c",
+      "bytes": 742430
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66980/runs_s5.jsonl",
+      "sha256": "f7944bb3579b5e4791c528e725ee81993cd509fb9576912b4e4ab1fc0ab505e3",
+      "bytes": 729741
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66980/runs_s6.jsonl",
+      "sha256": "833a8426168b9a0022a7176da29609b6dafc8398c24c15da97bb372d83f4d1c7",
+      "bytes": 755316
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v66980/runs_s7.jsonl",
+      "sha256": "5c6ab8e2c5e718cbed9db5633c615e4af996748b6dc566bb1d242cb66d359cef",
+      "bytes": 727860
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v68850/runs_s0.jsonl",
+      "sha256": "967ea6bfbc5edae5e3ecdfeb77b487d80cf1f8f21426feca91f60fdeb237d1ea",
+      "bytes": 743258
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v68850/runs_s1.jsonl",
+      "sha256": "720c5550551af1cd849cb8f42b2d34741ef464d771872898de81679d9972b73f",
+      "bytes": 743632
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v68850/runs_s2.jsonl",
+      "sha256": "72e766fac9dcaaddc9f431cdb342daee6db151ed35e9749930b3d83f232c5642",
+      "bytes": 710808
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v68850/runs_s3.jsonl",
+      "sha256": "5351ffb8d25d9128a389d3aebfd348bd699dec8b05ed872a5bef8aa7cbc96b98",
+      "bytes": 732537
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v68850/runs_s4.jsonl",
+      "sha256": "c38b37f092351781723a32649eb18c262eec0e873d671dfd7a54827be2df74d8",
+      "bytes": 750909
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v68850/runs_s5.jsonl",
+      "sha256": "ed13849fd9cb48de708015a5151e594d0fb83aa8cd981c4d7e48b5a19284ac8d",
+      "bytes": 731705
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v68850/runs_s6.jsonl",
+      "sha256": "fd61c91376cd80eb248a6de69eae981e6369f462ddae11c4cbe6c97f8c97aaae",
+      "bytes": 740391
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v68850/runs_s7.jsonl",
+      "sha256": "af595bf167c4b6f9dea546d5e1bb95d144c3e30eda998e0a7f22b1614a98926e",
+      "bytes": 725266
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v70580/runs_s0.jsonl",
+      "sha256": "df40bd959e45cf0e514b1960b877b3d4fed100912375d0881fddd9bee0facb86",
+      "bytes": 763873
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v70580/runs_s1.jsonl",
+      "sha256": "f1fbd17f8977283aaf949051343f4d8d71df67b6fe4d9e6317d7d2b2088c3cca",
+      "bytes": 762092
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v70580/runs_s2.jsonl",
+      "sha256": "fab97c26f695b818e64e9b4d19f17dde87c3d21477e658284a425b218ff5ad66",
+      "bytes": 719976
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v70580/runs_s3.jsonl",
+      "sha256": "7c973841f039294055f6d3be2359eda9e52dfc43d5873af1b5b3019476624c26",
+      "bytes": 728972
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v70580/runs_s4.jsonl",
+      "sha256": "2ab531d8ea6ece7066399374c32661e3346487ce15a07ce904ae697cd2d8a674",
+      "bytes": 739994
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v70580/runs_s5.jsonl",
+      "sha256": "07be796c0b5506b64563e819327159d3dd81a78b0068e6fcc9f1861ff7d3c71b",
+      "bytes": 735222
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v70580/runs_s6.jsonl",
+      "sha256": "6dc4056c4f912ffd7ceac19b355853b6afac57de95f58c806541e21a9ea39b27",
+      "bytes": 764211
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v70580/runs_s7.jsonl",
+      "sha256": "123837a2c14defa53ae4f90d2bc5a558ebd9ca31888bc35cbb38d216e338e4fb",
+      "bytes": 730260
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v72460/runs_s0.jsonl",
+      "sha256": "1373dc2c5c53a98b0b63c11389e42b5904617fb696b5555ccfd15d3072a32112",
+      "bytes": 726274
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v72460/runs_s1.jsonl",
+      "sha256": "2587f92d51cc7c0fd6a1070d0dd5bd7e01fca922b1c406827424c4e01c99355b",
+      "bytes": 746224
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v72460/runs_s2.jsonl",
+      "sha256": "1c9454a2ef240c3d973331b3ca5b666f282b7328047008fe528438734e028961",
+      "bytes": 728164
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v72460/runs_s3.jsonl",
+      "sha256": "efa9fd7855f40677acdd8d82b76ea0a4d9538fa6f0d254891e144d4992ff0b02",
+      "bytes": 738560
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v72460/runs_s4.jsonl",
+      "sha256": "9bf138043baa3b0b398648eb11f94884ea273980e36c64d268da49ca137f61c2",
+      "bytes": 743853
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v72460/runs_s5.jsonl",
+      "sha256": "25d6e1167f080ba78049fa372f13364f3b5774f2a9f089a2faada6f21c63b81c",
+      "bytes": 722097
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v72460/runs_s6.jsonl",
+      "sha256": "c71bd0879267fd774e3a4ad6b488d47fd6e3b67c135b6609ae3d33cfe6665034",
+      "bytes": 731664
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v72460/runs_s7.jsonl",
+      "sha256": "110d3dfe06451d3b7ab1ccbd5893223a7e20a4083a89b39b7cfd24395baf0e24",
+      "bytes": 715708
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v74360/runs_s0.jsonl",
+      "sha256": "26af6632becfa7abada63aa7086a9f2ff073ef4b23ea961c2082bf8ddbac9de3",
+      "bytes": 731150
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v74360/runs_s1.jsonl",
+      "sha256": "5143e77a6ba122209df10734144e195aa2b987334c5dbb9ad2daf0bffb1b7108",
+      "bytes": 728613
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v74360/runs_s2.jsonl",
+      "sha256": "9c47dabc99e559815a642d0551b2b34f8296c04dd67ff32ffabfdd077a8dfa95",
+      "bytes": 740786
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v74360/runs_s3.jsonl",
+      "sha256": "2b886b946752b03364a8a520240c157049e330cae4d5c1b839d885b288b272be",
+      "bytes": 718649
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v74360/runs_s4.jsonl",
+      "sha256": "232617c662a0f28cc60fd870db182a104567449905220ed32f9b6c47fe59a3b9",
+      "bytes": 732581
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v74360/runs_s5.jsonl",
+      "sha256": "f7ec48eaa30a6fea35a808ba0785f51376a0aebf56bcea0536bcff1085e408ab",
+      "bytes": 724023
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v74360/runs_s6.jsonl",
+      "sha256": "dac9cb621c9f71a5fe2fa4676765fe43e97b712ceee4e8428a101f4748e39abd",
+      "bytes": 733655
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v74360/runs_s7.jsonl",
+      "sha256": "fb92bcfed3bf1944f34c001a2a8ea9d128a0fb35b4f9e4122ce1cafdeef6192d",
+      "bytes": 726577
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v75320/runs_s0.jsonl",
+      "sha256": "713a3568363ba7d99e9672caafa3000748ea64f8afcaffad3af0c4d66b878f01",
+      "bytes": 765224
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v75320/runs_s1.jsonl",
+      "sha256": "f5b282ecfb27187497f7d390300d43ce022247efc9f517d53dcf52748fc7dec2",
+      "bytes": 733005
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v75320/runs_s2.jsonl",
+      "sha256": "045500dc329f34a9a0d371c7b54c5ec55df61b8430902f43c8f8e585fd7c7715",
+      "bytes": 752398
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v75320/runs_s3.jsonl",
+      "sha256": "c461c071c9854252c670b61f80b2384aa42d15d8e23273a4151381713dfe10e0",
+      "bytes": 726393
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v75320/runs_s4.jsonl",
+      "sha256": "4a26a901455f1a5c6da011368b85160b283944b2aa9192e1fe077a13dad2b3a0",
+      "bytes": 742994
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v75320/runs_s5.jsonl",
+      "sha256": "1df352c0fc2ad64398b1dbb4b1da83b866a204de1a0b154ca58fe9a774cd28c0",
+      "bytes": 737044
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v75320/runs_s6.jsonl",
+      "sha256": "5f3550c320837b298fa511d17685198f50d4cab403926e98a55dba463cd6f765",
+      "bytes": 765000
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v75320/runs_s7.jsonl",
+      "sha256": "7637b09629795a59a387de2eb8ab54ee3e6e1e684ad4fee8cf319ff3e6ced782",
+      "bytes": 723474
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v77300/runs_s0.jsonl",
+      "sha256": "0fa8ee3f3add1e59c509620686831187b558b424258e318db87d70b95ad617e9",
+      "bytes": 738590
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v77300/runs_s1.jsonl",
+      "sha256": "f2dbb0cdb43e1b1cd4e3431b981fabcadfeef62de3b163ff3f40287606ac48ee",
+      "bytes": 737984
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v77300/runs_s2.jsonl",
+      "sha256": "3eac19309a5a174d7eb1c97c5abb6da0e18fbc9a84db247c2c662eb4416f8bee",
+      "bytes": 732152
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v77300/runs_s3.jsonl",
+      "sha256": "1f492849372c8c243ba600cb67081890fb032710f93f36b4f21dfa7ace01c63a",
+      "bytes": 727291
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v77300/runs_s4.jsonl",
+      "sha256": "9604bdee46f181e79f8dcb69bebdec18b307a72cff8bcea2174e3445c81d3b4d",
+      "bytes": 738317
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v77300/runs_s5.jsonl",
+      "sha256": "2554ab6b6da99ac1a80013baff648cde8b3264037e651442d02c7e8743fcf3a3",
+      "bytes": 723840
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v77300/runs_s6.jsonl",
+      "sha256": "fbb910fcdb1ea747a1781626bad68105447ac5b80e093aa4feb3ba06d61f4ff7",
+      "bytes": 750034
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v77300/runs_s7.jsonl",
+      "sha256": "90d5e7dcbd8c9a7979f841fe014485e435ec81235342c26d5bfff0b16db83035",
+      "bytes": 721891
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v79300/runs_s0.jsonl",
+      "sha256": "d24bcf104892f409c8ede6ca66e215038a2e8a1ee8fae554f01457f20c1e1387",
+      "bytes": 733407
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v79300/runs_s1.jsonl",
+      "sha256": "04a8a9efb405b4c35cc25f42fb7bfb1cd62323cc03e6667944fc5b12b20a8344",
+      "bytes": 752900
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v79300/runs_s2.jsonl",
+      "sha256": "4ac40ebdd11802e4ff141e1e142ea6c677b10fdb52ac92d73a04c5c68efa7188",
+      "bytes": 735826
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v79300/runs_s3.jsonl",
+      "sha256": "485b41ec4cb798c2d9ead1545483e657032b0b9384d066b578f9e3a563d54c46",
+      "bytes": 757152
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v79300/runs_s4.jsonl",
+      "sha256": "ec45dcea651075b57987d835965513acd9b747d6dd3edb46fb9d2462d785e455",
+      "bytes": 726888
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v79300/runs_s5.jsonl",
+      "sha256": "91f6424d38a8e2cc29d30c6ec0136b9235d56f6795d2d11ff12b66ccaf63fbef",
+      "bytes": 746641
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v79300/runs_s6.jsonl",
+      "sha256": "5ee9b0b850a4cfd157c451b7cdca1a8235cf6865366a3ef27a70d2a33a541a87",
+      "bytes": 749678
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v79300/runs_s7.jsonl",
+      "sha256": "7018af81ac0ec5c5ff5edb1a0a8e513879a0a7b5a697d4fd3b73d0d2ea59ca30",
+      "bytes": 743135
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v81243/runs_s0.jsonl",
+      "sha256": "e4f1e5064632e32c208671a486f59c8d615aafb6b40fc1088061d15b111339d0",
+      "bytes": 722301
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v81243/runs_s1.jsonl",
+      "sha256": "ccca3411b1a5689b92d76442b625ced97bf8d9c792f566089b06aa52cc75f04d",
+      "bytes": 726174
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v81243/runs_s2.jsonl",
+      "sha256": "9a0059febe989281e2457f29cc22cd8f8912793036145eccbcafb744f2f192a2",
+      "bytes": 726968
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v81243/runs_s3.jsonl",
+      "sha256": "8e970244e67f1ff4797cb3bec3c2554768cbb2dc129aa9d05ceeea95944ac801",
+      "bytes": 716411
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v81243/runs_s4.jsonl",
+      "sha256": "ba7df6646b89d036bcd7f5c0a3a79cd0da4f386f9971fd6ceb066e60416cd417",
+      "bytes": 702443
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v81243/runs_s5.jsonl",
+      "sha256": "0e89f54a29110ab2ecd438a5fe8037749bebd3461aa1e7f85f7735163f49f8df",
+      "bytes": 710472
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v81243/runs_s6.jsonl",
+      "sha256": "41417429f1e844388eef9eea6fb747cb7c5c34ed77821b349e1e0431ebe287bf",
+      "bytes": 717746
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v81243/runs_s7.jsonl",
+      "sha256": "4f0a4162764ef31549085722d910c952444927bd4b5d2ccc91a3f5cd626be347",
+      "bytes": 686408
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v82160/runs_s0.jsonl",
+      "sha256": "62ed9692534639241ad8ec0846d3cb25ec78f6fb569fd49c0630cb8634e852b3",
+      "bytes": 742837
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v82160/runs_s1.jsonl",
+      "sha256": "4eb6dc8c5788f1f892b2f20995bf9efb6b6dcc0812648562e075e2f37d5ae49a",
+      "bytes": 767581
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v82160/runs_s2.jsonl",
+      "sha256": "3872f7d87c08805469029cbbb1333799acdc05c01874a89b13d7a8827cb282a3",
+      "bytes": 727866
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v82160/runs_s3.jsonl",
+      "sha256": "7fa0acbbc044f83c8cf48ba3d916dfdc3d132eb03b774f9531a29abd518832ba",
+      "bytes": 744469
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v82160/runs_s4.jsonl",
+      "sha256": "21a312cd3b811ae5073f92563e0bb4965d83000ffcf58f6b1dcc8310f41a9235",
+      "bytes": 755710
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v82160/runs_s5.jsonl",
+      "sha256": "0e8005e1873f2e51ea413c4ef28bded3395c410239d300d35b7cbc856acda656",
+      "bytes": 735378
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v82160/runs_s6.jsonl",
+      "sha256": "18443c6852daa5c0030a0f973cfedd0a72d6d46a9bc4f6f9ba863dc0d1b78459",
+      "bytes": 750149
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v82160/runs_s7.jsonl",
+      "sha256": "afff6c82bf958d5fc4135ebccc730a35dd903769e3e65a6ffffdbf546dab6a82",
+      "bytes": 741963
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900/runs_s0.jsonl",
+      "sha256": "93f6ce2ac85a4b367e52ede0a5100f0e582839ee019dddd509984eced2ee9f1d",
+      "bytes": 2260242
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900/runs_s1.jsonl",
+      "sha256": "c2aaf2e4dfac3db304e10b215b9faf053c9609b74c4a95c4f931f933dcc700d9",
+      "bytes": 2231564
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900/runs_s4.jsonl",
+      "sha256": "f743546ce7fe9a158edadb838ac3bf9411bf06a1e8d7c0eca5d14ab5b423fb69",
+      "bytes": 761472
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900/runs_s5.jsonl",
+      "sha256": "253936ddde7625312aff1ef6d513801650ea9ef48cd839008c3b56d0bac5e48f",
+      "bytes": 736292
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900-采样T1/runs_s0.jsonl",
+      "sha256": "3bc2e83d7f9d92274d2810f4d5ca222e92ce66fad41d5f52532b32936818b88f",
+      "bytes": 2446915
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900-采样T1/runs_s1.jsonl",
+      "sha256": "46caa6e56bd357150816eff6ab262b468158da0554994bd856cb30e8aa5673f2",
+      "bytes": 2463310
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900-采样T1-改选/runs_s0.jsonl",
+      "sha256": "b75bc99984ae58db5c408bb8b191bf2e536fd35f924351dbda169dfe6948bf8b",
+      "bytes": 2211565
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900-采样T1-改选/runs_s1.jsonl",
+      "sha256": "e95227a67657b658cf5d7c483c583b853b5fc89fa16787acc538179a1606ba9a",
+      "bytes": 2313449
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900-验收HO/runs_s0.jsonl",
+      "sha256": "649a3b88b7526f5221d150dff758f61d567c7d14b0b7cd95b24d637d8ff30fc1",
+      "bytes": 5459084
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900-验收HO/runs_s1.jsonl",
+      "sha256": "ef28b1e6c058cdb1a25876efb39b3d89950eabe208722be78e3a69d64bd7a8c2",
+      "bytes": 5604008
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v84667-计划外/runs_s0.jsonl",
+      "sha256": "6044ea0e7fb7bc0e3abee584ebba7ff423ea347161fba8e7c7b8f15fbc2dae2c",
+      "bytes": 2996019
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v84667-计划外/runs_s1.jsonl",
+      "sha256": "a94b2f443dc6a76aaff0e70cc50965a7f1d1230c9ad6b7c9a9437bcc7897a3da",
+      "bytes": 3007615
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v85620/runs_s0.jsonl",
+      "sha256": "e75593adf4930459221c397d7ec1d79ffff46748871481858b45cc40048abed1",
+      "bytes": 5453112
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v85620/runs_s1.jsonl",
+      "sha256": "937e8ed0dd605c70841d35a1efaecf7c0a997b01023fe411da078aa5d50f3f54",
+      "bytes": 5426342
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/boss3_exam.json",
+      "sha256": "eccb87324251980e390325300a568a9007240a3ab13b2f465b4256db790084ae",
+      "bytes": 1099355
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v83900/boss3.jsonl",
+      "sha256": "bc4a4d30a0a1f120466f7578fe14d5604d9142f681e3420b04a600dba51cefc5",
+      "bytes": 11265
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v84667-计划外/boss3.jsonl",
+      "sha256": "def17d29e54c06e7e5d91b674831b5472085aa2c2b8bd024a419235bf3196313",
+      "bytes": 11265
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/ability_test/v85620/boss3.jsonl",
+      "sha256": "e173ba81ea03385bc95d0923936e12a0ca78faf59f3ce62090fd9477c2c0f252",
+      "bytes": 11265
+    }
+  ],
+  "scope": "已有数据的描述性复算与小规模探索；未新增游戏对局、未证明部署收益"
+}

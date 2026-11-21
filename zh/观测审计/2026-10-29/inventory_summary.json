@@ -1,0 +1,31 @@
+{
+  "total": 1453,
+  "categories": {
+    "Cards": 596,
+    "Powers": 268,
+    "Relics": 300,
+    "Potions": 65,
+    "Enchantments": 23,
+    "Afflictions": 7,
+    "Orbs": 5,
+    "Monsters": 121,
+    "Events": 68
+  },
+  "tag_counts": {
+    "turn_end": 96,
+    "turn_start": 106,
+    "damage_modifier": 63,
+    "block_modifier": 159,
+    "card_selection": 108,
+    "replay_count": 13,
+    "cost_duration": 20,
+    "temporary_keywords": 5,
+    "entity_relation": 222,
+    "custom_state": 242,
+    "orb_effect": 55,
+    "death_phase": 52,
+    "draw_pile": 81,
+    "random_effect": 189
+  },
+  "limitation": "规则命中只用于筛选。索引不等于每个实体已逐局验证，未命中也不等于没有缺陷。"
+}

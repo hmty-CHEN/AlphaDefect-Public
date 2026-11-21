@@ -1,0 +1,56 @@
+diff --git a/src/Sts2Sim.Core/Content/Acts/GloryEncounters.BatchA.cs b/src/Sts2Sim.Core/Content/Acts/GloryEncounters.BatchA.cs
+index 06f5a27..b2790e4 100644
+--- a/src/Sts2Sim.Core/Content/Acts/GloryEncounters.BatchA.cs
++++ b/src/Sts2Sim.Core/Content/Acts/GloryEncounters.BatchA.cs
+@@ -9,7 +9,8 @@ public static partial class GloryEncounters
+     [
+         new(() => [(Monster<Axebot>(), "front")], null, false, "AxebotsNormal"),
+         new(() => [(Monster<DevotedSculptor>(), null)], null, true, "DevotedSculptorWeak"),
+-        new(() => [(Monster<Fabricator>(), "fabricator")], null, false, "FabricatorNormal"),
++        // 原版 FabricatorNormal.Slots：造出的机器人按槽位插在制造者两侧
++        new(() => [(Monster<Fabricator>(), "fabricator")], null, false, "FabricatorNormal") { Slots = ["bot1", "bot2", "fabricator", "bot3", "bot4"] },
+         new(() => [(Monster<FrogKnight>(), null)], null, false, "FrogKnightNormal"),
+         new(() => [(Monster<GlobeHead>(), null)], null, false, "GlobeHeadNormal"),
+         new(() => [(Monster<MechaKnight>(), null)], null, false, "MechaKnightElite"),
+diff --git a/src/Sts2Sim.Core/Content/Acts/HiveEncounters.BatchA.cs b/src/Sts2Sim.Core/Content/Acts/HiveEncounters.BatchA.cs
+index 91b23f6..05aca74 100644
+--- a/src/Sts2Sim.Core/Content/Acts/HiveEncounters.BatchA.cs
++++ b/src/Sts2Sim.Core/Content/Acts/HiveEncounters.BatchA.cs
+@@ -16,7 +16,8 @@ public static partial class HiveEncounters
+         new(() => CreateExoskeletons(3), [EncounterTag.Exoskeletons], true, "ExoskeletonsWeak"),
+         new(() => [(Monster<HunterKiller>(), null)], null, false, "HunterKillerNormal"),
+         new(() => [(Monster<InfestedPrism>(), null)], null, false, "InfestedPrismsElite"),
+-        new(() => [(Monster<Ovicopter>(), "ovicopter")], null, false, "OvicopterNormal"),
++        // 原版 OvicopterNormal.Slots：下蛋召唤后 SortEnemiesBySlotName 按这个顺序重排（蛋排在母体前面，先于母体行动）
++        new(() => [(Monster<Ovicopter>(), "ovicopter")], null, false, "OvicopterNormal") { Slots = ["egg1", "egg2", "egg3", "egg4", "egg5", "ovicopter"] },
+     ];
+ 
+     private static IReadOnlyList<(MonsterModel Monster, string? SlotName)> CreateBowlbugsNormal(Rng rng)
+diff --git a/src/Sts2Sim.Core/Content/Acts/HiveEncounters.BatchB.cs b/src/Sts2Sim.Core/Content/Acts/HiveEncounters.BatchB.cs
+index 0974e1b..99b9ee2 100644
+--- a/src/Sts2Sim.Core/Content/Acts/HiveEncounters.BatchB.cs
++++ b/src/Sts2Sim.Core/Content/Acts/HiveEncounters.BatchB.cs
+@@ -16,7 +16,8 @@ public static partial class HiveEncounters
+             (Monster<SlumberingBeetle>(), "third")], [EncounterTag.Workers], false, "SlumberingBeetleNormal"),
+         new(() => [(Monster<SpinyToad>(), null)], null, false, "SpinyToadNormal"),
+         new(() => [(Monster<TheInsatiable>(), null)], null, false, "TheInsatiableBoss"),
+-        new(() => [(Monster<TheObscura>(), "obscura")], null, false, "TheObscuraNormal"),
++        // 原版 TheObscuraNormal.Slots：召唤的幻影（Parafright）排在本体前面
++        new(() => [(Monster<TheObscura>(), "obscura")], null, false, "TheObscuraNormal") { Slots = ["illusion", "obscura"] },
+         new(() => [(Monster<ThievingHopper>(), null)], [EncounterTag.Thieves], true, "ThievingHopperWeak"),
+         new(() => [(Monster<Tunneler>(), null)], [EncounterTag.Burrower], true, "TunnelerWeak"),
+     ];
+diff --git a/src/Sts2Sim.Core/Content/Acts/Overgrowth.cs b/src/Sts2Sim.Core/Content/Acts/Overgrowth.cs
+index c7fbdf7..25f4672 100644
+--- a/src/Sts2Sim.Core/Content/Acts/Overgrowth.cs
++++ b/src/Sts2Sim.Core/Content/Acts/Overgrowth.cs
+@@ -55,7 +55,8 @@ public sealed class Overgrowth : ActDefinition
+     {
+         new(CreateMonster<BygoneEffigy>, tags: null, isWeak: false, name: "BygoneEffigy") { IdEntry = "BYGONE_EFFIGY_ELITE" },
+         new(CreateMonster<Byrdonis>, tags: null, isWeak: false, name: "Byrdonis") { IdEntry = "BYRDONIS_ELITE" },
+-        new(() => [(CreateMonster<PhrogParasite>(), "phrog")], tags: null, isWeak: false, name: "PhrogParasite") { IdEntry = "PHROG_PARASITE_ELITE" },
++        // 原版 PhrogParasiteElite.Slots：寄生体死后放出的蠕虫按槽位排在后面
++        new(() => [(CreateMonster<PhrogParasite>(), "phrog")], tags: null, isWeak: false, name: "PhrogParasite") { Slots = ["phrog", "wriggler1", "wriggler2", "wriggler3", "wriggler4"], IdEntry = "PHROG_PARASITE_ELITE" },
+     };
+ 
+     protected override IReadOnlyList<EncounterDefinition> BossEncounters { get; } = new List<EncounterDefinition>

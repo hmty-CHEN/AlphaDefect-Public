@@ -1,0 +1,226 @@
+--- a/src/Sts2Sim.Core/Models/Cards/Bombardment.cs
++++ b/src/Sts2Sim.Core/Models/Cards/Bombardment.cs
+@@ -1,12 +1,13 @@
+ using Sts2Sim.Core.Commands;
+ using Sts2Sim.Core.Entities.Cards;
++using Sts2Sim.Core.Entities.Players;
+ 
+ namespace Sts2Sim.Core.Models.Cards;
+ 
+-/// <summary>Exhaust,18伤害;耗尽后自动回放一次。逐字移植核心行为（<c>MegaCrit.Sts2.Core.Models.Cards.Bombardment</c>），
+-/// 偏离 #103：真实源码用"自动出牌阶段"hook，在这张卡真正落进耗尽堆之后再触发一次新的出牌流程；本项目没有
+-/// 这套阶段划分,直接在同一次 OnPlay 内用一个"是否已回放过"标记再结算一次伤害,效果上等价于"打一次顶两次伤害"，
+-/// 但不会像真实游戏那样产生第二个独立的 CardPlay/出牌历史记录。</summary>
++/// <summary>Exhaust,18伤害。sls2：照原版 <c>MegaCrit.Sts2.Core.Models.Cards.Bombardment</c>——打出时只打一下；
++/// 之后每个玩家回合的自动出牌阶段（AfterAutoPrePlayPhaseEnteredEarly），这张牌在消耗堆里就自动打出一次（CardCmd.AutoPlay，
++/// 目标从可打的敌人里按 CombatTargets 随机挑），打完照常进消耗堆，下回合再打。原来的移植（偏离 #103）把它写成第一次打出时连打两下，
++/// 储君对拍里 32 场战斗因此分歧（SIMRG 语料，打出后的下一回合敌人生命对不上）。_hasReplayed 不再使用，留着是因为私有字段登记表列了它。</summary>
+ public sealed class Bombardment : CardModel, ICardDamageVariableProvider
+ {
+     public bool TryGetThrashDamageVariable(out decimal amount)
+@@ -16,7 +17,9 @@
+     }
+ 
+     private decimal _damage = 18m;
++#pragma warning disable CS0414
+     private bool _hasReplayed;
++#pragma warning restore CS0414
+ 
+     public override CardType Type => CardType.Attack;
+ 
+@@ -32,10 +35,13 @@
+     {
+         ArgumentNullException.ThrowIfNull(cardPlay.Target);
+         await DamageCmd.Attack(_damage).FromCard(this, cardPlay).Targeting(cardPlay.Target).Execute();
+-        if (!_hasReplayed)
++    }
++
++    public override async Task AfterAutoPrePlayPhaseEnteredEarly(Player player)
++    {
++        if (Pile is { Type: PileType.Exhaust } && ReferenceEquals(player, Owner) && Owner.Creature.CombatState is { } combatState)
+         {
+-            _hasReplayed = true;
+-            await DamageCmd.Attack(_damage).FromCard(this, cardPlay).Targeting(cardPlay.Target).Execute();
++            await AutoPlayCmd.FromCards(combatState, Owner, new[] { (CardModel)this });
+         }
+     }
+ 
+--- a/src/Sts2Sim.Core/Models/Cards/Guards.cs
++++ b/src/Sts2Sim.Core/Models/Cards/Guards.cs
+@@ -3,10 +3,9 @@
+ 
+ namespace Sts2Sim.Core.Models.Cards;
+ 
+-/// <summary>任意数量手牌转化为 MinionSacrifice。逐字移植结构（<c>MegaCrit.Sts2.Core.Models.Cards.Guards</c>），
+-/// 偏离 #96：真实效果允许玩家自选0~全部张数,本项目没有交互式选择,确定性策略取"不选任何牌"
+-/// （0张）——比"默认全选"更保守,不会让自动策略把整手牌无脑喂给一张收益不确定的卡；
+-/// 需要真实策略时后续接入 RL 决策面即可覆盖这个默认值。</summary>
++/// <summary>任意数量手牌转化为 MinionSacrifice。sls2：照原版 <c>MegaCrit.Sts2.Core.Models.Cards.Guards</c>——从手牌里选 0 到任意张
++/// （CardSelectCmd.FromHand，最少 0、最多不限），逐张变成仆从献祭（升级过的卫兵给升级过的），做法同 Begone。
++/// 原来的移植（偏离 #96）没有选牌、什么都不做；储君对拍里 18 场战斗因此在卫兵之后分歧（游戏要选牌，sts2-sim 直接回到战斗决策）。</summary>
+ public sealed class Guards : CardModel
+ {
+     public override CardType Type => CardType.Skill;
+@@ -19,5 +18,17 @@
+ 
+     protected override IReadOnlyCollection<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Exhaust };
+ 
+-    protected override Task OnPlay(CardPlay cardPlay) => Task.CompletedTask;
++    protected override async Task OnPlay(CardPlay cardPlay)
++    {
++        IReadOnlyList<CardModel> selected = await CardSelectCmd.FromHand(CombatState!, Owner,
++            Owner.PlayerCombatState!.Hand.Cards, 0, 999999999, this, cancelable: false);
++        foreach (CardModel item in selected.ToList())
++        {
++            MinionSacrifice replacement = await CardCmd.CreateAndTransform<MinionSacrifice>(item);
++            if (IsUpgraded)
++            {
++                replacement.Upgrade();
++            }
++        }
++    }
+ }
+--- a/src/Sts2Sim.Core/Models/Cards/IAmInvincible.cs
++++ b/src/Sts2Sim.Core/Models/Cards/IAmInvincible.cs
+@@ -1,13 +1,14 @@
+ using Sts2Sim.Core.Commands;
+ using Sts2Sim.Core.Entities.Cards;
++using Sts2Sim.Core.Entities.Players;
+ using Sts2Sim.Core.ValueProps;
+ 
+ namespace Sts2Sim.Core.Models.Cards;
+ 
+-/// <summary>10 格挡；若抽牌堆顶是本卡则自动出牌。偏离 #103：原版在
+-/// <c>AfterAutoPostPlayPhaseEntered</c> 检查；模拟器仍在每张牌打出后的
+-/// <c>AfterCardPlayed</c> 检查。09-C1 已接入 AutoPostPlay 阶段，旧注释所说的“没有阶段划分”
+-/// 不再成立；本卡触发时机与原版的差异仍需独立夹具验证。</summary>
++/// <summary>10 格挡；回合结束时在抽牌堆顶就自动打出。sls2：照原版 <c>MegaCrit.Sts2.Core.Models.Cards.IAmInvincible</c>——
++/// 在自动出牌的回合末阶段（AfterAutoPostPlayPhaseEntered），抽牌堆顶是这张牌就从抽牌堆顶自动打出一张（AutoPlayFromDrawPile，不付能量、不强制消耗）。
++/// 原来的移植（偏离 #103）在每打出一张别的牌之后检查、用 PlayAsync 正常打出（付 1 能量），储君对拍里 8 场战斗因此分歧
++/// （出牌途中就多了 10 格挡、少了 1 能量，抽牌堆少一张）。</summary>
+ public sealed class IAmInvincible : CardModel
+ {
+     public override bool GainsBlock => true;
+@@ -27,13 +28,11 @@
+         await CreatureCmd.GainBlock(CombatState!, Owner.Creature, _block, ValueProp.Move, this, cardPlay);
+     }
+ 
+-    public override async Task AfterCardPlayed(CardPlay cardPlay)
++    public override async Task AfterAutoPostPlayPhaseEntered(Player player)
+     {
+-        if (cardPlay.Player == Owner &&
+-            cardPlay.Card != this &&
+-            Owner.PlayerCombatState!.DrawPile.Cards.FirstOrDefault() == this)
++        if (ReferenceEquals(player, Owner) && Owner.PlayerCombatState!.DrawPile.Cards.FirstOrDefault() == this && Owner.Creature.CombatState is { } combatState)
+         {
+-            await PlayAsync(target: null);
++            await AutoPlayCmd.FromTopOfDrawPile(combatState, Owner, 1, forceExhaust: false);
+         }
+     }
+ 
+--- a/src/Sts2Sim.Core/Models/Cards/MinionDiveBomb.cs
++++ b/src/Sts2Sim.Core/Models/Cards/MinionDiveBomb.cs
+@@ -21,6 +21,9 @@
+ 
+     public override TargetType TargetType => TargetType.AnyEnemy;
+ 
++    // sls2：原版的标签（对拍发现漏了：打击假人等按 Strike 标签加伤，储君语料里闪耀打击、仆从打击的伤害少了 3）
++    protected override IReadOnlyCollection<CardTag> CanonicalTags => new[] { CardTag.Minion };
++
+     protected override int CanonicalEnergyCost => 0;
+ 
+     protected override IReadOnlyCollection<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Exhaust };
+--- a/src/Sts2Sim.Core/Models/Cards/MinionSacrifice.cs
++++ b/src/Sts2Sim.Core/Models/Cards/MinionSacrifice.cs
+@@ -18,6 +18,9 @@
+ 
+     public override TargetType TargetType => TargetType.Self;
+ 
++    // sls2：原版的标签（对拍发现漏了：打击假人等按 Strike 标签加伤，储君语料里闪耀打击、仆从打击的伤害少了 3）
++    protected override IReadOnlyCollection<CardTag> CanonicalTags => new[] { CardTag.Minion };
++
+     protected override int CanonicalEnergyCost => 0;
+ 
+     protected override IReadOnlyCollection<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Exhaust };
+--- a/src/Sts2Sim.Core/Models/Cards/MinionStrike.cs
++++ b/src/Sts2Sim.Core/Models/Cards/MinionStrike.cs
+@@ -21,6 +21,9 @@
+ 
+     public override TargetType TargetType => TargetType.AnyEnemy;
+ 
++    // sls2：原版的标签（对拍发现漏了：打击假人等按 Strike 标签加伤，储君语料里闪耀打击、仆从打击的伤害少了 3）
++    protected override IReadOnlyCollection<CardTag> CanonicalTags => new[] { CardTag.Minion, CardTag.Strike };
++
+     protected override int CanonicalEnergyCost => 0;
+ 
+     protected override IReadOnlyCollection<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Exhaust };
+--- a/src/Sts2Sim.Core/Models/Cards/SeekerStrike.cs
++++ b/src/Sts2Sim.Core/Models/Cards/SeekerStrike.cs
+@@ -26,6 +26,9 @@
+ 
+     public override bool IsColorless => true;
+ 
++    // sls2：原版的标签（对拍发现漏了：打击假人等按 Strike 标签加伤，储君语料里闪耀打击、仆从打击的伤害少了 3）
++    protected override IReadOnlyCollection<CardTag> CanonicalTags => new[] { CardTag.Strike };
++
+     protected override int CanonicalEnergyCost => 1;
+ 
+     protected override async Task OnPlay(CardPlay cardPlay)
+--- a/src/Sts2Sim.Core/Models/Cards/ShiningStrike.cs
++++ b/src/Sts2Sim.Core/Models/Cards/ShiningStrike.cs
+@@ -21,6 +21,9 @@
+ 
+     public override TargetType TargetType => TargetType.AnyEnemy;
+ 
++    // sls2：原版的标签（对拍发现漏了：打击假人等按 Strike 标签加伤，储君语料里闪耀打击、仆从打击的伤害少了 3）
++    protected override IReadOnlyCollection<CardTag> CanonicalTags => new[] { CardTag.Strike };
++
+     protected override int CanonicalEnergyCost => 1;
+ 
+     protected override async Task OnPlay(CardPlay cardPlay)
+--- a/src/Sts2Sim.Core/Models/Powers/ArsenalPower.cs
++++ b/src/Sts2Sim.Core/Models/Powers/ArsenalPower.cs
+@@ -12,7 +12,9 @@
+ 
+     public override PowerStackType StackType => PowerStackType.Counter;
+ 
+-    public override async Task AfterCardGenerated(CardModel card, Player? creator)
++    // sls2：照原版挂在 AfterCardGeneratedForCombat 上——游戏只有这一个生成时机，变化（Begone、卫兵把手牌变成仆从牌）也走它；
++    // 原来挂在 sts2-sim 自己的 AfterCardGenerated 上，变化出的牌不给力量（储君对拍 SIMRG0004 第 11、48 层）
++    public override async Task AfterCardGeneratedForCombat(CardModel card, Player? creator)
+     {
+         if (creator?.Creature == Owner)
+         {
+--- a/src/Sts2Sim.Core/Models/CardModel.cs
++++ b/src/Sts2Sim.Core/Models/CardModel.cs
+@@ -301,7 +301,8 @@
+     /// <summary>A fixed energy-cost override until the turn ends or this card is first played.</summary>
+     public int? TemporaryCostOverrideThisTurnOrUntilPlayed { get; private set; }
+ 
+-    /// <summary>The independent star-cost part of SetToFreeThisTurn; unlike energy it survives playing.</summary>
++    /// <summary>The independent star-cost part of SetToFreeThisTurn. sls2：同原版 TemporaryCardCost.ThisTurn（ClearsWhenTurnEnds 与
++    /// ClearsWhenCardIsPlayed 都为真），打出之后也清掉（原来的移植说它打出后还留着，回到手里的牌（粒子墙等）本回合再打仍不花星，储君对拍 SIMRG0004 第 38 层）。</summary>
+     public int? TemporaryStarCostOverrideThisTurn { get; private set; }
+ 
+     public void SetToFreeThisTurn()
+@@ -1028,6 +1029,9 @@
+                 if (HasKeyword(CardKeyword.Ethereal) && combatState is CombatState concreteCombat)
+                     concreteCombat.SemanticHistory.Record(concreteCombat,
+                         CombatSemanticHistory.ActorEvent.EtherealPlayFinished, Owner);
++                // sls2 补丁：原版每打一次（含重放）记一条 CardPlayFinished，在 AfterCardPlayed 之前；原来在重放循环外只记一次，
++                // 重放的牌（星辰之子、华彩、回响等）本回合出牌数少算（储君对拍 SIMRG0006 第 36、37 层）
++                (combatState as CombatState)?.SemanticHistory.RecordCardPlayFinished((CombatState)combatState, this, cardPlay);
+                 await Hook.AfterCardPlayed(combatState, cardPlay);
+                 if (Owner.Creature.IsDead)
+                 {
+@@ -1074,9 +1078,9 @@
+             TemporaryFreeUntilPlayed = false;
+         }
+         TemporaryCostOverrideThisTurnOrUntilPlayed = null;
++        TemporaryStarCostOverrideThisTurn = null;      // sls2：原版 _temporaryStarCosts.RemoveAll(c => c.ClearsWhenCardIsPlayed)
+         _localEnergyModifiers.RemoveAll(modifier => modifier.ClearsAfterPlay);
+ 
+-        (combatState as CombatState)?.SemanticHistory.RecordCardPlayFinished((CombatState)combatState, this, firstPlay);     // sls2 补丁
+         observer?.CardPlayFinished(this, target, firstPlay);
+         return firstPlay;
+     }

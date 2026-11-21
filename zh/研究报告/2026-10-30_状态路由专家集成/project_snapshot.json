@@ -1,0 +1,65 @@
+{
+  "scope": "调查时点的只读核实摘录；不是持续刷新的运行状态。未修改训练或服务。",
+  "client_timezone": "Europe/Paris",
+  "main": {
+    "host_alias": "b",
+    "source": "~/.local/share/sls2/runs/defect/status.json",
+    "status_time_utc": "2026-10-29T23:32:47.685019+00:00",
+    "status_time_paris": "2026-10-30T00:32:47.685019+01:00",
+    "version": 86598,
+    "total_steps": 2844351030,
+    "sps": 9106,
+    "actors": 8,
+    "envs_per_actor": 36,
+    "model": {"vocab_size": 4096, "d": 256, "layers": 6, "heads": 4, "ff_mult": 4, "content_enchant": true},
+    "config_excerpt": {
+      "gamma": 1.0,
+      "ent_coef": 0.01,
+      "ent_coef_macro": 0.05,
+      "floor_reward": 0.02,
+      "act1_boss_reward": 0.5,
+      "act2_boss_reward": 0.5,
+      "act3_boss_reward": 1.5,
+      "act3_boss2_reward": 2.0,
+      "victory_reward": 2.0,
+      "wp_shaping": 0.0,
+      "prog_floor": 0.0,
+      "boss_chain_share": 1.0,
+      "solver_share": 0.0,
+      "distill_on": false,
+      "eval_runs": 0,
+      "run_fraction": 0.5,
+      "explore_offpolicy": true,
+      "phi_coef": 0.0
+    }
+  },
+  "evaluation": {
+    "host_alias": "a",
+    "source": "~/.local/share/sls2/runs/defect-eval/eval.jsonl",
+    "seed_set": "384 个分层 RT 种子",
+    "last_three_verified": [
+      {"version": 86329, "win_rate": 0.4088541666666667, "seconds": 306.0},
+      {"version": 86413, "win_rate": 0.4505208333333333, "seconds": 281.1},
+      {"version": 86491, "win_rate": 0.4635416666666667, "seconds": 270.4}
+    ],
+    "pause_marker_present": false,
+    "shared_weights_mtime_utc": "2026-10-29T23:34:35.824161+00:00"
+  },
+  "expert": {
+    "version": 84667,
+    "path": "/home/chenqiyue/.local/share/sls2/ability_test/v84667-计划外/model.pt",
+    "sha256": "1b9866264a0a9016c8a60b54626691eeb7e18c3e47dafcc9ebc013d9979c586f",
+    "state_tensor_elements": 18094341
+  },
+  "boss_exam": {
+    "items": 175,
+    "unique_source_seeds": 175,
+    "non_null_snapshot_fields": {"rng": 0, "odds": 0, "relic_grab_bag": 0, "unlock_state": 0}
+  },
+  "validation_limits": [
+    "未新增游戏对局，所有效果统计来自已保存结果。",
+    "源快照评测跨引擎/观测更新，必须统一栈重测后才能作新实验基线。",
+    "本次仅在 WSL 验证分析脚本；HTML 无外部资源，可直接打开，但未运行 Windows 浏览器自动化。",
+    "原始随机状态隔离由当前源码检查；没有把静态依赖检查称为全面动态安全证明。"
+  ]
+}

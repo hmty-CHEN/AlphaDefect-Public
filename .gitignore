@@ -1,0 +1,10 @@
+# build outputs and local environments
+bin/
+obj/
+.venv/
+__pycache__/
+*.pyc
+out/
+# downloaded network files (they are release assets; see weights/README.md)
+weights/files*/
+weights/teachers/

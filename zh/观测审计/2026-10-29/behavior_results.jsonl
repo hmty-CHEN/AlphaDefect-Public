@@ -1,0 +1,22 @@
+{"check": "metadata", "time": "2026-10-30T01:52:36.370751+08:00", "observation_sha256": "d216cb58b30ace0856bb0f38321e84a9c1d0a2b715d87389c5e365520e43a31c"}
+{"check": "S01", "format": 14, "same_public_arrays": {"tok_ints": true, "tok_feats": true, "cand_ints": true, "cand_feats": true}, "candidate_damage": [6.0, 6.0], "actual_damage": [6.0, 12.0]}
+{"check": "S02-retain", "hand_after_draw": 6, "retain_flags": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "hand_next_turn": 7}
+{"check": "S02-sly", "sly_flags": [0.0, 0.0, 0.0, 0.0], "hand_count": 4}
+{"check": "F03", "predicted_card_damage": 32.0, "actual_card_damage": 20.0, "predicted_passive_damage": 3.0, "actual_passive_damage": 0.0}
+{"check": "F05", "predicted_loss": 26.0, "actual_loss": 0, "turn_before": 1, "turn_after": 2}
+{"check": "F04", "enemy_hp": 27.0, "poison": 29.0, "predicted_loss": 8.0, "actual_loss": 0, "victory": true}
+{"check": "F07", "predicted_loss": 22.0, "actual_loss": 22, "frost_preview": 2.0}
+{"check": "F01", "card": "WITHER", "predicted_loss": 41.0, "actual_loss": 41}
+{"check": "F01", "card": "BURN", "predicted_loss": 36.0, "actual_loss": 36}
+{"check": "F01", "card": "TOXIC", "predicted_loss": 51.0, "actual_loss": 51}
+{"check": "F01", "card": "INFECTION", "predicted_loss": 41.0, "actual_loss": 41}
+{"check": "F01", "card": "DECAY", "predicted_loss": 36.0, "actual_loss": 36}
+{"check": "F01", "card": "BECKON", "predicted_loss": 56.0, "actual_loss": 56}
+{"check": "F01", "card": "BAD_LUCK", "predicted_loss": 91.0, "actual_loss": 91}
+{"check": "F01", "card": "REGRET", "predicted_loss": 51.0, "actual_loss": 51}
+{"check": "F01", "card": "DEBT", "predicted_loss": 26.0, "actual_loss": 26}
+{"check": "F01", "card": "DOUBT", "predicted_loss": 26.0, "actual_loss": 26}
+{"check": "F01", "card": "SHAME", "predicted_loss": 26.0, "actual_loss": 26}
+{"check": "S04", "card_upgrade": 0, "power_features": [[3.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]}
+{"check": "S04", "card_upgrade": 1, "power_features": [[3.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]}
+{"check": "S04-equality", "same_power_token": true, "limitation": "原卡在弃牌堆仍有升级信息；此项只证明能力实例自身不带伤害数值，不声称整帧相同。"}

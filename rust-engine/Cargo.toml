@@ -1,0 +1,88 @@
+# Rust 等价引擎工作区（Rust引擎方案.md，决策记录第 137 条）。
+# vendor/ 下是 spire-mentor 的规则内核（MIT，来源见 vendor/UPSTREAM.md）；我们自己的 crate 放在 crates/。
+[workspace]
+resolver = "2"
+members = ["vendor/sts2-core", "vendor/sts2-content", "vendor/sts2-srchash", "crates/sts2-serve"]
+
+[workspace.package]
+version = "0.0.1"
+edition = "2021"
+rust-version = "1.99"
+license = "MIT"
+authors = ["Thomas Friedel"]
+repository = "https://github.com/tfriedel/sts2-rs"
+
+[workspace.dependencies]
+sts2-core = { path = "vendor/sts2-core", version = "0.0.1" }
+sts2-content = { path = "vendor/sts2-content", version = "0.0.1" }
+smallvec = { version = "1.13", features = ["const_generics", "union"] }
+rand = "0.8"
+rand_xoshiro = "0.6"
+thiserror = "1.0"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+arc-swap = "1.7"
+ahash = { version = "0.8", default-features = false, features = ["std"] }
+xxhash-rust = { version = "0.8.19", default-features = false, features = ["xxh64"] }
+serial_test = "3"
+proptest = "1"
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+missing_debug_implementations = "warn"
+# rust_2018_idioms is a lint group → needs priority < 0 to allow per-lint overrides:
+rust_2018_idioms = { level = "warn", priority = -1 }
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+# Pedantic carve-outs (see RUST_PORTING_PLAN_v2.1):
+module_name_repetitions = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+must_use_candidate = "allow"
+too_many_lines = "allow"
+# Added by sts2-rs-4qpx (clippy 1.95 cleanup): these pedantic lints fire
+# broadly in our game-state code where the patterns are deliberate and
+# safe. They flag well-understood casts on bounded game values (HP,
+# energy, deck counts ≤ 255), small-copy params passed by &ref for API
+# uniformity, and naming pairs that are domain-meaningful (e.g.
+# `dealer`/`damager`).
+cast_possible_truncation = "allow"
+cast_possible_wrap = "allow"
+cast_sign_loss = "allow"
+cast_precision_loss = "allow"
+similar_names = "allow"
+trivially_copy_pass_by_ref = "allow"
+struct_excessive_bools = "allow"
+needless_pass_by_value = "allow"
+items_after_statements = "allow"
+ignore_without_reason = "allow"
+match_same_arms = "allow"
+unreadable_literal = "allow"
+type_complexity = "allow"
+large_enum_variant = "allow"
+option_option = "allow"
+ptr_arg = "allow"
+format_push_string = "allow"
+# Doc-style lints surfaced by 1.95: our doc comments mix prose with
+# Python pin references (`sts2-rl-agent@…`, file:line refs) and
+# manually-indented numbered/bulleted lists. Mass-rewriting them all
+# would churn ~100 lines of docs for zero behavioral benefit.
+doc_markdown = "allow"
+doc_overindented_list_items = "allow"
+doc_lazy_continuation = "allow"
+# New in clippy 1.99: `assert!(x.is_empty())` → `assert_eq!(x, [] as [T; 0])`.
+# ~200 test asserts; the suggested rewrite reads worse and needs `T: PartialEq`.
+assert_is_empty = "allow"
+# `excessive_precision` was previously allow-listed because the texel
+# writeback flow (`scripts/texel_writeback.py`) emitted `repr(float)` into
+# f32 slots, re-introducing f64-precision literals on every tuning pass
+# (e.g. `0.6000000238418579_f32`). Bead sts2-rs-nvh0u trimmed the existing
+# literals to their f32-shortest forms AND updated `format_f32` in the
+# writeback script to round-trip through f32 before formatting, so future
+# tuning passes stay clippy-clean.
+
+[profile.release]
+# 开发期用 thin LTO 缩短编译；panic 保持 unwind，进程可以捕获单局的 panic 并报错而不退出
+lto = "thin"
+panic = "unwind"

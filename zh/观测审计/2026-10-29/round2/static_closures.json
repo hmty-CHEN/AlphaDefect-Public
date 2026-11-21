@@ -1,0 +1,552 @@
+{
+  "reviewer": "entity_state_audit",
+  "round": 2,
+  "reviewed_at": "2026-10-29T19:33:02.820170+01:00",
+  "game_version": "v0.111.0",
+  "local_observation_format": 15,
+  "scope": "仅F06/F14/S08归零；不改主登记、不运行引擎、不修改训练代码配置或线上状态",
+  "implementation_hashes": {
+    "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs": "19580855c8b018329df969525b4ee7f64b7d817be1e54221c0c677dc1297a7a2",
+    "/home/chenqiyue/dev/sls2/python/sts2rl/model.py": "606ba438d8a0297af7ba13c0b52477af0f1b432ad0937f3ece03aa81130230ba",
+    "/home/chenqiyue/dev/sls2/python/sts2rl/features.py": "e6d575e2a1b91dac6957375d0f9bc9407829114ec0e3ce1cc4c85990fae81079",
+    "/home/chenqiyue/dev/sls2/观测格式.md": "36808031a46f7c8ffa4a8b2ef4edbbca8be988565d2f9198f359e318e9c91e33",
+    "/home/chenqiyue/dev/sls2/tools/check_obs_v12.py": "f34bc3a3563316efc588d574db7fe61636de78f76b0bad8280543bcf00f84259",
+    "/home/chenqiyue/dev/sls2/python/sts2rl/actor.py": "e4df8c88d66da80036aa8c5a2b073034c4238338f4582c0d96bd0075723f5a2c",
+    "/home/chenqiyue/dev/sls2/python/sts2rl/replay.py": "ddb1223422c043092bd0fb36a7194d22e5c95a832cd10b4af171586600973df3"
+  },
+  "verification": "静态全引用检索+方法/遭遇分支回读；F06复用已存在的运行证据",
+  "checks": [
+    {
+      "id": "F06",
+      "status": "optional_feature",
+      "closure": "口径已明确；再生案例不构成现有总损失预演的数值错误。净生命变化可另作派生特征。",
+      "finding_type": "semantics_resolved_with_validation_mismatch",
+      "new_raw_observation_gap": false,
+      "current_semantics": "生物特征17及战斗计数特征13，在现有覆盖机制范围内累加防伤后各段潜在生命损失；不减治疗、不按当前剩余HP截断。它不是当前HP到下一玩家回合HP的净差。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 645,
+          "detail": "Loss仅有格挡、缓冲和损失累加状态，没有HP或治疗状态",
+          "sha256": "19580855c8b018329df969525b4ee7f64b7d817be1e54221c0c677dc1297a7a2"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 653,
+          "detail": "防伤后的各段损失直接相加",
+          "sha256": "19580855c8b018329df969525b4ee7f64b7d817be1e54221c0c677dc1297a7a2"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 661,
+          "detail": "生物17直接输出Loss结果",
+          "sha256": "19580855c8b018329df969525b4ee7f64b7d817be1e54221c0c677dc1297a7a2"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/观测格式.md",
+          "line": 66,
+          "detail": "文档公式明确加伤害减格挡，没有减治疗",
+          "sha256": "36808031a46f7c8ffa4a8b2ef4edbbca8be988565d2f9198f359e318e9c91e33"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/RegenPower.cs",
+          "line": 25,
+          "detail": "再生在BeforeSideTurnEndEarly先治疗，和总损失是不同量",
+          "sha256": "c42df743d59330a1559687470e23790e0a9e2e148be85423073ce80b76e5a853"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/观测审计/2026-10-29/followup_results.jsonl",
+          "line": 6,
+          "detail": "既有独立实测：再生5时预计承伤26，净掉血21",
+          "sha256": "bd59c39b52ed87eb46aebb3572c52123c12599b423e6789fc0160842f96f13ea"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/python/sts2rl/model.py",
+          "line": 106,
+          "detail": "模型把该列作为生物特征映射，没有按它扣HP",
+          "sha256": "606ba438d8a0297af7ba13c0b52477af0f1b432ad0937f3ece03aa81130230ba"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/python/sts2rl/replay.py",
+          "line": 87,
+          "detail": "回放按原值透传",
+          "sha256": "ddb1223422c043092bd0fb36a7194d22e5c95a832cd10b4af171586600973df3"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/python/sts2rl/actor.py",
+          "line": 531,
+          "detail": "奖励血量势能取实际HP，不取预演17",
+          "sha256": "e4df8c88d66da80036aa8c5a2b073034c4238338f4582c0d96bd0075723f5a2c"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/python/sts2rl/actor.py",
+          "line": 545,
+          "detail": "战斗净失血奖励也取实际HP",
+          "sha256": "e4df8c88d66da80036aa8c5a2b073034c4238338f4582c0d96bd0075723f5a2c"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/tools/check_obs_v12.py",
+          "line": 86,
+          "detail": "校验脚本拿总损失对比净HP差；有治疗时口径不一致",
+          "sha256": "f34bc3a3563316efc588d574db7fe61636de78f76b0bad8280543bcf00f84259"
+        }
+      ],
+      "consumer_conclusion": "策略只消费数值特征；回放只记录；奖励使用实际HP。已确认的消费者问题在旧校验脚本：它只适合无治疗、无复活、无额外生命变化的测试样本。",
+      "next_action": [
+        "保留现有列的数值语义，统一称为“预计承伤／生命损失合计（不扣治疗）”，避免静默改变已训练特征。",
+        "修改对应校验时，应按覆盖的伤害事件核对；若仍对比净HP，必须限制到无治疗、无复活等额外生命变化的样本并注明范围。",
+        "如决定增加净生命变化，新增独立字段，逐段考虑治疗实际生效量、最大HP封顶、致死和复活；不要简单用总损失减再生层数。"
+      ],
+      "limits": [
+        "本结论只处理损失与净变化的口径，不替已知预演遗漏背书。",
+        "本轮复用既有再生实测，没有新增运行。",
+        "未将可选派生特征当作信息本身缺失或胜率收益。"
+      ]
+    },
+    {
+      "id": "F14",
+      "status": "optional_feature",
+      "closure": "当前原生单人玩法中没有独立缺失证据；局外能量与球位可作为方便计算的派生特征，退出待复现清单。",
+      "new_raw_observation_gap": false,
+      "write_path_conclusion": "全量检索MaxEnergy和BaseOrbSlotCount引用：Player.MaxEnergy的赋值来自构造、保存恢复/同步；BaseOrbSlotCount来自构造/保存恢复。正常新局从CharacterModel取初始值，没有卡牌、遗物、药水、事件直接永久改写这两个Player基础属性的自然路径。",
+      "energy_hook_count": 16,
+      "energy_hooks": [
+        {
+          "entity": "DemesnePower",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/DemesnePower.cs",
+          "line": 25,
+          "sha256": "eee5ece54a143c2cd9eee06a0db2e6b7751bc71f780768205793ed402b1e1169"
+        },
+        {
+          "entity": "FriendshipPower",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/FriendshipPower.cs",
+          "line": 16,
+          "sha256": "7404a151dfa1ff5be401e099115af996a29eab9a895f5af94baeb5e008444c3b"
+        },
+        {
+          "entity": "PyrePower",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/PyrePower.cs",
+          "line": 16,
+          "sha256": "0b16372599254f8aa08bd1dd94d4c1d111fb2f66db6f02e21f26d156e5c8863e"
+        },
+        {
+          "entity": "WasteAwayPower",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/WasteAwayPower.cs",
+          "line": 16,
+          "sha256": "c4a913157037a86fec1f816c79e8b0fba6f5b422494daa0533e2dd17810999f9"
+        },
+        {
+          "entity": "BlessedAntler",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/BlessedAntler.cs",
+          "line": 36,
+          "sha256": "a1510a9be4bb28f9d34cce3977fcea155ee6a09be7b5e5d1dc68f2a7cf6ceb59"
+        },
+        {
+          "entity": "BloodSoakedRose",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/BloodSoakedRose.cs",
+          "line": 36,
+          "sha256": "6738e21d8bab474b0e1755711d4d2d0df06aaecac02564260c3093d6da4d0bed"
+        },
+        {
+          "entity": "Bread",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/Bread.cs",
+          "line": 30,
+          "sha256": "06d6fdc5af92ae6c7b28f540fe7e46fc52b8dc31d08369ccfd34dff29ee3e85d"
+        },
+        {
+          "entity": "Ectoplasm",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/Ectoplasm.cs",
+          "line": 33,
+          "sha256": "064fca6868e0ff78c19ed523f448fd0307df40625f431b1bed43c74025635815"
+        },
+        {
+          "entity": "PaelsFlesh",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/PaelsFlesh.cs",
+          "line": 37,
+          "sha256": "48c5cd87a93b07237770cb66b849e1e187c127f9ab2cfd3f6e1954e4aeb06cde"
+        },
+        {
+          "entity": "PhilosophersStone",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/PhilosophersStone.cs",
+          "line": 32,
+          "sha256": "71c53c9bac96a1ebfda53a04a3b36bcfdbd0cffea0ef02d45ee58bd777d1784a"
+        },
+        {
+          "entity": "PrismaticGem",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/PrismaticGem.cs",
+          "line": 19,
+          "sha256": "2c193ea0f0b91f85cb29a94fe432a777ffaef686f50957341ec7b5f873ad0f79"
+        },
+        {
+          "entity": "PumpkinCandle",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/PumpkinCandle.cs",
+          "line": 58,
+          "sha256": "807de4c900f8d2dc20c55e7eba2bfa554a64f9a667d25bf2425e91da4dc8033a"
+        },
+        {
+          "entity": "Sozu",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/Sozu.cs",
+          "line": 22,
+          "sha256": "e4526ab54c41f21ad2aa135a7a41dff433b2f9b586041b319676b81011fc0c77"
+        },
+        {
+          "entity": "SpikedGauntlets",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/SpikedGauntlets.cs",
+          "line": 18,
+          "sha256": "f68af9cb8e3369692db2538a06e81460a51fde3b66648e4bc2ccc9f472aa8faa"
+        },
+        {
+          "entity": "VelvetChoker",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/VelvetChoker.cs",
+          "line": 46,
+          "sha256": "418c2070e88c5f9145a55a393978a7f993ffd29ab4a1a9b514549294deb24140"
+        },
+        {
+          "entity": "WhisperingEarring",
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/WhisperingEarring.cs",
+          "line": 29,
+          "sha256": "4d4a67823048a590d8d7984dd328fe44973da1c945277e262c6d722acc564bba"
+        }
+      ],
+      "energy_dependency_groups": {
+        "constant_relic_bonus": [
+          "BlessedAntler",
+          "BloodSoakedRose",
+          "Ectoplasm",
+          "PhilosophersStone",
+          "PrismaticGem",
+          "Sozu",
+          "SpikedGauntlets",
+          "VelvetChoker",
+          "WhisperingEarring"
+        ],
+        "public_conditional_relic_bonus": {
+          "Bread": "第一回合不加MaxEnergy，并另减2当前能量；后续回合加1，条件由遗物ID和回合数决定。",
+          "PaelsFlesh": "第3回合起加1，条件由遗物ID和回合数决定。",
+          "PumpkinCandle": "KindleCount>0时加1；计数由DisplayAmount输出。"
+        },
+        "power_amount_bonus": [
+          "DemesnePower",
+          "FriendshipPower",
+          "PyrePower",
+          "WasteAwayPower（扣减）"
+        ],
+        "listener_activity": "已融化遗物不进入战斗钩子，当前观测已编码IsMelted/Disabled状态。"
+      },
+      "orb_capacity_paths": [
+        "PlayerCombatState初始化由Player.BaseOrbSlotCount创建OrbQueue；机器人基础为3，其他正常角色为0。",
+        "RunicCapacitor在第1回合增加3球位，效果由遗物ID可知。",
+        "Capacitor、Modded、PotionOfCapacity与BulkUp仅通过OrbCmd修改本场OrbQueue.Capacity，没有改Player.BaseOrbSlotCount。",
+        "非机器人首次引导且容量为0时临时增加1；同样只改本场队列。"
+      ],
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Entities.Players/Player.cs",
+          "line": 263,
+          "detail": "构造时赋基础上限",
+          "sha256": "9fa253c367c1f2d709cee662c49a9579dd32ab989073a3dfdf4be53e073eda6d"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Entities.Players/Player.cs",
+          "line": 266,
+          "detail": "构造时赋基础球位",
+          "sha256": "9fa253c367c1f2d709cee662c49a9579dd32ab989073a3dfdf4be53e073eda6d"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Entities.Players/Player.cs",
+          "line": 307,
+          "detail": "新局按角色固定基础值创建",
+          "sha256": "9fa253c367c1f2d709cee662c49a9579dd32ab989073a3dfdf4be53e073eda6d"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Entities.Players/Player.cs",
+          "line": 320,
+          "detail": "读档恢复既有基础值，非自然效果改变",
+          "sha256": "9fa253c367c1f2d709cee662c49a9579dd32ab989073a3dfdf4be53e073eda6d"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Entities.Players/PlayerCombatState.cs",
+          "line": 101,
+          "detail": "有效能量由基础值经钩子得出",
+          "sha256": "c908ea3144a466dc0d979ec44ade207dd692d6b23b9512afbcccae3468fea123"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Entities.Players/PlayerCombatState.cs",
+          "line": 139,
+          "detail": "本场球位初始化",
+          "sha256": "c908ea3144a466dc0d979ec44ade207dd692d6b23b9512afbcccae3468fea123"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Characters/Defect.cs",
+          "line": 63,
+          "detail": "机器人固定基础球位",
+          "sha256": "08308b1fc8c7c6e791a137a4cc5bb79740079288bab77d02d62e04a33879b91e"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Hooks/Hook.cs",
+          "line": 1779,
+          "detail": "全部能量修改钩子入口",
+          "sha256": "fdb5fc0401e7f7018acb52cd8c8050f6f937bd3a210e4c595feb5946db12bde8"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/PumpkinCandle.cs",
+          "line": 26,
+          "detail": "条件状态已经公开编码",
+          "sha256": "807de4c900f8d2dc20c55e7eba2bfa554a64f9a667d25bf2425e91da4dc8033a"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/Bread.cs",
+          "line": 37,
+          "detail": "第一回合与后续回合上限不同",
+          "sha256": "06d6fdc5af92ae6c7b28f540fe7e46fc52b8dc31d08369ccfd34dff29ee3e85d"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/PaelsFlesh.cs",
+          "line": 43,
+          "detail": "第三回合才加能量",
+          "sha256": "48c5cd87a93b07237770cb66b849e1e187c127f9ab2cfd3f6e1954e4aeb06cde"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Combat/CombatState.cs",
+          "line": 432,
+          "detail": "已融化遗物不生效",
+          "sha256": "bd5f86957741c078fd279bad8d089b54ca5e17326d14e18cdecf9832a5661bb8"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/RunicCapacitor.cs",
+          "line": 23,
+          "detail": "开局球位由遗物效果计算",
+          "sha256": "d1f7f4244fab0b4ae9e34b66a32a0a66dfd09fe5e8002da272668766f9aaf045"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Commands/OrbCmd.cs",
+          "line": 30,
+          "detail": "修改本场队列而非永久基础",
+          "sha256": "b29ea07cd3f1bef01f6f119eb53dad76fe954b752d1264c338304072242adbc4"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Commands/OrbCmd.cs",
+          "line": 74,
+          "detail": "非机器人首次引导的临时球位",
+          "sha256": "b29ea07cd3f1bef01f6f119eb53dad76fe954b752d1264c338304072242adbc4"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 84,
+          "detail": "战斗中已有有效上限与实际球位",
+          "sha256": "19580855c8b018329df969525b4ee7f64b7d817be1e54221c0c677dc1297a7a2"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 1157,
+          "detail": "遗物有效状态已输出",
+          "sha256": "19580855c8b018329df969525b4ee7f64b7d817be1e54221c0c677dc1297a7a2"
+        }
+      ],
+      "next_action": [
+        "不为此做人工改存档的碰撞实验；那不代表自然可达状态。",
+        "若作为便于选牌/商店评估的特征实施，应输出首回合和稳定回合的可用能量摘要，以及开局球位；不能用局外直接调用全部战斗钩子得到的单值代替。"
+      ],
+      "limits": [
+        "限定v0.111.0原生正常角色与正常存档；不包括模组、手改存档、Debug/测试角色。",
+        "有效能量在局外不是唯一数：Bread、PaelsFlesh等使其依赖未来回合；直接调用依赖PlayerCombatState的钩子还可能空引用。",
+        "不否认派生特征有训练价值，但本次无信息碰撞证据。"
+      ]
+    },
+    {
+      "id": "S08",
+      "status": "excluded",
+      "closure": "在v0.111.0原生单人自然遭遇中，已核对的效果来源可以由现有公开实体唯一确定；没有需要补具体施加者引用的独立信息缺失证据。",
+      "new_raw_observation_gap": false,
+      "power_classes_with_explicit_applier_or_target_reads": [
+        "BarricadePower",
+        "ConstrictPower",
+        "CoveredPower",
+        "FlankingPower",
+        "GuardedPower",
+        "HeistPower",
+        "HexPower",
+        "KnockdownPower",
+        "MagicBombPower",
+        "OblivionPower",
+        "SandpitPower",
+        "ShrinkPower",
+        "SicEmPower",
+        "SoulboundPower",
+        "StranglePower",
+        "SwipePower",
+        "TagTeamPower",
+        "TenderPower",
+        "ThieveryPower",
+        "WitheringPresencePower"
+      ],
+      "source_resolution": [
+        {
+          "power": "ConstrictPower",
+          "source": "SlitheringStrangler",
+          "natural_encounters": [
+            "SlitheringStranglerNormal"
+          ],
+          "max_sources_per_encounter": 1,
+          "why_relation_matters": "施加者死亡则移除持续伤害。",
+          "why_inferable": "遭遇只追加一只绞缠者；配怪是果实或史莱姆，不会再选同种施加者。"
+        },
+        {
+          "power": "HexPower",
+          "source": "SpectralKnight",
+          "natural_encounters": [
+            "KnightsElite"
+          ],
+          "max_sources_per_encounter": 1,
+          "why_relation_matters": "施加者死亡移除Hex及其苦痛。",
+          "why_inferable": "三骑士各一只，只有SpectralKnight施加该能力。"
+        },
+        {
+          "power": "ShrinkPower",
+          "source": "ShrinkerBeetle",
+          "natural_encounters": [
+            "ShrinkerBeetleWeak",
+            "OvergrowthCrawlers"
+          ],
+          "max_sources_per_encounter": 1,
+          "why_relation_matters": "施加者死亡则移除缩小。",
+          "why_inferable": "两个遭遇均仅一只ShrinkerBeetle；另一只为FuzzyWurmCrawler。"
+        },
+        {
+          "power": "MagicBombPower",
+          "source": null,
+          "natural_encounters": [],
+          "max_sources_per_encounter": 0,
+          "why_relation_matters": "类实现依赖来源存活及来源死亡。",
+          "why_inferable": "全源码引用仅类定义与AbstractModelSubtypes类型注册，未找到原生Apply路径；不拿人工注入证明自然问题。"
+        }
+      ],
+      "other_relation_groups": {
+        "unique_player_or_players_pet": [
+          "HeistPower",
+          "OblivionPower",
+          "SandpitPower",
+          "SicEmPower",
+          "SoulboundPower",
+          "StranglePower",
+          "SwipePower",
+          "TagTeamPower",
+          "ThieveryPower",
+          "WitheringPresencePower"
+        ],
+        "multiplayer_relationships": [
+          "CoveredPower",
+          "FlankingPower",
+          "GuardedPower",
+          "KnockdownPower"
+        ],
+        "presentation_or_source_passthrough": [
+          "BarricadePower",
+          "TenderPower"
+        ],
+        "distinct_existing_issue": "Swipe里的StolenCard身份缺失是S07，本项只审计Applier/Target关系，不合并重开。"
+      },
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/ConstrictPower.cs",
+          "line": 29,
+          "detail": "来源死亡才移除",
+          "sha256": "22b408703c3af988b72813f894d7036b59f3727caa0464863fad83927f66ae0d"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Monsters/SlitheringStrangler.cs",
+          "line": 61,
+          "detail": "唯一原生施加者",
+          "sha256": "2020f0c9669c10e90f751a21986fa22b2c89500194217c036e4d32eafc4e077f"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Encounters/SlitheringStranglerNormal.cs",
+          "line": 105,
+          "detail": "每次只添加一只，其他分支不含同种",
+          "sha256": "3f686b0b6c6d7be5a9c51b710eaf020492f66036832acaad6137981d1c2e4eb5"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/HexPower.cs",
+          "line": 57,
+          "detail": "来源死亡移除Hex",
+          "sha256": "feaef7aa442f007a8be314e0f02dcfb9bf2aa4ee2c9a313d0d87bc39fa55f574"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Encounters/KnightsElite.cs",
+          "line": 42,
+          "detail": "唯一幽灵骑士",
+          "sha256": "59ccd1ec5cddfbf3fb5310e1d43fed93ab08110e0e4c8f15d8f5a5fa88f785b6"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/ShrinkPower.cs",
+          "line": 90,
+          "detail": "来源死亡移除Shrink",
+          "sha256": "c5d922d4e2fd20804939ca73a9ccbd527587d28d262c664c5c84ea8c52f9ba6c"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Encounters/ShrinkerBeetleWeak.cs",
+          "line": 20,
+          "detail": "单只缩小甲虫",
+          "sha256": "90b8eb22088e9fadad9b38528438fb8c53242baddab6c1501d50157ca6bf81c2"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Encounters/OvergrowthCrawlers.cs",
+          "line": 28,
+          "detail": "唯一缩小甲虫加不同种配怪",
+          "sha256": "95d288bd00553b5e173a5b2e7c8d2101281e8b4cfbcd5e54877b12d3a4e20640"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/MagicBombPower.cs",
+          "line": 23,
+          "detail": "仅保留未发现原生使用入口的类实现",
+          "sha256": "2c5e921dc4b5dfce02c6ab191fde10fb9fbd6578cc18888c8a71dc2f919934cc"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/StranglePower.cs",
+          "line": 42,
+          "detail": "单人场景来源玩家唯一",
+          "sha256": "c1a2932f962be486559c73985d104f06e0d6d5b0b96ad54d5c1b7eeda60e3736"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/WitheringPresencePower.cs",
+          "line": 48,
+          "detail": "单人场景目标玩家唯一",
+          "sha256": "aa46615f0397905cd8f4becbed94af6ca1fdbf66010be9cc7f3c22392171be24"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/CoveredPower.cs",
+          "line": 30,
+          "detail": "玩家间保护关系属于多人范围",
+          "sha256": "3b10a21ca63a3ac79f19e92e84ee2187b1100b93b340980b482b40cfb3d00dfe"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/BarricadePower.cs",
+          "line": 27,
+          "detail": "仅显示来源名，效果判断只看Owner",
+          "sha256": "a5ecba6bc6007bbe200879d545ec975002bd6230145248e3cf9732b73cd5eb04"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/TenderPower.cs",
+          "line": 50,
+          "detail": "来源透传给后续能力，无当前选择目标歧义",
+          "sha256": "7701c261dac64d191e48d43e4b9dc305203b9652456ad72892b91c1e46bdd72e"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 810,
+          "detail": "当前仅owner，无来源引用；缺字段本身不自动等于不可辨",
+          "sha256": "19580855c8b018329df969525b4ee7f64b7d817be1e54221c0c677dc1297a7a2"
+        }
+      ],
+      "next_action": [
+        "当前单人观测无需为S08新增字段，也不需构造两只原生不会同场的施加者。",
+        "未来启用多人、模组、随机混编怪物或新增同种多施加者遭遇时重新打开；届时应用实例引用而非只给怪物类型。"
+      ],
+      "limits": [
+        "这是有范围的排除，不表示能力关系在任意游戏模式都无价值。",
+        "没有把存在Applier属性本身当缺陷，也没有把多来源不确定性强行伪装成已验证碰撞。",
+        "本轮未运行引擎，结论依据所有相关自然调用点与遭遇生成分支。"
+      ]
+    }
+  ]
+}

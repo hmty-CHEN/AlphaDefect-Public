@@ -1,0 +1,10 @@
+{
+ "engine": "rs-inproc",
+ "specs": 60,
+ "combats": 1200,
+ "steps": 41497,
+ "setup_us_per_combat": 512.1,
+ "step_us": 3.06,
+ "combat_us": 618.1,
+ "steps_per_combat": 34.6
+}

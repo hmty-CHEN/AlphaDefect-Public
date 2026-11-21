@@ -1,0 +1,20 @@
+{
+  "episodes": 285,
+  "macro_steps": 44068,
+  "previous_marked": 0,
+  "new_marked": 824,
+  "by_act": {
+    "1": 285,
+    "2": 270,
+    "3": 269
+  },
+  "by_split": {
+    "validation": 88,
+    "train": 668,
+    "test": 68
+  },
+  "matches_independent_candidate_check": true,
+  "raw_files_and_observations_unchanged": true,
+  "rng_unchanged": true,
+  "validation_scope": "真实已留存轨迹的统计识别回归，不是新增游戏对局或胜率评估。"
+}

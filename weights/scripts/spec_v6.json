@@ -1,0 +1,27 @@
+[
+ {
+  "name": "ironclad_ema_v24782",
+  "src": "~/.local/share/sls2/runs/ironclad/backups/v24782-20261120-2157-回灌满500版复测前.pt",
+  "state_key": "ema",
+  "release": "weights-v6",
+  "dr": "Ironclad #1-#28",
+  "notes": "The Ironclad network of the AlphaDefect paper (its Table 3): the learner's EMA copy (decay 0.999 per version) at v24,782. Trained from scratch from 2026-11-17 on game v0.113.1 (content catalog v0.113.1); observation format 28; Muon on the hidden 2-D weights and Adam elsewhere; carries the candidate-conditioned future-readout head (future_head). From v24,280 the network feeds the output of its first encoder pass into a second pass (recycle, Ironclad DR #26); an earlier trial from v24,280 was discarded and training resumed from v24,279 (Ironclad DR #24, #25). Exported from the backup taken before its 1,000-seed retest (sha256 50f1a155...); every tensor is bit-identical to it.",
+  "eval": "68.4% greedy (684 / 1,000; mean floor 46.41) on the first 1,000 W1 seeds (A10, whole runs, observation format 28), the best single network among those tested on these seeds (Ironclad DR #26, #28); 73.1% (731 / 1,000; Wilson 95% CI 70.3-75.8%) with 32-simulation tree search in every boss and elite fight on 1,000 fresh R1 seeds, which have no greedy run, so the two results are not paired (Ironclad DR #28)."
+ },
+ {
+  "name": "ironclad_raw_v24782",
+  "src": "~/.local/share/sls2/runs/ironclad/backups/v24782-20261120-2157-回灌满500版复测前.pt",
+  "release": "weights-v6",
+  "dr": "Ironclad #1-#26",
+  "notes": "Raw learner weights of the same version: the network routine evaluation measures. Same training as ironclad_ema_v24782.",
+  "eval": "66.0% greedy on the same 1,000 W1 seeds (EMA minus raw +2.4 pp, p = 0.18); routine evaluation 67.6% over the last 12 rounds v24,535-v24,782 (3,113 / 4,608; 384 P1 seeds per round, raw weights, greedy, A10)."
+ },
+ {
+  "name": "necrobinder_raw_v25875",
+  "src": "~/.local/share/sls2/runs/necro/backups/v25875-20261120-0243-暂停训练.pt",
+  "release": "weights-v6",
+  "dr": "Necrobinder #1-#15",
+  "notes": "Necrobinder learner (raw) weights at v25,875, where training was paused (Necrobinder DR #15). Trained from scratch from 2026-11-17 on game v0.113.1 (content catalog v0.113.1); observation format 28 from v561 (22 before); Muon on the hidden 2-D weights and Adam elsewhere; carries the future-readout head (future_head) from v1. The paper's Necrobinder row averages the routine evaluations of the raw weights at v25,656-v25,867; this file is the checkpoint at the pause, 8 versions after the last of them. Exported from the backup taken at the pause (sha256 161d8cec...); every tensor is bit-identical to it.",
+  "eval": "No test on separate seeds. Routine evaluation 58.6% over the last 24 rounds v25,656-v25,867 (2,699 / 4,608; first 192 P1 seeds per round, raw weights, greedy, A10)."
+ }
+]

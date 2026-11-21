@@ -1,0 +1,63 @@
+{
+  "items": 47,
+  "by_status": {
+    "excluded": 15,
+    "covered_existing": 9,
+    "confirmed": 15,
+    "optional_feature": 4,
+    "linked": 2,
+    "confirmed_static": 1,
+    "excluded_static": 1
+  },
+  "runtime_checked_ids": [
+    "F01",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F09",
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S09",
+    "S10",
+    "S15",
+    "S16",
+    "S17"
+  ],
+  "runtime_confirmed_ids": [
+    "F03",
+    "F04",
+    "F05",
+    "F09",
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S09",
+    "S16",
+    "S17"
+  ],
+  "source_only_confirmed_ids": [
+    "F13",
+    "S05",
+    "S06",
+    "S07",
+    "S28"
+  ],
+  "note": "核查待办归零，不代表缺陷归零或已修复。已提交修改计划的旧发现与本轮新增项分别登记。",
+  "pending_after_round2": 0,
+  "round2": {
+    "checked": 8,
+    "confirmed": 3,
+    "optional_feature": 4,
+    "excluded": 1,
+    "new_confirmed_ids": [
+      "S03",
+      "S09",
+      "S16"
+    ]
+  }
+}

@@ -1,0 +1,434 @@
+[
+ {
+  "file": "teacher_v130978.pt",
+  "version": 130978,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72467805,
+  "sha256": "4983a9cc089a8c21893d4ceb9449587e316a2fad21d7167f36b62ca564f74703",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v130978; one of 16 uniformly spaced members (rank 1/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v134704.pt",
+  "version": 134704,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72467805,
+  "sha256": "3bbe980cb1a029305bd2f5cfc015bad844e39eecd58817d8abd45f03f7109077",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v134704; one of 16 uniformly spaced members (rank 2/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v138251.pt",
+  "version": 138251,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72467677,
+  "sha256": "c6f2317e0d4b463362e22071e2427c71589f986d151365f05ed01a5f7df3750f",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v138251; one of 16 uniformly spaced members (rank 3/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v141980.pt",
+  "version": 141980,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "85281972a892d560414aebf9878feac734d00710ad327653b25b5f4a0d47c9e3",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v141980; one of 16 uniformly spaced members (rank 4/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v143097.pt",
+  "version": 143097,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "5635e07cd672bdfe836701c6f33da811dd664aa542828fa9e787b229c6c9abd8",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v143097; one of 16 uniformly spaced members (rank 5/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v145449.pt",
+  "version": 145449,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "9d661d2f81d7cd0d108631eb86c58acbef9fec515cc0610769c7f344438fd1a1",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v145449; one of 16 uniformly spaced members (rank 6/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v146824.pt",
+  "version": 146824,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "af428b8d2a54e4841035a1112457f978bf1bea71eb70e2ca9843ea002283e0ed",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v146824; one of 16 uniformly spaced members (rank 7/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v148300.pt",
+  "version": 148300,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "3d04de2421f8c3dd4a53c4e7c5bfce145cefc30d038623cd790ebf726c275f2a",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v148300; one of 16 uniformly spaced members (rank 8/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v149700_20261102_2330.pt",
+  "version": 149700,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72470663,
+  "sha256": "cd8346447c1a7f8cd2b541032309e4d74de5fb45d596cd302d7995af2c99b7ab",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v149700-20261102-2330; one of 16 uniformly spaced members (rank 9/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v150216.pt",
+  "version": 150216,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "61947d7fa35f0d39df278adfb29dd51cf4616e47d0be3753f1eb392858f58f99",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v150216; one of 16 uniformly spaced members (rank 10/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v150632.pt",
+  "version": 150632,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "01fbaccfab324ee5ed9b817303d17f0856f9aec72306f8cbe2dd0a63e32499bd",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v150632; one of 16 uniformly spaced members (rank 11/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v151094.pt",
+  "version": 151094,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "625c1184c59f8ad4ace3e238936031b820327bc4a24c6d36f3e4617b9f86c486",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v151094; one of 16 uniformly spaced members (rank 12/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v151414.pt",
+  "version": 151414,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "c6c2716fc4ddcab227cfa876655d48267ac30b1571765990fff84971fe27a405",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v151414; one of 16 uniformly spaced members (rank 13/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v152822.pt",
+  "version": 152822,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "55d0f23911977b683f3acaee65b6570dc3e9b6f84b534a5971ba5b5a43d77f63",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v152822; one of 16 uniformly spaced members (rank 14/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v153877.pt",
+  "version": 153877,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "6ae1fb89a5a3c1daaa4915e7383ab037704ec1fd8db0d188d972a357f967ca94",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v153877; one of 16 uniformly spaced members (rank 15/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "teacher_v156880.pt",
+  "version": 156880,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468253,
+  "sha256": "c820df9bf92606f5e63411afee4ce68148af82fcaa04a8614206045d1a5bba3b",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "SL-pool snapshot v156880; one of 16 uniformly spaced members (rank 16/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread').",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273"
+ }
+]

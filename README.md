@@ -1,0 +1,94 @@
+# AlphaDefect
+
+Reinforcement-learning agents for **Slay the Spire 2** at Ascension 10. For each of the six characters, one network makes every decision of a run, in combat and outside it. It is trained with PPO against the game's own rules, run headlessly, and can guide a decision-time search in the hardest fights.
+
+This repository holds what the paper *AlphaDefect: Expert-Level AI for Slay the Spire 2* (Chen, Yu and Komiyama, 2026; arXiv link to be added) reports on: the code, all trained networks, the seed lists, per-seed results, training logs, and the project's full working record.
+
+## Results
+
+Win rates (%) at Ascension 10 in the headless engine, greedy play and with search, with the fresh-seed retests (paper, Tables 3 and 4). Search: PIMC in the two Act-3 boss fights on v0.111.0; information-set tree search in all boss and elite fights on v0.113.1.
+
+| Character | Game | Network | Greedy | Search | Retest on fresh seeds (greedy / search) |
+|---|---|---|---|---|---|
+| Defect | v0.111.0 | distilled (student e) | 76.7 | 80.3 | not retested (its seeds were not used for choices) |
+| Regent | v0.111.0 | distilled (student e8) | 74.1 | 77.2 | 74.9 / 80.5 |
+| Silent | v0.111.0 | EMA, update 26,428 | 71.3 | 74.0 | 71.2 / 73.6 |
+| Fool | v0.113.1 | EMA, update 24,181 | 62.1 | 68.4 | 62.5 / 66.7 |
+| Ironclad | v0.113.1 | EMA, update 24,782 | 67.9 | 73.1 | 66.5 / – |
+| Necrobinder | v0.113.1 | raw, update 25,875 | 58.6 (routine evaluations) | – | see `results/` |
+
+In 801 runs of the released game, played through a mod on a public livestream, the networks won 595 against 596.0 expected from these headless results.
+
+## Repository layout
+
+| Path | Content |
+|---|---|
+| `engine/`, `python/`, `tools/` | the system for game **v0.113.1** (the Fool, the Ironclad, the Necrobinder): headless C# host with in-place state cloning, observation encoder (formats up to 29), training system, information-set tree search (`tools/future/`), evaluation and analysis tools |
+| `game-v0.111.0/` | the system for game **v0.111.0** (the Defect, the Regent, the Silent), including the PIMC search on sts2-sim ([README](game-v0.111.0/README.md)) |
+| `rust-engine/` | our Rust reimplementation of the combat rules, used briefly and then withdrawn (paper, Section 4) |
+| `weights/` | model card, manifests and checksums; the network files are release assets ([README](weights/README.md)) |
+| `seeds/` | the test seed lists of the paper's tables |
+| `results/` | per-seed results behind Tables 3, 4 and 5 and Section 3.4, with scripts that recount them |
+| `paper/` | scripts that regenerate the paper's figures and appendix tables, with their inputs ([README](paper/README.md)) |
+| `data/` | learner logs, routine evaluations, per-seed capability tests and exams of the Defect, the Regent and the Silent ([README](data/README.md)) |
+| `docs/` | English documentation written during the project ([index](docs/README.md)) |
+| `zh/` | the original Chinese records: decision logs of every character, plans, reports and literature notes ([index](zh/README.md)) |
+
+## Quick start: play a released network
+
+Requirements: your own copy of Slay the Spire 2 on the matching public-beta branch (v0.113.1 or v0.111.0), the .NET 9 SDK, Python 3.12 with NumPy and PyTorch (a CPU is enough for greedy play). The repository contains no game files.
+
+```bash
+# 1. game files (example for a Steam install seen from WSL; adjust the paths)
+V=v0.113.1
+G="/mnt/c/Program Files (x86)/Steam/steamapps/common/Slay the Spire 2"
+mkdir -p ~/.local/share/sls2/game/$V
+rsync -a "$G/data_sts2_windows_x86_64/" ~/.local/share/sls2/game/$V/
+python3 -I tools/extract_pck.py "$G/SlayTheSpire2.pck" ~/.local/share/sls2/game/$V/res localization/eng/ localization/zhs/ localization/completion.json
+
+# 2. engine
+(cd engine/Sts2Headless && dotnet build -c Release -p:Sts2GameVersion=$V)
+dotnet engine/Sts2Headless/bin/Release/net9.0/Sts2Headless.dll selfcheck
+
+# 3. Python
+python3.12 -m venv .venv && .venv/bin/pip install numpy torch
+
+# 4. a network (verify the checksum)
+gh release download weights-v6 -R hmty-CHEN/AlphaDefect-Public -D weights/files_v6
+(cd weights/files_v6 && sha256sum -c ../SHA256SUMS_v6.txt)
+
+# 5. greedy play on the Ironclad's test seeds of Table 3
+.venv/bin/python -I tools/ability_test.py --character IRONCLAD --ckpt weights/files_v6/ironclad_ema_v24782.pt \
+    --asc 10-10 --runs 1000 --seeds-file seeds/R1.json --envs 8 --device cpu --out out/ironclad_R1 \
+    --req-extra '{"obs_format": 28, "loop_cut": true, "stall_turns": 20}'
+```
+
+For v0.111.0, do the same inside `game-v0.111.0/` with `V=v0.111.0`. [docs/17](docs/17_code_map.md) maps the code; [docs/25](docs/25_live_fool_search_and_engine.md) and [docs/26](docs/26_ironclad_and_necrobinder.md) describe the v0.113.1 engine, the tree search and the newest networks.
+
+## Reproducing the tables
+
+| Paper row | Code | Network (release, file) | Seeds | Per-seed results |
+|---|---|---|---|---|
+| Table 3, Defect | `game-v0.111.0/`: `tools/sim_pimc_eval.py` (greedy trunk and PIMC) | `weights-v1`, `student_e_v165018.pt` | W1, entries 6,901–8,400 | `results/table3/` |
+| Table 3, Regent | same | `weights-v2`, `regent_student_e8.pt` | W1, first 1,000 | `results/table3/` |
+| Table 3, Silent | same | `weights-v4`, `silent_ema_v26428.pt` | W1, first 1,000 | `results/table3/` |
+| Table 3, Fool | top level: `tools/future/run_search.py` (`--sims 0` greedy; `--sims 32 --rooms Boss,Elite`) | `weights-v5`, `fool_ema_v24181.pt` | P2-future, first 3,000 | `results/table3/` |
+| Table 3, Ironclad | top level: `tools/ability_test.py` (greedy), `tools/future/run_search.py` (search) | `weights-v6`, `ironclad_ema_v24782.pt` | R1 | `results/table3/` |
+| Table 3, Necrobinder | routine evaluation during training | `weights-v6`, `necrobinder_raw_v25875.pt` | P1 evaluation subset, first 192 | `paper/data/curves_v0113_raw.json` |
+| Table 4 (retests) | as in Table 3 | as in Table 3 | RV1, first 1,000 | `results/table4/` |
+| Table 5 (released game) | the livestream mod (not released) | as in Table 3 | the game's own seeds | `results/live/` (`python3 results/live/table5.py`) |
+| Section 3.4 (solver positions) | `results/solver_baseline/scripts/` | `weights-v1`, `student_e_v165018.pt` | 241 positions | `results/solver_baseline/` |
+
+Greedy evaluations are deterministic given the seed, the network and the batch size, and repeat game by game on the same hardware. Across devices, rare near-ties between candidates can flip a decision (paper, Appendix D). The paper's statistics (Wilson intervals, paired Wald intervals, exact McNemar tests) are computed by `paper/scripts/paper_stats.py`.
+
+## How this project was made
+
+One person, Chen Qiyue, set the goals, chose among approaches and approved every change to the training runs. AI coding assistants (mainly Claude Code) wrote nearly all of the code, ran the experiments and wrote most of the records, under that direction. [docs/16](docs/16_how_the_project_was_run.md) explains how this worked and how to read the records; the decision logs in `zh/` quote every instruction verbatim. Code comments and the original records are in Chinese; [docs/glossary.md](docs/glossary.md) maps the terms.
+
+## License
+
+The project's own code, documents, data and network weights are released under the [MIT license](LICENSE). Game-derived content tables, the vendored spire-mentor rules core and the Spire Codex statistics are third-party material, described with what is not included and what was redacted in [NOTICE.md](NOTICE.md). Slay the Spire 2 is a game by Mega Crit; this project is not affiliated with or endorsed by Mega Crit.
+
+## Citation
+
+See [CITATION.cff](CITATION.cff). The arXiv identifier will be added when the paper is public.

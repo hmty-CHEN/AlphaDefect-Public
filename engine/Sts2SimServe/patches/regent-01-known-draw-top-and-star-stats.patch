@@ -1,0 +1,163 @@
+--- a/src/Sts2Sim.Core/Entities/Cards/CardPile.cs
++++ b/src/Sts2Sim.Core/Entities/Cards/CardPile.cs
+@@ -18,8 +18,22 @@
+ 
+     public IReadOnlyList<CardModel> Cards => _cards;
+ 
++    /// <summary>
++    /// sls2（观测格式 20，储君）：抽牌堆从顶部起有几张是玩家知道位置的。同 Sts2Headless 的 Observation.DrawTop（游戏上挂的补丁）：
++    /// 经 CardPileCmd 按 Top 放进来的牌加一张，按 Random 放进来的整段作废，按 Bottom 不变；不是经 CardPileCmd 按位置放、而是按下标插入的
++    /// （变化的替换牌插回原位）只保留插入点以上；移走顶部已知段里的牌（抽走、打出、选走、挪到底部）减一张；挪到顶部（固有牌）加一张；
++    /// 打乱（开局洗牌、Session.Reseed 只打乱已知段以下的部分除外）作废。只记张数：牌的先后与游戏一致时，前缀张数就是游戏里核对一致的那段。
++    /// 只对抽牌堆记；CardPileCmd.Shuffle 的 StableShuffle 经 RandomizeOrderInternal 以外的路径重排时由那里清零。克隆时照抄。
++    /// </summary>
++    public int KnownTop { get; set; }
++
++    /// <summary>CardPileCmd.GetInsertionIndex 记下的下一次 AddInternal 的位置（Top / Random / Bottom），用完就清。</summary>
++    internal CardPilePosition? PendingPosition;
++
+     public void AddInternal(CardModel card, int index = -1)
+     {
++        CardPilePosition? pos = PendingPosition;
++        PendingPosition = null;
+         if (card.Pile != null)
+         {
+             card.Pile.RemoveInternal(card);
+@@ -34,26 +48,36 @@
+             _cards.Insert(index, card);
+         }
+         card.AssignPileInternal(this);
++        if (Type != PileType.Draw) return;
++        if (pos == CardPilePosition.Top) KnownTop = Math.Min(KnownTop + 1, _cards.Count);
++        else if (pos == CardPilePosition.Random) KnownTop = 0;
++        else if (pos == null && index >= 0 && index < _cards.Count - 1) KnownTop = Math.Min(KnownTop, index);
+     }
+ 
+     public void RemoveInternal(CardModel card)
+     {
++        int i = Type == PileType.Draw ? _cards.IndexOf(card) : -1;
+         if (_cards.Remove(card) && card.Pile == this)
+         {
+             card.AssignPileInternal(null);
+         }
++        if (i >= 0 && i < KnownTop) KnownTop--;
+     }
+ 
+     public void MoveToBottomInternal(CardModel card)
+     {
++        int i = Type == PileType.Draw ? _cards.IndexOf(card) : -1;
+         _cards.Remove(card);
+         _cards.Add(card);
++        if (i >= 0 && i < KnownTop) KnownTop--;
+     }
+ 
+     public void MoveToTopInternal(CardModel card)
+     {
++        int i = Type == PileType.Draw ? _cards.IndexOf(card) : -1;
+         _cards.Remove(card);
+         _cards.Insert(0, card);
++        if (Type == PileType.Draw && (i < 0 || i >= KnownTop)) KnownTop = Math.Min(KnownTop + 1, _cards.Count);
+     }
+ 
+     /// <summary>开局使用不稳定洗牌；普通重洗由 CardPileCmd.Shuffle 的 StableShuffle 处理。</summary>
+@@ -63,5 +87,15 @@
+         rng.Shuffle(list);
+         _cards.Clear();
+         _cards.AddRange(list);
++        KnownTop = 0;
++    }
++
++    /// <summary>sls2：搜索的确定化（Session.Reseed）只打乱玩家不知道位置的部分，已知的顶部原样留着。</summary>
++    public void RandomizeBelowKnownTop(Rng rng)
++    {
++        List<CardModel> rest = _cards.Skip(KnownTop).ToList();
++        rng.Shuffle(rest);
++        _cards.RemoveRange(KnownTop, _cards.Count - KnownTop);
++        _cards.AddRange(rest);
+     }
+ }
+--- a/src/Sts2Sim.Core/Commands/CardPileCmd.cs
++++ b/src/Sts2Sim.Core/Commands/CardPileCmd.cs
+@@ -103,12 +103,17 @@
+         return results;
+     }
+ 
+-    private static int GetInsertionIndex(CardModel card, CardPile pile, CardPilePosition position) => position switch
++    private static int GetInsertionIndex(CardModel card, CardPile pile, CardPilePosition position)
+     {
+-        CardPilePosition.Top => 0,
+-        CardPilePosition.Random => card.Owner.RunState.Rng.Shuffle.NextInt(pile.Cards.Count + 1),
+-        _ => -1,
+-    };
++        // sls2：记下这次是按什么位置放的，紧接着的 AddInternal 据此更新已知的抽牌堆顶部（CardPile.KnownTop）
++        pile.PendingPosition = position;
++        return position switch
++        {
++            CardPilePosition.Top => 0,
++            CardPilePosition.Random => card.Owner.RunState.Rng.Shuffle.NextInt(pile.Cards.Count + 1),
++            _ => -1,
++        };
++    }
+ 
+     /// <summary>Adds a newly created card to a live combat for the first time and emits its entry hook once.</summary>
+     public static Task EnterCombat(
+--- a/src/Sts2Sim.Core/Entities/Players/PlayerCombatState.cs
++++ b/src/Sts2Sim.Core/Entities/Players/PlayerCombatState.cs
+@@ -65,10 +65,27 @@
+             StarsGainedThisTurn += amount;
+         }
+ 
+-        Stars = (int)Math.Max(Stars + amount, 0m);
++        SetStars((int)Math.Max(Stars + amount, 0m));
+     }
+ 
+-    public void LoseStars(decimal amount) => Stars = (int)Math.Max(Stars - amount, 0m);
++    public void LoseStars(decimal amount) => SetStars((int)Math.Max(Stars - amount, 0m));
++
++    /// <summary>sls2：同游戏 PlayerCombatState.Stars 的 setter——星数每次实际变化，战斗历史记一条 StarsModifiedEntry（变化量），
++    /// 观测格式 20 的星统计（STAT:STARS）从这些记录数：本回合 / 本场得到与失去的星。这里不建历史，直接累计。</summary>
++    void SetStars(int value)
++    {
++        int d = value - Stars;
++        Stars = value;
++        if (d > 0) { StarsGainedThisTurnLog += d; StarsGainedThisCombatLog += d; }
++        else if (d < 0) { StarsLostThisTurnLog -= d; StarsLostThisCombatLog -= d; }
++    }
++
++    /// <summary>sls2（观测格式 20）：本回合 / 本场星数实际增加、减少的合计（同游戏战斗历史里 StarsModifiedEntry 的正负两部分）。
++    /// 本回合的两项在回合结束清理时归零（游戏按 HappenedThisTurn：同一轮、同一方）。</summary>
++    public int StarsGainedThisTurnLog { get; private set; }
++    public int StarsLostThisTurnLog { get; private set; }
++    public int StarsGainedThisCombatLog { get; private set; }
++    public int StarsLostThisCombatLog { get; private set; }
+ 
+     /// <summary>本回合已获得的星愿量（LunarBlast类"计算值"卡使用）。逐字移植：真实游戏靠战斗历史日志
+     /// （<c>CombatManager.History</c>）回查,本项目没有完整历史日志系统,改用逐回合重置的计数器,偏离 #101。</summary>
+@@ -229,6 +246,8 @@
+         }
+ 
+         StarsGainedThisTurn = 0m;
++        StarsGainedThisTurnLog = 0;
++        StarsLostThisTurnLog = 0;
+         SkillCardsPlayedThisTurn = 0;
+         AttackCardsPlayedThisTurn = 0;
+         ShivsPlayedThisTurn = 0;
+@@ -253,6 +272,10 @@
+             Phase = Phase,
+             TurnNumber = TurnNumber,
+             StarsGainedThisTurn = StarsGainedThisTurn,
++            StarsGainedThisTurnLog = StarsGainedThisTurnLog,
++            StarsLostThisTurnLog = StarsLostThisTurnLog,
++            StarsGainedThisCombatLog = StarsGainedThisCombatLog,
++            StarsLostThisCombatLog = StarsLostThisCombatLog,
+             SkillCardsPlayedThisTurn = SkillCardsPlayedThisTurn,
+             AttackCardsPlayedThisTurn = AttackCardsPlayedThisTurn,
+             ShivsPlayedThisTurn = ShivsPlayedThisTurn,
+@@ -278,6 +301,7 @@
+                 target.AddInternal(clonedCard);
+                 cardMap.Add(card, clonedCard);
+             }
++            target.KnownTop = source.KnownTop;      // sls2：已知的抽牌堆顶部张数照抄（牌的先后同原来）
+         }
+ 
+         return clone;

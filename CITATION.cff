@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this code, the networks or the records, please cite the paper."
+title: "AlphaDefect: reinforcement-learning agents for Slay the Spire 2"
+authors:
+  - family-names: Chen
+    given-names: Qiyue
+  - family-names: Yu
+    given-names: Taian
+  - family-names: Komiyama
+    given-names: Junpei
+license: MIT
+repository-code: "https://github.com/hmty-CHEN/AlphaDefect-Public"
+preferred-citation:
+  type: article
+  title: "AlphaDefect: Expert-Level AI for Slay the Spire 2"
+  authors:
+    - family-names: Chen
+      given-names: Qiyue
+    - family-names: Yu
+      given-names: Taian
+    - family-names: Komiyama
+      given-names: Junpei
+  year: 2026
+  notes: "arXiv identifier to be added on publication."

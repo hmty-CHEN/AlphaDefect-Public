@@ -1,0 +1,8 @@
+{
+ "engine": "cs",
+ "procs": 8,
+ "seconds": 30.2,
+ "steps_per_s": 778.7,
+ "combats_per_s": 22.45,
+ "steps_per_combat": 34.7
+}

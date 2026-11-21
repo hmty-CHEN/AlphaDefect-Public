@@ -1,0 +1,59 @@
+{
+  "scope": "既有汇总的内部一致性、200条合成序列代数检验、理论样本量示例；没有新游戏或训练实验",
+  "existing_statistics": {
+    "segment": {
+      "ev": 0.8492866628733028,
+      "mse": 0.19668721234350764,
+      "n_states": 315090.0,
+      "n_roots": 2000
+    },
+    "full_lambda": {
+      "ev": 0.7168145212540467,
+      "mse": 0.43412432821635566,
+      "n_states": 315090.0,
+      "n_roots": 2000
+    },
+    "mc_behavior": {
+      "ev": 0.18568735840516204,
+      "mse": 4.6293366366915105,
+      "n_states": 315090.0,
+      "n_roots": 2000
+    }
+  },
+  "advantage_sign_disagreement": 0.2741216795201371,
+  "lambda_weights": {
+    "0.95": {
+      "9": 0.6302494097246091,
+      "20": 0.3584859224085419,
+      "50": 0.07694497527671315,
+      "100": 0.0059205292203339975
+    },
+    "0.98": {
+      "9": 0.8337477621301498,
+      "20": 0.6676079717550942,
+      "50": 0.36416968008711675,
+      "100": 0.13261955589475294
+    }
+  },
+  "independent_equal_variance_td_noise_ratio_098_over_095": 2.462121212121208,
+  "pbrs_algebra_200_sequences": {
+    "max_return_error": 1.4210854715202004e-14,
+    "max_td_error": 3.552713678800501e-15,
+    "max_gae_error": 7.105427357601002e-14
+  },
+  "old_assist_exact_p_two_sided": 4.223704562267977e-05,
+  "paired_sample_size_approx_80pct_power": {
+    "discordance=0.26,gap=0.02": 5089,
+    "discordance=0.26,gap=0.03": 2258,
+    "discordance=0.35,gap=0.02": 6853,
+    "discordance=0.35,gap=0.03": 3042
+  },
+  "illustrative_binary_branch_se_K64_p07": {
+    "0.0": 0.08100925873009825,
+    "0.8": 0.03622844186547359
+  },
+  "proposed_rollout_counts_not_executed": {
+    "pilot_256_roots_3_actions_K8": 6144,
+    "expanded_512_roots_3_actions_K32": 49152
+  }
+}

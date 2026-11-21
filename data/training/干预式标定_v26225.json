@@ -1,0 +1,72 @@
+{
+ "exam": "/home/chenqiyue/.local/share/sls2/runs/remote/transfer/20261026-134744-migrate-a-b/exam.json",
+ "ckpt": "/home/chenqiyue/.local/share/sls2/runs/remote/transfer/20261026-134744-migrate-a-b/latest.pt",
+ "version": 26225,
+ "reps": 2,
+ "results": {
+  "act2:hp15": {
+   "n": 512,
+   "base": 0.3926,
+   "diff": -0.0996,
+   "se": 0.0147,
+   "b": 54,
+   "c": 3
+  },
+  "act2:potion": {
+   "n": 486,
+   "base": 0.3992,
+   "diff": -0.107,
+   "se": 0.0167,
+   "b": 59,
+   "c": 7
+  },
+  "act2:upgrade": {
+   "n": 506,
+   "base": 0.3972,
+   "diff": -0.0217,
+   "se": 0.0099,
+   "b": 18,
+   "c": 7
+  },
+  "act2:relic": {
+   "n": 512,
+   "base": 0.3926,
+   "diff": -0.041,
+   "se": 0.0119,
+   "b": 29,
+   "c": 8
+  },
+  "act3:hp15": {
+   "n": 512,
+   "base": 0.1406,
+   "diff": -0.041,
+   "se": 0.0094,
+   "b": 22,
+   "c": 1
+  },
+  "act3:potion": {
+   "n": 502,
+   "base": 0.1414,
+   "diff": -0.0378,
+   "se": 0.0091,
+   "b": 20,
+   "c": 1
+  },
+  "act3:upgrade": {
+   "n": 512,
+   "base": 0.1406,
+   "diff": -0.0039,
+   "se": 0.0068,
+   "b": 7,
+   "c": 5
+  },
+  "act3:relic": {
+   "n": 512,
+   "base": 0.1406,
+   "diff": -0.0156,
+   "se": 0.0083,
+   "b": 13,
+   "c": 5
+  }
+ }
+}

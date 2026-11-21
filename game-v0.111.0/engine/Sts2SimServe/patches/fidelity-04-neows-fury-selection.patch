@@ -1,0 +1,68 @@
+diff --git a/src/Sts2Sim.Core/Models/Cards/NeowsFury.cs b/src/Sts2Sim.Core/Models/Cards/NeowsFury.cs
+index dd9d014..366d9c9 100644
+--- a/src/Sts2Sim.Core/Models/Cards/NeowsFury.cs
++++ b/src/Sts2Sim.Core/Models/Cards/NeowsFury.cs
+@@ -3,10 +3,7 @@ using Sts2Sim.Core.Entities.Cards;
+ 
+ namespace Sts2Sim.Core.Models.Cards;
+ 
+-/// <summary>
+-/// Deviation #158: retrieves the first eligible discard cards because the simulator has no
+-/// interactive discard-card selection UI.
+-/// </summary>
++/// <summary>原版 <c>NeowsFury</c>：造成伤害，再从弃牌堆选至多 2（升级 3）张放回手牌。</summary>
+ public sealed class NeowsFury : CardModel, ICardDamageVariableProvider
+ {
+     private decimal _damage = 10m;
+@@ -34,15 +31,17 @@ public sealed class NeowsFury : CardModel, ICardDamageVariableProvider
+             .Targeting(cardPlay.Target)
+             .Execute();
+ 
+-        int availableCapacity = Math.Max(
+-            0,
+-            CardPile.MaxCardsInHand - Owner.PlayerCombatState!.Hand.Cards.Count);
+-        CardModel[] selected = Owner.PlayerCombatState.DiscardPile.Cards
+-            .Take(Math.Min(_retrieveCount, availableCapacity))
+-            .ToArray();
+-        foreach (CardModel card in selected)
++        // 原版：从弃牌堆选 0..min(张数, 手牌空位) 张放回手牌（CardSelectCmd.FromCombatPile，可以少选），
++        // 交给决策源选，不再自动取弃牌堆最前面的几张（原来的偏离 #158）
++        int count = Math.Min(_retrieveCount, CardPile.MaxCardsInHand - Owner.PlayerCombatState!.Hand.Cards.Count);
++        if (count > 0)
+         {
+-            CardPileCmd.Add(card, PileType.Hand);
++            IReadOnlyList<CardModel> selected = await CardSelectCmd.FromCombatPile(
++                CombatState!, Owner, Owner.PlayerCombatState.DiscardPile, 0, count, this);
++            foreach (CardModel card in selected)
++            {
++                CardPileCmd.Add(card, PileType.Hand);
++            }
+         }
+     }
+ 
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Cards/NeowsFuryTests.cs b/tests/Sts2Sim.Core.Tests/Models/Cards/NeowsFuryTests.cs
+index b0bcf5d..98f8c7e 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Cards/NeowsFuryTests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Cards/NeowsFuryTests.cs
+@@ -7,6 +7,7 @@ using Sts2Sim.Core.Models.Cards;
+ 
+ namespace Sts2Sim.Core.Tests.Models.Cards;
+ 
++
+ [Collection("ModelDb")]
+ public sealed class NeowsFuryTests : IDisposable
+ {
+@@ -41,9 +42,13 @@ public sealed class NeowsFuryTests : IDisposable
+             CardPileCmd.Add(card, PileType.Discard);
+         }
+         decimal hpBefore = room.Engine.State.Enemies[0].CurrentHp;
++        // 原版从弃牌堆选 0..上限 张：这里的决策源取前几张（上限 2、升级 3）
++        var selection = new LegacySelectionDecisionSource();
++        room.Engine.State.CardSelectionSource = selection;
+ 
+         await fury.PlayAsync(room.Engine.State.Enemies[0]);
+ 
++        Assert.Equal(0, Assert.Single(selection.Requests).MinCount);
+         Assert.Equal(expectedDamage, hpBefore - room.Engine.State.Enemies[0].CurrentHp);
+         Assert.Equal(discard.Take(expectedRetrieved),
+             player.PlayerCombatState!.Hand.Cards.Where(discard.Contains));

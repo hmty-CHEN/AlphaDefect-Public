@@ -1,0 +1,92 @@
+[
+ {
+  "name": "student_e_v165018",
+  "src": "~/.local/share/sls2/live/ckpt/v165018-20261105-学生e.pt",
+  "release": "weights-v1",
+  "dr": "#273, #274",
+  "notes": "Best single network. Student distilled from the probability-averaged ensemble of 16 uniformly spaced SL-pool snapshots (v130978-v156880), new structure, initialized from main-line v165018.",
+  "eval": "76.7% on 1,500 fresh W1 seeds; about 75-77% on P1 1,000 seeds (greedy, A10)"
+ },
+ {
+  "name": "main_v168398",
+  "src": "~/.local/share/sls2/runs/remote/defect-eval/best/v168398.pt",
+  "release": "weights-v1",
+  "dr": "#278",
+  "version": 168398,
+  "config_from": "student_e_v165018",
+  "notes": "Main line restarted from student e (renumbered to v167921), lr 1.375e-5, KL anchor removed from v168146. Kept by the routine evaluator's top-5 archive. Same architecture as student e.",
+  "eval": "routine P1 evaluation in the top-5 archive at the time; exact reading not in the local copy"
+ },
+ {
+  "name": "milestone_v044820",
+  "src": "~/.local/share/sls2/ability_test/model.pt",
+  "release": "weights-v1",
+  "dr": "#134",
+  "notes": "First all-ascension capability test. Observation format 10, 6-layer model without later add-ons.",
+  "eval": "8.8% on TEST0000-0999 (A10); A0 92.0%"
+ },
+ {
+  "name": "milestone_v063680",
+  "src": "~/.local/share/sls2/ability_test/pair/v63680-20261029-0200.pt",
+  "release": "weights-v1",
+  "dr": "#169, #170",
+  "notes": "Last checkpoint before segmented run submission. Pair with v066040-era results to see the largest single-change jump.",
+  "eval": "12.5% on 1,009 RT seeds"
+ },
+ {
+  "name": "milestone_v084667",
+  "src": "~/.local/share/sls2/keep/v84667.pt",
+  "release": "weights-v1",
+  "dr": "#196, #197",
+  "notes": "Observation format 15. Owner-requested keep (routine 192-run eval read 50%).",
+  "eval": "44.6% on RT0000-0999"
+ },
+ {
+  "name": "milestone_v103049",
+  "src": "~/.local/share/sls2/keep/v103049.pt",
+  "release": "weights-v1",
+  "dr": "#203",
+  "notes": "Livestream baseline from 2026-10-30.",
+  "eval": "56.1% on RT0000-0999"
+ },
+ {
+  "name": "milestone_v117152",
+  "src": "~/.local/share/sls2/keep/v117152.pt",
+  "release": "weights-v1",
+  "dr": "#208",
+  "notes": "Observation format 16.",
+  "eval": "62.3% on RT0000-0999; 59.9% on the HO acceptance seeds"
+ },
+ {
+  "name": "milestone_v128517_ema",
+  "src": "~/.local/share/sls2/keep/v128517-ema.pt",
+  "release": "weights-v1",
+  "dr": "#225",
+  "notes": "EMA weights (decay 0.998). Observation format 18.",
+  "eval": "69.7% on RT0000-0999 (95% CI 66.8-72.5%)"
+ },
+ {
+  "name": "milestone_v134704",
+  "src": "~/.local/share/sls2/live/ckpt/v134704-20261101.pt",
+  "release": "weights-v1",
+  "dr": "#227-#231",
+  "notes": "Observation format 19; start of the plateau.",
+  "eval": "73.8% on RT0000-0999"
+ },
+ {
+  "name": "milestone_v141229",
+  "src": "~/.local/share/sls2/keep/v141229.pt",
+  "release": "weights-v1",
+  "dr": "#240",
+  "notes": "Livestream model from 2026-11-01 and the first baseline on seed pool P1.",
+  "eval": "75.1% on RT0000-0999; 72.5% on P1"
+ },
+ {
+  "name": "milestone_v156880",
+  "src": "~/.local/share/sls2/ability_test/v156880-首通探测/model.pt",
+  "release": "weights-v1",
+  "dr": "#272, #273",
+  "notes": "Newest member of the 62-snapshot SL pool and the starting point of the first pool distillation (student b).",
+  "eval": "about 72.5% on 1,500 fresh seeds (DR #273 'pool single')"
+ }
+]

@@ -1,0 +1,22 @@
+archive/dual-net-268 d9cad16 2026-11-04 归档（未完成、未检验、未上线）：战斗与局外拆成两个网络 + 同组偏置局（决策记录 268）
+backup/wip-20261028 2f5d060 2026-10-28 备份：2026-10-28 工作区未提交的改动（avatar 语音与主持、开播守护、MouseGuard 等）
+codex/avatar-direct-motion 77cdc53 2026-10-28 修复形象抬手绕圈：直达手部路径与稳定三维肘部解
+codex/avatar-gestures 4fedc42 2026-10-28 直播形象：随机小动作、两级礼物谢礼与不可抢占保护
+codex/avatar-reactive a8f7f22 2026-10-28 记录形象 v2 的实机战斗与 OBS 启用核对
+engine-modular a991522 2026-11-08 合并 master（储君决策记录第 24 条）到 engine-modular
+master efeacd6 2026-11-12 猎人决策记录第 23 条：第 26,428 版带第三幕搜索 74.0%（贪心 71.3%），对第 24,721 版带搜索 +4.5（p = 0.006）
+rust-combat 2839eb2 2026-10-28 规则：Goopy 只附 Defend 标签的牌，每打出一次层数 +1 并写回牌组
+rust-obs 1cb6a6c 2026-10-28 CRYSTAL_SPHERE 小游戏改为逐格决策（同 C# NCrystalSphereScreen 的 Minigame 决策）
+silent-obs23fix 57bb4ba 2026-11-11 格式 23 修补（猎人决策记录第 18 条，做好未上线）：被动伤害过无实体、律动残余封顶、女王死时爪牙同死、防御药水候选
+wq1 971e2c8 2026-11-01 import 加 fmt=2：保留 wire 抽牌堆顺序（只给闭环对拍用，搜索仍走重洗）
+wq2 971e2c8 2026-11-01 import 加 fmt=2：保留 wire 抽牌堆顺序（只给闭环对拍用，搜索仍走重洗）
+wq3 971e2c8 2026-11-01 import 加 fmt=2：保留 wire 抽牌堆顺序（只给闭环对拍用，搜索仍走重洗）
+wq4 2ee9aa0 2026-11-01 等价性 99.68%->99.94%（只剩 2 帧）：补发 AFFLICTION.RINGING、调整 CARDMOD:COPY 的记录位置
+github/backup/wip-20261028 2f5d060 2026-10-28 备份：2026-10-28 工作区未提交的改动（avatar 语音与主持、开播守护、MouseGuard 等）
+github/codex/avatar-direct-motion 77cdc53 2026-10-28 修复形象抬手绕圈：直达手部路径与稳定三维肘部解
+github/codex/avatar-gestures 4fedc42 2026-10-28 直播形象：随机小动作、两级礼物谢礼与不可抢占保护
+github/codex/avatar-reactive a8f7f22 2026-10-28 记录形象 v2 的实机战斗与 OBS 启用核对
+github/master cbf6ce1 2026-10-28 定期复测（每约 2,000 版，RT 种子 1,000 局，本机守护自动触发）；护栏基准换成分段提交后的评测，新增复测护栏；决策记录 171（含头两次复测）
+github/rust-combat 2839eb2 2026-10-28 规则：Goopy 只附 Defend 标签的牌，每打出一次层数 +1 并写回牌组
+github/rust-obs 1cb6a6c 2026-10-28 CRYSTAL_SPHERE 小游戏改为逐格决策（同 C# NCrystalSphereScreen 的 Minigame 决策）
+win/master 8b9eef0 2026-10-31 实机桥接：问号房事件里暂停即时模式；看板可调静止判定与即时模式；休息处点过离开不再出决策

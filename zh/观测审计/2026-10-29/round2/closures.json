@@ -1,0 +1,70 @@
+{
+  "closed_at": "2026-10-29T19:37:53.788132+01:00",
+  "items": [
+    {
+      "id": "F06",
+      "status": "optional_feature",
+      "result": "口径已明确：现有列是经防伤后的潜在生命损失合计，不扣治疗，不等于下一回合净HP差。再生26/21不是此口径的数值错误；旧check_obs_v12直接比较净HP在有治疗时不成立。",
+      "recommendation": "保留既有列含义；净变化可另列。旧校验限定无治疗/复活场景或改核对损伤事件，避免静默改变旧特征。",
+      "verification": "static_consumer_review_and_prior_runtime",
+      "evidence": "round2/static_closures.json:F06"
+    },
+    {
+      "id": "F14",
+      "status": "optional_feature",
+      "result": "复核自然MaxEnergy/BaseOrbSlotCount写入和16个ModifyMaxEnergy钩子，未发现独立的自然状态遗漏；数值由角色、公开遗物/计数、能力与回合条件决定。",
+      "recommendation": "作为局外决策的便利摘要可做；不以手改存档构造必要性。范围限原生单人玩法。",
+      "verification": "whole_source_reference_review",
+      "evidence": "round2/static_closures.json:F14"
+    },
+    {
+      "id": "S08",
+      "status": "excluded",
+      "result": "复核20类来源/目标关联能力：Constrict、Hex、Shrink相关自然遭遇均只有一个对应施加者；MagicBomb未发现自然Apply调用点。其余主要是唯一玩家或多人关系。",
+      "recommendation": "当前原生单人范围不新增字段；遇到多人、模组、混编怪群或新多施加者遭遇时重开。",
+      "verification": "natural_encounter_source_review",
+      "evidence": "round2/static_closures.json:S08"
+    },
+    {
+      "id": "S03",
+      "status": "confirmed",
+      "result": "自然流程：打一张打击入弃牌，癫狂之触令手中另一张整场零费，再用液态记忆取回前一张。两张手牌的实体整数、实体数值与候选数值完全相同，均为0费；结束回合后只有一张仍0费，另一张恢复1费。",
+      "recommendation": "编码费用修正的有效期，或本回合结束后/再次打出后的预计费用。重点是同一手牌中具体哪张会过期，不只是全局有过降费。",
+      "verification": "runtime_same_frame_indistinguishable_cards",
+      "evidence": "round2/closure_results.jsonl:S03"
+    },
+    {
+      "id": "S09",
+      "status": "confirmed",
+      "result": "花园幽灵鳗首次被打击命中后得到7格挡；随后打掉格挡，再次命中不再得格挡。整个过程中能力记录始终是相同的[7,0,7,...]，没有表示HasGainedBlockThisTurn。只证明能力实例标记遗漏，未声称测试构造了两张整帧完全相同的局面。",
+      "recommendation": "补本回合是否已触发/剩余触发次数。历史v81243千种子有366局、374场相关遭遇，属于当前角色常见机制。",
+      "verification": "runtime_effect_flag_missing",
+      "evidence": "round2/closure_results.jsonl:S09; round2/encounter_coverage.json"
+    },
+    {
+      "id": "S10",
+      "status": "optional_feature",
+      "result": "两层回响下，本回合三次手动打击依次造成12、12、6；出牌前已完成结算数分别0、2、4。已确认计数口径不同，但未证明所有其他输入相同且最优动作不同。当前完成数本身没有算错。",
+      "recommendation": "如需降低计算难度，可另加独立出牌序列数或剩余回响额度；不能改写现有为连击等机制服务的完成结算计数。",
+      "verification": "runtime_counter_semantics",
+      "evidence": "round2/closure_results.jsonl:S10"
+    },
+    {
+      "id": "S15",
+      "status": "optional_feature",
+      "result": "破灭自动打出内存清理时确实会暂停选牌，内存清理消耗关键字为0，结算后进消耗堆。不过破灭和内存清理同时在已编码打出区，强制消耗可以由来源与规则推导，尚无独立整帧冲突证据。",
+      "recommendation": "可增加实际结果去向/强制消耗提示，归为结果预览便利项；不把缺少该布尔值直接当成无法学习。",
+      "verification": "runtime_natural_pause_and_source_visibility",
+      "evidence": "round2/closure_results.jsonl:S15"
+    },
+    {
+      "id": "S16",
+      "status": "confirmed",
+      "result": "双持复制巨镰后，同一手牌中原牌和副本的实体特征相同；两次受控重放在选择前整帧逐项相同。打原牌时永久巨镰从13增长到18；打副本时永久巨镰仍为13。",
+      "recommendation": "针对永久成长牌编码是否关联永久牌组/是否战斗生成副本，避免用不稳定的列表顺序代替身份。",
+      "verification": "runtime_same_frame_duplicate_origin",
+      "evidence": "round2/closure_results.jsonl:S16"
+    }
+  ],
+  "pending_after": 0
+}

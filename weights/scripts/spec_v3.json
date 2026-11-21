@@ -1,0 +1,64 @@
+[
+ {
+  "name": "silent_ema_v24721",
+  "src": "/root/.local/share/sls2/runs/silent/backups/v24721-20261111-2200-集成蒸馏前.pt",
+  "state_key": "ema",
+  "release": "weights-v3",
+  "dr": "Silent #15",
+  "notes": "Final Silent network: the learner's EMA copy (decay 0.999 per version) at v24,721, where Silent training stopped. On the Silent neither the EMA copy nor an 8-snapshot ensemble beat the raw weights, so there was no distillation; the EMA copy was chosen as the final single network (Silent DR #15). Bit-identical to the network the 1,000-seed tests used.",
+  "eval": "66.2% greedy on 1,000 W1 seeds; 69.5% (95% CI about 66.6-72.3%) with Act-3 double-boss PIMC search on the same seeds, +3.3 pp, McNemar exact p = 3.8e-5 (A10)"
+ },
+ {
+  "name": "silent_raw_v24721",
+  "src": "/root/.local/share/sls2/runs/silent/backups/v24721-20261111-2200-集成蒸馏前.pt",
+  "release": "weights-v3",
+  "dr": "Silent #1-#15",
+  "notes": "Silent learner (raw) weights at v24,721, the last version trained (from scratch since 2026-11-09; Muon on the hidden 2-D weights and Adam elsewhere; observation format 23 from v19,901; skipping easy fights from v24,208). The trunk the combat-outcome heads were trained on.",
+  "eval": "65.6% greedy on the same 1,000 W1 seeds (EMA vs raw +0.6 +/- 3.5 pp, p = 0.78; 8-snapshot ensemble also 65.6%); routine evaluation 62.4% over the last 12 rounds v24,491-v24,686 (2,877/4,608; 384 P1 seeds per round, raw weights, greedy, A10)"
+ },
+ {
+  "name": "silent_combat_outcome_heads_v24721",
+  "src": "/root/.local/share/sls2/runs/silent/backups/v24721-20261111-2200-集成蒸馏前.pt",
+  "kind": "co_heads",
+  "trunk": "silent_raw_v24721.pt",
+  "release": "weights-v3",
+  "dr": "Silent #14",
+  "calibration": {
+   "window": "v24208-v24721",
+   "definition": "mean of (actual HP after the fight / max HP at the start) minus the raw HP head's predicted mean, on eligible fights that were played; keys act<n>_<room>",
+   "hp_residual": {
+    "act1_Elite": {
+     "mean_residual": 0.002,
+     "n": 32463
+    },
+    "act1_Monster": {
+     "mean_residual": 0.0051,
+     "n": 103547
+    },
+    "act2_Elite": {
+     "mean_residual": 0.0031,
+     "n": 26054
+    },
+    "act2_Monster": {
+     "mean_residual": 0.0037,
+     "n": 70494
+    },
+    "act3_Elite": {
+     "mean_residual": 0.0006,
+     "n": 17772
+    },
+    "act3_Monster": {
+     "mean_residual": 0.0009,
+     "n": 46324
+    }
+   },
+   "potions": {
+    "potion_fights": 390177,
+    "predicted_use": 0.216,
+    "actual_use": 0.212
+   }
+  },
+  "notes": "Combat-outcome heads of the Silent at v24,721 (sts2rl.model.CombatOutcomeHeads): 41-bin distribution of HP after a won fight (fraction of max HP at the start) and per-potion use probability. They read the detached trunk embedding g of silent_raw_v24721.pt; used in training to sample outcomes of skipped fights (Silent DR #14).",
+  "eval": "played eligible fights v24,208-v24,721: HP residual +0.0006 to +0.0051 of max HP by (act, room); potions predicted 0.216 vs actual 0.212 (390,177 potion-fights)"
+ }
+]

@@ -1,0 +1,33 @@
+# Original documents (Chinese)
+
+These are the project's original records, copied unchanged except for redacted machine addresses. Second snapshot: 2026-11-11 (working repository `master` at `0ed0e6a`, then `a87e852` the same day). They are the primary sources behind the English documents in [`../docs/`](../docs/). Links inside them may point to paths on the owner's machines (`/home/…/dev/sls2/…`); the same files are here under `zh/` with the same relative names.
+
+| File / folder | What it is | English guide |
+|---|---|---|
+| `决策记录.md` | Decision record (Defect and project-wide), 293 numbered entries, 2026-10-24 → 11-09 | [docs/15](../docs/15_decision_log_index.md) |
+| `储君决策记录.md` | The Regent line's own decision record, 30 entries, 2026-11-06 → 11-09 ("Regent DR #n") | [docs/19](../docs/19_regent.md) |
+| `猎人决策记录.md` | The Silent line's own decision record (猎人 "Hunter" is the records' name for the Silent), 23 entries, 2026-11-09 → 11-12 ("Silent DR #n") | [docs/20](../docs/20_silent.md) |
+| `猎人训练交接.md` | Plan and handover written before the Silent line started | [docs/20](../docs/20_silent.md) |
+| `储君观测调研.md`, `储君观测核对报告.md` | Regent observation research (format 20) and its verification | [docs/22](../docs/22_engine_updates.md) |
+| `猎人观测调研.md` | Silent observation research (formats 21 and 23) | [docs/22](../docs/22_engine_updates.md) |
+| `铁甲与亡灵契约师观测调研.md` | Ironclad and Necrobinder observation research (format 22; written before either was trained) | [docs/22](../docs/22_engine_updates.md) |
+| `铁甲战士决策记录.md` | Branch `game-v0.113.0` only (2026-11-21): the Ironclad line's decision record (铁甲战士 is the Ironclad's Chinese name), from 2026-11-17 ("Ironclad DR #n"), DR #1–#29; two LAN addresses replaced by `B_LAN_IP` and `C_LAN_IP`, DR #30 left out | [docs/26](../docs/26_ironclad_and_necrobinder.md) |
+| `亡灵契约师决策记录.md` | Branch `game-v0.113.0` only (2026-11-21): the Necrobinder line's decision record (亡灵契约师), from 2026-11-17 ("Necrobinder DR #n"), DR #1–#15 (the pause at v25,875) | [docs/26](../docs/26_ironclad_and_necrobinder.md) |
+| `引擎模块与游戏更新适配.md` | Engine split into modules, game-version compatibility layer, what to do on a game update (branch `game-v0.113.0`: download tools, column alignment, aliases) | [docs/22](../docs/22_engine_updates.md) |
+| `游戏更新v0.113.0/` | Branch `game-v0.113.0` only: the v0.113.0 adaptation report (适配报告.md) with its attachments — the Fool's mechanics (Fool调研.md), changes to old content (老内容改动调研.md), the update-impact report (影响评估.md), and the independent observation audit behind format 25 (观测独立核查.md) | [docs/23](../docs/23_game_update_v0.113.0.md) |
+| `愚者决策记录.md` | Branch `game-v0.113.0` only: the Fool line's decision record (愚者 is the Fool's Chinese name), from 2026-11-13 ("Fool DR #n"), through DR #26 (engine switch, pause at v24,181) since 2026-11-17 | [docs/23](../docs/23_game_update_v0.113.0.md), [docs/25](../docs/25_live_fool_search_and_engine.md) |
+| `游戏更新v0.113.1/` | Branch `game-v0.113.0` only (2026-11-17): the v0.113.1 adaptation report (适配报告.md), impact assessment (影响评估.md) and check log (核对记录.md) | [docs/25 §4](../docs/25_live_fool_search_and_engine.md#4-the-engine-for-v01131) |
+| `直播树搜索.md` | Branch `game-v0.113.0` only (2026-11-17): how the boss-and-elite tree search is wired into live play, the switch-over plan and rehearsal, on/off controls. The one livestream document included | [docs/25 §3](../docs/25_live_fool_search_and_engine.md#3-live-play) |
+| `技术路线.md` | Original technical plan (10-24) | [docs/14 §4](../docs/14_research_reports_and_literature.md) |
+| `M0验证报告.md`, `M1验证报告.md`, `M2准备报告.md`, `M2训练上线报告.md` | Milestone reports: headless prototype, full-run loop, training system, going live | [docs/02](../docs/02_timeline_and_critical_path.md) |
+| `观测格式.md` | Observation frame layout, versions 1–23 (1–29 on branch `game-v0.113.0`) | [docs/04](../docs/04_observation_and_model.md), [docs/26](../docs/26_ironclad_and_necrobinder.md) |
+| `网络结构_4090机.md` | Parameter breakdown after model growth | [docs/04](../docs/04_observation_and_model.md) |
+| `后续计划.md` | Plans from 10-26 onward (two opposing planning agents, later phases) | [docs/16](../docs/16_how_the_project_was_run.md) |
+| `AlphaZero式搜索方案.md`, `战斗搜索与蒸馏方案.md` | Search designs (10-27) and the current search-and-distill plan (11-06) | [docs/10](../docs/10_search_ensembles_distillation.md) |
+| `研究报告/` | Experiment reports, independent reviews, surveys (with their data); on branch `game-v0.113.0` also `2026-11-20_全角色观测缺口调研/`, the research, specification and merge check of observation format 29 | [docs/14](../docs/14_research_reports_and_literature.md), [docs/26](../docs/26_ironclad_and_necrobinder.md) |
+| `reports/` | Analysis reports (plateau, ensembles, distillation routes, specialist design, LR/batch; from 11-11 also combat-outcome prediction and skipping easy fights, see [docs/21](../docs/21_combat_outcome_prediction_and_skipping.md); from 11-12 the Silent card-choice trap diagnostic, plan and report: 选牌能力陷阱诊断方案.md, 选牌能力陷阱诊断报告.md, see [docs/20 §3.10](../docs/20_silent.md#310-is-the-policy-locked-out-of-long-card-plans-19); on branch `game-v0.113.0` from 11-17 the search night and the cloning engine: 整夜搜索探究总结.md, 树搜索试验记录.md, 搜索算法文献调研.md, 局面复制无头引擎报告.md, PIMC推理侧提速.md, and the Fool failure analysis 愚者失败结构分析.md, see [docs/25](../docs/25_live_fool_search_and_engine.md); from 11-21 the search-in-training pilot 训练中用搜索试点记录.md, see [docs/26](../docs/26_ironclad_and_necrobinder.md)) | [docs/14](../docs/14_research_reports_and_literature.md) |
+| `research_notes/` | Literature survey notes behind those reports | [docs/14](../docs/14_research_reports_and_literature.md) |
+| `观测审计/` | Audit of observation coverage (10-29) | [docs/14](../docs/14_research_reports_and_literature.md) |
+| `README_原版.md` | The working repository's original README (build and run commands) | [docs/17](../docs/17_code_map.md) |
+
+Omitted on purpose: the bilingual briefing pack for presenting the project, all livestream documents (live bridge, stream layout and daemon, SL mode, YouTube research, worked SL lines, the earlier live search plan) except, on branch `game-v0.113.0`, `直播树搜索.md`, a document about the owner's network and proxy setup, the data-evacuation tooling and notes for the owner's cloud storage, a dashboard password file, and the working repository's agent-instruction file (its useful rules are summarized in [docs/16](../docs/16_how_the_project_was_run.md)).

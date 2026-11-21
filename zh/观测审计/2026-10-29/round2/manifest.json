@@ -1,0 +1,65 @@
+{
+  "started_at": "2026-10-29T19:26:40.875242+01:00",
+  "scope": [
+    "F06",
+    "F14",
+    "S03",
+    "S08",
+    "S09",
+    "S10",
+    "S15",
+    "S16"
+  ],
+  "authorization": "继续只读核查；审计文件及极小独立复现允许写入；不改训练状态。",
+  "prior_findings": "用户说明上一轮发现已提交修改计划；提交不等同于已经修复。",
+  "source_hashes": {
+    "engine/Sts2Headless/Engine/Observation.cs": "6153286fd5d696c1d4f47230b3865ed7a12bd132ea559b73605e3f6423c8a1a4",
+    "python/sts2rl/features.py": "e6d575e2a1b91dac6957375d0f9bc9407829114ec0e3ce1cc4c85990fae81079",
+    "python/sts2rl/model.py": "36f375d6229ea2eca58f2e57bf2b43f032219d2abbc5b5e53d0f79a88625c50a"
+  },
+  "windows_before_hashes": {
+    "audit_summary.json": "bbdb723c622b1c6e2a62afede7c6180c8504e95b57a54986091c5dd2d8b773d8",
+    "behavior_results.jsonl": "c949b0b255d464ef4ad642ec0d48f9dac7a7ed55542d3cbc06f7306da3cc15ce",
+    "checklist.json": "b043b7f44f9ad88b28f4155fbc76dc752f8111e2131f127c5b607282f286f939",
+    "entity_inventory.csv": "359c7858e6fa358291c825c6314521bfb5f8483bde4179ac36b26a01b1a02abf",
+    "followup_results.jsonl": "bd59c39b52ed87eb46aebb3572c52123c12599b423e6789fc0160842f96f13ea",
+    "inventory_summary.json": "aa315199e9e66f076b974dbfbc50d6a356f534d5fa6cd5902a8984b3e41e70cc",
+    "manifest.json": "162a01a0d0af3ab4fbcdf37777defa4fc083e9feda08e17252c1ffb745bc2ab6",
+    "momentum_results.jsonl": "1d464a8b031d38f1d08763eb5a8f72c0fe0edc893ef388444e47bb104090faa9",
+    "probe_attempts.jsonl": "73f2941cfc5b60e8e47347c58c09dee2dfd01223c5879ed8445466c8b322090e",
+    "README.md": "16b8e07d84a1a41ab0dafc3350cffdbfb6019f368b705ef6522251365a4cb83b",
+    "replay_coverage.json": "daac6f93268ef9985fdba0a06f7c98a526b9c3a6384d16cc080bb3cc5520f8a4",
+    "state_checks.json": "8c7082407bea5da9e1c7f456343ee1481033fcc095539ac98b02f451ccf41408",
+    "state_review.md": "d81bf06b14ce7b8c7bf5b1c93d5cd4e2880936b368a536b34cc61d3c16b19c38",
+    "排查清单.md": "d149f4a663a6b66fc7ae4ee882204a1caf2c5b96367501fdf543522bd46bd992",
+    "本轮结论.md": "dd680ba804549bb0609507860c35fb9fa1e04c9864a0c268e268e2637f802167",
+    "probes/behavior_probe.py": "335b4c6522e68fb24c7bae9f7c88cd16d38784f5f3b54459d53d7f67259332f5",
+    "probes/followup_probe.py": "e915dee9871df3657eec6be3802c2603fd66a4d8d9f160c26b34ec03a7d36b5d",
+    "probes/inventory.py": "0dfd7fb881bdb30c9ba543313007f2599d97a5bb79eff3e12948813c852f1a08",
+    "probes/momentum_recovery_probe.py": "763e10561e3fd6081c5ac79963f3f6d730a688e9abdea7d89e79aea435e83f71",
+    "probes/replay_coverage.py": "7fa40a39d9e6c5d11bb5ceec91a8ff1b72c2e72b0b9255ce7c8704bbc856170b"
+  },
+  "finished_at": "2026-10-29T19:37:53.788132+01:00",
+  "source_hashes_at_finish": {
+    "engine/Sts2Headless/Engine/Observation.cs": "19580855c8b018329df969525b4ee7f64b7d817be1e54221c0c677dc1297a7a2",
+    "python/sts2rl/features.py": "e6d575e2a1b91dac6957375d0f9bc9407829114ec0e3ce1cc4c85990fae81079",
+    "python/sts2rl/model.py": "606ba438d8a0297af7ba13c0b52477af0f1b432ad0937f3ece03aa81130230ba"
+  },
+  "runtime_metadata": {
+    "check": "metadata",
+    "time": "2026-10-30T02:33:38.712352+08:00",
+    "observation_sha256": "d216cb58b30ace0856bb0f38321e84a9c1d0a2b715d87389c5e365520e43a31c"
+  },
+  "disposition_summary": {
+    "checked": 8,
+    "confirmed": 3,
+    "optional_feature": 4,
+    "excluded": 1,
+    "new_confirmed_ids": [
+      "S03",
+      "S09",
+      "S16"
+    ]
+  },
+  "pending_after": 0
+}

@@ -1,0 +1,107 @@
+--- a/src/Sts2Sim.Core/Models/Cards/Catastrophe.cs
++++ b/src/Sts2Sim.Core/Models/Cards/Catastrophe.cs
+@@ -1,12 +1,18 @@
++using Sts2Sim.Core.Combat;
++using Sts2Sim.Core.Commands;
+ using Sts2Sim.Core.Entities.Cards;
+ using Sts2Sim.Core.Entities.Creatures;
+ using Sts2Sim.Core.Helpers;
++using Sts2Sim.Core.Hooks;
+ 
+ namespace Sts2Sim.Core.Models.Cards;
+ 
+ /// <summary>随机自动打出抽牌堆2张可用卡。逐字移植选牌行为（<c>MegaCrit.Sts2.Core.Models.Cards.Catastrophe</c>）。
+-/// 偏离 #104：真实源码对被自动打出的卡统一传 target:null；本项目引擎对 AnyEnemy 等单体卡
+-/// 仍要求非空目标，因此仅这些类型先用 <c>CombatTargets</c> 显式定标。RandomEnemy 由牌的效果自行抽目标。</summary>
++/// 原版对挑中的牌一律 <c>CardCmd.AutoPlay(card, target: null)</c>，目标在 AutoPlay 里按类型补：AnyEnemy 从可攻击的敌人里随机，
++/// AnyAlly 从除自己以外活着的玩家里随机，补不上就把牌放进结果牌堆、不打出（MoveToResultPileWithoutPlaying）；其余类型目标为 null。
++/// 这里照 AutoPlay 的顺序写（战斗结束 → 不能打出 → 钩子否决 → 补目标），见 <see cref="AutoPlayCmd"/> 的同一套判断。
++/// 修正（2026-11-08，储君对拍 SIMRG0004 第三幕 Boss）：原来补不上目标时直接跳过、牌留在抽牌堆，AnyAlly 也会选到自己；
++/// 实验体复活中可攻击的敌人为空时，游戏把闪耀打击放进弃牌堆，sts2-sim 留在抽牌堆顶，第二张挑牌跟着不同。</summary>
+ public sealed class Catastrophe : CardModel
+ {
+     private int _count = 2;
+@@ -38,43 +44,43 @@
+                 continue;
+             }
+ 
+-            // Native CardCmd.AutoPlay checks this before moving cards or choosing targets.
++            // Native CardCmd.AutoPlay returns before moving cards or choosing targets.
+             // Keep selecting on later iterations, as native Catastrophe does, but do not play.
+             if (CombatState!.IsOverOrEnding() || picked.Owner.Creature.IsDead)
+             {
+                 continue;
+             }
+ 
+-            // Native CardCmd.AutoPlay moves an Unplayable fallback pick to its result pile
+-            // without running OnPlay. This direct AutoPlayAsync path needs the same guard.
+-            if (picked.Keywords.Contains(CardKeyword.Unplayable))
++            // Native CardCmd.AutoPlay: Unplayable, then hook vetoes, then the missing target,
++            // each moves the card to Play and on to its result pile without running OnPlay.
++            if (picked.Keywords.Contains(CardKeyword.Unplayable) ||
++                !Hook.ShouldPlay(CombatState!, picked, isAutoPlay: true))
+             {
+-                await picked.MoveToResultPileWithoutPlaying(CombatState!);
++                await MoveToResultPile(picked);
+                 continue;
+             }
+ 
+-            Creature? target = picked.TargetType switch
++            Creature? target = null;
++            if (picked.TargetType is TargetType.AnyEnemy or TargetType.AnyAlly)
+             {
+-                TargetType.AnyEnemy =>
+-                    CombatState!.RunState.Rng.CombatTargets.NextItem(CombatState!.HittableEnemies),
+-                TargetType.AnyAlly or TargetType.AnyPlayer =>
+-                    CombatState!.RunState.Rng.CombatTargets.NextItem(CombatState!.Allies),
+-                _ => null,
+-            };
+-
+-            // 偏离 #104 的补充：显式定标类型的目标池可能为空（例如敌人已全部死亡），
+-            // Rng.NextItem 在空集合上返回 null，而这些卡会在自己的 OnPlay 里抛异常。
+-            // RandomEnemy 不在此列；其效果可自行选择目标，不应预先消耗 CombatTargets。
+-            // Plan 08b-6 Task 8 的 A10 随机策略在种子 52 撞到该路径。
+-            if (target is null &&
+-                picked.TargetType is TargetType.AnyEnemy or TargetType.AnyAlly or TargetType.AnyPlayer)
+-            {
+-                continue;
++                target = CombatState!.RunState.Rng.CombatTargets.NextItem(
++                    CombatTargetCandidates.ForCard(CombatState!, picked.Owner, picked.TargetType));
++                if (target is null)
++                {
++                    await MoveToResultPile(picked);
++                    continue;
++                }
+             }
+ 
+-            await picked.AutoPlayAsync(target);
++            await picked.AutoPlayPrevalidatedWithResultAsync(target);
+         }
+     }
+ 
++    private async Task MoveToResultPile(CardModel card)
++    {
++        CardPileCmd.Add(card, PileType.Play);
++        await card.MoveToResultPileWithoutPlaying(CombatState!);
++    }
++
+     protected override void OnUpgrade() => _count += 1;
+ }
+--- a/src/Sts2Sim.Core/Models/Cards/MadScience.cs
++++ b/src/Sts2Sim.Core/Models/Cards/MadScience.cs
+@@ -77,11 +77,11 @@
+     private async Task PlayAttackAsync(CardPlay cardPlay)
+     {
+         ArgumentNullException.ThrowIfNull(cardPlay.Target);
++        // 原版 ExecuteAttack 是一次 DamageCmd.Attack(...).WithHitCount(hitCount)：一次攻击打几段，
++        // 活力这类“下一次攻击”的加成对每一段都算，打完整张牌才消耗（2026-11-08，储君对拍 SIMRG0011 第三幕 Boss：
++        // 原来写成三次独立的攻击，暴力词条的后两段少了活力，三段 27/18/18，游戏 27/27/27）
+         int hits = Rider == MadScienceRider.Violence ? 3 : 1;
+-        for (int i = 0; i < hits; i++)
+-        {
+-            await DamageCmd.Attack(12m).FromCard(this, cardPlay).Targeting(cardPlay.Target).Execute();
+-        }
++        await DamageCmd.Attack(12m).WithHitCount(hits).FromCard(this, cardPlay).Targeting(cardPlay.Target).Execute();
+         if (Rider == MadScienceRider.Sapping)
+         {
+             await PowerCmd.Apply<WeakPower>(CombatState!, cardPlay.Target, 2m, Owner.Creature, this);

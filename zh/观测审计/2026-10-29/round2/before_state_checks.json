@@ -1,0 +1,1319 @@
+{
+  "reviewer": "entity_state_audit",
+  "scope": "公开实例状态、卡牌来源与期限、能力关联、已知历史；不含主智能体负责的伤害结算时序",
+  "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+  "source_game_version": "v0.111.0",
+  "observation_version": 15,
+  "source_counts": {
+    "Cards": 596,
+    "Powers": 268,
+    "Relics": 300,
+    "Potions": 65,
+    "Enchantments": 23,
+    "Afflictions": 7
+  },
+  "source_count_note": "顶层实体定义，不含.Mocks；批量检索后按机制做静态复核，不代表每一类的所有分支均已运行。",
+  "implementation_hashes": {
+    "engine/Sts2Headless/Engine/Observation.cs": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce",
+    "python/sts2rl/model.py": "dad084de46c7f031a71d042777973be86257188f769e8888b87daaf8a81a4d82",
+    "python/sts2rl/features.py": "6ef20aa1bc5db419e78bd9a1e112a3fcf8d70a16fd71c921dde636755d3f217c"
+  },
+  "method": "先以编码布局和实体可变字段提出候选，再逐个回读生产逻辑；高/中/低是核查前基于实现的出错可能性，不是统计概率。verification区分静态确认与主线程运行复现。confirmed不表示已证明胜率收益或每项均为整帧碰撞。",
+  "runtime_tests_run_by_this_agent": 0,
+  "checks": [
+    {
+      "id": "S01",
+      "title": "卡牌实例的基础重放次数",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "SoldiersStew",
+        "HiddenGem",
+        "Transfigure",
+        "SwordSagePower"
+      ],
+      "status": "confirmed",
+      "reason": "BaseReplayCount 不参与 AddCard，也不参与 Preview 的命中数；SoldiersStew 只增加此值即可改变 Strike 结算次数。手牌文字会显示重放次数，属于公开状态。 主线程部署v14复现：用药后与无药对照的四组公开数组完全一致；两者候选伤害均6，实际伤害6与12。当前v15静态复核仍未编码该字段。",
+      "recommendation": "编码基础及当前实际重放次数；不要与每次结算内部的多段攻击混为一列。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models/CardModel.cs",
+          "line": 396,
+          "detail": "实例基础重放计数",
+          "sha256": "aa464f969f3d28c271aee8ed1594ba3118ddc4d4c6c1802d5ded725b6b70fe0c"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Potions/SoldiersStew.cs",
+          "line": 31,
+          "detail": "自然触发且不改卡费",
+          "sha256": "d4d1d958e7477aadbf281610092c3b0fdedc32fd8f9a02cd75be8e23d08884ee"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/HiddenGem.cs",
+          "line": 56,
+          "detail": "无色牌随机给抽牌堆卡牌永久本场重放",
+          "sha256": "f78f17dc5542626381acf6b879fbb49063df9fb779bacc32b3bc0ee589bce286"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 944,
+          "detail": "只预览单次伤害",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 1043,
+          "detail": "命中次数只从这两个 DynamicVar 得出",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review_and_parent_runtime_probe",
+      "observation_format": 15,
+      "reproduction": [
+        "独立战斗持有 Strike 与 SoldiersStew，记录出牌前候选。",
+        "使用药水后核对 Strike token 和候选；受控对比消除药水槽变化。",
+        "分别实际出牌，核对敌方掉血与执行次数。主智能体统一执行。"
+      ],
+      "runtime_evidence": {
+        "path": "/home/chenqiyue/dev/sls2/观测审计/2026-10-29/behavior_results.jsonl",
+        "format": 14,
+        "observation_sha256": "d216cb58b30ace0856bb0f38321e84a9c1d0a2b715d87389c5e365520e43a31c",
+        "results": [
+          {
+            "check": "S01",
+            "format": 14,
+            "same_public_arrays": {
+              "tok_ints": true,
+              "tok_feats": true,
+              "cand_ints": true,
+              "cand_feats": true
+            },
+            "candidate_damage": [
+              6.0,
+              6.0
+            ],
+            "actual_damage": [
+              6.0,
+              12.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "S02",
+      "title": "临时保留与临时奇巧",
+      "likelihood": "高",
+      "impact": "中",
+      "entities": [
+        "Expertise",
+        "HandTrick"
+      ],
+      "status": "confirmed",
+      "reason": "ShouldRetainThisTurn / IsSlyThisTurn 会读取独立的单回合标记；观测只检查 Keywords。牌面文本专门使用前述属性，表明该差异可见。 主线程部署v14实测：Expertise抽后六张手牌的retain列均0，次回合实有7张；HandTrick选后四张手牌的sly列均0。当前v15仍是同样关键字读取方式。",
+      "recommendation": "手牌保留、奇巧列使用实际生效属性，并保留期限信息。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models/CardModel.cs",
+          "line": 591,
+          "detail": "临时标记不进入 Keywords",
+          "sha256": "aa464f969f3d28c271aee8ed1594ba3118ddc4d4c6c1802d5ded725b6b70fe0c"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models/CardModel.cs",
+          "line": 620,
+          "detail": "临时奇巧使用独立标记",
+          "sha256": "aa464f969f3d28c271aee8ed1594ba3118ddc4d4c6c1802d5ded725b6b70fe0c"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/Expertise.cs",
+          "line": 23,
+          "detail": "自然触发路径",
+          "sha256": "4045b224cbf626b44fdaa2f0e0265fb37029d83eea0af64f42da9919003853cb"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/HandTrick.cs",
+          "line": 33,
+          "detail": "自然触发路径",
+          "sha256": "63619941da222ac19e0828aea31691b946befd4f1d8fcae6d6220afc75c8bdc5"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 965,
+          "detail": "当前保留列只看关键字",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 971,
+          "detail": "当前奇巧列只看关键字",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review_and_parent_runtime_probe",
+      "observation_format": 15,
+      "reproduction": [
+        "使用 Expertise 抽到一张无永久保留关键字的牌，检查保留列并结束回合。",
+        "HandTrick 对技能牌赋临时奇巧后，比较该牌观测并触发弃牌。"
+      ],
+      "runtime_evidence": {
+        "path": "/home/chenqiyue/dev/sls2/观测审计/2026-10-29/behavior_results.jsonl",
+        "format": 14,
+        "observation_sha256": "d216cb58b30ace0856bb0f38321e84a9c1d0a2b715d87389c5e365520e43a31c",
+        "results": [
+          {
+            "check": "S02-retain",
+            "hand_after_draw": 6,
+            "retain_flags": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "hand_next_turn": 7
+          },
+          {
+            "check": "S02-sly",
+            "sly_flags": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "hand_count": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "S03",
+      "title": "当前费用相同但有效期不同",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "CardEnergyCost",
+        "Enlightenment",
+        "LiquidMemories",
+        "TouchOfInsanity",
+        "Eidolon"
+      ],
+      "status": "needs_reproduction",
+      "reason": "当前费用被编码，但本回合、直到打出、整场的局部修正期限没有编码。相同牌当前均为零费时，保留、回收后的资源价值可以不同。",
+      "recommendation": "输出若现在结束回合及打出后回收的基础费用，或局部修正的值与到期条件；不要只输出总费用。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Entities.Cards/CardEnergyCost.cs",
+          "line": 175,
+          "detail": "直到打出",
+          "sha256": "c2b18b52ad44a44acbac01c5df4a209f5534a6ec7138e748ea73d66b2dcedd53"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Entities.Cards/CardEnergyCost.cs",
+          "line": 197,
+          "detail": "回合结束或打出到期",
+          "sha256": "c2b18b52ad44a44acbac01c5df4a209f5534a6ec7138e748ea73d66b2dcedd53"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Entities.Cards/CardEnergyCost.cs",
+          "line": 238,
+          "detail": "整场有效",
+          "sha256": "c2b18b52ad44a44acbac01c5df4a209f5534a6ec7138e748ea73d66b2dcedd53"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 937,
+          "detail": "只保留当前汇总费用",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15,
+      "reproduction": [
+        "通过 LiquidMemories 与 TouchOfInsanity 让同一牌变零费，比较目标实体编码。",
+        "原生保留或打出再回收，验证费用分叉；源药水不同意味着不能直接声称整帧完全相同。"
+      ]
+    },
+    {
+      "id": "S04",
+      "title": "能力层数之外的实例伤害与格挡",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "TheBombPower",
+        "ToricToughnessPower"
+      ],
+      "status": "confirmed",
+      "reason": "两种能力的 Amount 都用于倒计时，实际伤害或格挡存入 DynamicVars。Power token 仅有 Amount、Type、DisplayAmount。TheBomb 到期前两三回合不会经结束回合预演暴露其伤害；Toric 的后续格挡保存的是施放时实际获得值。 主线程部署v14实测TheBomb与升级版的能力token相同；原牌在弃牌堆仍带升级信息，所以只证明能力本身没数值，不能声称整帧碰撞。Toric尚待运行复现。",
+      "recommendation": "分别编码剩余回合和实例伤害、格挡，并将实例数值绑定在能力上。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/TheBombPower.cs",
+          "line": 32,
+          "detail": "实例伤害可为40、50等",
+          "sha256": "134cacd31438d5972a1979b438f973258b8d7259dfc0cea49b1b298f247319f3"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/ToricToughnessPower.cs",
+          "line": 29,
+          "detail": "实例格挡与层数独立",
+          "sha256": "456720b22457cdbce2d3badc5229e365718425b814c06aaf13d9da7b9b6bc639"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/ToricToughness.cs",
+          "line": 34,
+          "detail": "保存实际格挡，受当时敏捷、脆弱等影响",
+          "sha256": "2d6e099df7dedd04fa377b45ff2acec7e1b29c1ff7830dc46860390bc3446bfd"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 783,
+          "detail": "Power未提供实例DynamicVars",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 533,
+          "detail": "只到期时预演能间接暴露Bomb伤害",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review_and_parent_runtime_probe",
+      "observation_format": 15,
+      "reproduction": [
+        "独立引擎分别施放 TheBomb 与升级版，比较剩2回合时能力token；不能忽略源牌差异。",
+        "Toric 以不同施法时增益得到不同储存格挡，恢复当前增益后比较能力观测与下回合实际格挡。"
+      ],
+      "runtime_evidence": {
+        "path": "/home/chenqiyue/dev/sls2/观测审计/2026-10-29/behavior_results.jsonl",
+        "format": 14,
+        "observation_sha256": "d216cb58b30ace0856bb0f38321e84a9c1d0a2b715d87389c5e365520e43a31c",
+        "results": [
+          {
+            "check": "S04",
+            "card_upgrade": 0,
+            "power_features": [
+              [
+                3.0,
+                0.0,
+                3.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            ]
+          },
+          {
+            "check": "S04",
+            "card_upgrade": 1,
+            "power_features": [
+              [
+                3.0,
+                0.0,
+                3.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            ]
+          },
+          {
+            "check": "S04-equality",
+            "same_power_token": true,
+            "limitation": "原卡在弃牌堆仍有升级信息；此项只证明能力实例自身不带伤害数值，不声称整帧相同。"
+          }
+        ]
+      },
+      "runtime_evidence_followup": "followup_results.jsonl: Toric 2回合的能力token相同，下一回合格挡分别5/7；源卡升级仍可见，非整帧碰撞。"
+    },
+    {
+      "id": "S05",
+      "title": "Nightmare 选中的卡牌身份与实例属性",
+      "likelihood": "高",
+      "impact": "中",
+      "entities": [
+        "NightmarePower"
+      ],
+      "status": "confirmed",
+      "reason": "被复制的卡牌以克隆存于 Power 内部，不在手牌等牌堆枚举中；Power 只有层数，无法承载下一回合将得到什么。当前牌堆中有多种候选时，已选择哪张不能由牌堆恢复。",
+      "recommendation": "给能力附属一个被选择卡牌的完整实体记录，包含升级、附魔和实例数值。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/NightmarePower.cs",
+          "line": 23,
+          "detail": "内部保存选定卡牌",
+          "sha256": "5d2cb4f59448de6d461f6dd7f3df7effa7a1af6c2b6188d07a9abde677d75979"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/NightmarePower.cs",
+          "line": 55,
+          "detail": "保存克隆并将牌名写入公开说明",
+          "sha256": "5d2cb4f59448de6d461f6dd7f3df7effa7a1af6c2b6188d07a9abde677d75979"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 785,
+          "detail": "未附属所选卡牌",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S06",
+      "title": "PaelsTooth 暂存牌的清单",
+      "likelihood": "高",
+      "impact": "中",
+      "entities": [
+        "PaelsTooth"
+      ],
+      "status": "confirmed",
+      "reason": "当前只编码暂存牌数量。遗物实际保存并向玩家展示每张牌名，每场战斗后随机返还其中一张并升级；数量相同、内容不同的未来牌组价值不同。",
+      "recommendation": "输出剩余暂存牌的公开集合；不要读取下一张随机返还结果。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/PaelsTooth.cs",
+          "line": 60,
+          "detail": "保存完整卡牌对象清单",
+          "sha256": "68053c79b69a1b47c3591a6dc9e750c3e032d5b814013c66a20e79aad6f7721d"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/PaelsTooth.cs",
+          "line": 126,
+          "detail": "界面展示暂存牌名",
+          "sha256": "68053c79b69a1b47c3591a6dc9e750c3e032d5b814013c66a20e79aad6f7721d"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 1076,
+          "detail": "仅遗物通用计数与状态",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S07",
+      "title": "Swipe 偷走的具体牌",
+      "likelihood": "高",
+      "impact": "中",
+      "entities": [
+        "SwipePower",
+        "ThievingHopper"
+      ],
+      "status": "confirmed",
+      "reason": "Swipe 的公开 hover tip 展示被偷牌，能力同时保存它以便击杀后返还。观测仅把它当普通能力，缺失牌的身份和实例属性。",
+      "recommendation": "将被偷牌作为所属能力的附属卡牌输出，帮助评估击杀与资源回收。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/SwipePower.cs",
+          "line": 25,
+          "detail": "保存被偷的牌",
+          "sha256": "25bc80f818baa5bf58a0aa0c6ece876ab675150f8ff4d9eab86a2f1d07708aac"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/SwipePower.cs",
+          "line": 46,
+          "detail": "明确公开可见",
+          "sha256": "25bc80f818baa5bf58a0aa0c6ece876ab675150f8ff4d9eab86a2f1d07708aac"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/SwipePower.cs",
+          "line": 62,
+          "detail": "击杀返还其DeckVersion",
+          "sha256": "25bc80f818baa5bf58a0aa0c6ece876ab675150f8ff4d9eab86a2f1d07708aac"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 785,
+          "detail": "缺少附属卡牌",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S08",
+      "title": "能力的施加者与目标关联",
+      "likelihood": "中",
+      "impact": "中",
+      "entities": [
+        "ConstrictPower",
+        "ShrinkPower",
+        "MagicBombPower",
+        "HexPower"
+      ],
+      "status": "needs_reproduction",
+      "reason": "若施加者死亡，部分能力会移除。Power owner 仅指效果落在哪个生物，未编码 Applier / Target。单来源遭遇通常能推断，多来源可构造不同关联。尚未验证当前单人遭遇存在无法从其他实体唯一推断的常见状态。",
+      "recommendation": "先统计真实多来源遭遇，再考虑公开施加者引用；不要仅加入施加者类型而丢同类怪个体。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/MagicBombPower.cs",
+          "line": 34,
+          "detail": "施加者死亡会移除炸弹",
+          "sha256": "2c5e921dc4b5dfce02c6ab191fde10fb9fbd6578cc18888c8a71dc2f919934cc"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/ShrinkPower.cs",
+          "line": 90,
+          "detail": "缩小同样依赖来源死亡",
+          "sha256": "c5d922d4e2fd20804939ca73a9ccbd527587d28d262c664c5c84ea8c52f9ba6c"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 785,
+          "detail": "owner只记效果所属生物",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S09",
+      "title": "Skittish 本回合已经触发格挡",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "SkittishPower",
+        "PhantasmalGardener"
+      ],
+      "status": "needs_reproduction",
+      "reason": "能力有独立 HasGainedBlockThisTurn 开关，首次受卡牌未格挡伤害后获得格挡，之后本回合不再触发。Amount/DisplayAmount 未反映开关；格挡被打完后无法仅凭当前格挡判断是否还会触发。",
+      "recommendation": "编码本回合触发状态，或剩余触发次数；属于玩家见过的战斗历史。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/SkittishPower.cs",
+          "line": 38,
+          "detail": "持续一回合的公开可记状态",
+          "sha256": "b7fcc40241e8edfedc2de36404537e61f5b454ee32faa797e248bd9252acdfe7"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/SkittishPower.cs",
+          "line": 58,
+          "detail": "决定下一次攻击后是否补格挡",
+          "sha256": "b7fcc40241e8edfedc2de36404537e61f5b454ee32faa797e248bd9252acdfe7"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 783,
+          "detail": "未读取该状态",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15,
+      "reproduction": [
+        "攻击花园怪直到首次格挡产生，再用攻击耗尽格挡。",
+        "记录当前能力token，再比较独立对照中未触发的相同Amount能力。",
+        "验证下一次相同攻击是否再次产生格挡；帧级碰撞需同时控制HP和行动计数。"
+      ]
+    },
+    {
+      "id": "S10",
+      "title": "EchoForm 的手动出牌序列计数",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "EchoFormPower",
+        "CardPlayFinishedEntry",
+        "CardPlayStartedEntry"
+      ],
+      "status": "needs_reproduction",
+      "reason": "EchoForm 按 CardPlaysStarted 且 IsFirstInSeries 计算剩余重放资格；CombatStat 统计所有 CardPlayFinished，包含重放。不应把当前总出牌数直接当Echo已消耗额度。是否可由当前所有其他字段恢复尚需端到端对照。",
+      "recommendation": "增加本回合已开始的独立出牌序列数或Echo剩余额度；不改动用于Panache等每次结算计数。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/EchoFormPower.cs",
+          "line": 62,
+          "detail": "重放资格的真实计数口径",
+          "sha256": "910f27e0d0ebbde3973056d89c41eec9bb7eef7c35ee74b9411e670e6be730e3"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 695,
+          "detail": "观测统计所有完成的出牌",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S11",
+      "title": "已有 DisplayAmount 的内部计数",
+      "likelihood": "中",
+      "impact": "中",
+      "entities": [
+        "OrbitPower",
+        "AutomationPower",
+        "PanachePower",
+        "FeralPower",
+        "HardenedShellPower",
+        "SlowPower"
+      ],
+      "status": "excluded",
+      "reason": "这些内部计数通过重写 DisplayAmount 输出；当前 Power 特征2已读取。不能因为私有Data字段存在就认定遗漏。",
+      "recommendation": "保持现有字段；派生收益可另做实验，不登记为缺失状态。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/OrbitPower.cs",
+          "line": 25,
+          "detail": "能量距离下次触发",
+          "sha256": "1060f66977b53b1da1fc72a08f50370c8e3f0ce45b4e4944b5822df07b14f470"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/AutomationPower.cs",
+          "line": 25,
+          "detail": "距离下次触发的抽牌数",
+          "sha256": "568fac0e930bd76b3887f9a6a82f81421a8daba902ea988d396d21ecbd931505"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/HardenedShellPower.cs",
+          "line": 25,
+          "detail": "本回合剩余损伤额度",
+          "sha256": "81ebdd1312d4e08d1a901981776349c1c09456b7dd51c93de424b32b92fe42d8"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 784,
+          "detail": "已承载这些状态",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S12",
+      "title": "成长牌伤害和格挡的实例值",
+      "likelihood": "中",
+      "impact": "高",
+      "entities": [
+        "GeneticAlgorithm",
+        "TheScythe",
+        "Claw",
+        "KinglyPunch",
+        "Rampage",
+        "Maul",
+        "TheBall"
+      ],
+      "status": "excluded",
+      "reason": "这些牌把实例成长同步写入 DynamicVars.Damage 或 Block.BaseValue，当前观测会编码；不能把私有成长字段本身未输出视作信息丢失。",
+      "recommendation": "保留当前方式；永久牌与生成副本是否可区分另见S16。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/GeneticAlgorithm.cs",
+          "line": 33,
+          "detail": "成长写入公开数值",
+          "sha256": "1e9cb506ae12787a16982497207b55943da5b890ccde45de543006f8996c94d9"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/TheScythe.cs",
+          "line": 34,
+          "detail": "成长写入公开数值",
+          "sha256": "1b0f05dd47c3c493af523b1dc16aa94371d44d6928245f7cdedef708e8cf434a"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/Claw.cs",
+          "line": 73,
+          "detail": "全体Claw成长写入公开数值",
+          "sha256": "8210c99ad45049a7a4dce0bae4b95ed98da64bb4a4a0322433ca750e1865c6e5"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 951,
+          "detail": "当前记录伤害基值",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S13",
+      "title": "任务牌与诅咒倒计数",
+      "likelihood": "中",
+      "impact": "中",
+      "entities": [
+        "Dowsing",
+        "Guilty"
+      ],
+      "status": "excluded",
+      "reason": "RoomsEntered/CombatsSeen 同步写入第一个 DynamicVar，当前卡牌其他数值列能读取。",
+      "recommendation": "无需新增重复计数。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/Dowsing.cs",
+          "line": 40,
+          "detail": "剩余问号房数写入动态数值",
+          "sha256": "efa16b4a87b27351a03a7805489286a2d99874933141ad59ec738c9070d7108e"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/Guilty.cs",
+          "line": 36,
+          "detail": "剩余战斗数写入动态数值",
+          "sha256": "773f91ffbd7f91ff535e0147936f1c3c7ed281068f82da5caf0e290930eed266"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 954,
+          "detail": "两者只有一个非伤害格挡数值",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S14",
+      "title": "卡牌仅取前两个其他 DynamicVars",
+      "likelihood": "高",
+      "impact": "中",
+      "entities": [
+        "BigBang",
+        "BrightestFlame",
+        "Offering",
+        "MadScience"
+      ],
+      "status": "excluded",
+      "reason": "批量扫描定位到这四类。前三类被截断的数值由固定卡牌ID和升级决定，目前未找到独立实例变化，不能证明观测碰撞；MadScience 已在v15单独处理。",
+      "recommendation": "固定值由内容先验/ID学习即可；将截断规则作为后续新增卡牌审计点。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/BigBang.cs",
+          "line": 19,
+          "detail": "第三/四数值固定",
+          "sha256": "43e45d8fd64120e47886d50330f0f3af1132cc6fe4acc6939cdb7aaffcdaaa67"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/Offering.cs",
+          "line": 39,
+          "detail": "被截断抽牌数由升级等级决定",
+          "sha256": "401902bb5f21d705f00c0ad600275801996b7c2dd9ed4efb69dc2351a8a93afe"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 962,
+          "detail": "MadScience已有专用编码",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S15",
+      "title": "ExhaustOnNextPlay 强制消耗标记",
+      "likelihood": "中",
+      "impact": "低",
+      "entities": [
+        "CardModel",
+        "AutoPlayFromDrawPile",
+        "Havoc",
+        "Cinder"
+      ],
+      "status": "needs_reproduction",
+      "reason": "只输出 Exhaust 关键字，未输出独立标记。现有写入集中在随即自动打牌之前，常规手牌决策未必有机会看到；若自动牌内部出现选牌决策，结算中的牌可能可见。",
+      "recommendation": "先证明自然选择暂停点会依赖这个标记，再决定是否添加，避免只覆盖测试构造状态。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models/CardModel.cs",
+          "line": 560,
+          "detail": "独立于Keywords",
+          "sha256": "aa464f969f3d28c271aee8ed1594ba3118ddc4d4c6c1802d5ded725b6b70fe0c"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Commands/CardPileCmd.cs",
+          "line": 1174,
+          "detail": "写入后立即自动打出",
+          "sha256": "7d8615a01c8f201527c27e9b59042de3a616785145ee0334ac0a6dac691cc291"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 966,
+          "detail": "目前只看关键字",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S16",
+      "title": "永久牌和战斗生成副本的区别",
+      "likelihood": "高",
+      "impact": "中",
+      "entities": [
+        "GeneticAlgorithm",
+        "TheScythe",
+        "BurningSticks",
+        "SkillPotion"
+      ],
+      "status": "needs_reproduction",
+      "reason": "DeckVersion/IsClone 没有进入卡牌观测；GeneticAlgorithm 和 TheScythe 仅对有 DeckVersion 的卡同步永久成长。克隆清空 DeckVersion。现象有代码依据，尚需确认同数值两张牌在自然选择点同时出现的最短路径。",
+      "recommendation": "针对会永久成长的卡输出是否关联永久牌组，必要时给稳定公开实例引用。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models/CardModel.cs",
+          "line": 1228,
+          "detail": "克隆时清空永久牌关联",
+          "sha256": "aa464f969f3d28c271aee8ed1594ba3118ddc4d4c6c1802d5ded725b6b70fe0c"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/GeneticAlgorithm.cs",
+          "line": 69,
+          "detail": "决定永久成长写回",
+          "sha256": "1e9cb506ae12787a16982497207b55943da5b890ccde45de543006f8996c94d9"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/TheScythe.cs",
+          "line": 73,
+          "detail": "同样决定永久成长",
+          "sha256": "1b0f05dd47c3c493af523b1dc16aa94371d44d6928245f7cdedef708e8cf434a"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/BurningSticks.cs",
+          "line": 49,
+          "detail": "自然产生技能副本",
+          "sha256": "7c01f7308ea8d12a84161c069c669dbdadc18fb48ef5f551a5d9adcfbe3e8cf9"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 973,
+          "detail": "记录无来源/永久牌关联",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S17",
+      "title": "Momentum 累积伤害在非手牌区域丢失",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "Momentum",
+        "Hologram",
+        "Discard",
+        "Draw",
+        "Exhaust"
+      ],
+      "status": "confirmed",
+      "reason": "Momentum 累积额外伤害存于附魔的 ExtraDamage，通过 EnchantDamageAdditive 生效。手牌会走 Preview，因此可见；其他区域仅取卡牌 DynamicVars 基值和附魔Amount，不能区分附魔已成长多少。Hologram 回收等候选引用这些未预览牌。",
+      "recommendation": "为非手牌卡提供已知实例基础伤害（含附魔累积），或将附魔动态数值另记在卡牌上；避免混入未知未来增益。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Enchantments/Momentum.cs",
+          "line": 36,
+          "detail": "每次出牌累计",
+          "sha256": "fdfcdc593cd17473289558ceca7f8da2b080f30d1371847f49615dae7ef549de"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Enchantments/Momentum.cs",
+          "line": 46,
+          "detail": "通过附魔钩子修正伤害",
+          "sha256": "fdfcdc593cd17473289558ceca7f8da2b080f30d1371847f49615dae7ef549de"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 944,
+          "detail": "非手牌不走预览",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 969,
+          "detail": "非手牌回落到不含Momentum累积的基值",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15,
+      "runtime_evidence_followup": "followup_results.jsonl；补充momentum_results.jsonl核对全息影像取回后才显示累计伤害。"
+    },
+    {
+      "id": "S18",
+      "title": "附魔一次性触发是否耗尽",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "Glam",
+        "Swift",
+        "Sown"
+      ],
+      "status": "covered_existing",
+      "reason": "前几轮已报告并列入安排；v15当前代码已编码 Disabled 附属记录。",
+      "recommendation": "保留验证，不作为本轮新发现。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Enchantments/Glam.cs",
+          "line": 54,
+          "detail": "使用后切换状态",
+          "sha256": "ebaa7dbf63e737db9b23ce5c5f7b3a325d1d0c7abc86040b3b016275bb641618"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 983,
+          "detail": "已有编码",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S19",
+      "title": "苦痛身份和限牌机制",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "Bound",
+        "Galvanic",
+        "Smog"
+      ],
+      "status": "covered_existing",
+      "reason": "苦痛ID已输出为卡牌附属Power；限牌机制前几轮已安排。",
+      "recommendation": "不重复列入新增优先项；剩余额度可由原修改计划覆盖。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 976,
+          "detail": "苦痛已经独立编码",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/ChainsOfBindingPower.cs",
+          "line": 77,
+          "detail": "限牌剩余额度仍需以原计划为准",
+          "sha256": "24b13c2fd3f33f6ad639b4f3bf40b001a3a8253eb5162243fe1f0159331bf9a2"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S20",
+      "title": "遗物有效状态与每回合触发标记",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "Regalite",
+        "MiniRegent",
+        "MusicBox",
+        "DemonTongue",
+        "Permafrost"
+      ],
+      "status": "covered_existing",
+      "reason": "遗物状态已是原修改计划。v14通用实现读取ThisCombat布尔字段，ThisTurn字段没有被同一筛选覆盖；其中MusicBox可部分由本回合攻击数推导，Regalite生成牌历史未单列。属于既有遗物状态计划应补的覆盖边界，不重新包装为新发现。",
+      "recommendation": "在原计划验收清单补查ThisTurn字段；不要仅按字段名后缀判定所有生效状态。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 1099,
+          "detail": "现通用反射只读ThisCombat",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/Regalite.cs",
+          "line": 18,
+          "detail": "每回合生成首张牌触发",
+          "sha256": "f731d4a522dfb3b98e282841951bafbc2af85d4aa4668d2662934433d19d9364"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/MusicBox.cs",
+          "line": 17,
+          "detail": "每回合首张攻击",
+          "sha256": "8ffc2ec937b016f65d79cbfb6d1eb81126bee25a15ed1153a026e431e7db9044"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/MiniRegent.cs",
+          "line": 19,
+          "detail": "每回合首次花星触发",
+          "sha256": "c36490b78249d15effa19b18a9463e7151fbb7a8aa36c42977b26544195fd234"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S21",
+      "title": "药水自身是否还有独立公开可变状态",
+      "likelihood": "低",
+      "impact": "低",
+      "entities": [
+        "65 Potion 类"
+      ],
+      "status": "excluded",
+      "reason": "批量字段扫描中65个药水定义只发现 SneckoOil 的测试覆盖字段；药水使用后改变卡牌的状态分别归S01、S03，未发现需要给药水实体普遍新增的运行实例字段。",
+      "recommendation": "保持药水ID、槽位与可用性；测试字段不得进入模型。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Potions/SneckoOil.cs",
+          "line": 19,
+          "detail": "仅测试固定随机结果",
+          "sha256": "1cf94d78db62d8973208535c690fb680ec36a68ac7f8082076fb01c472431f98"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S22",
+      "title": "多人施加者和保护关系",
+      "likelihood": "中",
+      "impact": "低（当前单人）",
+      "entities": [
+        "GuardedPower",
+        "CoveredPower",
+        "InterceptPower",
+        "FlankingPower",
+        "KnockdownPower"
+      ],
+      "status": "excluded",
+      "reason": "关系在多人有语义，但当前训练为单人。不能把未启用多人机制列为当前模型首要缺陷。单人敌方来源关系另见S08。",
+      "recommendation": "多人上线时独立验证关系编码。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/CoveredPower.cs",
+          "line": 30,
+          "detail": "明确是玩家间来源",
+          "sha256": "3b10a21ca63a3ac79f19e92e84ee2187b1100b93b340980b482b40cfb3d00dfe"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/GuardedPower.cs",
+          "line": 35,
+          "detail": "玩家保护关联",
+          "sha256": "5258c41fe9574fa447da46429aeb28e7d28a6ca89889e9ba54629f1f5ff28dd0"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S23",
+      "title": "递归保护、动画与测试标记",
+      "likelihood": "低",
+      "impact": "低",
+      "entities": [
+        "BeaconOfHopePower",
+        "SoulboundPower",
+        "ConfusedPower",
+        "VigorPower",
+        "CurlUpPower"
+      ],
+      "status": "excluded",
+      "reason": "私有状态不是自动等于观测缺失。部分只在同步回调内防止递归，或属于测试/动画，普通决策点没有稳定可用状态。",
+      "recommendation": "仅当发现可暂停选择点和行为差异才升级；不把任意私有字段直接喂入策略。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/BeaconOfHopePower.cs",
+          "line": 55,
+          "detail": "一次回调结束清理递归保护",
+          "sha256": "8db09cbcdc118822a359fe2e42a43603efbb4a037f11be0fbfdae8a8f8c2e973"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/ConfusedPower.cs",
+          "line": 11,
+          "detail": "纯测试覆盖",
+          "sha256": "d38af5402c260325c9371b0ab688f66242b97ece96e6d6c32dfb8413638fc603"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S24",
+      "title": "Wither 假升级是否漏数值",
+      "likelihood": "中",
+      "impact": "高",
+      "entities": [
+        "Wither"
+      ],
+      "status": "excluded",
+      "reason": "FakeUpgradeLevel 不在CurrentUpgradeLevel中，但实际伤害同步升级到 DynamicVars.Damage，当前伤害列已区分；卡牌图片和标题变化无需另编码。",
+      "recommendation": "保持伤害列，出牌额外塞牌代价按原计划检查。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/Wither.cs",
+          "line": 100,
+          "detail": "假升级同步实际伤害",
+          "sha256": "d9cab3353836f39d7acf62be4b6ea9d637c25ec802214c63144784c060127e9b"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 951,
+          "detail": "观测已读伤害",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S25",
+      "title": "非手牌区域的全局费用与关键字修正",
+      "likelihood": "中",
+      "impact": "中",
+      "entities": [
+        "CorruptionPower",
+        "HexPower",
+        "Heroism"
+      ],
+      "status": "excluded",
+      "reason": "当前非手牌有意使用Local而非All。全局效果仍通过Power存在，静态情况下可推导，暂未证明不含独立实例状态时会形成信息碰撞。与S03期限、S17附魔实例成长应区别处理。",
+      "recommendation": "若增强便于计算可输出预计入手费用，但不把可推导值当硬缺失。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 938,
+          "detail": "非手牌只算Local费用",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 964,
+          "detail": "非手牌只读Local关键字",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/CorruptionPower.cs",
+          "line": 17,
+          "detail": "全局修正由能力定义",
+          "sha256": "f7db11dee58381e9da5df7955d59cf29797dc26067020937affd70fa9f614c63"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S26",
+      "title": "MadScience 与连打上下文",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "MadScience",
+        "BossPrev",
+        "BossNext",
+        "GoldPlatedCables"
+      ],
+      "status": "covered_existing",
+      "reason": "用户明确说上一轮三项已列入修改计划；当前热目录已到v15，并可看到三项对应实现。",
+      "recommendation": "本轮只登记覆盖，不作为新结论。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 34,
+          "detail": "当前格式v15",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 988,
+          "detail": "MadScience实例类型",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 217,
+          "detail": "Boss场数",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 126,
+          "detail": "充能球被动次数",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S27",
+      "title": "玩家已经知道的抽牌堆顶顺序",
+      "likelihood": "高",
+      "impact": "高",
+      "entities": [
+        "ReboundPower",
+        "Headbutt",
+        "DrawPile"
+      ],
+      "status": "covered_existing",
+      "reason": "已核对后续计划.md第128行：该缺口已按决策129明确延期，故障机器人低频，待扩展其他角色时再做；本轮不能作为新增发现。抽牌堆排序与Rebound/Headbutt的公开堆顶关系静态复核成立。",
+      "recommendation": "维持已有延期决策，不重复排优先级；扩展其他角色时再按原方案维护公开已知序列。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 133,
+          "detail": "公开抽牌堆始终排序，位置放priv0",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/ReboundPower.cs",
+          "line": 30,
+          "detail": "刚打出的牌放堆顶且可知",
+          "sha256": "4c49d901fe4ea28502dd51ddda84b9f4032251aa838d5f3014da99dde4ab8a90"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Cards/Headbutt.cs",
+          "line": 32,
+          "detail": "公开选择后放堆顶",
+          "sha256": "b8400c89dace20e5d1a8161ee82ceb2e118590eca22ffcb67863cc7bfb256d15"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/python/sts2rl/model.py",
+          "line": 161,
+          "detail": "输入仅当前组批，没有跨步记忆状态",
+          "sha256": "dad084de46c7f031a71d042777973be86257188f769e8888b87daaf8a81a4d82"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/后续计划.md",
+          "line": 128,
+          "detail": "已知抽牌堆顶早已登记并明确延期",
+          "sha256": "79978a96a927a43c339ce58d618b82fc1cccf3c9d27d46ccc0174548ac121087"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S28",
+      "title": "HistoryCourse 下回合重演哪张攻击",
+      "likelihood": "高",
+      "impact": "中",
+      "entities": [
+        "HistoryCourse"
+      ],
+      "status": "confirmed",
+      "reason": "该遗物记录玩家上回合最后一张非dupe攻击，下回合自动打出其副本。观测只有出牌计数和当前牌堆，不记录有序历史或这张牌的身份，遗物自身计数/状态也不能承载。",
+      "recommendation": "存在HistoryCourse时输出本回合目前最后一张有效攻击的完整公开实体摘要，供决定收尾出牌顺序。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/HistoryCourse.cs",
+          "line": 21,
+          "detail": "按有序历史选择上一回合最后攻击",
+          "sha256": "9416136b224fbb966f3d8c0f3f5d3397cccec2517281cf0d5dfc7a45244f6dac"
+        },
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Relics/HistoryCourse.cs",
+          "line": 25,
+          "detail": "下一回合重演该牌",
+          "sha256": "9416136b224fbb966f3d8c0f3f5d3397cccec2517281cf0d5dfc7a45244f6dac"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 695,
+          "detail": "当前只累计类型数",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    },
+    {
+      "id": "S29",
+      "title": "实验体复活形态与是否可被击中",
+      "likelihood": "中",
+      "impact": "高",
+      "entities": [
+        "AdaptablePower",
+        "TestSubject"
+      ],
+      "status": "excluded",
+      "reason": "虽然能力内部有isReviving标记，生物可击中状态和当前HP已有，另有AddForms输出形态数、剩余总血量；未发现需额外再给该布尔值的独立信息。",
+      "recommendation": "不重复添加同义标记。",
+      "evidence": [
+        {
+          "path": "/home/chenqiyue/.local/share/sls2/decompiled/v0.111.0/MegaCrit.Sts2.Core.Models.Powers/AdaptablePower.cs",
+          "line": 50,
+          "detail": "复活状态影响可击中",
+          "sha256": "d52696c9f8e9b8753844c46a7d9e1a8644bcadcf332a93042fa8440ad91285d4"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 764,
+          "detail": "已读取可击中",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        },
+        {
+          "path": "/home/chenqiyue/dev/sls2/engine/Sts2Headless/Engine/Observation.cs",
+          "line": 746,
+          "detail": "已有完整形态摘要",
+          "sha256": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce"
+        }
+      ],
+      "reviewed_at": "2026-10-29T18:54:59.283049+01:00",
+      "verification": "static_source_review",
+      "observation_format": 15
+    }
+  ],
+  "parent_runtime_test_count": 4,
+  "review_completed_at": "2026-10-29T18:56:33.329269+01:00",
+  "final_hash_recheck": {
+    "engine/Sts2Headless/Engine/Observation.cs": "c13e12eef038396957733cb9e0febd92da364f3fa7971cedcc36bcf736d4cdce",
+    "python/sts2rl/model.py": "dad084de46c7f031a71d042777973be86257188f769e8888b87daaf8a81a4d82",
+    "python/sts2rl/features.py": "6ef20aa1bc5db419e78bd9a1e112a3fcf8d70a16fd71c921dde636755d3f217c"
+  }
+}

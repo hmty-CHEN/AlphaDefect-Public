@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>状态路由专家集成调查报告 · sls2 · 2026-10-30</title><style>
+    :root{color-scheme:light;--ink:#202c36;--muted:#5e6c78;--line:#d8e1e7;--accent:#185c76}
+    *{box-sizing:border-box}body{margin:0;background:#f3f6f8;color:var(--ink);font:16px/1.85 system-ui,"Microsoft YaHei",sans-serif}
+    main{max-width:1120px;margin:34px auto;background:white;padding:40px 56px 64px;border:1px solid var(--line);border-radius:10px}
+    h1{font-size:29px;line-height:1.5;margin:0 0 24px}h2{font-size:21px;line-height:1.6;border-top:2px solid var(--line);padding-top:28px;margin-top:42px;scroll-margin-top:22px}
+    p{margin:16px 0}strong{color:#153e50}li{margin:10px 0}ul,ol{padding-left:27px}
+    .table-wrap{overflow:auto;margin:22px 0}table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.7}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}th{background:#eaf1f5}tr:nth-child(even) td{background:#f8fafb}
+    code{font:13px/1.7 ui-monospace,Consolas,monospace;background:#edf2f5;padding:2px 4px;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow:auto;border-left:3px solid var(--accent);background:#f1f5f7;padding:18px}pre code{background:none;padding:0}
+    details{background:#f3f7f9;border:1px solid var(--line);padding:14px 18px;margin:0 0 26px}summary{cursor:pointer;color:var(--accent);font-weight:650}nav{display:grid;grid-template-columns:1fr 1fr;gap:7px 20px;padding:12px 0}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.meta{color:var(--muted);font-size:13px}
+    @media(max-width:700px){main{margin:0;border:0;border-radius:0;padding:24px 19px}h1{font-size:24px}nav{grid-template-columns:1fr}th,td{min-width:105px}}
+    @media print{body{background:white}main{margin:0;border:0;padding:0;max-width:none}details{display:none}h2{break-after:avoid}table,pre{break-inside:auto}th{background:#eee}}
+    </style></head>
+<body><main><p class="meta">sls2 · 研究报告 · 2026-10-30 · 离线可读</p><details><summary>目录（15 节）</summary><nav><a href="#section-1">1．判断：值得做一个受控研究分支，但现在还不能把并集胜率当成目标承诺。</a>
+<a href="#section-2">2．项目目前处于什么阶段。</a>
+<a href="#section-3">3．实际复算：互补性成立，且不是一个小效应。</a>
+<a href="#section-4">4．并集为什么不能直接兑现。</a>
+<a href="#section-5">5．更接近因果问题的现有证据：双 Boss 同局面比较。</a>
+<a href="#section-6">6．文献调研：哪些方法可以直接借鉴。</a>
+<a href="#section-7">7．严格的信息边界，以及当前代码中的两个关键事实。</a>
+<a href="#section-8">8．推荐架构和需要学的量。</a>
+<a href="#section-9">9．数据方案：先建立同状态的反事实比较。</a>
+<a href="#section-10">10．如何把路由真正训练成强化学习。</a>
+<a href="#section-11">11．评测设计：怎样区分真实收益、偶然收益和种子记忆。</a>
+<a href="#section-12">12．工程落地顺序、交付件和停止条件。</a>
+<a href="#section-13">13．计算成本与主要风险。</a>
+<a href="#section-14">14．可执行的首个实验建议。</a>
+<a href="#section-15">15．证据、来源与复算。</a></nav></details><h1>基于合法游戏状态的专家路由：项目调查、可行性与技术路线</h1>
+<p>日期：2026 年 10 月 30 日，Europe/Paris。</p>
+<p>调查范围：sls2 当前代码、决策与部署记录、A/B 机只读状态、已保存的逐种子复测与双 Boss 诊断卷，以及策略集成、层级强化学习、泛化和统计评测的原始论文。本次没有修改训练实现、配置、检查点或服务，没有新增游戏对局；新增内容仅为这份报告和可复算的离线分析。</p>
+<h2 id="section-1">1．判断：值得做一个受控研究分支，但现在还不能把并集胜率当成目标承诺。</h2>
+<p>你的设想具有明确的技术可行性：保留若干能力接近、行为不同的策略快照，用一个小网络读取当前合法状态，选择其中一个执行。它可以构成策略层面的混合专家，也可以进一步作为强化学习中的高层策略。</p>
+<p>本项目已经具备三项有利条件：专家快照确有互补性；已有小型胜率预测器和批量评测基础设施；第三幕双 Boss 可以从玩家资源快照重建，适合以较低代价验证专家选择。但决定收益的关键事实尚未得到证明：<strong>专家的优势能否由合法状态预测，并且在换掉未来随机实现后仍然成立。</strong></p>
+<p>建议第一版采用 <strong>3 个冻结专家＋只读公开状态的独立路由器＋第三幕双 Boss 开始前选一次、连续执行两场</strong>。验证后再扩展到其他房间边界，最后才考虑战斗回合或单步切换。主训练线继续独立运行，路由器第一阶段使用终局胜负监督，不复用现有带塑形奖励的价值输出。</p>
+<p>这里的“马尔科夫假设”按你的要求解释为：用当前合法游戏状态描述决策，把未知未来视为状态条件下的随机转移；不输入、不恢复、不预测游戏 RNG，不学习种子身份或随机序列指纹。这个近似不会让真实游戏自动变成严格 MDP，因此后文所有理论保证都注明其条件。</p>
+<h2 id="section-2">2．项目目前处于什么阶段。</h2>
+<p>2026-10-30 00:32:47（巴黎时间，UTC 为 2026-10-29 23:32:47）对 B 机的只读查询得到以下状态。版本会继续增长，这是一份时间截面，不是报告阅读时的实时值。</p>
+<div class="table-wrap"><table><tr><th>项目</th><th>本次核实的状态</th><th>对本方案的意义</th></tr><tr><td>训练目标</td><td>故障机器人，A10；当前训练使用 C# 引擎，项目资料对应游戏 v0.111.0</td><td>首次验证限定这一角色、难度和引擎</td></tr><tr><td>主线</td><td>B 机 v86598，累计 2,844,351,030 个训练步；当时约 9,106 步/秒</td><td>已有充分训练的专家，不需要从零训练 MoE</td></tr><tr><td>策略网络</td><td>Transformer，宽 256、6 层、4 头；v84667 的 state 张量共 18,094,341 个元素</td><td>3 个完整专家的参数存储可以接受，推理应只激活所选专家</td></tr><tr><td>采集</td><td>B 本地 8×36 个环境；A 协同采集，A 同时承载常规评测</td><td>数据采集和评测已有分布式框架，但不是空闲算力</td></tr><tr><td>当前奖励</td><td>恢复旧奖励：层数 0.02，前两幕 Boss 各 0.5，第三幕首 Boss 1.5，次 Boss 2.0，另有 victory_reward 2.0</td><td>原价值头衡量的不是纯通关概率</td></tr><tr><td>当前折扣与探索</td><td>gamma=1；战斗熵系数 0.01、局外 0.05；explore_offpolicy=True</td><td>高层终局目标可用不折扣的有限回合 formulation；专家执行方式必须固定</td></tr><tr><td>当前训练保留项</td><td>第三幕双 Boss 连打、按输率加权，真实第二个 Boss 练习</td><td>适合比较“同样资源交给不同专家”</td></tr><tr><td>当前停用项</td><td>wp_shaping=0、prog_floor=0、phi_coef=0、distill_on=False、solver_share=0</td><td>胜率塑形、旧牌组打分训练和求解器蒸馏目前不是主线组成部分</td></tr><tr><td>观测</td><td>当前源码格式 v15，已补充部分遗物状态、卡牌临时效果、Boss 阶段和公开遭遇统计</td><td>小路由器需要同步这些语义，旧的粗略胜率特征不够完整</td></tr><tr><td>常规评测</td><td>已迁到 A；每轮 384 个从 RT 池分层抽取的种子；B 的 eval_runs=0</td><td>不能把 B 旧 eval.jsonl 的最后一条误当作最新评测</td></tr></table></div>
+<p>A 机只读核对的近三轮为：v86329 40.89%、v86413 45.05%、v86491 46.35%，每轮 384 局，约 270–306 秒。A 的共享权重在查询时仍更新，评测 PAUSE 标记不存在。这里只说明观测到的运行状态，不把三个波动点解释为稳定能力提升。</p>
+<p>近期路线经历过“去掉中间奖励→胜率势能→进度势能→恢复旧奖励及回退”的数次变化。当前状态应以配置和在线结果为准，不能沿用旧报告中“只留通关奖励”的描述。版本号曾回退，专家身份必须使用<strong>检查点哈希＋配置＋引擎与观测版本</strong>，不能只用 vXXXXX。[P1–P4]</p>
+<h2 id="section-3">3．实际复算：互补性成立，且不是一个小效应。</h2>
+<p>读取已有 <code>runs_s*.jsonl</code>，只保留 A10，按种子对齐，检查每个目录恰有 1,000 个不同的 RT 种子；下列快照均无 stuck 记录。区间为单模型 Wilson 95% 区间。</p>
+<div class="table-wrap"><table><tr><th>快照</th><th>通关/1,000</th><th>胜率</th><th>95% 区间</th></tr><tr><td>v79300</td><td>402</td><td>40.2%</td><td>37.20%–43.27%</td></tr><tr><td>v82160</td><td>396</td><td>39.6%</td><td>36.61%–42.67%</td></tr><tr><td>v83900</td><td>431</td><td>43.1%</td><td>40.06%–46.19%</td></tr><tr><td>v84667</td><td>446</td><td>44.6%</td><td>41.55%–47.70%</td></tr><tr><td>v85620</td><td>407</td><td>40.7%</td><td>37.70%–43.77%</td></tr></table></div>
+<p>v83900 在另一组 HO0000–HO0999 上为 424/1,000，即 42.4%（39.37%–45.49%）。这是一个额外的历史能力检查；这组 HO 已被查看，今后若用它选方案，就不能再称作未接触的最终验收集。</p>
+<p>v83900 和 v84667 的逐局关系为：</p>
+<div class="table-wrap"><table><tr><th>结果</th><th>局数</th></tr><tr><td>两者都赢</td><td>272</td></tr><tr><td>只有 v83900 赢</td><td>159</td></tr><tr><td>只有 v84667 赢</td><td>174</td></tr><tr><td>两者都输</td><td>395</td></tr><tr><td>至少一个赢</td><td><strong>605</strong></td></tr></table></div>
+<p>两者总体胜率差异的精确配对检验 p=0.443，但有 333 个种子的结局不同。这正是“总体能力近似，成功路径不同”的实例。</p>
+<div class="table-wrap"><table><tr><th>历史专家组合</th><th>事后通关并集</th></tr><tr><td>v83900＋v84667</td><td><strong>60.5%</strong></td></tr><tr><td>再加 v85620</td><td><strong>67.8%</strong></td></tr><tr><td>再加 v82160</td><td><strong>73.0%</strong></td></tr><tr><td>再加 v79300</td><td><strong>78.1%</strong></td></tr><tr><td>全部 15 个已保存 RT 复测版本</td><td><strong>90.1%</strong></td></tr></table></div>
+<p>这些数字只描述已有记录。旧版本评测跨越了观测与引擎更新，较早记录缺少完整哈希；同一 RT 池也被反复用于训练决策与选模。<strong>它们不是统一运行栈下的新实验，也不是泛化置信保证。</strong> 特别是 90.1%，更不能解读成“15 专家就能做出九成胜率”。[D1]</p>
+<p>另一个值得保留的事实：v84667 比 v85620 高 3.9 个百分点，单次配对 p=0.032。但这里比较过多个快照、还存在筛选过程，不能把这个未经多重比较修正的结果当作“已经确定 v84667 永远最好”。第一版可把它作为历史参考专家，正式基线仍应在新开发集上确定。</p>
+<h2 id="section-4">4．并集为什么不能直接兑现。</h2>
+<p>令 Y_i 表示专家 i 在一个完整环境随机实现下是否通关，X 表示路由时刻的合法状态。事后选择知道每个专家最终结局，合法选择只知道 X。对“一次选定、之后全程使用同一专家”的制度，有：</p>
+<pre><code>固定专家的最优期望        = max_i E[Y_i]
+合法状态路由的理论最优    = E_X[max_i E[Y_i | X]]
+事后知道每条轨迹的并集    = E[max_i Y_i]
+
+固定专家 ≤ 合法状态路由 ≤ 事后并集</code></pre>
+<p>第二项和第三项之间的差距就是不能提前看到未来的代价。若开局状态完全相同，而 A、B 只是分别在一个不可见的公平随机结果下获胜，则事后并集可为 100%，任何只看当前状态的选择仍然只有 50%。这不是路由器太小，而是可用信息不足。</p>
+<p>游戏中的互补性可能来自三种不同机制：</p>
+<ul><li><strong>状态上的专长</strong>：某专家擅长特定构筑、Boss 组合或资源配置。这是最有希望的可学习信号。</li><li><strong>不同早期决策形成不同后续状态</strong>：一位专家攒出适合自己的牌组，另一位走另一条路线。中途接管不一定能复现从头打的优势。</li><li><strong>不同动作碰上不同随机实现</strong>：抽牌、目标和触发顺序恰好更有利。按你的约束，这部分不能通过辨认种子来回收。</li></ul>
+<p>因此，不能把“专家 A 在这个种子赢了”直接标成“这个种子的每个状态都应该选 A”；A、B 到达的状态可能完全不同。也不能在看过第 30 层、死亡地点或最终牌组后，回头声称第 1 层就能做同样的选择。</p>
+<p>动态切换还要另行理解：混合策略会创造新的轨迹，因此可能赢下所有单专家都输掉的种子，也可能破坏原本可赢的轨迹。历史整局并集只是一个事后参照，并非动态混合策略的严格上限。[本节为决策论推导；策略改进背景见 R1]</p>
+<p>以 v84667 为默认专家、v83900 为候选：只在后者独赢的 159 局中正确切换的比例记作 r，在前者独赢的 174 局中错误切换的比例记作 f，理想化整局一次选择的收益为：</p>
+<pre><code>胜率增量 = (159 × r − 174 × f) / 1000</code></pre>
+<p>例如 r=60%、f=10%，增量为 7.8 个百分点；这是解释错误代价的算例，不是已测成绩。它说明不必全部猜对才能有收益，但误换掉优势专家的代价同样真实。上线评价应衡量净收益，不应只看专家分类准确率。</p>
+<h2 id="section-5">5．更接近因果问题的现有证据：双 Boss 同局面比较。</h2>
+<p>现有 <code>boss3_exam.json</code> 从 v85620 的 804 个第三幕入场局面中，按 Boss 顺序、血量和药水分层，抽出了 175 题，来自 175 个不同源种子。这里的“26 层”是 26 个分层单元，不是第 26 层游戏楼层。题目用同一份玩家资源、同一对 Boss 和同一重建种子，分别让不同快照连打两场。[P5]</p>
+<div class="table-wrap"><table><tr><th>模型</th><th>两场都赢</th></tr><tr><td>v83900</td><td>60/175，34.3%</td></tr><tr><td>v84667</td><td>70/175，40.0%</td></tr><tr><td>v85620</td><td>69/175，39.4%</td></tr><tr><td>三者事后并集</td><td><strong>85/175，48.6%</strong></td></tr></table></div>
+<p>同样资源下仍有互补性，但空间比完整轨迹并集看起来小：对最强单模型只有 15 道额外可赢题。这里只是分层诊断卷，不代表真实整局的第三幕条件胜率；源状态来自单一快照，也未涵盖混合策略自己的状态分布。</p>
+<p>本次额外做了一个无需运行游戏的探索实验：固定 5 折，按来源种子分组，训练折内用“Boss 顺序”或“Boss 顺序＋血量档＋药水档”估计各专家胜率，使用固定强度 10 的平滑，留出折按预测最高者选择。种子只用于分组，完全不作为特征。</p>
+<ul><li>每折只在训练折挑一个固定专家：合计 65/175。</li><li>根据 Boss 顺序选择：67/175。</li><li>再加血量、药水档：67/175。</li><li>相对折内固定专家，新增赢 7 题、丢失赢 5 题，探索性配对 p=0.774。</li></ul>
+<p><strong>目前没有证据证明粗粒度状态路由已经有效，也没有证据证明更好的状态路由不可能有效。</strong> 175 个状态、每状态一个未来随机实现、简单分桶，既不能稳定估计微小优势，也没有充分表达牌组和遗物协同。五折结果还共享训练数据，相关检验只作描述，正式结论必须来自新的独立对局。不能把同一张卷子上的全样本最优 70 题，与交叉拟合的 67 题简单当成无偏算法排名。[D1]</p>
+<h2 id="section-6">6．文献调研：哪些方法可以直接借鉴。</h2>
+<div class="table-wrap"><table><tr><th>路线与原始文献</th><th>与本问题的关系</th><th>本项目适用边界</th></tr><tr><td>Generalized Policy Improvement，Barreto 等，2017 [R1]</td><td>在多个已有策略的价值估计上构造改进策略，为“组合现有专家”提供理论背景</td><td>标准 GPI 使用动作价值 Q；不能拿各专家的任意 V 输出作未经校准的替代。原文误差界的折扣假设不能直接套到本项目 gamma=1</td></tr><tr><td>Options / Option-Critic，Bacon 等，2017 [R2]</td><td>一个专家执行一段，再由高层决定下个专家；适合房间和 Boss 阶段</td><td>第一阶段固定终止边界和专家，只训练高层，避免同时学习专家、路由和终止条件</td></tr><tr><td>Policy Distillation，Rusu 等，2015/2016 [R3]</td><td>将多个策略的行为压回一个学生模型</td><td>后期把验证有效的路由策略蒸馏回主模型，才能减少部署复杂度；不保证学生保留全部收益</td></tr><tr><td>DAgger，Ross 等，2011 [R4]</td><td>序列决策会改变后续状态分布，离线学得好不代表闭环运行好</td><td>复用“到新策略实际访问的状态上重新收集标签”的思想，不把这里的算法冒称为原版 DAgger</td></tr><tr><td>Doubly Robust Policy Evaluation and Learning，Dudík 等，2011 [R5]；Offline RL 综述，Levine 等，2020 [R6]</td><td>历史数据只看见实际执行动作的结果；行为概率与覆盖影响估计</td><td>老回放缺少同状态下其他专家的反事实结果。不能仅加一个 expert_id 就声称解决了选择偏差</td></tr><tr><td>Quantifying Generalization in RL，Cobbe 等，2019 [R7]；Statistical Precipice，Agarwal 等，2021 [R8]</td><td>程序生成环境仍会过拟合；需要独立环境划分和不确定性报告</td><td>全轨迹按源种子隔离；固定调参集与最终验收集；对整局胜负作配对统计</td></tr><tr><td>Sparsely-Gated MoE，Shazeer 等，2017 [R9]；Soft MoE，Puigcerver 等，2023 [R10]</td><td>说明条件计算可以用少量激活换取较大容量</td><td>主要研究网络内部专家层，与复用完整游戏策略快照不同；没有必要先改造主网络为 token 级 MoE</td></tr><tr><td>EPPO，Yang 等，2022 [R11]</td><td>联合训练策略集成和单策略，研究泛化与探索</td><td>可作为后期共同训练的替代路线；第一版成本和归因难度高于冻结快照</td></tr></table></div>
+<p>还定向核对了截至本次调查能检索到的近期原文，以下均作为研究线索，不视作成熟部署结论：</p>
+<ul><li>Shitanda 等，2026 年 3 月的 <em>Rethinking Policy Diversity in Ensemble Policy Gradient in Large-Scale Reinforcement Learning</em> [R12]，指出扩大策略多样性不自动改善训练，研究通过策略间 KL 约束调节多样性。它支持“保留有用差异”，不支持为了不同而强行让专家犯不同错误。</li><li>Suzuki、Okumura，2026 年 10 月 19 日的 <em>Map-Distribution Mixture-of-Experts for Multi-Agent Pathfinding</em> [R13]，研究根据局部场况组合预训练专家，和你的总体设想很接近。作者同时报告，适当训练且参数量匹配的单体模型仍可更强。因此应比较同等采样预算下的单模型继续训练/蒸馏，而不只比较专家总参数更多的集成。</li><li>Jin 等，2026 年 10 月 15 日的 <em>Router Drift Control</em> [R14]，讨论异步 RL 中采集与学习路由不一致的问题。实验对象是语言模型内部 MoE，不是本游戏；可借鉴的是冻结专家、记录路由版本与行为概率，不能直接照搬文中的任务收益或过滤规则。</li></ul>
+<p>核心判断：最贴合现有工程的是策略组合和 options；网络内部稀疏 MoE 属于更大规模的架构改造。论文证明了这些路线有研究基础，<strong>没有任何一篇文献证明本项目的 67.8% 历史并集可由合法状态路由实现。</strong></p>
+<h2 id="section-7">7．严格的信息边界，以及当前代码中的两个关键事实。</h2>
+<p>建议定义单独的 <code>PublicState</code> 白名单接口。路由器只接收它，不能把完整 <code>Obs</code>、<code>extra</code>、玩家存档字典或检查点价值输出直接传入。</p>
+<div class="table-wrap"><table><tr><th>可以使用的状态语义</th><th>禁止进入路由器的内容</th></tr><tr><td>当前幕、房间、Boss 阶段、当前难度</td><td>环境种子、种子散列、存档 ID、文件名、对局编号、源目录、时间戳</td></tr><tr><td>当前血量、格挡、金币、能量、药水</td><td>RNG 对象、状态、调用次数、未来随机结果、随机分支标记</td></tr><tr><td>牌组与卡牌的公开升级、附魔、临时效果、永久关联</td><td>未知抽牌顺序、未揭示奖励、隐藏事件内容、预抽但未公开的遭遇</td></tr><tr><td>遗物的公开有效状态和计数、敌人当前公开意图</td><td>能解析随机状态的内存字段、原始序列化对象、特权 critic 输出</td></tr><tr><td>当前公开路线、已公开且合法可知的 Boss 信息</td><td>把完整地图/轨迹编码成种子指纹，以预测该种子的未来</td></tr><tr><td>为状态补足所必需的规则计数，如已用次数、已发生的公开状态变化</td><td>用 RNN/Transformer 历史记忆重建随机发生器或隐含种子身份</td></tr></table></div>
+<p>“公开可见”与“不会被用来记忆种子”不是同一件事。卡组、地图和遗物组合可能有较强辨识力，它们又确实影响打法，不能全部删去。应同时采用语义特征、容量限制、按源局隔离、全新种子，以及在保留合法状态时改变未知未来的检验。有限测试不能证明网络绝无任何统计关联；能实施的强约束是输入不可达、没有 RNG 预测目标，以及对未来随机实现的泛化检验。</p>
+<p><strong>事实 A：当前策略与特权价值通道不同。</strong> <code>Observation.cs</code> 在训练的 <code>privileged=True</code> 模式下提供真实抽牌位置、预抽遭遇及随机招式推演；<code>model.py</code> 在 <code>logits</code> 算出之后，才把这些特征送入 <code>value_mlp</code>。从当前代码依赖看，策略前向不直接读取它们，但训练价值头确实使用了未知未来。[P6]</p>
+<p>因此禁止把“取所有专家 V 最大的一位”当作合规捷径。即使在部署时把特权列清零，旧 V 仍面对训练/部署输入差异，而且它预测的是塑形回报，不是通关率。</p>
+<p>如果“我们的模型不获得任何随机数/随机未来信息”适用于所有训练组件，那么现有特权 critic 也需要单独整改：改为仅公开状态的 critic，并重新训练或评估该变化。仅删除推理时输入不能抹去旧模型的训练历史。本报告不擅自改变既有主线，也不把旧快照说成从未接受过特权价值训练。冻结快照可以用于验证公开输入下的路由；若要声明整个新系统连训练都满足更严格约束，应使用相应无特权训练来源的专家，或明确披露遗留训练来源。</p>
+<p><strong>事实 B：玩家快照和任意中途状态克隆是两回事。</strong> 当前 <code>Snapshot.Player</code> 会把 RNG、odds、relic_grab_bag、unlock_state 清空；本次也核对了 175 道题的这些字段全为 null。<code>Snapshot.Restore</code> 保留新局自己的 RNG。这为重复构造“同一资源、不同未来”提供了基础。[P7]</p>
+<p>但 <code>Sts2Env.player()</code> 返回玩家资源快照，并非任意时刻完整游戏状态；不能据此声称已经有完善的房间中途分叉接口。现有 <code>RunSession.Reseed</code> 明确记载会打乱玩家已知的牌堆顶，并不覆盖某些对象自带的 RNG，因此不能直接用作严格的通用反事实采样器。新工具必须保留已揭示意图、已知置顶、卡牌实例效果和公开计数，且只改未知未来；不满足时宁可只在战斗开始前采样。[P7]</p>
+<p>以上约束不禁止模拟器内部使用随机数，也不禁止训练器随机采样专家；禁止的是把游戏随机状态或其身份线索提供给决策模型。</p>
+<h2 id="section-8">8．推荐架构和需要学的量。</h2>
+<pre><code>游戏观测
+   ↓  只读 PublicState；剥离特权列、附加存档、种子及身份元数据
+小型状态编码器
+   ↓
+每个专家的终局成功概率 / 高层动作价值 ＋ 估计不确定性
+   ↓  优势不足、状态缺失或分布外时用固定参考专家
+选择 1 个冻结专家
+   ↓
+该专家独立给合法动作打分并执行，直到预定边界
+   ↓
+下一个边界重新判断；终局胜负用于训练和评测</code></pre>
+<p><strong>专家池。</strong> 首轮 3 个，候选为 v83900、v84667、v85620；先在同一代码、引擎、词表、精度和贪心执行规则下重测。若重新确认的相对优势不同，可以在开发集更换。增加专家应依据同状态、跨未来的可预测优势和新种子收益，而不是只看事后并集增长。</p>
+<p><strong>路由网络。</strong> 建议先做 10 万–50 万参数量级的独立网络，这是设计预算，不是已测最优规模。卡牌、遗物、药水和敌人采用集合编码，每个实体先编码身份与数值，再作 sum/mean pooling；显式保留数量、升级/附魔有效期、能力层数、充能球顺序、Boss 顺序等。接一个 128–256 宽的 MLP，输出 K 个独立胜率 logit。可以复用现有 <code>WinProb</code> 的批处理、训练和校准框架，不能原样沿用它只聚合 ID、总体升级比例等粗特征。[P8]</p>
+<p>K 个输出不是互斥分类：同一状态所有专家都可能赢，也可能都输。用每专家胜负的多输出二元交叉熵，不强迫一个专家占满概率。可写成“共同难度分数＋专家相对优势”，让网络把有限容量用于区分差异。需要可靠的同状态多专家标签后，再考虑辅助排序损失。</p>
+<p><strong>第一阶段目标。</strong> 在第三幕首 Boss 进入前选专家，随后两场都由它完成。此时预测目标就是“最终两场都赢”，与该阶段的通关目标吻合；不能只预测第一场胜负，也不应给省药、剩血另加未经验证的替代目标。</p>
+<p>对一般状态有两种不同的预测量：</p>
+<pre><code>F_i(x) = P(从当前 x 开始，之后一直由专家 i 控制，最终通关)
+
+Q_g(x,i) = P(现在让专家 i 执行一个选定阶段，之后恢复路由 g，最终通关)</code></pre>
+<p>第一种适合一次选定或监督初始化。真正反复切换时，需要第二种。两者不能混用：如果标签全部来自“i 打到终局”，却声称网络准确预测“i 只打一间房再切走”，训练目标已经改变。</p>
+<p><strong>切换边界。</strong> 顺序为双 Boss 整段→普通房间/宏观决策→战斗回合；单步只作后期对照。前两者能保留构筑和战斗计划的一致性，也降低路由频率。高层在边界上是一个以“专家执行阶段”为动作的 semi-MDP；保存当前专家编号只是控制器执行状态，不允许附带游戏随机历史。若要求每个原始动作严格只依赖当前游戏状态，可用无记忆 <code>g(x)</code> 每步路由作对照，但它可能更易抖动。[R2]</p>
+<p><strong>回退规则。</strong> 初期以开发集确定的参考专家为默认；只有候选的预测优势超过开发集确定的安全阈值才切换。可用按来源状态 bootstrap 的小型模型集合估计差值不确定性，并以优势的保守下界作选择依据。集成分歧不是形式化置信保证，需检验校准。不要为了“专家利用率均匀”强制选择较差专家；数据采集期保证覆盖和部署期强制均分是两回事。</p>
+<h2 id="section-9">9．数据方案：先建立同状态的反事实比较。</h2>
+<p>老回放适合预训练状态编码器和一般胜率，不足以单独训练可信的专家比较器。原因是专家 i 的训练状态分布主要由 i 自己造成；一个模型的胜率高，可能只是它面对的状态更容易。没有覆盖的动作/专家，离线重要性加权或 doubly robust 方法也不能凭空补出结果。[R5、R6]</p>
+<p>建议分两种来源收集数据。</p>
+<p><strong>A．可重建状态的配对分支。</strong> 首先用现有第三幕资源快照：</p>
+<ol><li>从新的开发种子收集状态，来源混合参考专家、其他专家和后续路由器，避免只采 v85620 状态。</li><li>在开战前定义一个规范化的公开状态和两个 Boss 的合法已知信息；对所有专家使用同一状态条件。</li><li>用独立的新环境随机实现生成未来。每个状态先做 4–8 个重复，每个重复让 K 个专家各执行一次；使用相同的重复编号作配对，但编号不进入模型。</li><li>若路由定义在抽牌之后，必须固定已经看到的手牌、意图等状态，再改变未见未来。若重建时连首手都重新抽了，路由时刻就必须定义在抽牌之前。不能把不同首手误当成同一个战斗中状态。</li><li>记录每专家终局胜负、合法状态特征、运行协议与分组标识。环境种子、源种子、轨迹 ID 放在隔离的元数据表，模型数据加载器无权把它们拼成输入。</li><li>每个源局及其所有分支、所有专家、所有重复只进入同一个数据划分；按源状态/源局平衡损失，避免长局拥有几百倍权重。</li></ol>
+<p>不同专家采取不同动作时，对随机流的消耗会分叉。共同种子不意味着逐步遭遇了相同随机结果，也不保证降低方差；需要多个重复。严禁从多个未来中挑对某专家最有利的一次充当标签。</p>
+<p>当前快照重建能力足以做这一阶段的原型，但与原局的持久遗物状态、游戏阶段和观测模式仍须作针对性等价检查。特别是 <code>MODE_COMBAT</code> 与整局 <code>MODE_RUN</code> 是模型输入的一部分；诊断卷成绩不能代替在真实整局里的切换评测。</p>
+<p><strong>B．无法完整恢复时的随机交接。</strong> 在新的整局里到达预定边界后，按已知概率随机选一个专家来执行，再记录结果。分配与该时刻隐藏未来独立；状态、expert_id、行为选择概率、执行区间及后继状态一起留档。这种数据虽然每局只看见一位专家的结果，但通过随机化形成可比较的样本。初期选择概率要保证每个专家在重要状态上有覆盖。</p>
+<p>这一方法不要求修改游戏 RNG，也不要求完整克隆存档，尤其适合牌组构筑、商店和选路。代价是方差更大、需要更多对局。先用 A 验证低成本可学习性，再用 B 检验真实整局收益。</p>
+<p><strong>建议首批规模。</strong> 500–1,000 个新来源状态，K=3，每状态 4–8 个未来，即 6,000–24,000 次双 Boss 续跑；一次续跑最多两场战斗。这是实验预算建议，不是统计充分性保证。先用 100 个状态做工程和吞吐试验，再依据方差、胜率差距和时间决定扩量。不要直接拿同一个状态做成千上万次，把随机实现数量误当成状态泛化样本量。</p>
+<h2 id="section-10">10．如何把路由真正训练成强化学习。</h2>
+<p>第一阶段冻结所有专家，只监督训练成功概率，清楚回答能不能选对。第二阶段在真实整局访问的状态上迭代高层策略，按以下方式闭环：</p>
+<ol><li>用当前路由 g 运行新对局，保存它实际访问的边界状态。</li><li>对这些状态补充随机交接或配对分支数据。</li><li>用明确的后续策略产生终局标签，更新 <code>Q_g(x,i)</code> 或高层 critic。</li><li>在开发集上检验改进，冻结版本，再开始下一轮。</li></ol>
+<p>这借鉴了 DAgger 的分布修正思想，但反事实标签来自模拟和终局结果，并非人工专家标签。[R4]</p>
+<p>把每个专家的阶段性执行看作一个高层动作，持续 τ 个游戏决策。终局奖励为通关 1、失败 0，高层 Bellman 目标可写成：</p>
+<pre><code>Q_g(x,i) = E[ R_segment + (非终局) × gamma^τ × V_g(x_next) ]
+V_g(x)   = Σ_i g(i|x) Q_g(x,i)</code></pre>
+<p>当前项目 gamma=1，若高层也采用终局胜率目标，就不应因为某专家行动次数少而额外偏爱它。必须保证有限回合/终止处理；超时与引擎故障单独统计，不能默默丢掉失败样本。也不要把折扣情形中的 <code>1/(1−gamma)</code> 理论界直接写进本项目。</p>
+<p>可先实现 K 动作的小型 PPO 或基于随机交接数据的高层策略迭代。冻结专家时，学习的行为概率是高层所选专家的概率；如果更新高层，只计算边界决策的比率。若使用带行为分布的离线数据，需保存真实选择概率并满足覆盖条件。第一版不要求同时更新低层专家，避免给已有 PPO 的行为分布、优势和回报口径再加一层混合。[P9、R5]</p>
+<p>等路由证明有效后，再分两条线利用它加强主强化学习：</p>
+<ul><li><strong>蒸馏路线，优先推荐。</strong> 用成功路由的状态和动作分布训练单个学生，先在学生自己访问的状态上补标签，再在原本的 RL 框架中微调。学生只读公开状态，不蒸馏特权值。验收时同时比较混合教师、蒸馏学生与相同预算继续训练的单模型。[R3、R4]</li><li><strong>共同训练路线，后续选项。</strong> 交替冻结路由更新专家、冻结专家更新路由；保留参考专家与旧快照，记录各版本行为概率。专家过快更新会让路由标签失效，过强的共同蒸馏又会抹掉差异。不以“专家彼此越不同越好”为优化目标。[R11、R12、R14]</li></ul>
+<p>这使混合系统成为强化学习的改进工具，而不只是一个额外推理插件。主目标始终是新的独立对局通关率。</p>
+<h2 id="section-11">11．评测设计：怎样区分真实收益、偶然收益和种子记忆。</h2>
+<p>RT0000–RT0999 已反复参与复测、护栏和 384 种子的构建，应定位为开发数据。既有 HO 也已被用于查看能力。新的研究需要事先生成并隔离新的训练、开发、最终验收集合；用不同前缀管理可以减少误用，但前缀本身不证明底层随机实现独立。模型永远不接触这些标识。[P3、R7]</p>
+<p>最终至少比较以下系统，游戏版本、执行精度、贪心/采样方式和推理预算一致：</p>
+<div class="table-wrap"><table><tr><th>对照</th><th>需要回答的问题</th></tr><tr><td>开发集选定的固定专家</td><td>路由是否超过可实际选出的单模型</td></tr><tr><td>其余候选专家分别完整运行</td><td>不把历史排名当作当前排名；看状态分工是否仍成立</td></tr><tr><td>随机选专家、阶段规则选专家</td><td>收益是否只来自简单多样性或阶段分工</td></tr><tr><td>小型状态路由</td><td>是否在新种子上获得净提升</td></tr><tr><td>相同采样/训练预算的单模型继续训练；后期加蒸馏学生</td><td>集成的收益是否值得额外复杂度</td></tr></table></div>
+<p>软投票、所有专家同时前向、战斗回合切换可作小规模次要消融，不必首轮铺开。不要把增加 K 倍推理计算的方案和一次前向的基线混称为同预算。</p>
+<p><strong>主指标</strong>为完整 A10 通关率，以及相对预先选定基线的逐种子配对差值；报告两种策略各赢多少、只一方赢多少、95% 差值区间。条件胜率、专家使用率、换手次数、p50/p95 延迟和误切换损失用于解释，不替代主指标。多个分支、多个状态和同源随机重复须以源局聚类，不能逐步当作独立样本。[R8]</p>
+<p><strong>规模判断。</strong> 1,000 局在 45% 胜率附近的单模型 95% 区间约 ±3.1 个百分点。配对差值的精度取决于两系统的分歧率 q。用近似规划式、双侧 5% 显著性和约 80% 检验功效：</p>
+<pre><code>n ≈ (1.96 + 0.84)^2 × q / Δ^2</code></pre>
+<p>q=0.2–0.3 时，识别 3 个百分点提升约需 1,700–2,600 对局；识别 2 个百分点约需 3,900–5,900 对局。这只是忽略多重比较、采用独立配对局的预算近似；应先用新开发对局估计 q，再冻结正式规模。</p>
+<p>可先用 1,000 对新局筛查明显失败，再对一个固定候选跑 3,000–5,000 对验收局，目标效应更小时增量。重复查看 p 值并随时停止会增加假阳性，应事先定检查点或采用合法的序贯检验。</p>
+<p><strong>随机数边界的必要验收：</strong></p>
+<ul><li>固定公开状态，替换种子元数据、轨迹 ID、时间戳和特权张量，路由输出不应改变；最好的实现是这些字段根本不在路由器接口中。</li><li>随机置换语义无序的牌组/遗物/未知抽牌堆记录，输出保持一致；手牌引用、球顺序和已知置顶等有语义的顺序不能乱换。</li><li>在保持合法公开状态、规则分布和已知信息的前提下改变未知未来，专家优势应在统计上复现。结果不要求逐次相同，要求收益并非只出现在原来那一个未来。</li><li>完全新种子、不同来源专家产生的状态、不同后续随机实现分别报告。禁止只在曾出现于训练的地图指纹上验证。</li><li>推理时禁止搜索实际存档未来来选择专家；昂贵的分支模拟只用于离线标签和研究，不作为“快速小路由器”的隐藏计算。</li></ul>
+<p>若正式新局上的配对置信区间仍跨 0，就不能宣称已提升。若跨未来测试失效，应优先判断原优势是否只是随机实现依赖，而不是继续增加路由容量以记住旧题。</p>
+<h2 id="section-12">12．工程落地顺序、交付件和停止条件。</h2>
+<p>以下是建议实现范围，并非本次已完成的开发。</p>
+<div class="table-wrap"><table><tr><th>阶段</th><th>工作与可审查交付件</th><th>进入下一阶段的条件</th></tr><tr><td>0．固定专家与协议</td><td><code>expert_manifest.json</code>：检查点 SHA256、模型配置、引擎/词表哈希、观测版本、执行模式、合法输入协议；统一栈复测</td><td>专家兼容；能力、互补性可复现；数据隔离明确</td></tr><tr><td>1．公开状态接口</td><td><code>public_state.py</code>、白名单 schema；只提取语义状态；特权不变性与集合置换检查</td><td>所有新训练/推理路径无 RNG、种子身份、特权值输入</td></tr><tr><td>2．首批同状态数据</td><td><code>collect_router_labels.py</code>；先 100 状态检查重建，再 500–1,000 状态×3 专家×4–8 未来</td><td>重建保留正确状态；有跨未来、状态相关的优势，资源开销可接受</td></tr><tr><td>3．监督路由</td><td><code>router.py</code>、<code>train_router.py</code>；常数/分桶/小网络对照、校准与回退</td><td>留出源状态上的选择净收益改善，不能只看 AUC</td></tr><tr><td>4．真实整局接入</td><td><code>evaluate_router.py</code>；前面固定参考专家，第三幕双 Boss 前选择；记录专家使用与胜负</td><td>真实整局配对提升；无随机数边界违例；延迟满足预算</td></tr><tr><td>5．高层 RL</td><td>房间边界随机交接、Q_g 和版本化数据缓冲；逐轮更新，重新收集路由访问状态</td><td>更早切换带来额外收益，没有构筑/战斗接管损失</td></tr><tr><td>6．蒸馏和公平比较</td><td>单学生策略、同预算继续训练基线、独立最终报告</td><td>学生保留有意义的收益，或混合系统的收益足以覆盖成本</td></tr></table></div>
+<p>优先复用位置：<code>tools/ability_test.py</code> 与 <code>tools/ability_compare.py</code> 的整局评测、<code>tools/boss3_exam.py</code> 的资源快照重建、<code>python/sts2rl/evaluator.py</code> 的批量环境循环、<code>tools/winprob/</code> 与 <code>winprob_online.py</code> 的小模型训练/组批。不要直接把路由插进现有主训练并同时调奖励、熵、队列和观测，否则无法归因。[P3、P5、P8、P9]</p>
+<p>第一版选择在第三幕前的理由是反事实标签最接近终局、恢复接口最成熟，<strong>不是已经证明第三幕是互补性的唯一或最大来源</strong>。如果这一区域没有可预测优势，仍可在开局古神选择、牌组奖励、第二幕资源配置等位置用随机交接试验；如果这些区域也无净收益，应停止扩展集成，而不是追逐不断增大的事后并集。</p>
+<h2 id="section-13">13．计算成本与主要风险。</h2>
+<p>v84667 约 1,809 万参数，FP32 权重约 72 MB；3 份约 217 MB。这不等于实际显存占用：CUDA 上下文、固定内容表、激活和批处理缓存还会额外占用。已有工程记录显示每个独立推理进程的上下文开销不可忽略，因此建议<strong>单推理进程常驻 3 个专家，按 expert_id 分桶批量推理</strong>，不能每步从磁盘换权重，也不宜为每个专家另开整套 CUDA 进程。[P2、P4]</p>
+<p>如果只激活所选专家，主网络计算接近单模型；但批量被分成三份可能降低 GPU 利用率，所以“路由网络很小”不等于训练吞吐必然不变。建议开发预算设为端到端吞吐损失不超过 10%、p95 延迟增加不超过 10%–20%，这些是待验收目标，尚未测得。离线标签生成通常比小模型训练更昂贵，应先实测每次续跑耗时再计算资源预算。</p>
+<div class="table-wrap"><table><tr><th>风险</th><th>具体表现</th><th>应对</th></tr><tr><td>随机幸运被当作专长</td><td>原种子上好，重采样未来后消失</td><td>同状态多未来、全新种子；不拟合赢家种子表</td></tr><tr><td>选择偏差与覆盖不足</td><td>A 的状态容易、B 的状态难，被误判为 A 更强</td><td>同状态全专家标签或随机交接；按来源分组</td></tr><tr><td>快照不等价</td><td>恢复丢掉临时效果、已知置顶或公开计数</td><td>从战前边界做起，针对性检查状态等价</td></tr><tr><td>专家接管不兼容</td><td>一位构筑、另一位不会使用，或在第一场花光资源</td><td>终局目标、较长承诺区间、真实整局闭环评测</td></tr><tr><td>路由过拟合或差值失准</td><td>总胜率预测准，却总把两位专家相对顺序排错</td><td>单独评价差值、选择后净收益和回退能力</td></tr><tr><td>专家/路由同时漂移</td><td>旧标签、旧行为概率不再对应新权重</td><td>冻结池、完整 manifest、按版本更新标签</td></tr><tr><td>数据集被反复“考熟”</td><td>RT 结果越来越好，新种子无收益</td><td>将 RT 定位开发集，使用未接触的最终验收集</td></tr><tr><td>系统成本超过收益</td><td>几个百分点收益换来高延迟与复杂部署</td><td>单进程 top-1、蒸馏、同预算单模型对照</td></tr></table></div>
+<h2 id="section-14">14．可执行的首个实验建议。</h2>
+<p>用统一运行栈冻结 3 个候选专家，建立独立公开状态编码器。在新种子上由参考专家及其他专家收集第三幕首 Boss 前的状态，每状态用 4–8 个新未来比较三个专家。先证明相对优势能跨未来复现，再训练多输出胜率路由器；最终从游戏开局运行参考专家，到第三幕入口选择一位专家连打两场，与固定参考专家作新种子的完整配对比较。</p>
+<p>如果有稳定提升，再把选择提前到更早的房间或构筑决策，用高层 RL 优化终局胜率，并尝试蒸馏回一个主策略。如果没有提升，当前结果仍有价值：它会区分“专家确有可组合的状态专长”与“历史互补主要由路径分歧或随机实现造成”，避免投入一套无法兑现并集收益的大型 MoE 系统。</p>
+<p>目前证据支持的是：<strong>互补性已确认，工程基础基本具备，路由收益尚未证明；最合适的下一步是一个不读随机数、以同状态多未来为标签的三专家验证实验。</strong></p>
+<h2 id="section-15">15．证据、来源与复算。</h2>
+<p>项目证据对应调查时读取的热开发目录 <code>/home/chenqiyue/dev/sls2</code>。源码行号可能随后续开发改变，因此下列以路径和符号定位为准。报告交付目录同时保存在 Windows 项目中。</p>
+<div class="table-wrap"><table><tr><th>编号</th><th>来源</th></tr><tr><td>D1</td><td>同目录 <code>analysis.json</code>，含逐模型统计、配对关系、专家并集、双 Boss 探索分析及输入文件 SHA256；<code>analyze_existing.py</code> 为完整复算脚本</td></tr><tr><td>P1</td><td><code>README.md</code>；<code>决策记录.md</code> 第 183–199 条；定向历史归档检索只用来定位背景，当前事实另查代码/运行数据</td></tr><tr><td>P2</td><td>B 机 <code>runs/defect/status.json</code>、<code>train_config.json</code>、<code>best/index.json</code> 的只读查询；A 机 <code>runs/defect-eval/eval.jsonl</code> 与共享权重更新时间</td></tr><tr><td>P3</td><td><code>tools/ability_test.py</code>、<code>tools/ability_compare.py</code>、<code>tools/remote/retest.sh</code>、<code>tools/remote/eval_seeds.json</code></td></tr><tr><td>P4</td><td>v84667 检查点：SHA256 <code>1b9866264a0a9016c8a60b54626691eeb7e18c3e47dafcc9ebc013d9979c586f</code>；<code>python/sts2rl/model.py</code></td></tr><tr><td>P5</td><td><code>tools/boss3_exam.py</code>；现有 175 题考卷与三个快照的 <code>boss3.jsonl</code></td></tr><tr><td>P6</td><td><code>engine/Sts2Headless/Engine/Observation.cs</code> 的 <code>Privileged</code>、<code>SimulateNextRolls</code>、抽牌记录；<code>model.py</code> 的 <code>_encode</code>、<code>forward_phi</code>；<code>actor.py</code> 的训练 reset</td></tr><tr><td>P7</td><td><code>Engine/Snapshot.cs</code> 的 <code>Player</code>、<code>Restore</code>；<code>Engine/CombatSpec.cs</code>；<code>Engine/RunSession.cs</code> 的 <code>Reseed</code>；<code>python/sts2env/env.py</code></td></tr><tr><td>P8</td><td><code>tools/winprob/winprob.py</code> 的 <code>featurize_step</code>、<code>WinProb</code>；<code>tools/winprob/train.py</code> 的源种子划分；<code>python/sts2rl/winprob_online.py</code></td></tr><tr><td>P9</td><td><code>python/sts2rl/evaluator.py</code>、<code>actor.py</code>、<code>train.py</code> 及当前配置；本报告只复用必要接口判断，没有运行新的主训练</td></tr></table></div>
+<p>复算命令（在已保存原始评测的 WSL 环境中运行；仅用标准库）：</p>
+<pre><code>python3 analyze_existing.py \
+  --data /home/chenqiyue/.local/share/sls2/ability_test \
+  --out analysis.json</code></pre>
+<p>外部资料采用原论文、作者发布的预印本或会议官方论文页；没有引入第三方仓库、安装依赖或执行外部代码。网页搜索工具本次未返回可用内容，外部核对通过直接读取 arXiv、PMLR 原文页面完成。下面将“摘要核对”与“方法依据”分开，不声称逐篇复现，也不声称穷尽截至日期的全部文献。</p>
+<ul><li><strong>R1</strong> Barreto et al. <em>Successor Features for Transfer in Reinforcement Learning</em>. NeurIPS 2017，预印本 2016。arXiv:1606.05312。<code>https://arxiv.org/abs/1606.05312</code>。用于策略集合改进的理论背景；本项目不需要为相同奖励专门引入 successor features。</li><li><strong>R2</strong> Bacon, Harb, Precup. <em>The Option-Critic Architecture</em>. AAAI 2017。arXiv:1609.05140。<code>https://arxiv.org/abs/1609.05140</code>。用于时间抽象和高层策略结构；其引用的 Sutton、Precup、Singh 1999 原始 options 论文 DOI 为 <code>10.1016/S0004-3702(99)00052-1</code>。</li><li><strong>R3</strong> Rusu et al. <em>Policy Distillation</em>. arXiv 2015 / ICLR 2016。arXiv:1511.06295。<code>https://arxiv.org/abs/1511.06295</code>。核对摘要与方法定位。</li><li><strong>R4</strong> Ross, Gordon, Bagnell. <em>A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning</em>. AISTATS 2011，PMLR 15。<code>https://proceedings.mlr.press/v15/ross11a.html</code>。核对官方摘要；本文只借鉴闭环数据分布修正思想。</li><li><strong>R5</strong> Dudík, Langford, Li. <em>Doubly Robust Policy Evaluation and Learning</em>. ICML 2011。arXiv:1103.4601。<code>https://arxiv.org/abs/1103.4601</code>。核对摘要；contextual bandit 结论不自动等于长时序无偏评估。</li><li><strong>R6</strong> Levine, Kumar, Tucker, Fu. <em>Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems</em>. 2020。arXiv:2005.01643。<code>https://arxiv.org/abs/2005.01643</code>。核对摘要，用于说明离线数据问题的研究背景。</li><li><strong>R7</strong> Cobbe et al. <em>Quantifying Generalization in Reinforcement Learning</em>. ICML 2019，PMLR 97。<code>https://proceedings.mlr.press/v97/cobbe19a.html</code>。核对官方摘要。</li><li><strong>R8</strong> Agarwal et al. <em>Deep Reinforcement Learning at the Edge of the Statistical Precipice</em>. NeurIPS 2021。arXiv:2108.13264。<code>https://arxiv.org/abs/2108.13264</code>。核对摘要；本报告使用项目二元配对结果，不机械套用多任务榜单的聚合指标。</li><li><strong>R9</strong> Shazeer et al. <em>Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer</em>. 2017。arXiv:1701.06538。<code>https://arxiv.org/abs/1701.06538</code>。核对摘要，区分网络层 MoE 与完整策略集成。</li><li><strong>R10</strong> Puigcerver et al. <em>From Sparse to Soft Mixtures of Experts</em>. 2023 预印本。arXiv:2308.00951。<code>https://arxiv.org/abs/2308.00951</code>。核对摘要，作为架构替代路线，不据此推断本项目收益。</li><li><strong>R11</strong> Yang et al. <em>Towards Applicable Reinforcement Learning: Improving the Generalization and Sample Efficiency with Policy Ensemble</em>. 2022。arXiv:2205.09284。<code>https://arxiv.org/abs/2205.09284</code>。核对作者、题名与摘要，作为联合训练候选。</li><li><strong>R12</strong> Shitanda et al. <em>Rethinking Policy Diversity in Ensemble Policy Gradient in Large-Scale Reinforcement Learning</em>. 2026-03，预印本。arXiv:2603.01741。<code>https://arxiv.org/abs/2603.01741</code>。核对作者、题名、日期与摘要，不外推其机器人实验收益。</li><li><strong>R13</strong> Suzuki, Okumura. <em>Map-Distribution Mixture-of-Experts for Multi-Agent Pathfinding</em>. 2026-10-19，预印本。arXiv:2610.25991。<code>https://arxiv.org/abs/2610.25991</code>。核对作者、题名、日期与摘要，保留作者对参数匹配单模型的比较限制。</li><li><strong>R14</strong> Jin et al. <em>Router Drift Control: Mitigating Off-Policy Degradation in Mixture-of-Experts Reinforcement Learning</em>. 2026-10-15，预印本。arXiv:2610.21682。<code>https://arxiv.org/abs/2610.21682</code>。核对作者、题名、日期与摘要，仅作为异步路由漂移的相关证据。</li></ul>
+<p>尚未解决的事实问题：专家在统一运行栈上的最新配对成绩、同状态多未来下的可预测性、路由器真实整局收益和实际延迟。它们都需要按上述路线做新实验，不能由文献或历史并集替代。</p></main></body></html>

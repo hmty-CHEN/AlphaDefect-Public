@@ -1,0 +1,175 @@
+diff --git a/src/Sts2Sim.Core/Combat/CombatEngine.cs b/src/Sts2Sim.Core/Combat/CombatEngine.cs
+index e1827a8..d2345e1 100644
+--- a/src/Sts2Sim.Core/Combat/CombatEngine.cs
++++ b/src/Sts2Sim.Core/Combat/CombatEngine.cs
+@@ -462,6 +462,9 @@ public sealed class CombatEngine
+     private async Task SetupPlayerTurnAsync(Player player)
+     {
+         player.PlayerCombatState!.Phase = PlayerTurnPhase.Start;
++        // 原版在换边（SwitchSides）时就把回合数加一，重置能量之前已经是新回合：
++        // 帕埃尔之肉等按回合数改能量上限的效果在重置能量时就要看到新回合数
++        player.PlayerCombatState!.TurnNumber++;
+         if (Hook.ShouldPlayerResetEnergy(State, player))
+         {
+             player.PlayerCombatState!.ResetEnergy();
+@@ -473,11 +476,16 @@ public sealed class CombatEngine
+ 
+         await Hook.AfterEnergyReset(State, player);
+ 
+-        player.PlayerCombatState!.TurnNumber++;
+         await Hook.BeforeHandDraw(State, player);
+         decimal handDrawCount = Hook.ModifyHandDraw(State, player, BaseHandDrawCount,
+             out IEnumerable<AbstractModel> modifiers);
+         await Hook.AfterModifyingHandDraw(State, modifiers);
++        if (player.PlayerCombatState!.TurnNumber == 1)
++        {
++            // 原版第 1 回合：先排固有牌与灌注牌，再保证固有牌都能抽进手（不超过手牌上限）
++            int innate = player.ArrangeDrawPileForFirstHand();
++            handDrawCount = Math.Min(Math.Max(handDrawCount, innate), CardPile.MaxCardsInHand);
++        }
+         await CardPileCmd.Draw(State, (int)handDrawCount, player, fromHandDraw: true);
+     }
+ 
+diff --git a/src/Sts2Sim.Core/Entities/Players/Player.cs b/src/Sts2Sim.Core/Entities/Players/Player.cs
+index f18955f..4a8be20 100644
+--- a/src/Sts2Sim.Core/Entities/Players/Player.cs
++++ b/src/Sts2Sim.Core/Entities/Players/Player.cs
+@@ -261,10 +261,6 @@ public sealed class Player
+         }
+         PlayerCombatState!.DrawPile.RandomizeOrderInternal(shuffleRng);
+         List<CardModel> initialOrder = PlayerCombatState.DrawPile.Cards.ToList();
+-        var bottomDesignatedCards = new HashSet<CardModel>(
+-            initialOrder.Where(card => card.Enchantments.Any(
+-                enchantment => enchantment.ShouldStartAtBottomOfDrawPile)),
+-            ReferenceEqualityComparer.Instance);
+         foreach (EnchantmentModel enchantment in initialOrder
+                      .SelectMany(card => card.Enchantments)
+                      .ToList())
+@@ -275,14 +271,31 @@ public sealed class Player
+         {
+             PlayerCombatState.DrawPile.MoveToBottomInternal(card);
+         }
++    }
+ 
+-        // 偏离 #87：多张 Innate 卡移到牌堆顶时，未核实真实游戏中的相对顺序。
+-        foreach (CardModel innateCard in PlayerCombatState.DrawPile.Cards
+-                     .Where(card => card.HasKeyword(CardKeyword.Innate) && !bottomDesignatedCards.Contains(card))
+-                     .ToList())
++    /// <summary>原版 <c>CombatManager.SetupPlayerTurn</c> 第 1 回合抽牌前（BeforeHandDraw、ModifyHandDraw 之后）：
++    /// 附魔要求开局在底部的牌（灌注）移到底部，其余固有牌依次移到顶部，返回移到顶部的张数。
++    /// 原版不在 <c>PopulateCombatState</c> 里做这一步：进房间的钩子（如碎石器按抽牌堆顺序 StableShuffle 选牌升级）
++    /// 看到的是没挪过固有牌的抽牌堆，提前挪会让同名副本在不稳定排序里换位，升级落到另一张副本上。</summary>
++    public int ArrangeDrawPileForFirstHand()
++    {
++        CardPile pile = PlayerCombatState!.DrawPile;
++        List<CardModel> bottom = pile.Cards
++            .Where(card => card.Enchantments.Any(enchantment => enchantment.ShouldStartAtBottomOfDrawPile))
++            .ToList();
++        foreach (CardModel card in bottom)
++        {
++            pile.MoveToBottomInternal(card);
++        }
++        List<CardModel> innate = pile.Cards
++            .Where(card => card.HasKeyword(CardKeyword.Innate))
++            .Except(bottom)
++            .ToList();
++        foreach (CardModel card in innate)
+         {
+-            PlayerCombatState.DrawPile.MoveToTopInternal(innateCard);
++            pile.MoveToTopInternal(card);
+         }
++        return innate.Count;
+     }
+ 
+     public Task AfterCombatEnd()
+diff --git a/src/Sts2Sim.Core/Models/Enchantments/Imbued.cs b/src/Sts2Sim.Core/Models/Enchantments/Imbued.cs
+index 5e7e103..22aca9f 100644
+--- a/src/Sts2Sim.Core/Models/Enchantments/Imbued.cs
++++ b/src/Sts2Sim.Core/Models/Enchantments/Imbued.cs
+@@ -15,13 +15,7 @@ public sealed class Imbued : EnchantmentModel
+     public override bool CanEnchant(CardModel card) =>
+         base.CanEnchant(card) && card.Type == CardType.Skill;
+ 
+-    public override void ModifyShuffleOrder(Player player, List<CardModel> cards, bool isInitialShuffle)
+-    {
+-        if (!isInitialShuffle || player != Owner.Owner || !cards.Remove(Owner))
+-            return;
+-
+-        cards.Add(Owner);
+-    }
++    // 原版 Imbued 没有 ModifyShuffleOrder：开局放到底部由 Player.ArrangeDrawPileForFirstHand 在第 1 回合抽牌前做。
+ 
+     public override Task AfterAutoPrePlayPhaseEntered(Player player)
+     {
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Events/HiveFidelityRound4Tests.cs b/tests/Sts2Sim.Core.Tests/Models/Events/HiveFidelityRound4Tests.cs
+index 18e0470..f24d2f3 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Events/HiveFidelityRound4Tests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Events/HiveFidelityRound4Tests.cs
+@@ -85,6 +85,7 @@ public sealed class HiveFidelityRound4Tests : IDisposable
+ 
+         player.ResetCombatState();
+         player.PopulateCombatState(new Rng(7uL));
++        player.ArrangeDrawPileForFirstHand();
+ 
+         IReadOnlyList<CardModel> drawPile = player.PlayerCombatState!.DrawPile.Cards;
+         CardModel combatImbuedInnate = Assert.Single(drawPile,
+diff --git a/src/Sts2Sim.Core/Models/Relics/ArtOfWar.cs b/src/Sts2Sim.Core/Models/Relics/ArtOfWar.cs
+index e3ebc1d..0db272c 100644
+--- a/src/Sts2Sim.Core/Models/Relics/ArtOfWar.cs
++++ b/src/Sts2Sim.Core/Models/Relics/ArtOfWar.cs
+@@ -44,7 +44,7 @@ public sealed class ArtOfWar : RelicModel
+     public override Task AfterEnergyReset(Player player)
+     {
+         if (player == Owner &&
+-            player.PlayerCombatState?.TurnNumber >= 1 &&
++            player.PlayerCombatState?.TurnNumber > 1 &&     // 原版 TurnNumber > 1（回合数在重置能量前已加一）
+             _previousTurnHadNoAttack)
+         {
+             player.PlayerCombatState.GainEnergy(1m);
+diff --git a/src/Sts2Sim.Core/Models/Relics/BoundPhylactery.cs b/src/Sts2Sim.Core/Models/Relics/BoundPhylactery.cs
+index aa0f0f0..020dc19 100644
+--- a/src/Sts2Sim.Core/Models/Relics/BoundPhylactery.cs
++++ b/src/Sts2Sim.Core/Models/Relics/BoundPhylactery.cs
+@@ -13,8 +13,8 @@ public sealed class BoundPhylactery : RelicModel
+ 
+     public override async Task AfterEnergyResetLate(Player player)
+     {
+-        // 原版判断 TurnNumber != 1；本引擎在 AfterEnergyReset 之后才加一回合数，0 是首回合的等价时刻。
+-        if (player == Owner && Owner.PlayerCombatState!.TurnNumber != 0)
++        // 原版判断 TurnNumber != 1（回合数在重置能量前已加一，与原版一致）
++        if (player == Owner && Owner.PlayerCombatState!.TurnNumber != 1)
+             await SummonPet();
+     }
+ 
+diff --git a/src/Sts2Sim.Core/Models/Relics/Bread.cs b/src/Sts2Sim.Core/Models/Relics/Bread.cs
+index ba98267..b47a00f 100644
+--- a/src/Sts2Sim.Core/Models/Relics/Bread.cs
++++ b/src/Sts2Sim.Core/Models/Relics/Bread.cs
+@@ -28,15 +28,11 @@ public sealed class Bread : RelicModel
+             return Task.CompletedTask;
+         }
+ 
++        // 回合数已改为在重置能量前加一（同原版），第 2 回合的能量上限直接 +1，不再需要原来补的那 1 点
+         if (Owner.PlayerCombatState.TurnNumber == 1)
+         {
+             Owner.PlayerCombatState.LoseEnergy(2m);
+         }
+-        else if (Owner.PlayerCombatState.TurnNumber == 2)
+-        {
+-            // Bridge only the first transition: reset precedes the turn increment.
+-            Owner.PlayerCombatState.GainEnergy(1m);
+-        }
+ 
+         return Task.CompletedTask;
+     }
+diff --git a/src/Sts2Sim.Core/Models/Relics/IceCream.cs b/src/Sts2Sim.Core/Models/Relics/IceCream.cs
+index 59584d4..4ec613c 100644
+--- a/src/Sts2Sim.Core/Models/Relics/IceCream.cs
++++ b/src/Sts2Sim.Core/Models/Relics/IceCream.cs
+@@ -9,5 +9,5 @@ public sealed class IceCream : RelicModel
+ 
+     public override bool ShouldPlayerResetEnergy(Player player) =>
+         player != Owner ||
+-        player.PlayerCombatState?.TurnNumber < 1;
++        player.PlayerCombatState?.TurnNumber <= 1;     // 原版 TurnNumber == 1（回合数在重置能量前已加一）
+ }

@@ -1,0 +1,42 @@
+{
+ "version": 165018,
+ "args": {
+  "cmd": "run",
+  "items": "../losses_e.json",
+  "ckpt": "/root/defect_v113/ck/student_e_v165018.pt",
+  "dll": "/root/paper_exp/b3agent/repo/engine/Sts2Headless/bin/Release/net9.0/Sts2Headless.dll",
+  "device": "cuda",
+  "threads": 2,
+  "seeds": null,
+  "pre": "first",
+  "real_mode": "run",
+  "policy_mode": "run",
+  "value_mode": "combat",
+  "tau": 0.9,
+  "pmin": 0.02,
+  "z": 2.0,
+  "k": 4,
+  "sims0": 4,
+  "rounds": 2,
+  "leaf": 12,
+  "procs": 4,
+  "shard": "0/4",
+  "out": "../greedy_first",
+  "search": false,
+  "setup_only": false,
+  "b1_from": null,
+  "limit": 0,
+  "again": false
+ },
+ "params": {
+  "tau": 0.9,
+  "k": 4,
+  "pmin": 0.02,
+  "sims0": 4,
+  "rounds": 2,
+  "z": 2.0,
+  "leaf": 12,
+  "max_steps": 600
+ },
+ "start": 1795284745
+}

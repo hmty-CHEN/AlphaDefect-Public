@@ -1,0 +1,85 @@
+[
+ {
+  "file": "silent_ema_v24721.pt",
+  "version": 24721,
+  "obs_format": 23,
+  "vocab_n": 2286,
+  "total_steps": 1102073095,
+  "character": "SILENT",
+  "weights": "ema",
+  "params": 19408136,
+  "bytes": 77698227,
+  "sha256": "e595b7428518942b312b157058b69e6050ed6702aa275deee5d14955f8467a3e",
+  "model_flags": {
+   "content_enchant": true,
+   "content_upgrade": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true,
+   "future_content": true,
+   "value_hl": true,
+   "combat_aux": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Final Silent network: the learner's EMA copy (decay 0.999 per version) at v24,721, where Silent training stopped. On the Silent neither the EMA copy nor an 8-snapshot ensemble beat the raw weights, so there was no distillation; the EMA copy was chosen as the final single network (Silent DR #15). Bit-identical to the network the 1,000-seed tests used.",
+  "eval": "66.2% greedy on 1,000 W1 seeds; 69.5% (95% CI about 66.6-72.3%) with Act-3 double-boss PIMC search on the same seeds, +3.3 pp, McNemar exact p = 3.8e-5 (A10)",
+  "release": "weights-v3",
+  "dr": "Silent #15"
+ },
+ {
+  "file": "silent_raw_v24721.pt",
+  "version": 24721,
+  "obs_format": 23,
+  "vocab_n": 2286,
+  "total_steps": 1102073095,
+  "character": "SILENT",
+  "weights": "raw",
+  "params": 19408136,
+  "bytes": 77698163,
+  "sha256": "4a29e25e0cf65503434712e12d3ec8b885231f5d670a7f22c945995430ed77d6",
+  "model_flags": {
+   "content_enchant": true,
+   "content_upgrade": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true,
+   "future_content": true,
+   "value_hl": true,
+   "combat_aux": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Silent learner (raw) weights at v24,721, the last version trained (from scratch since 2026-11-09; Muon on the hidden 2-D weights and Adam elsewhere; observation format 23 from v19,901; skipping easy fights from v24,208). The trunk the combat-outcome heads were trained on.",
+  "eval": "65.6% greedy on the same 1,000 W1 seeds (EMA vs raw +0.6 +/- 3.5 pp, p = 0.78; 8-snapshot ensemble also 65.6%); routine evaluation 62.4% over the last 12 rounds v24,491-v24,686 (2,877/4,608; 384 P1 seeds per round, raw weights, greedy, A10)",
+  "release": "weights-v3",
+  "dr": "Silent #1-#15"
+ },
+ {
+  "file": "silent_combat_outcome_heads_v24721.pt",
+  "kind": "co_heads",
+  "version": 24721,
+  "obs_format": 23,
+  "character": "SILENT",
+  "trunk": "silent_raw_v24721.pt",
+  "params": 681002,
+  "bytes": 2730037,
+  "sha256": "9df58b0970aa40a995f811511ae6514cdba481f00b481754b543cd86e19f14d6",
+  "notes": "Combat-outcome heads of the Silent at v24,721 (sts2rl.model.CombatOutcomeHeads): 41-bin distribution of HP after a won fight (fraction of max HP at the start) and per-potion use probability. They read the detached trunk embedding g of silent_raw_v24721.pt; used in training to sample outcomes of skipped fights (Silent DR #14).",
+  "eval": "played eligible fights v24,208-v24,721: HP residual +0.0006 to +0.0051 of max HP by (act, room); potions predicted 0.216 vs actual 0.212 (390,177 potion-fights)",
+  "release": "weights-v3",
+  "dr": "Silent #14"
+ }
+]

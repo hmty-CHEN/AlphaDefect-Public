@@ -1,0 +1,35 @@
+== greedy_first（241 题）
+  原来死在第 1 个 Boss：48 题，第一场赢 24，第二场赢 8（= 两场都赢）
+  原来死在第 2 个 Boss：193 题，第一场赢 170，第二场赢 90（= 两场都赢）
+  第一场两边都赢的 114 题：剩余血量 智能体 − 求解器 平均 -16.7、中位 -18（智能体多 17、少 95、相同 2）
+  只智能体赢 J17BQ486FH：求解器 b1: win=True timed_out=False error=None; b2: win=False timed_out=False error=None
+  第一场赢且结束那一下加了血：19 题 [('47QAD1F7A5', 1, False, True), ('TT8S8RLJNA', 1, False, True), ('GPGW5Y388B', 12, True, False), ('AN5YZQYB13', 1, False, True), ('J5GHQB0SHY', 1, False, True), ('N8AJTYC5SH', 1, False, True), ('X7PP97WFGM', 12, True, False), ('T777PCHETM', 1, False, True), ('Y1MUZE73X5', 1, False, True), ('T6D650ERX5', 12, True, True), ('69YBDXNYRF', 1, False, True), ('DRD3JZ5ZJM', 1, False, True), ('L41YCD2FDC', 1, False, False), ('XD7N1LWVSJ', 1, False, True), ('VZDHUYC06Q', 1, False, False), ('LB2PGJPJ50', 1, False, False), ('AQUB5QMRT2', 12, True, False), ('TWW536WH4N', 1, False, False), ('52W25ZRPRC', 1, False, False)]
+== greedy_policy（241 题）
+  原来死在第 1 个 Boss：48 题，第一场赢 25，第二场赢 8（= 两场都赢）
+  原来死在第 2 个 Boss：193 题，第一场赢 177，第二场赢 94（= 两场都赢）
+  第一场两边都赢的 119 题：剩余血量 智能体 − 求解器 平均 -15.9、中位 -19（智能体多 22、少 94、相同 3）
+  只智能体赢 MSPDKQUSFF：求解器 b1: win=True timed_out=False error=None; b2: win=False timed_out=False error=None
+  第一场赢且结束那一下加了血：24 题 [('9W500H2R8S', 12, True, True), ('T6D650ERX5', 12, True, False), ('47QAD1F7A5', 1, False, True), ('TT8S8RLJNA', 1, False, True), ('F3KULZEMMW', 12, True, True), ('TUXD1FW73N', 1, False, False), ('GPGW5Y388B', 12, True, False), ('69YBDXNYRF', 1, False, True), ('DRD3JZ5ZJM', 1, False, True), ('L41YCD2FDC', 1, False, False), ('XD7N1LWVSJ', 1, False, True), ('MSPDKQUSFF', 12, True, True), ('AN5YZQYB13', 1, False, True), ('VZDHUYC06Q', 1, False, False), ('LB2PGJPJ50', 1, False, False), ('J5GHQB0SHY', 1, False, True), ('N8AJTYC5SH', 1, False, True), ('X7PP97WFGM', 12, True, False), ('AQUB5QMRT2', 12, True, False), ('KVQWLKWBHM', 1, False, False), ('T777PCHETM', 1, False, True), ('TWW536WH4N', 1, False, False), ('Y1MUZE73X5', 1, False, True), ('52W25ZRPRC', 1, False, False)]
+== greedy_combat（241 题）
+  原来死在第 1 个 Boss：48 题，第一场赢 23，第二场赢 9（= 两场都赢）
+  原来死在第 2 个 Boss：193 题，第一场赢 175，第二场赢 90（= 两场都赢）
+  第一场两边都赢的 116 题：剩余血量 智能体 − 求解器 平均 -14.2、中位 -14（智能体多 23、少 90、相同 3）
+  只智能体赢 J17BQ486FH：求解器 b1: win=True timed_out=False error=None; b2: win=False timed_out=False error=None
+  第一场赢且结束那一下加了血：21 题 [('T6D650ERX5', 12, True, True), ('47QAD1F7A5', 1, False, True), ('AN5YZQYB13', 1, False, True), ('VZDHUYC06Q', 1, False, False), ('LB2PGJPJ50', 1, False, False), ('TT8S8RLJNA', 1, False, False), ('J5GHQB0SHY', 1, False, True), ('N8AJTYC5SH', 1, False, True), ('F3KULZEMMW', 12, True, True), ('X7PP97WFGM', 12, True, False), ('AQUB5QMRT2', 12, True, False), ('GPGW5Y388B', 12, True, False), ('KVQWLKWBHM', 1, False, False), ('69YBDXNYRF', 1, False, True), ('T777PCHETM', 1, False, True), ('TWW536WH4N', 1, False, False), ('Y1MUZE73X5', 1, False, True), ('DRD3JZ5ZJM', 1, False, True), ('L41YCD2FDC', 1, False, True), ('XD7N1LWVSJ', 1, False, True), ('52W25ZRPRC', 1, False, False)]
+== pimc_first_merged（241 题）
+  原来死在第 1 个 Boss：48 题，第一场赢 28，第二场赢 12（= 两场都赢）
+  原来死在第 2 个 Boss：193 题，第一场赢 183，第二场赢 100（= 两场都赢）
+  第一场两边都赢的 124 题：剩余血量 智能体 − 求解器 平均 -14.2、中位 -16（智能体多 24、少 99、相同 1）
+  第一场赢且结束那一下加了血：21 题 [('47QAD1F7A5', 1, False, True), ('AN5YZQYB13', 1, False, True), ('VZDHUYC06Q', 1, False, False), ('58KC8ZEWMN', 12, True, True), ('LB2PGJPJ50', 1, False, True), ('Y4UUGKACB2', 3, False, False), ('TT8S8RLJNA', 1, False, True), ('J5GHQB0SHY', 1, False, True), ('N8AJTYC5SH', 1, False, False), ('F3KULZEMMW', 12, True, False), ('TUXD1FW73N', 1, False, False), ('GPGW5Y388B', 12, True, False), ('KVQWLKWBHM', 1, False, False), ('69YBDXNYRF', 1, False, True), ('T777PCHETM', 1, False, True), ('TWW536WH4N', 1, False, False), ('Y1MUZE73X5', 1, False, True), ('DRD3JZ5ZJM', 1, False, True), ('L41YCD2FDC', 1, False, True), ('XD7N1LWVSJ', 1, False, True), ('52W25ZRPRC', 1, False, True)]
+  决策 27476，搜索 14908（54.3%），改选 1355（9.1%），推演 385460、报错 0；每次搜索 3.32 秒
+== pimc_policy_full（241 题）
+  原来死在第 1 个 Boss：48 题，第一场赢 30，第二场赢 13（= 两场都赢）
+  原来死在第 2 个 Boss：193 题，第一场赢 185，第二场赢 111（= 两场都赢）
+  第一场两边都赢的 127 题：剩余血量 智能体 − 求解器 平均 -12.5、中位 -15（智能体多 28、少 98、相同 1）
+  只智能体赢 MSPDKQUSFF：求解器 b1: win=True timed_out=False error=None; b2: win=False timed_out=False error=None
+  只智能体赢 89VCJJNTF5：求解器 b1: win=True timed_out=False error=None; b2: win=False timed_out=False error=None
+  只智能体赢 0VC1Z7RC6B：求解器 b1: win=True timed_out=False error=None; b2: win=False timed_out=False error=None
+  只智能体赢 F6RB0VD2TC：求解器 b1: win=True timed_out=False error=None; b2: win=False timed_out=False error=None
+  只智能体赢 J17BQ486FH：求解器 b1: win=True timed_out=False error=None; b2: win=False timed_out=False error=None
+  第一场赢且结束那一下加了血：19 题 [('47QAD1F7A5', 1, False, True), ('AN5YZQYB13', 1, False, True), ('VZDHUYC06Q', 1, False, False), ('58KC8ZEWMN', 12, True, True), ('LB2PGJPJ50', 1, False, True), ('TT8S8RLJNA', 1, False, True), ('J5GHQB0SHY', 1, False, True), ('N8AJTYC5SH', 1, False, False), ('TUXD1FW73N', 1, False, False), ('GPGW5Y388B', 12, True, False), ('KVQWLKWBHM', 1, False, False), ('69YBDXNYRF', 1, False, True), ('T777PCHETM', 1, False, True), ('TWW536WH4N', 1, False, False), ('Y1MUZE73X5', 1, False, True), ('DRD3JZ5ZJM', 1, False, True), ('L41YCD2FDC', 1, False, True), ('XD7N1LWVSJ', 1, False, True), ('52W25ZRPRC', 1, False, True)]
+  决策 28208，搜索 15547（55.1%），改选 1393（9.0%），推演 403308、报错 0；每次搜索 3.27 秒

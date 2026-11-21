@@ -1,0 +1,13 @@
+快照 15 个，种子 1000；单局方差 0.1969 = 种子内 0.1344 + 种子间 0.0625（种子间 31.8%）
+各幕 Boss 能从记录里恢复的种子数： {'第一幕 Boss': 999, '第二幕 Boss': 999, '第三幕两个 Boss': 997}
+  只看第一幕 Boss（开局即公开）：对种子胜率的交叉验证 R² -0.001，约占单局输赢方差 0.0%
+  第一、二幕 Boss：对种子胜率的交叉验证 R² -0.019，约占单局输赢方差 0.0%
+  三幕全部 Boss：对种子胜率的交叉验证 R² -0.133，约占单局输赢方差 0.0%
+  只看第三幕两个 Boss：对种子胜率的交叉验证 R² -0.003，约占单局输赢方差 0.0%
+  三幕 Boss 加性：交叉验证 R² -0.003，约占单局输赢方差 0.0%
+  第二、三幕 Boss 加性（开局时看不到的部分）：交叉验证 R² -0.001，约占单局输赢方差 0.0%
+各 Boss 的种子平均胜率（种子数）：
+   (0, 0) LAGAVULIN_MATRIARCH_BOSS 0.711(183), VANTOM_BOSS 0.770(180), WATERFALL_GIANT_BOSS 0.713(173), SOUL_FYSH_BOSS 0.712(161), CEREMONIAL_BEAST_BOSS 0.761(155), THE_KIN_BOSS 0.728(145)
+   (1, 0) THE_INSATIABLE_BOSS 0.719(348), KAISER_CRAB_BOSS 0.757(346), KNOWLEDGE_DEMON_BOSS 0.720(303)
+   (2, 0) TEST_SUBJECT_BOSS 0.746(337), QUEEN_BOSS 0.723(334), AEONGLASS_BOSS 0.729(326)
+   (2, 1) AEONGLASS_BOSS 0.716(340), TEST_SUBJECT_BOSS 0.748(330), QUEEN_BOSS 0.734(327)

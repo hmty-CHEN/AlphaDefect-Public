@@ -1,0 +1,301 @@
+[
+ {
+  "file": "student_e_v165018.pt",
+  "version": 165018,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": 6698310938,
+  "params": 19407368,
+  "bytes": 77695155,
+  "sha256": "f51545673c578e0d2970a3cf1fd5cb47fd894bc4bbbdcfe962c2b472828ac44e",
+  "model_flags": {
+   "content_enchant": true,
+   "content_upgrade": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true,
+   "future_content": true,
+   "value_hl": true,
+   "combat_aux": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Best single network. Student distilled from the probability-averaged ensemble of 16 uniformly spaced SL-pool snapshots (v130978-v156880), new structure, initialized from main-line v165018.",
+  "eval": "76.7% on 1,500 fresh W1 seeds; about 75-77% on P1 1,000 seeds (greedy, A10)",
+  "release": "weights-v1",
+  "dr": "#273, #274"
+ },
+ {
+  "file": "main_v168398.pt",
+  "version": 168398,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 19407368,
+  "bytes": 77693098,
+  "sha256": "37d692b65fcdbe1225ba3880131e3719373c10c5211fd972b1ab396d6fcef270",
+  "model_flags": {
+   "content_enchant": true,
+   "content_upgrade": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true,
+   "future_content": true,
+   "value_hl": true,
+   "combat_aux": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Main line restarted from student e (renumbered to v167921), lr 1.375e-5, KL anchor removed from v168146. Kept by the routine evaluator's top-5 archive. Same architecture as student e.",
+  "eval": "routine P1 evaluation in the top-5 archive at the time; exact reading not in the local copy",
+  "release": "weights-v1",
+  "dr": "#278"
+ },
+ {
+  "file": "milestone_v044820.pt",
+  "version": 44820,
+  "obs_format": 10,
+  "vocab_n": null,
+  "total_steps": null,
+  "params": 11050757,
+  "bytes": 44244923,
+  "sha256": "ccdaf73df16ff209020853624b9c6f6fe42e6ebfe31c276fedea9df5d5e31fa1",
+  "model_flags": {},
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "First all-ascension capability test. Observation format 10, 6-layer model without later add-ons.",
+  "eval": "8.8% on TEST0000-0999 (A10); A0 92.0%",
+  "release": "weights-v1",
+  "dr": "#134"
+ },
+ {
+  "file": "milestone_v063680.pt",
+  "version": 63680,
+  "obs_format": 12,
+  "vocab_n": 2268,
+  "total_steps": 2092563118,
+  "params": 11252485,
+  "bytes": 45053395,
+  "sha256": "2a9bacf3f5cf4d08b316d1a98d5deee8633a1696ed664be46f2140efce17d870",
+  "model_flags": {},
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Last checkpoint before segmented run submission. Pair with v066040-era results to see the largest single-change jump.",
+  "eval": "12.5% on 1,009 RT seeds",
+  "release": "weights-v1",
+  "dr": "#169, #170"
+ },
+ {
+  "file": "milestone_v084667.pt",
+  "version": 84667,
+  "obs_format": 15,
+  "vocab_n": 2284,
+  "total_steps": null,
+  "params": 18094341,
+  "bytes": 72427315,
+  "sha256": "52e14399af1bc2bdd2342431daeed9b490e261d67d63494e100ce16231a8691d",
+  "model_flags": {
+   "content_enchant": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Observation format 15. Owner-requested keep (routine 192-run eval read 50%).",
+  "eval": "44.6% on RT0000-0999",
+  "release": "weights-v1",
+  "dr": "#196, #197"
+ },
+ {
+  "file": "milestone_v103049.pt",
+  "version": 103049,
+  "obs_format": 15,
+  "vocab_n": 2284,
+  "total_steps": null,
+  "params": 18094341,
+  "bytes": 72427443,
+  "sha256": "8866aa0a62a949fef8f4469cc5845f87a73c6a56e70d24ccce42582e35a1e838",
+  "model_flags": {
+   "content_enchant": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Livestream baseline from 2026-10-30.",
+  "eval": "56.1% on RT0000-0999",
+  "release": "weights-v1",
+  "dr": "#203"
+ },
+ {
+  "file": "milestone_v117152.pt",
+  "version": 117152,
+  "obs_format": 16,
+  "vocab_n": 2284,
+  "total_steps": null,
+  "params": 18096901,
+  "bytes": 72438035,
+  "sha256": "5ec52b2aa4aabe0d51f39fc4b6a37f7ffdf8c9ee3c4647ffc9e9e9a66bfbad4e",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Observation format 16.",
+  "eval": "62.3% on RT0000-0999; 59.9% on the HO acceptance seeds",
+  "release": "weights-v1",
+  "dr": "#208"
+ },
+ {
+  "file": "milestone_v128517_ema.pt",
+  "version": 128517,
+  "obs_format": 18,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18099461,
+  "bytes": 72451967,
+  "sha256": "1adad8e919f9a55707e899baed8dcafaaeee1397297b91e83bbf7c8d81ff3b7d",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "EMA weights (decay 0.998). Observation format 18.",
+  "eval": "69.7% on RT0000-0999 (95% CI 66.8-72.5%)",
+  "release": "weights-v1",
+  "dr": "#225"
+ },
+ {
+  "file": "milestone_v134704.pt",
+  "version": 134704,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468003,
+  "sha256": "ff98f7ebc90c6c02b10327f716ebcbf1875842fbe280853ce7a1b2e13f7eafcf",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Observation format 19; start of the plateau.",
+  "eval": "73.8% on RT0000-0999",
+  "release": "weights-v1",
+  "dr": "#227-#231"
+ },
+ {
+  "file": "milestone_v141229.pt",
+  "version": 141229,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468323,
+  "sha256": "801971ecffca0e366cc0c52ab47221fb09de128c305d6d3007fe3660ef83962e",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Livestream model from 2026-11-01 and the first baseline on seed pool P1.",
+  "eval": "75.1% on RT0000-0999; 72.5% on P1",
+  "release": "weights-v1",
+  "dr": "#240"
+ },
+ {
+  "file": "milestone_v156880.pt",
+  "version": 156880,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": null,
+  "params": 18103301,
+  "bytes": 72468515,
+  "sha256": "72cba5352a1f3bfb34026465d1b457f24a804564d764fc111dcf68a8b82b2c72",
+  "model_flags": {
+   "content_enchant": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Newest member of the 62-snapshot SL pool and the starting point of the first pool distillation (student b).",
+  "eval": "about 72.5% on 1,500 fresh seeds (DR #273 'pool single')",
+  "release": "weights-v1",
+  "dr": "#272, #273"
+ },
+ {
+  "file": "aux_buildvalue_run6.pt",
+  "bytes": 395453,
+  "sha256": "a7dc453f3ca220da1fe4e7765bb537c1d41e2ade3ed1b5c5caa48944de738934",
+  "notes": "Deck-value model, sixth version (tools/buildvalue.py, DR #252, #253). Used as a frozen potential for shaping in DR #253; withdrawn in DR #255.",
+  "release": "weights-v1"
+ }
+]

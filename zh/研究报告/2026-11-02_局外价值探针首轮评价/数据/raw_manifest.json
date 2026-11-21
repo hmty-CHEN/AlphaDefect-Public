@@ -1,0 +1,2061 @@
+{
+  "episodes": [
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-21.npz",
+      "sha256": "c43e4458054e5d05c85471e96e567c14ee1aa50f7ff823674c390ff9f931440f",
+      "episode_id": "76fb38db50eb-2-21",
+      "root_id": "8613bcdae2c6d01b2a9d155e6ed87366210e08796dd5bcc9db7b16b0118f4a19",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-23.npz",
+      "sha256": "c17f8c49375987203509d96c3a87a98d917c3349802f7f83650d8441e614d6c2",
+      "episode_id": "60d9ed93e7f5-0-23",
+      "root_id": "09109f804069a40e441b9e437d8a6d22ea8d1212cf7fbf2c908b4ee8ff5b90ea",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-25.npz",
+      "sha256": "42652b578072cc1e9fce6d5bdd9f1e61c0badb456bee0cc8334737ce3b5e6fee",
+      "episode_id": "73b2e457a948-7-25",
+      "root_id": "9c12ffb55df7bea1afd35b3b0e14044a37d89ae59622a7a48ee5bdee61d2e99e",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-233.npz",
+      "sha256": "5c712ad0f259b9448c63f38c3e25f0cfa9d1740830401dc1d4a2b6a1b7be1c7c",
+      "episode_id": "e0d19bc2d2f1-4-233",
+      "root_id": "888bad72e666e0c8cc5313c258550915013fcaebcb665d87bf96758b1e43f32c",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-286.npz",
+      "sha256": "b8ee21904a633c203c5de6fc03be258eeee917969b70aa1fced520a90ffe0b01",
+      "episode_id": "38460b10eb5e-3-286",
+      "root_id": "7e810e22e6823e654d9cdce05efd03014eacda76e1c4d020d9129818765a78fa",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-298.npz",
+      "sha256": "980a9ebacc6060827b74e561cdacf7d912601df4724eca328f42a60e3b84dc36",
+      "episode_id": "73b2e457a948-7-298",
+      "root_id": "7689ef847cf9e6d120b19eef092487192f7778c825a479a30452214d0f9bf921",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-435.npz",
+      "sha256": "70a50206b1dc854e1cbf6f37b96e95251d7f6b690203e8a6595e6fbed00d28b8",
+      "episode_id": "e0d19bc2d2f1-4-435",
+      "root_id": "ddea225ed4b48a5a8783deaee9287c327086b841a6646c642d3b067a4fbb3e04",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-331.npz",
+      "sha256": "6aae43a4587fbbac8d0def309c69e71f523fb60f2e82a8e149ba7c3c91b7ef21",
+      "episode_id": "60d9ed93e7f5-0-331",
+      "root_id": "0d2be8646548368aa0613f666cdeaeacefe8ba8ee3be603ebac6a72880bd4237",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-341.npz",
+      "sha256": "c66701b05c06287d981e929a2d40705db9a8911b984e5c27120497d55b9b0608",
+      "episode_id": "73b2e457a948-7-341",
+      "root_id": "9a046e9b2bbe6d09ceda0a5729a03bf5558cc953e87e9e84cf45260bdfa43c32",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-270.npz",
+      "sha256": "ce0766f768091147b222bf8c97bcfe7ea5221c9da6fc9bc89353d957bcdce5a0",
+      "episode_id": "a493e0be3072-5-270",
+      "root_id": "f69174bd3e7b49b2002a0998300256fd24807edcccbdb45e4285ed5e977b82a2",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-319.npz",
+      "sha256": "3f5a17b78eed4c24c7de6d466fc472d372dfddafca514ed122b9070ab59b4eb6",
+      "episode_id": "60db97ef94f9-6-319",
+      "root_id": "d556d9199add96666ccb33482fd1bbad0c115746ee1df3cde19b1d977bdbf05c",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-445.npz",
+      "sha256": "c9cdf8ae29fce1abf087f278d3b838a47ea962fbafc6ce845d843c5340d46572",
+      "episode_id": "a262f6b425b5-1-445",
+      "root_id": "b541daff2a58377cb7290feb6181e8d8c9ae41892b76a3b935696d4da161123d",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-477.npz",
+      "sha256": "c64b4938579f8ef5ed8078d3932d956613d0a468af26324725fbf37bc65849f8",
+      "episode_id": "73b2e457a948-7-477",
+      "root_id": "2d8e718ebac2f6badb6c4790f4deacc13b0786ae3bc7adfc8d1a33d1cfe33d31",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-526.npz",
+      "sha256": "0e459883abae4f78f46a28e211dcce14c029f1c94826943f32bb977aaabc74bd",
+      "episode_id": "60d9ed93e7f5-0-526",
+      "root_id": "768513397b5f51afc518b7eb57c27b7b8598971dd7bb81fc8f4b953b61579405",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-541.npz",
+      "sha256": "f666546f07943b645fa58cebf19fd4f975861d9e8ba1c63b348544d665321fe9",
+      "episode_id": "e0d19bc2d2f1-4-541",
+      "root_id": "9de366c8cfcce552cdfe09185c732bdf8208008f0c0d32619a808304d810d0e3",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-663.npz",
+      "sha256": "c9a8cfbb7b3b20a5b901255b9f586ca41302ce94efc46048685f67dd8531bee4",
+      "episode_id": "60d9ed93e7f5-0-663",
+      "root_id": "276c12502e91741e3d822fdece39942598476781f12c6ef1e7d6ba9ea7f9d008",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-777.npz",
+      "sha256": "be107a966b025a93290ea0c2077e14d22e1359dfbcdfa2c9da9528066ee92532",
+      "episode_id": "76fb38db50eb-2-777",
+      "root_id": "4382629cbfd3e7fe85205c13e193df381815cf7fe03b74f91544d72cfe69bb71",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-810.npz",
+      "sha256": "ca84e93e501fec91173cc9e85853183a878c72de1b6d354f0fbaeb9eea35abc6",
+      "episode_id": "a493e0be3072-5-810",
+      "root_id": "8588725128f51e859b8df0449f7e812f6c085aa98b0dabdb512f03e27d50a190",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-704.npz",
+      "sha256": "95e1682dce6e5c5553cd6d5e1d9efe3032791fff48a830ee239116f971209303",
+      "episode_id": "a262f6b425b5-1-704",
+      "root_id": "59ba369e7428c5f5f94d5118727924703465127546d5617935c46b435791d154",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-826.npz",
+      "sha256": "901d3e46391439c21bfce32c98c7c23e1951bad7079415e249bbc71ef78cf7f5",
+      "episode_id": "60db97ef94f9-6-826",
+      "root_id": "8ad162baef64aa00315fff5fd406aabb8c1729989088a399afd72e86483d088a",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-861.npz",
+      "sha256": "8ba014dbbad17c7cda1dc989e07686876b33def32c223f82ef8ab7d48266e210",
+      "episode_id": "a262f6b425b5-1-861",
+      "root_id": "dbe7dae681728d362e72a545f86883e9ae2dc29dde5305db458121934786dddb",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-848.npz",
+      "sha256": "9158cb9d0bee891c788be49cc0d1a7bfca5b5b4d3bcc2d427a2b188ec37ddcf7",
+      "episode_id": "60db97ef94f9-6-848",
+      "root_id": "c498d3efa835dd87e9def30f9798440e47e76ae13c075e7ca7acb95aa0c46ee1",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-955.npz",
+      "sha256": "08c5f8fced99a1f8ab62f6a46e66b0f947c3c0401fe68c2e0a427e4621b66b4f",
+      "episode_id": "a262f6b425b5-1-955",
+      "root_id": "a7f97585b519fa0802cc1e123f6b6872218751bd104a5da969aff11c949f7db1",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-923.npz",
+      "sha256": "305e8c1da7aa5e828a3dc3324747a86e7bb8bb1811eaa32aae4a43965b4a90b7",
+      "episode_id": "60db97ef94f9-6-923",
+      "root_id": "8597c2e2326572b9e48024aba9f3e74f7c759de07a844745a06f8b096a3ba4b6",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-957.npz",
+      "sha256": "ba263f4fcc350905899fb048766a499d19199a2186c268f8fd21cbbf7bda7d9d",
+      "episode_id": "73b2e457a948-7-957",
+      "root_id": "d547b14043e7f4e1fd23a474abfde3947552c6f62487fccdeec64c7ded63720b",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-956.npz",
+      "sha256": "86b78928512433415f918ed4e60d2854e61a6f69b28e9557b09138c4d118068f",
+      "episode_id": "76fb38db50eb-2-956",
+      "root_id": "605350e9904b3bb27a1010a0900071fe4cdf83dd452a4a6ca33c3e86e31e248e",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-933.npz",
+      "sha256": "1f65889b88e1689b6d6285c8860825e3476f6220561853e1693958e58589b710",
+      "episode_id": "a262f6b425b5-1-933",
+      "root_id": "80daa49ea3d1f7f6ba963833f1fe05acbf374776c3bc7fc58e4a3775b443eb76",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-1055.npz",
+      "sha256": "188e06375e957729bc73685432e93e52914db2c8270920b4d912bc5b7755617b",
+      "episode_id": "a493e0be3072-5-1055",
+      "root_id": "43b60e3440e2af40bee089875a3769c74e3e862619118d43b338dc97f632b431",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-1012.npz",
+      "sha256": "3eb06984dc903e8b41307caf9875a69e259f6c1658f0b960fcd8b52b2f0d3f58",
+      "episode_id": "73b2e457a948-7-1012",
+      "root_id": "b87ebaa4481260ee8ec33579f5f9e5c7c52b6ef1edd528494b63c0224da88b43",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-992.npz",
+      "sha256": "610dca1023a5577166d1e75b76f0dec0e9f27378fb708138ed45e675cdc45ff2",
+      "episode_id": "60db97ef94f9-6-992",
+      "root_id": "ee7d258a67c15371776e1a39df6cec1169f53c51d7ccfce0a26b8caac0e811f7",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-993.npz",
+      "sha256": "ec28ac2c369d03a707c1713e1cba3b3da521b56b1f8d21061698fffd4bb675df",
+      "episode_id": "60db97ef94f9-6-993",
+      "root_id": "ac7ccbc42e1de6af8eeca9beb6e2e0d1381554e0b685ae25ad3ba609d7f406f9",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-1022.npz",
+      "sha256": "de689c8095f810ae24f5d9f92f469c9148c1324e12e02e49d81e5a4a1cb0044d",
+      "episode_id": "e0d19bc2d2f1-4-1022",
+      "root_id": "fcce777551f18c4b55eea21d9e02174e3c9d4e6ebe4725109be2f3a159d9e5c0",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-1134.npz",
+      "sha256": "de2f2dede40b92e0431677b6e1f69de274b751d477384937b3019b950ddb3611",
+      "episode_id": "60d9ed93e7f5-0-1134",
+      "root_id": "7e6921515dee1701da0c387682a0683a4942d2c0b36356f1bf64fdd77780f6fb",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-1206.npz",
+      "sha256": "eb18e6a4dc6650255308cf8fb02ba321c962e32c391fbd62cc948b0d1787e0c2",
+      "episode_id": "76fb38db50eb-2-1206",
+      "root_id": "63cbd52264760afa09471501cf9ddfe44cf164ae298f5aa9b6e03644322ee982",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-1231.npz",
+      "sha256": "832872519bd0446affd1a5cedb5b2c4cb99d11fe54d2574254652f3abf2ec050",
+      "episode_id": "60d9ed93e7f5-0-1231",
+      "root_id": "141c44204d7aeb9d8a21ad89ff36fa656db767dbe677006bce573ddc8f659040",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-1184.npz",
+      "sha256": "ec639507a40fc6fc9c3b099d5e4a0aee5c70a6cce4c3b7ed1228f78ec67f4681",
+      "episode_id": "76fb38db50eb-2-1184",
+      "root_id": "2800ca57bc412cafb258e189e6aaa7d203b60f2b5dfa5b474e91287492690ffd",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-1246.npz",
+      "sha256": "3744c49bf7af9aa9908d931533ac6ace32f2c097c74caf2a42a17139d1c6a189",
+      "episode_id": "e0d19bc2d2f1-4-1246",
+      "root_id": "afdc439a2405ffd0196275a8ab5ee6ca7b567838dea4a72e15ceb082a7a979dd",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-1163.npz",
+      "sha256": "f878fcf37c04f47838b62a4b0ba7da6a1c26cc1ebb2e314a0cbcb40009713a10",
+      "episode_id": "60d9ed93e7f5-0-1163",
+      "root_id": "ce8e48443b9f2ea071617dba885ace54de20c16b98d3d1a7c031eeb05c9af089",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-1199.npz",
+      "sha256": "1017b837939c9bf8c27b84e5fb51e115c778cdfe1a0b3a351b60de363309cdab",
+      "episode_id": "60db97ef94f9-6-1199",
+      "root_id": "5bb95cd6941dff7546a19d3481890dd8de1981b82e6446ee4c4b6d90e282d8ec",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-1225.npz",
+      "sha256": "769f2407ca7949292450a597f2d561ddbb119a0a1fc74afcaf3676a01b7e2d54",
+      "episode_id": "60d9ed93e7f5-0-1225",
+      "root_id": "017a8628f7ba7e252e7828d536d29f8714b3c42f38292d7c10a9214a22ee5acd",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-1245.npz",
+      "sha256": "fd4a06c9810d8cd8a428dfcd3cbf275ba18106c7baceba05898d0c017469d217",
+      "episode_id": "60db97ef94f9-6-1245",
+      "root_id": "e3dc2433ef3b3a30935df9d4bdb6976bddc0b67d249f373ff66cd4dab910bd08",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-1355.npz",
+      "sha256": "622b31dc8d48e31266d5602d143f1f46bdd32c971620926414c4fce648aefc5d",
+      "episode_id": "a262f6b425b5-1-1355",
+      "root_id": "4ee90a543a6d9f7ef479cbbd61c60618995dd3b32374904d5b5cd7b0d37dc8d7",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-1322.npz",
+      "sha256": "4c69df800ba3aa00c3d9a989ab49a29a9187c75f3b8deb8ff64dae628d6969fe",
+      "episode_id": "e0d19bc2d2f1-4-1322",
+      "root_id": "1a43f3e6ba6144b130308a15cb3d52b4e4fd1e40a1a78e21332f488851661d1b",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-1251.npz",
+      "sha256": "3a3bb56a55e950128a7aa0f932a4c0c39594334707a503f542f008c65ea3e26d",
+      "episode_id": "38460b10eb5e-3-1251",
+      "root_id": "180443ec56854523c9845e1787d5cdc36c4ea5161f73615341017da7fc5ec1e5",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-1396.npz",
+      "sha256": "d1c0d77d4dd64757bd75f8b2d9f18d4e6f93d139f87a59d3bd174d66ea309a88",
+      "episode_id": "a493e0be3072-5-1396",
+      "root_id": "3bf039f0be7f0e327df36871ddb3fb822dd984ba3ee35e3aa18a53aad6a100ce",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-1371.npz",
+      "sha256": "1e5a4c1215930f26dc15ff8a7e78c3702da823f501a7b788b43554b137b5b6ac",
+      "episode_id": "e0d19bc2d2f1-4-1371",
+      "root_id": "6a7ca5eec7500c319152c9113aa4061631675d16fee68fe61fb7f30bcb2bcba2",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-1406.npz",
+      "sha256": "8521b5a4209ae83f5a09542faf0b91f772f3412de338cd0d013f1b330e8e2fd6",
+      "episode_id": "a262f6b425b5-1-1406",
+      "root_id": "322106bdfdeb74b82a8390b8f8c214f53d1d1a789552bd0530c1291f0633a5ca",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-1421.npz",
+      "sha256": "2bf1ccffafb65faf9ed08674de8cf2c35d4afdd5050d742129f3018beb026293",
+      "episode_id": "60d9ed93e7f5-0-1421",
+      "root_id": "8e47484356f000e5e030dd1d6203eff54d016533584c296484691b9d77a79ac4",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-1428.npz",
+      "sha256": "4f1a6a0b7fc816f3c1f75bc3633a646e0935481b5e0fa371e5050f46a9a5614e",
+      "episode_id": "60db97ef94f9-6-1428",
+      "root_id": "9bec6c3edabc0bdd35f94ce48c769210d1e481cb609a0adb026821af6384c0d0",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-1454.npz",
+      "sha256": "57bb866f39f03964bde8598e58dedff3017507b938beae9ff198bfdfc51d7122",
+      "episode_id": "76fb38db50eb-2-1454",
+      "root_id": "8d55b4871530dfc9605f79404548e9e27a1dbc6f5bc09b11962d41d2ebeebab0",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-1460.npz",
+      "sha256": "a08b83f743811b1dd521cf38ef74714188754eba3b55bd5a96213fd27a95a297",
+      "episode_id": "38460b10eb5e-3-1460",
+      "root_id": "914b2b4c39c03432d8748f4b77838e28628b0909b917fd3bfd8be42e192fb83a",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-1477.npz",
+      "sha256": "78749094d27eaf0856b4c5c93769f76c11a9eec568af956e4c1d2d05ad94e824",
+      "episode_id": "76fb38db50eb-2-1477",
+      "root_id": "5902541e79e159699d4fd726ec4f85df4fca8bad2fe394970f805101f724f651",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-1489.npz",
+      "sha256": "6e70e3f23a7813aa0c7e61c09d1f51de041b067bf8851591a95fdeee5e903a9b",
+      "episode_id": "73b2e457a948-7-1489",
+      "root_id": "f9cc927694582143f482579c023fb80f727700180f0403d79cb11332a2c37600",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-1516.npz",
+      "sha256": "c4d63e3f9778fbfe64087221856f35beaaaa435dc1e8ae765e9bd503874b4694",
+      "episode_id": "e0d19bc2d2f1-4-1516",
+      "root_id": "75ba542aefc5173977075a010f7a8094e13a1c5a730490241baf530be162779e",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-1607.npz",
+      "sha256": "f92adb2fc08298699399f7b92ecd676c18d78b35c60e90c1e0c79e57c49fdd66",
+      "episode_id": "a262f6b425b5-1-1607",
+      "root_id": "e54d09f47e689f1b37313b6f2f3dcbdf4eed85402b87e58cf6e43ea280dbe706",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-1610.npz",
+      "sha256": "8823d1960a25470188b80e5abd7c8064dca60837a5dd0220bad8caedc5cfcce4",
+      "episode_id": "60d9ed93e7f5-0-1610",
+      "root_id": "54f54119709b26c0cbaa39e5fc0905f67d8a6d2e74763f34fb232f63001b686f",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-1730.npz",
+      "sha256": "f4448cea9739bec210214835736aec010a55c27e73085f008910df7ffb5fdae4",
+      "episode_id": "a493e0be3072-5-1730",
+      "root_id": "25585c53bc25c35e77fb501ecc13b6716e66aab3c64150adbd2a4f8259c016ba",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-1615.npz",
+      "sha256": "8b457953f6384d5bd73eb6b1bca5ebc218d2c3ae8c5db29f694ec95b264ee993",
+      "episode_id": "76fb38db50eb-2-1615",
+      "root_id": "8f95dbd9ce2f6c4d5ae445643ba5e7f61adff48541fcc38278791fcfe30b6306",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-1951.npz",
+      "sha256": "f42021d6c1b26d9bbac8dc929da99c61dd376f7615605fbc104835fd9a6637a5",
+      "episode_id": "a493e0be3072-5-1951",
+      "root_id": "0c2e65aa588c9ced7ee92c79f039aa3d267bc425c6b9ef9b758c5e37493fae66",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-1813.npz",
+      "sha256": "a31d124c745f0c3c7c477fa811e5a740c7b3c0096f9823075e9cc67ef8c8a1b6",
+      "episode_id": "76fb38db50eb-2-1813",
+      "root_id": "7dd86feabfc8886a77c6a582f1859c327e85579796447a2e5609cedb700ba3f2",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-1868.npz",
+      "sha256": "fb01dc55a9e13fac94f63dc11110997abea68d7ded14099e391b053925159ab3",
+      "episode_id": "a493e0be3072-5-1868",
+      "root_id": "78338c28259ab1ade4312d32ba372584a1be638b66fbfbf138f47a88c591940b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-1753.npz",
+      "sha256": "855a60f1c7b9f5df9159dd2fb76c9b2ed62ca54d143ca83eb2c1c092adabd073",
+      "episode_id": "60d9ed93e7f5-0-1753",
+      "root_id": "4ccc78f62f72b3319d6b1ed548cb3a19eda3a760662e1646e4a7912b71860f88",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-1850.npz",
+      "sha256": "06983a237b53fb762f1a0cad8175ee05584f2a39a1fc3cca473f6598486e1ba4",
+      "episode_id": "73b2e457a948-7-1850",
+      "root_id": "879ba101682eb75b102e70a6690d415808c4d1fa19e1a3d31e070f1b232cf533",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-1867.npz",
+      "sha256": "e2c3bec1acab7a01b2e187180c7a84d578b4b19520d42a7e6557a7c80bc4ec40",
+      "episode_id": "a262f6b425b5-1-1867",
+      "root_id": "cae3bbeef7ac321871c41cbdfa6b0b44ed15209ef1255dd6772737cfdfb396a8",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-2029.npz",
+      "sha256": "38450e7d1f20c3678b6c4501e1b73245a21c74d4bc0bd9ef4cab7078177856f5",
+      "episode_id": "a493e0be3072-5-2029",
+      "root_id": "2cc2e75275c6bd73bdc76833a11337fc1e08781dc24c4c64482473d867e513d1",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-1902.npz",
+      "sha256": "a87079f724b6c59cc6e4770629d290e3c84cb8222c22585adbaea34a0d41f20b",
+      "episode_id": "60d9ed93e7f5-0-1902",
+      "root_id": "ef7f3f24123a59e2a234ae4ea65213f967c94fc3ae969e772dd3ef5ed982d550",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-1908.npz",
+      "sha256": "18f1e3376eea5977f64de9c18dd7a80d83edc247cc9789eef01c6cc30b05c65f",
+      "episode_id": "38460b10eb5e-3-1908",
+      "root_id": "d55fd8d5ac9434e85d4788555b37b139e9578d62c9640ed0ac2e9d921d0c8cd7",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-1900.npz",
+      "sha256": "afbe908fd39473b05d695a332f7f9c8e76407a58ebf09d2df24e7afcccbee7d3",
+      "episode_id": "60db97ef94f9-6-1900",
+      "root_id": "17a9a6af37299fba82a5da89c7b4cb14703cc7daff387f2e6c590e7e2cf653a0",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-1975.npz",
+      "sha256": "ed34ece9cecf8b35e23e588a5c1571f8ef8e1b4dabf3a4d82ac079ef5fbd6164",
+      "episode_id": "76fb38db50eb-2-1975",
+      "root_id": "5343cc41b3c39a4f05fd990dea325f5e94487f455ebc47ce1f7d0996d82fb6e9",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-1918.npz",
+      "sha256": "424bb959f615bbcd3952e67cf814fade5b486bfc442d604057377cc8f15e303c",
+      "episode_id": "73b2e457a948-7-1918",
+      "root_id": "de3b0c803165e07fef876645a8364327ed764276f02680325c8288e6ab3c19ad",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-1983.npz",
+      "sha256": "8bdade0c4706f4c3bb798ab69681fc35a200d40a329f2bf59010033c7a1d4037",
+      "episode_id": "73b2e457a948-7-1983",
+      "root_id": "4a9b4f2fa3c8852ca8890d154454aa3b8f2ecfa19b29c23223b1284b9ea57534",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-1959.npz",
+      "sha256": "167493ae64f2b3359920fd9b1302b194ca97f241f7a7837d27788a0ea2043878",
+      "episode_id": "e0d19bc2d2f1-4-1959",
+      "root_id": "42cbe834c469da3dd6b520ae742c2f4f1d42bf83628fbedba9f3d14a8834368a",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-1962.npz",
+      "sha256": "311ca157cffbc9d4ac04372e7fca23d4792f091973f0b47e5a68796feb0e188a",
+      "episode_id": "73b2e457a948-7-1962",
+      "root_id": "e7cc5331ad339f6128b4f3776dada43aa12c586eccc029569328b8f818a0c8e1",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-2115.npz",
+      "sha256": "92faea63805402de87fc730393a3749aa55d15c3c32ec631d164cd67ee7963b7",
+      "episode_id": "e0d19bc2d2f1-4-2115",
+      "root_id": "dd02d030333d96c51bf0c0bc2eaa96af2fbef355b771a42e103b1857c3fe63fe",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-2304.npz",
+      "sha256": "6f4d78138c623cbb8abe8d05ff67b7b4a2227809aec5eaa9d9ad4e5298c70c9f",
+      "episode_id": "a493e0be3072-5-2304",
+      "root_id": "7cd2a315e1a6fc96e8d8edb36b06eb0abe80e7a5bf53fe224c79cdc4c27be973",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-2270.npz",
+      "sha256": "03c1f71aba33476c9d169703c33d17fa661afe7d878d4a9dd6aaade9827e0aea",
+      "episode_id": "73b2e457a948-7-2270",
+      "root_id": "d21e3a142692aa3e7f10fe40fd50cc74d3f698768012aa395eac4bbfebf5cf2b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-2419.npz",
+      "sha256": "241786b0e44e777636137f73297dd53e4f84553fc179e1587e13682eadb39a35",
+      "episode_id": "e0d19bc2d2f1-4-2419",
+      "root_id": "e7f00d45271dc444460d3dcce2105d155c97826c41c002a639d56dbaa4727d96",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-2264.npz",
+      "sha256": "c52128cc74a39f58aebe3124ddd49f8cf97685c9e2b24a128b6e2bceae27c129",
+      "episode_id": "a262f6b425b5-1-2264",
+      "root_id": "95f55f4cf9bf5d8cc2bf8a1b8a2ded128c052c7781638a393bc4a5a161fc21b8",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-2295.npz",
+      "sha256": "730d43a2155c4c6ca696f2cc46d07329081a9870a2c87ebf17eb0edd34870e46",
+      "episode_id": "a262f6b425b5-1-2295",
+      "root_id": "71435491d32de04e2f9fe94e32094efe812bd60162b07e4727c794765b075490",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-2307.npz",
+      "sha256": "81db29524e2736faa08063982ccd5752bceb304ff7ff897c74a3a67c1c440285",
+      "episode_id": "a262f6b425b5-1-2307",
+      "root_id": "414c9d77e6583781bbad914a4868f0d5beabe737518ddf59c630e36a08549fc4",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-2397.npz",
+      "sha256": "108292f96290ede4045baa47843e3d0c15d5b0d91bcd600eccb29d5f6fe473f7",
+      "episode_id": "38460b10eb5e-3-2397",
+      "root_id": "0139e33ca383037c5e11b009fdf28b80d6595971f9f5c8324ef76a510bedfc93",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-2462.npz",
+      "sha256": "9be24dfe5cd961dd26888b2cbd20c8615b65b67f6886e337a60a3510f348d9c0",
+      "episode_id": "76fb38db50eb-2-2462",
+      "root_id": "9a383c333c18c259d8300dbd9b33c0aa9c4620965318e39e9ff7bfd8e3c7ac68",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-2489.npz",
+      "sha256": "915b17ba5ed7a9fcd6494333ee9499e0148e01e45eb871afd78d931d0c7e5209",
+      "episode_id": "76fb38db50eb-2-2489",
+      "root_id": "b3d3180334cddc08f5f50c85b42257f086155103d807c396631415ec4eba7150",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-2442.npz",
+      "sha256": "894d39912910a4e17262ab893b0ae8721a9dbd25780b474270ec946ac914b982",
+      "episode_id": "76fb38db50eb-2-2442",
+      "root_id": "6df854431ac7c776f85a29d6e325b9f7dcdaf06820abf95cbbf9ebf38372eee7",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-2563.npz",
+      "sha256": "57e073a49abb9b429eae937774f74cc91b829c212651a4a0fe08d6abd6b0f955",
+      "episode_id": "60d9ed93e7f5-0-2563",
+      "root_id": "bc7b835b2f3c878849b8b2e4f78bf51d1a8f12546d6c06549e198d1e516dcd20",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-2536.npz",
+      "sha256": "bb6a6e4708535acf11f1b622e4eb279530797eea49cd9224e7ef50606544ac11",
+      "episode_id": "e0d19bc2d2f1-4-2536",
+      "root_id": "40a579699b1c39c67d7851e2e79406c2a3729228b82e4f8e739aee91f04e0c59",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-2438.npz",
+      "sha256": "26251d59562d9bc8c306d09c376849decc79f4fea71255eb7c902b019fbe5134",
+      "episode_id": "38460b10eb5e-3-2438",
+      "root_id": "581fff81a3800445eb0efe8938ea4e589002afb4a7882050a06a3eb604a035d6",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-2618.npz",
+      "sha256": "b092ebe567244294891b82c456fd1b4f16e6b91297a28fd1e76a4dcded1f6727",
+      "episode_id": "76fb38db50eb-2-2618",
+      "root_id": "89f9568749121e52494182bf5c65a441093efc262abdccf12c36a173db1db689",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-2582.npz",
+      "sha256": "653f237eda642328fb7835935fe0739dc5fcd2a796b0834d3d1c3f283b5ccb90",
+      "episode_id": "38460b10eb5e-3-2582",
+      "root_id": "9b666ac27dce33cee2e36846800e6fe14303776cfabed16b0d1423769e2835d5",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-2674.npz",
+      "sha256": "33bf4e46ee9ccf68b91d5dab8f1592214b8106fdd241f2710551544ea0664a70",
+      "episode_id": "60d9ed93e7f5-0-2674",
+      "root_id": "c36db57fa6b611ec7efdbe18588feba2c57917134502d86321ae7984fb6becb6",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-2739.npz",
+      "sha256": "b2616926c7e902bf2e5c3f913f43a02e76787360aeed81f6ad11b5cdd6ec1afd",
+      "episode_id": "a262f6b425b5-1-2739",
+      "root_id": "27486f4f634e30a9aa1cb1d23b40574d49dc4f8d39f456eb23fe4050aa9a8528",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-2607.npz",
+      "sha256": "832f2de686ffd1a06dd728479f65365b21ff0f5307a925c2e1097d6dce9008d0",
+      "episode_id": "38460b10eb5e-3-2607",
+      "root_id": "f0bd94df0b697d11883480a280f0fa7414ba4f0ca0a24ada1e1d332f24b9da13",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-2803.npz",
+      "sha256": "45a8cf1c6b883b911bd47c29b1b5209a5751d76427bb83d07d9dd8cc03c09893",
+      "episode_id": "a493e0be3072-5-2803",
+      "root_id": "bc407ca9b18ad9dd857350a818099974b6d71946206a7d37eac191da053ff4ca",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-2753.npz",
+      "sha256": "c6dc3f6207b5e5656eca4a16c32bc9c6e5c23faa8f599c77fa2e5ee6caefcbfa",
+      "episode_id": "a262f6b425b5-1-2753",
+      "root_id": "13412b1ca6970075e41b29c94b320387e52b9b34c39d1641a8049c371ff24833",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-2765.npz",
+      "sha256": "47e658deff24d9d64709ceb95bb4d4378e399eb80fd0c3b577c6ee7c801239c9",
+      "episode_id": "e0d19bc2d2f1-4-2765",
+      "root_id": "7d1d4259bdc9707b5208f848bf253be054d26db7de59709c56be9a58e2b86a99",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-2734.npz",
+      "sha256": "818d7eb77156969346c008905b777844acabca9cc417e352a5f7c46e79436c3e",
+      "episode_id": "60d9ed93e7f5-0-2734",
+      "root_id": "3b00e4cc4db354b4ed6bf1279296761432a4f41bd76587d2098a229f5ee95d10",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-2891.npz",
+      "sha256": "90602c991700257a3010fde47e4019985ac6a0869ed75d54594223422c994dcf",
+      "episode_id": "a262f6b425b5-1-2891",
+      "root_id": "e8cdfead1c2850081694e45b0ba050ac0ee488721f287a8a8def88281f3d2f73",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-2938.npz",
+      "sha256": "8edcb91ac4dd674e0719f9ee384517c339740da41e9cc63a032751883577741e",
+      "episode_id": "a262f6b425b5-1-2938",
+      "root_id": "c8ec750bee9a141dc45f1ef51bf50820e80b5821fab64c2e778974348376cb40",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-2888.npz",
+      "sha256": "f063332bd319a84a8c3e58f76224d9b3f1ae72a22033712beb957791a1e81f61",
+      "episode_id": "a262f6b425b5-1-2888",
+      "root_id": "6a5a5db3e050899b60f32468919570a51422d2cf3aa11f7ddfce36e3768c401b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-2962.npz",
+      "sha256": "9986d05a670ead4e711964e1b58612cd0ce48c83673209f860e8c3dc45a4e3cf",
+      "episode_id": "a493e0be3072-5-2962",
+      "root_id": "ffeba5c74093f467ac5b194d6a4b14c281a3eac63765eebeb0cfcb601880d459",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-3010.npz",
+      "sha256": "ebbc1593d4238a40943569906293652d2f2d3ec323aaf3a4ca5edcd68bb2afa0",
+      "episode_id": "a262f6b425b5-1-3010",
+      "root_id": "d1d4cbefad8cc63916d9d075280d4ee1f0fa5d43b890ed392af495956d79c489",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-3008.npz",
+      "sha256": "d667f77329cf87a7e833b8f87a681da0cba90844d99688414eca8c2c9240c129",
+      "episode_id": "76fb38db50eb-2-3008",
+      "root_id": "6d733f482bda8ad83671a81e73e238c40dd20c9be981ed79d3391c53c56e3172",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-2929.npz",
+      "sha256": "b3f716cd70771eced7a28c89da893a01b6084a600ae9698e39ecfb65319d9491",
+      "episode_id": "60db97ef94f9-6-2929",
+      "root_id": "d18d2c03e7ff6315532cb172666ddb96e2c45eadbddd36e217dfaac97634605b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-3087.npz",
+      "sha256": "d74375ad3d5269ba1de6d969a48317b9418407af82498ddff521064e4054d98f",
+      "episode_id": "a493e0be3072-5-3087",
+      "root_id": "d665e7f4668c01e5a6711c9a121daad1d1cb9394d5645fe3a8f2d76ce8782716",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-3106.npz",
+      "sha256": "d03bc0f1d8d76c9d7241927af98b6a7c7b6ab7f2ca7d89477eedb9d79d1717f6",
+      "episode_id": "a493e0be3072-5-3106",
+      "root_id": "c3c35f1f9f0ec7c02a0b71ee618b3353ae07c97c47b56382c5bc100b1084c5db",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-3131.npz",
+      "sha256": "065962d623758a7d10af411d5fd8b9122f77d8f2f067c3109980bdbd418fd4f8",
+      "episode_id": "a493e0be3072-5-3131",
+      "root_id": "fe92324495d577569de1a5773810df628f4f80296b28e38622c3b7bd22792a9f",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-3115.npz",
+      "sha256": "dcfc8fd8e7b769b0617104b01d53cfa0eac0e5e891239b8759900115fb8bc734",
+      "episode_id": "a262f6b425b5-1-3115",
+      "root_id": "96e38dd949168bf11f34204864d29dfe980e143f98bb0a10184cd7b3f010790b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-3115.npz",
+      "sha256": "28da09aaaace362a8b81af5966f55d462544f7941a2b31ed9b66938acdf25fa8",
+      "episode_id": "76fb38db50eb-2-3115",
+      "root_id": "9ce0649d4d1e529b4212e18e9f11a5ddd408c05f7e2184f5f81f915b61df5f92",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-2990.npz",
+      "sha256": "adfd3377c8956248e76d03e150d3079980e2665c44a7b714909f90a8db928882",
+      "episode_id": "73b2e457a948-7-2990",
+      "root_id": "594070399c2e69a976d7a998db281f3e7ba24348391ee96e96aa178a8b6f7ff9",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-3017.npz",
+      "sha256": "67ca254f68da944a93c65f78b426147eefbbbf019140b4dc58f0cfc6fbfa9847",
+      "episode_id": "60db97ef94f9-6-3017",
+      "root_id": "90dffe019948ee03a0b4e84a665befe040968a1435d453cedd5b086d9123ff40",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-3299.npz",
+      "sha256": "d7a01a6a2de797c8f4ab4f7884f234cbe789f3977cdb220c35c06ca2d11a9952",
+      "episode_id": "a493e0be3072-5-3299",
+      "root_id": "d920e166070751c10b0d2133d2bfcbdffc4e907a32770381ba085ec6887d6b02",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-3187.npz",
+      "sha256": "d9754436ddc28514d9472fe5ab293aeb49314d7611d42d6e2933065c009e292d",
+      "episode_id": "60db97ef94f9-6-3187",
+      "root_id": "b75099822281e18f00548e7ea83dcf5121036ad17e0425a54115cdaf344950f9",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-3249.npz",
+      "sha256": "dd8ee122bf68733fbc124a71beb29dc2e5035fefd548bb020e40798a8a6e3b66",
+      "episode_id": "a262f6b425b5-1-3249",
+      "root_id": "62796b059842b11b952c57725b121ab8693f1fd6de220b8b8814fc54a822c6b7",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-3126.npz",
+      "sha256": "0303b606711528613908dfc9f93f263a154369effe94c5b68557e24c78830e51",
+      "episode_id": "73b2e457a948-7-3126",
+      "root_id": "f4c01967d57f4ea054340916893925e30cf3c8406b483eb2bb3ae98cb020871c",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-3382.npz",
+      "sha256": "72f5cd135fd2da3856f162e5a916ffdf38db2f9e4eb300ff661d67d7ec86beb5",
+      "episode_id": "a493e0be3072-5-3382",
+      "root_id": "5ee3eeb017ef01b4da69cf9c882db44db7987fec8e219889ffba845f479ddf07",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-3438.npz",
+      "sha256": "90b0ca151c7c0852878376d5bf2d779aaf6640cd54f7071bf7595f485b65de3e",
+      "episode_id": "a493e0be3072-5-3438",
+      "root_id": "13a2074fa760407cc08dbf46557c088e089cc6e594b942fcaaa08df3a93a199b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-3414.npz",
+      "sha256": "7e68a607e5e54a4aeaefc7e7f6b86873fb238a638f610312881eb1cc1454588c",
+      "episode_id": "a493e0be3072-5-3414",
+      "root_id": "a64f025d24bc8fbf300d3be36e7e1dc28ea876df6867b6aec12d8a6c7ace3e8f",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-3273.npz",
+      "sha256": "0132aad00409f07565070abe04c2a4ade13327584a60708d46343b6e097c4e3f",
+      "episode_id": "38460b10eb5e-3-3273",
+      "root_id": "5c50dbd2032b9f461296ebc04b8c3570089388766ff552880f0905f96673dd82",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-3492.npz",
+      "sha256": "98621c2f8bc69292c830d1dbd376d801fad6da1413e47e9f13e0283f57edafe8",
+      "episode_id": "a493e0be3072-5-3492",
+      "root_id": "54e6d56cc097e001932c282d7ce3f096eb169238a6155d368833e26111840605",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-3499.npz",
+      "sha256": "44036dbd7b3b88751733dce127f306db4889b61124172dfd6879fdc7f16cc62c",
+      "episode_id": "76fb38db50eb-2-3499",
+      "root_id": "9559267a70f76185a728ff1975e818a92a85f6bd91ec82124aaf891dec921190",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-3395.npz",
+      "sha256": "90a2a89aea289536e34873ac994f95599f4c813e9f6623c4961c992e302e902b",
+      "episode_id": "73b2e457a948-7-3395",
+      "root_id": "7074bb3fd9508a4a07a968987fe6111b19430a3cce90794c199292998146b7e0",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-3637.npz",
+      "sha256": "0b54ec6003a046638864bc33b6aaa1374d6a723e44b1fb1aaee20436cb4322a9",
+      "episode_id": "a493e0be3072-5-3637",
+      "root_id": "c99d559cf8e0c71620b862ec2ed8ac3ffc6554e9c98ee10afdb148f7a6d4952c",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-3519.npz",
+      "sha256": "2f4ad017f9184d598ebc3a138cb5acf665397391d4d763a8a5a2b85be14f7266",
+      "episode_id": "e0d19bc2d2f1-4-3519",
+      "root_id": "e7a7843959406736accbd01851510a07c813b451ddae2acded51cf5b63e8abb7",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-3575.npz",
+      "sha256": "224fc770e0807f2817bcbbb8140df4e19334980ec187d66af9784eb356a7aff2",
+      "episode_id": "a262f6b425b5-1-3575",
+      "root_id": "d591ae71f225290e95ce204f3618fa47d214218775cb0be5d22b429e27e3b456",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-3594.npz",
+      "sha256": "4ed52da6f58d065a00adf05f75d01677f944899aa98d3ebcc147d9ff49a19cc4",
+      "episode_id": "76fb38db50eb-2-3594",
+      "root_id": "4f73272e77d3be8a1a11847588cef918b1a33d39aadb18d3b7040cd6349ceb83",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-3519.npz",
+      "sha256": "dc1c5f26c849ef9c93e4d151faf511b42716c0c0d692ed9136d310a5f159acdf",
+      "episode_id": "60d9ed93e7f5-0-3519",
+      "root_id": "ce50496dbd68f81d697704153ad3c114f76994824156fd2e80a1c583108e07f9",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-3573.npz",
+      "sha256": "3d0ba66a268976254402ea747f2a0a3868b161bb9aab3aef0e20886444c369d8",
+      "episode_id": "38460b10eb5e-3-3573",
+      "root_id": "11aaee1cd9b440a80ff24809ad7659e2cff0b6ef57b2e6addcc5d2c195f81b68",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-3707.npz",
+      "sha256": "51ea29ecfd75561fefc94fdc03b1dc077f3ad72b23a4a46cd95c053514e2bd85",
+      "episode_id": "e0d19bc2d2f1-4-3707",
+      "root_id": "6a2f6bc762856a8e0112d4b3e706ffb4b0dd7224149d8f61db05af32f5510376",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-3678.npz",
+      "sha256": "9d3f3a528d4d64ebb64981b1beea133495b9138030b5621b88048280f372c789",
+      "episode_id": "60db97ef94f9-6-3678",
+      "root_id": "e014aa442519f19021bc0ce9ccf10c06b654565d261e4caa745742d299207cf6",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-3683.npz",
+      "sha256": "15a5188e85f0f45a5712cdf5658118261ca6d56544bb91491ee4649fa4f32dbe",
+      "episode_id": "38460b10eb5e-3-3683",
+      "root_id": "ebc5b03da5b8f3b170bec7db80e26d6369f0cfeabdc6ef84be019d37911b41e6",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-3698.npz",
+      "sha256": "1bd85728c261dd31f33f017582daf21e092a1dfa59e1417fcaa21978dd0e7f08",
+      "episode_id": "38460b10eb5e-3-3698",
+      "root_id": "17a99bcd5658425e9f64b3ebc38b8a5d382a1bd20566c207eef4d1504569d71b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-3621.npz",
+      "sha256": "34640b63e0e1e15c3af91f9732458c0ce39d5144472259d096d2df704cf34482",
+      "episode_id": "60d9ed93e7f5-0-3621",
+      "root_id": "3ac5b6d0215769a933833f73d810ea225f514249116f2eba083bddc38b0c1904",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-3716.npz",
+      "sha256": "27ad401ad959f191a5b24a888c246d487f138c11ddbff8d10430dcff44664c97",
+      "episode_id": "73b2e457a948-7-3716",
+      "root_id": "e4aced580941be06378cfeaee66dc3384070bf6a49b359d34eecaf2a3275cbed",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-3829.npz",
+      "sha256": "5c1c402e9e26a7093a9792cfe22b54f34e9e2dc39331fcc84a1d2c522d1e8883",
+      "episode_id": "60db97ef94f9-6-3829",
+      "root_id": "2757b554f630c0d4150abaca3b5906fbac357f8fde90f77d66b0280778f1f04f",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-3941.npz",
+      "sha256": "5dfb41b600f3f90b50422bbc5d69af9d6074a51ab43344d65b37c0943ba7058a",
+      "episode_id": "a493e0be3072-5-3941",
+      "root_id": "1c8f472586230cec728a926389d45b2d0823268c80b5349875587cd855b37d8c",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-3862.npz",
+      "sha256": "2b39fa3fdd1b3a06dd2f78290627d16c9e0ce77527b18b297b14b23556161e39",
+      "episode_id": "a262f6b425b5-1-3862",
+      "root_id": "8219edab1010d5a4ed424c7c7af1671b89bd7c905adb020d82c6c1bbff7525c5",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-3737.npz",
+      "sha256": "731c0ba2a12da28b4c0ac12ed8816cae29d43626e98bb338309676a20876e172",
+      "episode_id": "60d9ed93e7f5-0-3737",
+      "root_id": "1bee4a3cab9ba5ae6c1e40ccef74d72aef52d992ed6d4085623053d142d084d4",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-4062.npz",
+      "sha256": "32222ee4d5629c0a353cd8041ce890a44a9ba1f064c128a21bf639654f595bbd",
+      "episode_id": "a493e0be3072-5-4062",
+      "root_id": "a255b2f93a41488d08eff617f20204abe6d897a883f60f421f007e37d9efe7f2",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-4202.npz",
+      "sha256": "08a87fe897c9486278d19a3bfb06b35fd097f5aefc07503a4e7aec657df567ab",
+      "episode_id": "a493e0be3072-5-4202",
+      "root_id": "690efd110cd8e077cc914f2b8a9e038bb7af53469fcd1c1e5353624e0ada9594",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-3881.npz",
+      "sha256": "f4bb94807dfd05a596bf464c678f989ac4518629f13f209f5803d9e47b99b991",
+      "episode_id": "73b2e457a948-7-3881",
+      "root_id": "b8d98cfb90cb8b9f6471dc0daf50873715eb84af00e2f07180915a23cb60894a",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-4070.npz",
+      "sha256": "b42a85e9a111b975c3e765d17601268cc4ae9a20ba6ff98eebae6c6fc66fd1fd",
+      "episode_id": "76fb38db50eb-2-4070",
+      "root_id": "75e6a5e19a31c8eb79becd399a8391775db0ad0eead6177b202e0c26c93103df",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-4047.npz",
+      "sha256": "08889055986820636998c56a3bc40d8445bae9fbd0bd563a50e5aeb0d484dc29",
+      "episode_id": "a262f6b425b5-1-4047",
+      "root_id": "7bd535f8392dbd2779a38eecbeacfcd3d559a7abcc73e90abb7e1e6e5d99ef58",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-4223.npz",
+      "sha256": "1386eeed28ce3cdf625fdaba4f016eb8792a6f92026902b9b9d75b03f3ef85f4",
+      "episode_id": "a493e0be3072-5-4223",
+      "root_id": "6de5665df6c155201d655746591527dc1e68bc320b2907b9c10b3ba3e50e9a2a",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-4111.npz",
+      "sha256": "2f57d9a6d4e645fac6937c51a8e4db2f8267f95a699948097a0b155f36b3bd9b",
+      "episode_id": "e0d19bc2d2f1-4-4111",
+      "root_id": "0821ebdd6aa6d262fca204c2f5fc1f807d25cf106d06e2955e4149e40c48c81e",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-4012.npz",
+      "sha256": "7e8eebea8872f6ce73c171aa9ba3430e45befc8b30681833da2cd7990bf596b0",
+      "episode_id": "73b2e457a948-7-4012",
+      "root_id": "2cf7d9840aaff859010bfce7312a8e304a3bd054e12bf38b95cd70d1c7e81848",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-4266.npz",
+      "sha256": "9ca44bd0075838136eaff7e35f71c20b18d7bd84c550546ee4c25f0f877c6995",
+      "episode_id": "76fb38db50eb-2-4266",
+      "root_id": "788288369dad0eaa12f7b78ae0ee53caa2dedce6011b4379d2a692fe1e546881",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-4108.npz",
+      "sha256": "7e2191d50e5f1fe5fece495137b7eafaa42119ae361c8896026c59ffc7b4aad6",
+      "episode_id": "60d9ed93e7f5-0-4108",
+      "root_id": "24a92421c36c928967067be9e444352c0d2b0da43b8eb95e6266424168dd83d9",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-4276.npz",
+      "sha256": "c0f0f76e684718e61bfd5ad6276356e2f27319f783235f2d1cb255b0c8fb45f6",
+      "episode_id": "60db97ef94f9-6-4276",
+      "root_id": "f6ed021e3d277e6f4ce15629d8bf04cccbefae3223628e569ba3d3dce2cff12f",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-4219.npz",
+      "sha256": "d9b31ee029d58df46ca7855d24fabc39a79a0d4e457dd5d950ba8c5b8551c74d",
+      "episode_id": "60d9ed93e7f5-0-4219",
+      "root_id": "964f57a136841aacd841bd5a73e0e47ab94446b7dc0d243837dead90e1f291e0",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-4190.npz",
+      "sha256": "bd4eafd415ec3f752e26371f2f34af54c22a402c574a43eaf6cffda89629dfd3",
+      "episode_id": "60d9ed93e7f5-0-4190",
+      "root_id": "aefbfe807bd85ffa5d17e895a3c0d549942ee94cc826fb44b18d081cb45c1be9",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-4548.npz",
+      "sha256": "7aa7f9b219db93c070d1382752f1642165b57acfeb98a2eacdccaccef05c2801",
+      "episode_id": "a262f6b425b5-1-4548",
+      "root_id": "be1a152d35612533931972d7f94384a209f274b5b935b2b97ca16e734fc20f22",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-4482.npz",
+      "sha256": "04612b8e48c645b4ff8fa647143d35926de486eb1e401f874483967ca9e27c21",
+      "episode_id": "76fb38db50eb-2-4482",
+      "root_id": "09d8aac0f77828fed93da116afb0c4a505ffbcf37008fe087e7475e20c893976",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-4555.npz",
+      "sha256": "d583ea61ec76554888f839cc25d0cc26dfa093b43ced71b3e6e783ff42a4b5dd",
+      "episode_id": "a262f6b425b5-1-4555",
+      "root_id": "a645d0cb485d9db598dd7530a68fa5bc690058861dc6e6f97f47c3aff66be94d",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-4677.npz",
+      "sha256": "bebb74c0c3ef3ccbc840f3a879c4ba3e211c3524a4545910502d6fe4b5d3bac0",
+      "episode_id": "a262f6b425b5-1-4677",
+      "root_id": "1cc62195398c555af8460be9a47837a092abef5e2e6e4d4e15a94a40366b65cf",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-4522.npz",
+      "sha256": "61af9c39e889916a867af0e3e601d4e270d2d73774301ad42c6f94332c20dcb8",
+      "episode_id": "60d9ed93e7f5-0-4522",
+      "root_id": "c75ab11d096e8eeada984a52e373abdb0425b444e13f54aa49f056c7e8e115fc",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-4539.npz",
+      "sha256": "c80b2cb436c77f7dce295e7ecac4a65e5772ae2381ac66f5ef8c8b19e13e510a",
+      "episode_id": "76fb38db50eb-2-4539",
+      "root_id": "fc9ca9824d82356a4448f0df2147c4b66a45e535bf6021c3b8f977d0fbef3cdf",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-4581.npz",
+      "sha256": "967edb748087927d5c3f1b3b15a324adee9739f4b7196d56e29306be8072ffe0",
+      "episode_id": "a262f6b425b5-1-4581",
+      "root_id": "b2d83f95044259a3e398951f6b4b7b4574aa68406db3b778c996ca7d6aa3c324",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-4624.npz",
+      "sha256": "e4cab2d4445f5565ecb0bb4d7574ac3eb80ab61d08591b62d5c2a2fbcdd0a9e5",
+      "episode_id": "a262f6b425b5-1-4624",
+      "root_id": "38a488c63d99d17b800934f084fd23323bd255108454e6316d90afa8ebaaa76b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-4547.npz",
+      "sha256": "be18a27770636a7b5a9af1302fd4357105b65d66929623fea0fd0cbddb032ae9",
+      "episode_id": "38460b10eb5e-3-4547",
+      "root_id": "82b1959334a1494d2d129dabb63d47b4f9c8c7d728d8d120a1d1323588533def",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-4465.npz",
+      "sha256": "222eb3540c0400463d6134400fcfafa5b55341185d75b19e24337afcdeb0cbb9",
+      "episode_id": "73b2e457a948-7-4465",
+      "root_id": "2598ea8b4ec32c4dd4f2b1365257ab4d9d8c493cba4ae94f18b3762e785d55af",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-4539.npz",
+      "sha256": "3fbd7717dbbe389d5f42c51f3441a28342bb8da98c8a2b53a1950af065b13df6",
+      "episode_id": "60d9ed93e7f5-0-4539",
+      "root_id": "5aa5f2dd7be5b67e0649797505afe53e0cbc2ddf83c0edd393386f6c0628fd19",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-4594.npz",
+      "sha256": "4880f0961184a1479f58f9e081ded1b73bdc0fa46f153fe66f93d4dbedcf0bd7",
+      "episode_id": "60db97ef94f9-6-4594",
+      "root_id": "f6ed78e64e6d61250da8557d295416debb64d96ba0ad4d55c80cbfd38fa2bc5a",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-4880.npz",
+      "sha256": "cbaadc7bbeedc3226835837e52aa07c311273f42ca5f35f49ec55ca9f0ad40c4",
+      "episode_id": "a493e0be3072-5-4880",
+      "root_id": "97f5f5e3152920f61a92d82dbc3f926b2fed96d2dba4ced3bc9e2279e26dc410",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-4743.npz",
+      "sha256": "f1decf86dcdbc339ab4f2dc08133d9531fd495862a265bd09548c608c4bc2f8b",
+      "episode_id": "a262f6b425b5-1-4743",
+      "root_id": "b02151b5c66dd8c87002747b79307ba6b8500a7e95eb08f33c7214507be4ad35",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-4830.npz",
+      "sha256": "4b56e9cfe18464845dba559d0df09d7a788f2fc0c7c5c3ffd3f20bc9146eae7e",
+      "episode_id": "a493e0be3072-5-4830",
+      "root_id": "8268172b6f5beb28e6bdc99b5f7bc28bfcea9cf3b263b53fcd2a2585933f09c9",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-4634.npz",
+      "sha256": "a5039f6ca21053cbc712a3333e460496127861c31f912b6c590aecd259efc23e",
+      "episode_id": "60db97ef94f9-6-4634",
+      "root_id": "165c5c22505693bed601b8a48203a4984be68ede17217465f5f62e549070544f",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-4634.npz",
+      "sha256": "aaa721c7ed06d836e1e3fe3ba9c610425e4a3ed61b3b79bc7d2b95faf7c544b0",
+      "episode_id": "73b2e457a948-7-4634",
+      "root_id": "92e21f4b8c27d2521a288fceb3e272e6a02a46848485b6121c4adc40edb48ce5",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-4698.npz",
+      "sha256": "3d93e880206f6c1bd1c8e16f11075733e5504db4db253df1d5addee802fe5e15",
+      "episode_id": "60db97ef94f9-6-4698",
+      "root_id": "471c0de9d4f3ab4fd38215695ce0f7c9d6901cb8d249cb9f327dea9d8c9a1ff7",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-4710.npz",
+      "sha256": "3a7724a2b2af1e1c0635f56116f98af0485178f09f27de3bbc12a4ee3253ab22",
+      "episode_id": "60d9ed93e7f5-0-4710",
+      "root_id": "2f623c1da529aaa79867b228adaaf23ed1c6686f96a7cc3fb5988863b7d6703c",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-4815.npz",
+      "sha256": "5d65c6be95c9fefea8b2c0e62279fbc61b10f388dfaf219bcd09b2aea1965e4b",
+      "episode_id": "76fb38db50eb-2-4815",
+      "root_id": "f13bfb802c5447ebfae2bb9678f2df2e0e68b7203e995f7efbb2db63dd9bd0a4",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-4816.npz",
+      "sha256": "825109ff9f08a4ee6b4501d73c0cfe6f184e453d39c8143207e09b8a1ce72048",
+      "episode_id": "60db97ef94f9-6-4816",
+      "root_id": "ef27a2242ddb50f932e54acdaa6f929f76cb28723b79ede9e7f441161a3be1ac",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-5010.npz",
+      "sha256": "36e1d66c3de55ba851b4a0249d50265de2a9024e8100e8b7ac4d555b3b22d1d3",
+      "episode_id": "a493e0be3072-5-5010",
+      "root_id": "9965becdbfde4d5bc89c204502a9b9ca7e07cfc19732b13ab80d227745725b86",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-5028.npz",
+      "sha256": "ddfc76018b3913c42aad40d1242ad38428e1668ad4fa07dc8c0625ed6bde6fb8",
+      "episode_id": "a262f6b425b5-1-5028",
+      "root_id": "3b7bb2b4147730dfb3a7a1d92ffe76abe6747fc1d0fca6ced501f17fef7f5a06",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-4911.npz",
+      "sha256": "f83e5372776e2ee97d1a770b115007da4d9197e68cbba3a9c17ab3d0581be361",
+      "episode_id": "38460b10eb5e-3-4911",
+      "root_id": "e7965764feba75a62955689024e7712473df49a2073d029d71d21f95a96f43cf",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-4849.npz",
+      "sha256": "76c26e05602db3fc39e41c4fab8a7a30ba08da5ae7f0f601d40e88a490f1a99f",
+      "episode_id": "38460b10eb5e-3-4849",
+      "root_id": "4c3ea14a375db93412d4166e355b99bf517f45bfdad487ee2b36f08e3b519e91",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-4892.npz",
+      "sha256": "0307b72d1e04dc38aad768ee745532788b66919a467beeeabb76e3742d20e684",
+      "episode_id": "60d9ed93e7f5-0-4892",
+      "root_id": "74e86bd365639c868def86639a906c53518a4789b04f7cff36857525f94bdc33",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-4919.npz",
+      "sha256": "15c7ba3897a052f802ecd0c2893deee7e81352141b1d3ee78ff8d70f6a6cda79",
+      "episode_id": "60db97ef94f9-6-4919",
+      "root_id": "43b780acb2b39ef2d3f2580b8bf8ebbd0788456b94c551c5122f68aab7234f08",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-5176.npz",
+      "sha256": "424340323b145174895876b2e2a6cd500e7477971223cc328debcdc12f8037f5",
+      "episode_id": "a493e0be3072-5-5176",
+      "root_id": "27ef71328f2ea8466e27952962f5a05836eb1d1bc2bf23426e74e16065b0a4bb",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-5115.npz",
+      "sha256": "ed70e87ad39a678806cb80865782b4dd901cdd56893167b2708be8f90b97f766",
+      "episode_id": "60db97ef94f9-6-5115",
+      "root_id": "ea546a191a2c387eb86573478b3a7bb2f1e267133ef0dc30395d8cdfcdd18e5b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-5176.npz",
+      "sha256": "691c74d30266cdbca124d85dc7b604d533f6e813d04636af26a3c859210ce363",
+      "episode_id": "76fb38db50eb-2-5176",
+      "root_id": "6ce0d587b00f39c1e8b5f78a578e23f9efe4a17fdc86b293158cfc21a257c3a7",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-5069.npz",
+      "sha256": "9d53bf7c5282628c17f81f61200ef1f6bdf8028d71656b8037c8bba36302d291",
+      "episode_id": "73b2e457a948-7-5069",
+      "root_id": "b568dbeda5b96746c3dc8c052ab3f318d738b524b7637dfc0ccf575542aaee30",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-5361.npz",
+      "sha256": "c82e2eeef9690e4ab4480263d8947003a39802078d87f0c20521f37e849799fa",
+      "episode_id": "a493e0be3072-5-5361",
+      "root_id": "388afc384bc97f5e6c19dbdad76626e0ed74a6da42084ff14e767ed133c3a678",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-5242.npz",
+      "sha256": "b7eec5b0c148197b0c6a9af800e2b7cd539d878e6eff336ce2b1a82d702350cc",
+      "episode_id": "76fb38db50eb-2-5242",
+      "root_id": "2cf3c552e9586476bc9f47ca983e6ba499c5e2bfe0f74fd721d2eaac0b4b5cd7",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-5196.npz",
+      "sha256": "e2aee25a50fe4c9710d67be5c0ef0fb9101851e1519f20dce4e5e7722523e184",
+      "episode_id": "60d9ed93e7f5-0-5196",
+      "root_id": "4554ed546100d1e17e4371f720c01fc59517f567d306fc5fa96d62490d563dbb",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-5357.npz",
+      "sha256": "dcbd1258eda2e6bf3c3d9dcbfe5887d30388689f9b98b3f168184379bb651086",
+      "episode_id": "76fb38db50eb-2-5357",
+      "root_id": "89d17d9cd11bf0ca0fb6a2582bfcd853488851b47210f4bf8bfad0a1568d02a2",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-5585.npz",
+      "sha256": "6287bbb6e1e7b26907edd3aaba7080e83d5444f67c67eabf0a99e0712076a64a",
+      "episode_id": "a493e0be3072-5-5585",
+      "root_id": "a5ad5a419db57c7c0feb237c75c5e777fa7184efb52c2ea9520448ae288a7eb8",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-5693.npz",
+      "sha256": "786687cb163e244e8ac376cf25b49236550d138a18b44ac62021805f88adeaaa",
+      "episode_id": "e0d19bc2d2f1-4-5693",
+      "root_id": "ec36bdc463691a11021abad6bfdb6baf2d410d6c35e00da8b34140c988283793",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-5733.npz",
+      "sha256": "5335058d91ade683a077bc2b18c7f7d406fb19e8c86de840bc50961e9bfb34cb",
+      "episode_id": "38460b10eb5e-3-5733",
+      "root_id": "47eb5dfbb8344d0840312d24c1d24a3e333890d963b7b66f33137471e72ab043",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-5642.npz",
+      "sha256": "2524eb76206f042dbb0ac3fb97a37dd3d6e6fcb77a7fce7a5a9d0aa3487f74cf",
+      "episode_id": "60db97ef94f9-6-5642",
+      "root_id": "a05c0c098906510a97461b4562b12f31b33046c238739a98e3d41a236a164871",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-5626.npz",
+      "sha256": "22431356ff6fb2bf2d23e556f472a2f4d807eac79e970d587e548cfaee714ac3",
+      "episode_id": "38460b10eb5e-3-5626",
+      "root_id": "b80b8d0c20581d1e4c9d225c6d06c8be5618b8a6e6e057e446e5a49400d109b9",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-5765.npz",
+      "sha256": "989c37703415c23a9b458886877085ecf5082542f9ce35e341d7f94cfd39bece",
+      "episode_id": "a262f6b425b5-1-5765",
+      "root_id": "e61f4e15577e9b7d356c692baaef0a72c2144440597e10d4cffbd09ca65b112a",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-5673.npz",
+      "sha256": "bc98d363bc95eb7004664258a4f0e638190b2c553f6815f17f062a18891581fd",
+      "episode_id": "73b2e457a948-7-5673",
+      "root_id": "c828039f96ae0607652b2d14666b7bf82297053a348125567c643467c5682d2d",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-5856.npz",
+      "sha256": "bd778389035210129f782d8cd74ae802cc32669cac0b80522c925909566d5b3d",
+      "episode_id": "76fb38db50eb-2-5856",
+      "root_id": "4c338047cec58e762bf4ea9d5d804f1ae856a355235965b2b50a07a5554265bc",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-6020.npz",
+      "sha256": "386cddcf72bceb448b3bc05a47820c15149d7ff0886a79a71744ac56152a869a",
+      "episode_id": "a493e0be3072-5-6020",
+      "root_id": "59c1250e811ef72c967a7c4f32c35c36908a3a0b678078e69171c1bc7c2d8c8b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-5840.npz",
+      "sha256": "2edb962c4b3f5eaa22aa119bfe0d5470b729f667501de0d89e2a68f9584dd656",
+      "episode_id": "60d9ed93e7f5-0-5840",
+      "root_id": "a8e111ef674983c0de018423a4a065bce2bdaa0baef3e38eafbad3cbf33a91bf",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-6007.npz",
+      "sha256": "9006b9a9fc7097d110165f6e4b2209f63064375dfb33b3941593c924c20c1861",
+      "episode_id": "a262f6b425b5-1-6007",
+      "root_id": "9097cdc3de7d57117cbf6841a2455c67a7ec8be55bba1d7e20db99dbcb713db6",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-6052.npz",
+      "sha256": "2f84ba230def2c6412f4fcb76d2a3d5bdfd5576f390061f24be2eaac541a3838",
+      "episode_id": "60db97ef94f9-6-6052",
+      "root_id": "370684a68dd4972cd5cdcfcfa18e2a8768188226e4d9af7bb3761c62d908283b",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-5824.npz",
+      "sha256": "5c7f2a6c4ca5a33e3d1e4d036e88af6d2abbf94d8ad71bd98c944eb1ba5e2a92",
+      "episode_id": "73b2e457a948-7-5824",
+      "root_id": "6b532b9c049667d430a92b13b07c9786c7b124e844541f7fe9182cda98db5af2",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-5899.npz",
+      "sha256": "68a555ba8b4ff6d3f1e8b1600611f2e87c8d315dc6e3cae8170a21fc213f34c3",
+      "episode_id": "60d9ed93e7f5-0-5899",
+      "root_id": "55476f4de8e253db66f1d04058cc3e129465cb130077d57335ff56dc75f3968d",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-6059.npz",
+      "sha256": "d72ec2466de5766b3b734aee32389839e58dfb98e73aa4315a921204cb488298",
+      "episode_id": "60db97ef94f9-6-6059",
+      "root_id": "a78dd61c4698c6fbcdbe660f3531fc3c00c694f8a2fd141aa589bba05a04427c",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-6053.npz",
+      "sha256": "e5531494514e9e3db86b2fc69a3f15344ab90edcf31af4e03c42853e8c447a83",
+      "episode_id": "38460b10eb5e-3-6053",
+      "root_id": "9cc79b778ed8a895ea5e79b74e59f7b0169258243f4d0646607125b574841a7b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-5941.npz",
+      "sha256": "04cfcbf5e4dc77743cb37d637b020b120d54155c8176aa5fdd4519ed9dd69295",
+      "episode_id": "60d9ed93e7f5-0-5941",
+      "root_id": "1bea0a87d8cfbf4cc79b515f93aaf5a7723b146b2b129145a731d0b6fd1390f7",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-6176.npz",
+      "sha256": "70d4a6d305c5fd0dcfe24ab7a1bbd524c34d0a1d978c40839ea47ffa93879ad2",
+      "episode_id": "60db97ef94f9-6-6176",
+      "root_id": "c815059e45a4ec98842857c3b4f19190262289742c259f18531b1ea184912040",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-6280.npz",
+      "sha256": "c8c85ecb8d87cba2e7f68d58e11710a6fa46780dd40ebeddb5d70fc7af19366a",
+      "episode_id": "a493e0be3072-5-6280",
+      "root_id": "fd6597c6124226e1ee18cd3475107a7c74ec06086d3f83bf690d4fdaf69b3b4a",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-6139.npz",
+      "sha256": "73e8819af3b10198a0363f3f4739dbb07547d75940f694be44dad876313804bc",
+      "episode_id": "60db97ef94f9-6-6139",
+      "root_id": "afd2b8f169f6411552ee604446617e403afa17c4d1a8f4b86e0512d12a547401",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-6399.npz",
+      "sha256": "ee6818b6e0b03cb70ee3bba355d2ca968fdcd7b088e41c5995d6fc4114f43eba",
+      "episode_id": "e0d19bc2d2f1-4-6399",
+      "root_id": "8c8a8dbd7c8934efb6c38f2099e2c774e9dff16ca469baa7bd1b0b5fd84b3fbb",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-6113.npz",
+      "sha256": "0495c1b18e122590839ce67ba725abd7cb432196db8577e01deeea52da2b32f3",
+      "episode_id": "60d9ed93e7f5-0-6113",
+      "root_id": "fd1346411c9408797314b807ca1a9179cf01785a9a6eac8ba195198b582e562b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-6141.npz",
+      "sha256": "20dca0cd34704920ae5a77001711eb31f114b8618337503ba5e3e5b61b67e619",
+      "episode_id": "73b2e457a948-7-6141",
+      "root_id": "cc0121da0f47a86094777159f070980ea220e0ca6178c6a544b565641107c130",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-6325.npz",
+      "sha256": "2108001387b3de6c913c7c315ad0fb99d7c5c9bda66f0f29f718c4073a09d558",
+      "episode_id": "a262f6b425b5-1-6325",
+      "root_id": "5cc7b20272b6d6a57f9c6c706bd4e42f072fd57bb6961227f6343bd74c616b43",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-6505.npz",
+      "sha256": "d22e072c5d8b4611e5e97d824759635137e5f2c8a42d451efa7132b8d7fa69eb",
+      "episode_id": "e0d19bc2d2f1-4-6505",
+      "root_id": "6eea5330e7ef3c50e5bc8bd54216cbe11d8a60fe9a5de70a74dfa2c22f508911",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-6557.npz",
+      "sha256": "1d7c8494c69f3ce8e04021464d53e59b6bd6c61c3ebe0ea094a0c3f2b48bf29d",
+      "episode_id": "a262f6b425b5-1-6557",
+      "root_id": "84ca0449a7ac7167bd11a95985d41a8b1f3402cae0ad3ec66ca392871aa993ff",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-6469.npz",
+      "sha256": "0a1679986ffbc8b74a60ee6a210dc90f5f8fe04e97e1a8280e4e984d674cbfc1",
+      "episode_id": "a262f6b425b5-1-6469",
+      "root_id": "22c4d5f8ef259b35a8dd30597f15ab3b755460c49dac2f74243b5250f71f1e37",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-6485.npz",
+      "sha256": "227c08fb31ef0b987354ad5aa5b64c5466254bb0d8d74b0210a87abbf00ff90d",
+      "episode_id": "38460b10eb5e-3-6485",
+      "root_id": "af94c6c8364df853832eaccd1a5e0b185d2fb73db2a4431e2d9f3339ec03ffa2",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-6572.npz",
+      "sha256": "31c86ba4d7882a4b6d5f9352f984ddafd0c01803a5760c10675b04069f05fc3f",
+      "episode_id": "60db97ef94f9-6-6572",
+      "root_id": "85d72517985af853f8471fc8ed07ed1a1772ee1b90cd7fcfc814d90ca1f20f92",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-6795.npz",
+      "sha256": "3e828fc32007cad21066cd4cee194c6b065941c36e75e9b430ebeec84ce3a184",
+      "episode_id": "a493e0be3072-5-6795",
+      "root_id": "91ec7fd4337cfbc47a58a91280f0d64df1688319010009d2e316cc9b17cb583f",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-6797.npz",
+      "sha256": "92f816b16a848f6e0b00d6badf1f139fb2f4933a4f21b9c1ec043e2cd8a44992",
+      "episode_id": "a493e0be3072-5-6797",
+      "root_id": "1d1525be69199dd7e19dc643143fad0b7472a463e0895a6f2fba8f50d799d291",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-6629.npz",
+      "sha256": "c30fb7572026de51453efadbef832bff6d1f4ee818817cee3604659a804750b7",
+      "episode_id": "60db97ef94f9-6-6629",
+      "root_id": "b9ba11a155a8320ed323f8bd77a021f4a93ef41a0c97a4af9adbf6cd2c35297d",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-6625.npz",
+      "sha256": "69c1f2fde1717f84b64e301db63173761084caf68531cf20303d58a28181e863",
+      "episode_id": "a262f6b425b5-1-6625",
+      "root_id": "4380bed2a3422e491289270f4be3b1bf8d1f2ef58eb622c21d9415d4e0f5498a",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-6572.npz",
+      "sha256": "20a37ad34ece9e1993391cf1735d79b3cf1edf87b0cd35ac95d4e7487453a07f",
+      "episode_id": "60d9ed93e7f5-0-6572",
+      "root_id": "38ce2c5bb2cefd42dd81f466faa362c81ba51203177ac00f76946c5da144011b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-6841.npz",
+      "sha256": "308a5d84d96705f547aaa5be86dc9a48f6dfa6168693fac85140b3a77130103f",
+      "episode_id": "a262f6b425b5-1-6841",
+      "root_id": "825962b1e82ac0ac0d6f21dc8bd923d25b643003f5f70f5831082b868f35bc32",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-6748.npz",
+      "sha256": "fabc37600824c952c30f1c58e50c76121e763d99d82f6d804923d15dc51caa63",
+      "episode_id": "60d9ed93e7f5-0-6748",
+      "root_id": "5f5899977bb17529a4e33f4b83a5519d8a33ef2f6f479082260b7e2b597d8760",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-6750.npz",
+      "sha256": "e233bba3974f5a01797f9becb47e7628d82ab7da25b22dd8961e0274ce54c06e",
+      "episode_id": "60d9ed93e7f5-0-6750",
+      "root_id": "0087418e5e6a268534a127ef96e98ce699fac5bd357be169e8ae36937c0a1795",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-6775.npz",
+      "sha256": "82d7a8c96fb8fdb1684264fa9a387ac9531190296708d95f3e2607acd11edc5d",
+      "episode_id": "76fb38db50eb-2-6775",
+      "root_id": "32be35da826cf055a44011fa8f2d9056badd10c177afaa0a2f8f50948b890dda",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-6860.npz",
+      "sha256": "3af0aee666fc273afde7d94fc49d62db65246cb981d04ce56631f53cac725cfd",
+      "episode_id": "a262f6b425b5-1-6860",
+      "root_id": "b9d0e056b0eb4d7e249dc0ae555831c6f68f9ba36ea4c3fb81677020445232a5",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-6658.npz",
+      "sha256": "01deaab0871550067769603f8cd3cca5d7227f7583b039a66845ed78e4c544ad",
+      "episode_id": "73b2e457a948-7-6658",
+      "root_id": "8389a2f6e9d371d064a5efad122dfe83edaa78f292be12cf7a29247213ceda50",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-6858.npz",
+      "sha256": "362253286b95157691eddc2287b156aba460b8eb4b67b29721f88ec57e6200b8",
+      "episode_id": "38460b10eb5e-3-6858",
+      "root_id": "3565843622322b03602cf4359ae2acb62a40f775a94debc6aa3770398381fdf5",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-7009.npz",
+      "sha256": "91cda2f6b2b7f62f52840452628f62aed853ada2878cf897f5f5def6174f09bf",
+      "episode_id": "76fb38db50eb-2-7009",
+      "root_id": "0160f8a9a978eb51cf8831b2a3a695a598b8e54a6e38ed4edf5af957c92bc9fb",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-6674.npz",
+      "sha256": "5e74e722f51ef062c2befab530bccca604b5e2653ffae66fe7b566cb83791c6a",
+      "episode_id": "73b2e457a948-7-6674",
+      "root_id": "d537f94554e045817e06edee3ea8df9b0c11675c63f5cd35fdab695b70bb5933",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-6773.npz",
+      "sha256": "18a8454e0bbe5017e3ec5e506e09f8d7a9f481c367a4cb6c26601bd1a14b7486",
+      "episode_id": "60d9ed93e7f5-0-6773",
+      "root_id": "c88e332e8cd95e4d3dea2a1f7df84c798c1ac4b52c22f451d95e6c97379a4821",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-6858.npz",
+      "sha256": "a02079ca3a504b5e7310342d853296f972e2975187c3370944e4d8a1dfebf0d4",
+      "episode_id": "73b2e457a948-7-6858",
+      "root_id": "0a9e27b8830f18624033062947f36584abbe26251e1fdd930abbdfcc2a2f5fd9",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-6772.npz",
+      "sha256": "4402f947b0d13d9a8f0866fddf70db24ca68d9e2cfc23420c3fdfee189ac9590",
+      "episode_id": "73b2e457a948-7-6772",
+      "root_id": "e116742e33a356d17889670479ec41a3eae2f4a81d43d152723914cd894f9c1d",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-7177.npz",
+      "sha256": "49b81e8ae7bcc508064a1265a023c3a7c1b343e294a7e587a1dc6dc0542359b2",
+      "episode_id": "a493e0be3072-5-7177",
+      "root_id": "c21e82d6025f7401dd613ef455ccc8b4a27f52b71ebf31b247669cbbb8276408",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-7217.npz",
+      "sha256": "9a5c3fb417c35824be41862ad29c767ba0289dc490f2af814fe1396060ddf3b2",
+      "episode_id": "a493e0be3072-5-7217",
+      "root_id": "2a727b87d1d48c364172bfc3d5a449e9844dcdb662a6b7a95f8bea72d5d76c64",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-7268.npz",
+      "sha256": "09e6f0699bc738ecdada76b616a20ca08025ca5f56e7b751250449934aaa6e21",
+      "episode_id": "a493e0be3072-5-7268",
+      "root_id": "0b391e45c081003f5c8b131db4521318f784a7d74e62735e916a59ef67fc41fe",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-7124.npz",
+      "sha256": "1c2d9d70a8adec3181ea13d9a0758474308e1c9ab02a01723ae08cf916b2a606",
+      "episode_id": "76fb38db50eb-2-7124",
+      "root_id": "9798d3f3dcbc036f4aac1c186622897a52f728cc74ba681c54fcc1fc742d49bd",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-7196.npz",
+      "sha256": "c9e9a71a5131149fffa7eccc3cf3e822fcf0cc0e7bc24835d12965a31c21372e",
+      "episode_id": "e0d19bc2d2f1-4-7196",
+      "root_id": "406092bf426fca0b32e9026cba85f99efcb2fd9a7b555787e47ed90a586753ae",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-7252.npz",
+      "sha256": "5ff57b90cd185f94c7626eb8fef7e87e13a1f1b4863cd5ed8fe8dd2804be9b9e",
+      "episode_id": "a493e0be3072-5-7252",
+      "root_id": "633b3677364f2f6a6676691cd5fa8e3cc9ee812b3267afe0d39a2b44f07ab804",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-6926.npz",
+      "sha256": "b2537b44e24af373dbd0c03798c45f21ffe19f7c34075434c3c2af789fc7324e",
+      "episode_id": "73b2e457a948-7-6926",
+      "root_id": "62da0e934d01eb8aa23854d3299add33c3d1e7072ebffa6545903082691f1970",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-7149.npz",
+      "sha256": "044c0f28ffe538fabe1eb39f21c890e8e758a133786337395859b96261d3a037",
+      "episode_id": "60db97ef94f9-6-7149",
+      "root_id": "298f59b1524b8bb0e56401032e1ad7f926a97294da13589d61254451d8e8b810",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-7184.npz",
+      "sha256": "0e15decfb93c24d1c8f2ea20b0fffbd2c5eea7cf4605f2c1466d6387109a35e5",
+      "episode_id": "a262f6b425b5-1-7184",
+      "root_id": "4b268af8abb5daa8798fabfdf3317327b4997ca001be876bfb369b0a2db40cdb",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-7039.npz",
+      "sha256": "5e77f8e0d7b0dac563f86c5506e96a713c1a5e27b233f7f429b53297e4a3929a",
+      "episode_id": "73b2e457a948-7-7039",
+      "root_id": "0b45d645ec71dc11b880b2c29343f80d88a6693f889ebbd9bb4bf0572cf679d4",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-7255.npz",
+      "sha256": "52e86a54b2e738cbf018d4e2518bca9369e695168858279e133a41fc6ae5fe4c",
+      "episode_id": "e0d19bc2d2f1-4-7255",
+      "root_id": "5396f083f8598de6b87f75ed084c34e2a66b27e34d1f4a178eb19ceb69bd9a6f",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-7283.npz",
+      "sha256": "6ff8799974a0d3e48ad0f2eb77612ce3bffd61d8ecba1820f6a672999efb7f9a",
+      "episode_id": "a262f6b425b5-1-7283",
+      "root_id": "e0bca136fcac48647449ce61f54f1b1dabfb75a84864f498b804f2c48983ce0d",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-7084.npz",
+      "sha256": "cd0c661a3fb2fca852e98dade7d960e3de4870207c14312cf77f82acff76ec51",
+      "episode_id": "60d9ed93e7f5-0-7084",
+      "root_id": "09984e71aa0a1eafe59952544ef040dcd2a29043ce3907a1a854f70ac12b2ac8",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-7239.npz",
+      "sha256": "7645bbf5ae3a74970218846306caef4c954e2f48bd8c881a0165b62b471e680c",
+      "episode_id": "60db97ef94f9-6-7239",
+      "root_id": "d448642d247fc9f7a22f650877c2dcf6bc2c8322905821c9a946ba6c9584adfb",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-7265.npz",
+      "sha256": "d3f34cafc8d67fe9d7c07899b6177b9dcf5b2aee51ebcf68305b0c34cddaf537",
+      "episode_id": "60db97ef94f9-6-7265",
+      "root_id": "c5f9f9355eea7269d85e2c2a2f69e6253e61d19c095786dd265473750f4b6d13",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-7273.npz",
+      "sha256": "d3226a1f1acec4dabe796b8179c6d0d9f8fb45c787f9915d57d1e9478ee547a3",
+      "episode_id": "76fb38db50eb-2-7273",
+      "root_id": "8ed748d6159703f65673434e72ab503f99144663ccf917c7fff697529b80fa7b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-7331.npz",
+      "sha256": "1f2bc69d7ba0a56bd00c7e099b29b0c993879b7d8695f3af64ed019b0c153867",
+      "episode_id": "76fb38db50eb-2-7331",
+      "root_id": "9e44ce802f679c5e9e44be0f8f94af19bc84cc4b023558926c62afaee116658a",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-7473.npz",
+      "sha256": "ddc976575bc78d9fb4ffad0847f10e15e61a9e2d8ce9f4a51648b4d9063191da",
+      "episode_id": "e0d19bc2d2f1-4-7473",
+      "root_id": "76a2fe69588874b559dd3e1962a9651d50e5bf64f07d6f19d1f90687291973f6",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-7517.npz",
+      "sha256": "e622a9d2263d454d69447edf101754bcf13745ff83dcb0aa56908c5c045b77ae",
+      "episode_id": "a493e0be3072-5-7517",
+      "root_id": "e9230c9e5d3cf5f2169401cb54f5ba44612d436b910a7886986823ace047b5f6",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-7460.npz",
+      "sha256": "c2592d2daf1968b18631352701a46977bee98870c1825f5e857256499d1e7f71",
+      "episode_id": "76fb38db50eb-2-7460",
+      "root_id": "05c20867ef03704792bdf9b3365fa69e48c4b853fb3a6da2cb2651acc9f06469",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-7467.npz",
+      "sha256": "337d1d086c02b8fec0a5a31fce518f9813994b46c2e7009af9a0735d4166d437",
+      "episode_id": "e0d19bc2d2f1-4-7467",
+      "root_id": "9f5503e33b913efb00bad9ac43f16f618d78a12967d201f9a81c484a811c3257",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-7530.npz",
+      "sha256": "e701d9020103e8c26bd4423c3da72b7e6dc078ef796d93eb1b352c2b20f3871b",
+      "episode_id": "a262f6b425b5-1-7530",
+      "root_id": "4590d1315245ce4a3b9a5d55f3b2015e5ab3ccd072ca2ff01d90fe4e4bf97f31",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-7519.npz",
+      "sha256": "b1495b3f5ea7aead7995eb9eb3c0d3d3322d2876026c7eb606e0cbcae0efefe5",
+      "episode_id": "76fb38db50eb-2-7519",
+      "root_id": "b0688a8676b683c73b39da45b8e108877c227f303bd54581f93afa96ca29229c",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-7505.npz",
+      "sha256": "e82b57482057ab49af4253c13010b65f6f21d1c9a891782a08d3d7c7e8f839fe",
+      "episode_id": "60db97ef94f9-6-7505",
+      "root_id": "094610f87c8fca4d88356d80db6f1ed984bb83800ee08d2eab0408c6132e96ac",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-7574.npz",
+      "sha256": "11f2796a6d4cc8840f399bfa8a2bccff2f797d6d47ee30c09e8ca5e656f92c9e",
+      "episode_id": "a262f6b425b5-1-7574",
+      "root_id": "83750d4bbb5461617d0e3bd62ff953e14d39b35e12cf94c1f1055b7d321853fa",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-7410.npz",
+      "sha256": "ab60efd04e1dec73d82fa57addb4ff5621d3a614d76f289291283305a8b5da4b",
+      "episode_id": "60d9ed93e7f5-0-7410",
+      "root_id": "f582aeda4fed77d742ebdd83511f7deb77d09bbdfa5843dc581e0906e5b2bb97",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-7593.npz",
+      "sha256": "4b482c3f6e71b0842f4241e205eacf2900cccb282568c858c4ebc9d9cf89ce03",
+      "episode_id": "a262f6b425b5-1-7593",
+      "root_id": "34867b41827e13d45371a6c9ea59efa4b00d0914aff4498d5a3090b52368dbe9",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-7482.npz",
+      "sha256": "0e07ac32904ddf60372166925b7da7e834ef53214d014fe9e6b34f49fa876cb8",
+      "episode_id": "60d9ed93e7f5-0-7482",
+      "root_id": "017f0e714ae6f5cd860bb7b290319cf04b1f34c9e3976e5c9b18c66e723f3cb4",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-7665.npz",
+      "sha256": "f0b3f340280a8bb7df17451dbd0f853f26a11a605ce54855316b9f20ff012c18",
+      "episode_id": "76fb38db50eb-2-7665",
+      "root_id": "ffeac664fe387b5ce73d9a5c91c87e0d2340cb01c970fe975e5f0619b57e58c2",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-7667.npz",
+      "sha256": "99a3a1dc3e742ff8780d3e9b56b20fb9384b50db142890f35bc5ff2961527aa6",
+      "episode_id": "38460b10eb5e-3-7667",
+      "root_id": "5e61197bdf0e5a84ae8b2781c99c191ec48ef1d7d4924d7f737b458939e74c83",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-7818.npz",
+      "sha256": "363846d7bc97c268b590a1907b71b31acbe9260d28955ec4cd59aedd2bc033fe",
+      "episode_id": "e0d19bc2d2f1-4-7818",
+      "root_id": "08adc72b4379a70f84046f3f0769fb4199b01d1c2b866f1fe31c7da51da69480",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-7763.npz",
+      "sha256": "19aff0f021ba2f1a60526bf5fa5a86788a374fa202e6a6e7efbc51d866ae7991",
+      "episode_id": "38460b10eb5e-3-7763",
+      "root_id": "014a2c28785c6deba5351082514477916ee70becadb27d8e3003b392b8bbb16d",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-8056.npz",
+      "sha256": "5eae65c7ca76b8c033135956c3f6ffc1cb20afa24d4906b685ab793cd71f9000",
+      "episode_id": "a493e0be3072-5-8056",
+      "root_id": "b02bddd0424072fbfe9447d91942abdd6ebf34454fb14c28d7b3d3742756847f",
+      "split": "test"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-7786.npz",
+      "sha256": "4b828ca618b769606cb8d5e425c51095196ffab3ea5d751d50d186e109e056f3",
+      "episode_id": "a262f6b425b5-1-7786",
+      "root_id": "dc3545eccd8495310a1058de8a35afd51530be246df709531c86b48518edde2b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-7670.npz",
+      "sha256": "aa042fdc347884ffdc33ab4c8e7d0264649b381e61522689edabbf28e13db089",
+      "episode_id": "60d9ed93e7f5-0-7670",
+      "root_id": "b75194765abf87323a64ed8260bb3f1d48e011d6e721b47a2c998bb7b3481edb",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-7884.npz",
+      "sha256": "c0bf68703d281f2d8d042cdd802a6021a6230e22c9b00926686e7c4eeafbeb3a",
+      "episode_id": "60db97ef94f9-6-7884",
+      "root_id": "f48b99b7dc9706d9fcfcb65dce40255725034250d8bb0f5497335bbd69849fb1",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-7906.npz",
+      "sha256": "284728ce7fa494a5b6b9fd0321843217be6f966805d72525a4a70a4e4848eaa1",
+      "episode_id": "e0d19bc2d2f1-4-7906",
+      "root_id": "be437bfe23925b5f57d3ab6bd612a9587bcce99f2a5c25880a2c164f2185cb31",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/e0d19bc2d2f1-4-8045.npz",
+      "sha256": "13c824b35903e508a45925a1457b77a6522779a4832d9eab6813a4ba41fa9216",
+      "episode_id": "e0d19bc2d2f1-4-8045",
+      "root_id": "b82ebff40ec7df11ab8982783f080f24f94318d7e0970088e40ec6003318e08b",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-8154.npz",
+      "sha256": "a47169be33c47b6718236c618824069735235ebd0c956366fcb63c6178f85fb4",
+      "episode_id": "a493e0be3072-5-8154",
+      "root_id": "3c2f6b4c6ce6956e34789ffe87a378200728d563054decf2289afc34612e14a4",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/73b2e457a948-7-7677.npz",
+      "sha256": "c451a3ba31c81dadb58ceea327076ad7f256d9bfc2c099c210ef739a13551357",
+      "episode_id": "73b2e457a948-7-7677",
+      "root_id": "bf53498d7e1f63505bdb469741d4b1b2a0c4f51ebbdb8f279187a60e54e45bce",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-8011.npz",
+      "sha256": "ef1708c440a9665f4efa3b20d3688e87efd5b9f209853226091a6a9452b742cc",
+      "episode_id": "60db97ef94f9-6-8011",
+      "root_id": "a761c348546dde067bb5f4200740e13e6839dfe7a711deec4a74126095c7c4b2",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-7955.npz",
+      "sha256": "82df6dcbea4a094f81ed165ac9fd9c6531482dd8f4254904e1ae5f63a22fa3e5",
+      "episode_id": "60d9ed93e7f5-0-7955",
+      "root_id": "715930ef83d97f0cf9e99cfe9e6a0d1cf6c2225ce84bbcbde53699ed537992bf",
+      "split": "validation"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-8079.npz",
+      "sha256": "8bcf23f04e299d4f8c70ea275d1bfb87b71867ba87f8aacd93ca5f82ff66c5ce",
+      "episode_id": "76fb38db50eb-2-8079",
+      "root_id": "e8e4599ae0f673c23f0da60ab7b630e8e9b2e711dcad45576f001a4e657d8000",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-8133.npz",
+      "sha256": "50e05faaed8da403e06ba90590852576d0129f6a438f3fc64d4e958433ee7b8b",
+      "episode_id": "38460b10eb5e-3-8133",
+      "root_id": "aeed5939e187bba1c58ecf807397be1a244a5aebd1912a2f4defe8315b5452c7",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-7975.npz",
+      "sha256": "416529c3b342a9c0035710788e601fd0c4f1066a771787931a48b12bc5646831",
+      "episode_id": "60d9ed93e7f5-0-7975",
+      "root_id": "e48b79b298ea15b3b1ab343719bb2adfcb4dceefba8528fffd400afc50c53e05",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-8224.npz",
+      "sha256": "78704f8944d1de4d5e160c4d849d99e5c135f5bd275e1371b22a9ba1e4b05905",
+      "episode_id": "76fb38db50eb-2-8224",
+      "root_id": "5685e304c6e85825aa07f10b0d5a1573ae2d229df5aef33a6eb72af5044ab728",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/76fb38db50eb-2-8155.npz",
+      "sha256": "c1d5fb3b6007a834fcf451fac82635398b28db7bdf921be79bb92eeea5a4fb33",
+      "episode_id": "76fb38db50eb-2-8155",
+      "root_id": "53ae14ad4b053ab58842fe2521170e165f28c598b6073e42412ee6a20070999e",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-8156.npz",
+      "sha256": "f9f3ddfd0e766bb65a6de265f74b424374595679fbbd90fd0b3ba835d4cb6dbb",
+      "episode_id": "38460b10eb5e-3-8156",
+      "root_id": "749068c21485d8548e4e50828d86303bcbf8dd7d3937e2d980f2c0e16aeb08de",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60db97ef94f9-6-8206.npz",
+      "sha256": "92e4d009e9dd7b3d4c47017b23589dbf8d6a51f4cafeb05c4b426d22168a4a13",
+      "episode_id": "60db97ef94f9-6-8206",
+      "root_id": "b4cd4601289af056798b1096938b2697c2faf9ad0ff8f3ddee9b9e8168e0d349",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/60d9ed93e7f5-0-8041.npz",
+      "sha256": "737571882be87a0fb3a7440e44a51d9487ad109a32c7e77e6b55ebab694dc852",
+      "episode_id": "60d9ed93e7f5-0-8041",
+      "root_id": "f3ba5b659c1906ecd8e9a4cbc826747ceb258318b0fb127c09b4966aa49fb395",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-8232.npz",
+      "sha256": "8f45e2f50e991b01459028d62e1f2102d904496142f5eaa65e17170b9a6dc9e4",
+      "episode_id": "a262f6b425b5-1-8232",
+      "root_id": "107e23fc6c3f250a4a2b132bae5691b179c8c81f46bcea7167d309ff2d893cf7",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a493e0be3072-5-8617.npz",
+      "sha256": "bc5feb4223be1c7758cf28c9e8992f0a265ca60f87461b943ed36e96690ea0cb",
+      "episode_id": "a493e0be3072-5-8617",
+      "root_id": "d95966e68505bac56bc0a4c5710cc8a0abde3eeba10cd2090f8ac33c4519ec51",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/38460b10eb5e-3-8167.npz",
+      "sha256": "3ee545f29b11875e1d24ac1ea578a93518cb1ded97d021e22a4ca2bb30b9b27c",
+      "episode_id": "38460b10eb5e-3-8167",
+      "root_id": "bf6e0cc379c9fd06b76427321e3eb63a1ef39260a7c3c082a30a576a4c047f44",
+      "split": "train"
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/a262f6b425b5-1-8427.npz",
+      "sha256": "f8cbbeda0580b28e6df6e70b9516196630d165dd3cffd73b39c94d24393eae83",
+      "episode_id": "a262f6b425b5-1-8427",
+      "root_id": "88830655fc5c270330bb5b4bd649f603d64f80cf5770e54c2fee91cb9a37e48e",
+      "split": "test"
+    }
+  ],
+  "batches": [
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144263.npz",
+      "sha256": "5c9b161cfd500a79c9841d8800aefe81c2e8596b24b99eaeb31bfe179afcb459",
+      "version": 144263
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144282.npz",
+      "sha256": "94339045a0b1201bc341e2e19f3eb788bcfe5a6cdb093947260071cec8e64c61",
+      "version": 144282
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144302.npz",
+      "sha256": "09741c5b5b7f505cfe57500b1320e4863df0336c3dd4446f5cbbe902c87fe9ea",
+      "version": 144302
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144322.npz",
+      "sha256": "84354f154fa8bf49877fd40551c3446f035a5d96c209fa209ae2bd37251c29c4",
+      "version": 144322
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144342.npz",
+      "sha256": "a03f1e94752a24b4b556903641d76d296807ccbb95c6c9137b4ad53ba94a00e2",
+      "version": 144342
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144362.npz",
+      "sha256": "861daad1dc1dab0c098fcd50402d0257218a6c77f4b9096fbc4477ef23518dd0",
+      "version": 144362
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144382.npz",
+      "sha256": "58f19830d8116a504fd3836c7f89d575a11ea0adb9dd010ec4361b9fd4b4c4e6",
+      "version": 144382
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144402.npz",
+      "sha256": "13eee93a92150ebe4dfad8f4bfb0bdcbb3c0979652884e94ae2091431a78d147",
+      "version": 144402
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144422.npz",
+      "sha256": "ecfb7aaa60735ba0e4591b868cf32fcca162027db8b01a860677f8693e10b8a2",
+      "version": 144422
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144442.npz",
+      "sha256": "c9673adc34a46f47abd74f8923c38b2f4cd3522eb779558646fb8165dcb93d7f",
+      "version": 144442
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144462.npz",
+      "sha256": "b28b986d683e6fcf952251619b23bc37aefdd6a392b64a99bc26f59d1a2e7b6e",
+      "version": 144462
+    },
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/batches/fb980a056974_v144482.npz",
+      "sha256": "39e810d8e65399cebbdaae9413bdf5a6ecdb0a6e72c6969496cd7416b057a52f",
+      "version": 144482
+    }
+  ]
+}

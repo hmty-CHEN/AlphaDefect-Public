@@ -1,0 +1,53 @@
+{
+  "checked_at_paris": "2026-11-01T23:30:48.366960+01:00",
+  "summary_mtime_paris": "2026-11-01T23:25:25.933440+01:00",
+  "source": "/home/chenqiyue/.local/share/sls2/ability_test/v141229-计划外",
+  "raw_recount": {
+    "n": 1000,
+    "wins": 725,
+    "duplicates": 0,
+    "versions": [
+      141229
+    ]
+  },
+  "summary": {
+    "ascensions": {
+      "10": {
+        "n": 1000,
+        "wins": 725,
+        "win_rate": 0.725,
+        "win_ci": [
+          0.696503294821948,
+          0.7517746008141762
+        ],
+        "floor_mean": 46.989,
+        "floor_median": 49.0,
+        "reach2": 0.964,
+        "reach3": 0.93,
+        "boss3_reach": 0.91,
+        "boss3_pass": 0.9626373626373627,
+        "boss3b_reach": 876,
+        "boss3b_pass": 0.8276255707762558,
+        "stuck": 0,
+        "endings": {
+          "第一幕": 36,
+          "第二幕": 34,
+          "第三幕其他": 20,
+          "第三幕 Boss": 185,
+          "卡住": 0,
+          "通关": 725
+        }
+      }
+    }
+  },
+  "meta": {
+    "ckpt": "v141229.pt",
+    "ckpt_sha256": "a5b7425a1ddc96da",
+    "engine_sha256": "5c16852e0b8d5ba8",
+    "vocab": "2286",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "host": "a",
+    "shards": 2,
+    "envs": 20
+  }
+}

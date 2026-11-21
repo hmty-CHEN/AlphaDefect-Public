@@ -1,0 +1,2135 @@
+{
+  "version": 141229,
+  "files": 300,
+  "scope": "All currently retained v141229 greedy evaluation replays; retention may select runs. Segmentation reconstructed, no values/rewards present; do not treat as training EV or unbiased policy performance.",
+  "raw_segment_steps": {
+    "n": 3113,
+    "mean": 82.83456472855767,
+    "median": 79,
+    "p05": 64,
+    "p95": 116,
+    "min": 25,
+    "max": 193
+  },
+  "macro_segment_steps": {
+    "n": 3113,
+    "mean": 16.625762929649856,
+    "median": 16,
+    "p05": 5,
+    "p95": 28,
+    "min": 2,
+    "max": 42
+  },
+  "macro_steps_to_segment_end": {
+    "n": 51756,
+    "mean": 10.303887471983925,
+    "median": 9.0,
+    "p05": 1,
+    "p95": 23,
+    "min": 1,
+    "max": 42
+  },
+  "nonterminal_segment_macro_fraction": 0.9626903160986165,
+  "per_run": [
+    {
+      "seed": "RT0001",
+      "win": true,
+      "steps": 945,
+      "segments": 11,
+      "macro": 170
+    },
+    {
+      "seed": "RT0005",
+      "win": true,
+      "steps": 874,
+      "segments": 11,
+      "macro": 181
+    },
+    {
+      "seed": "RT0006",
+      "win": true,
+      "steps": 1079,
+      "segments": 12,
+      "macro": 176
+    },
+    {
+      "seed": "RT0009",
+      "win": true,
+      "steps": 654,
+      "segments": 9,
+      "macro": 166
+    },
+    {
+      "seed": "RT0017",
+      "win": true,
+      "steps": 925,
+      "segments": 11,
+      "macro": 182
+    },
+    {
+      "seed": "RT0018",
+      "win": true,
+      "steps": 683,
+      "segments": 10,
+      "macro": 179
+    },
+    {
+      "seed": "RT0019",
+      "win": true,
+      "steps": 1027,
+      "segments": 11,
+      "macro": 171
+    },
+    {
+      "seed": "RT0020",
+      "win": true,
+      "steps": 753,
+      "segments": 9,
+      "macro": 160
+    },
+    {
+      "seed": "RT0023",
+      "win": true,
+      "steps": 893,
+      "segments": 11,
+      "macro": 175
+    },
+    {
+      "seed": "RT0024",
+      "win": true,
+      "steps": 968,
+      "segments": 13,
+      "macro": 184
+    },
+    {
+      "seed": "RT0029",
+      "win": true,
+      "steps": 801,
+      "segments": 10,
+      "macro": 161
+    },
+    {
+      "seed": "RT0030",
+      "win": true,
+      "steps": 854,
+      "segments": 9,
+      "macro": 168
+    },
+    {
+      "seed": "RT0033",
+      "win": true,
+      "steps": 874,
+      "segments": 11,
+      "macro": 187
+    },
+    {
+      "seed": "RT0035",
+      "win": true,
+      "steps": 938,
+      "segments": 10,
+      "macro": 186
+    },
+    {
+      "seed": "RT0036",
+      "win": true,
+      "steps": 1038,
+      "segments": 13,
+      "macro": 174
+    },
+    {
+      "seed": "RT0038",
+      "win": true,
+      "steps": 870,
+      "segments": 11,
+      "macro": 176
+    },
+    {
+      "seed": "RT0042",
+      "win": true,
+      "steps": 1123,
+      "segments": 12,
+      "macro": 179
+    },
+    {
+      "seed": "RT0043",
+      "win": true,
+      "steps": 738,
+      "segments": 10,
+      "macro": 165
+    },
+    {
+      "seed": "RT0054",
+      "win": true,
+      "steps": 742,
+      "segments": 9,
+      "macro": 207
+    },
+    {
+      "seed": "RT0059",
+      "win": true,
+      "steps": 819,
+      "segments": 11,
+      "macro": 174
+    },
+    {
+      "seed": "RT0061",
+      "win": true,
+      "steps": 842,
+      "segments": 10,
+      "macro": 189
+    },
+    {
+      "seed": "RT0066",
+      "win": true,
+      "steps": 749,
+      "segments": 10,
+      "macro": 180
+    },
+    {
+      "seed": "RT0084",
+      "win": true,
+      "steps": 773,
+      "segments": 10,
+      "macro": 177
+    },
+    {
+      "seed": "RT0086",
+      "win": true,
+      "steps": 856,
+      "segments": 10,
+      "macro": 173
+    },
+    {
+      "seed": "RT0089",
+      "win": true,
+      "steps": 990,
+      "segments": 12,
+      "macro": 168
+    },
+    {
+      "seed": "RT0100",
+      "win": true,
+      "steps": 737,
+      "segments": 9,
+      "macro": 177
+    },
+    {
+      "seed": "RT0101",
+      "win": true,
+      "steps": 940,
+      "segments": 11,
+      "macro": 176
+    },
+    {
+      "seed": "RT0107",
+      "win": true,
+      "steps": 905,
+      "segments": 11,
+      "macro": 169
+    },
+    {
+      "seed": "RT0110",
+      "win": true,
+      "steps": 813,
+      "segments": 10,
+      "macro": 163
+    },
+    {
+      "seed": "RT0114",
+      "win": true,
+      "steps": 1056,
+      "segments": 12,
+      "macro": 174
+    },
+    {
+      "seed": "RT0115",
+      "win": true,
+      "steps": 788,
+      "segments": 10,
+      "macro": 176
+    },
+    {
+      "seed": "RT0121",
+      "win": true,
+      "steps": 854,
+      "segments": 10,
+      "macro": 178
+    },
+    {
+      "seed": "RT0123",
+      "win": true,
+      "steps": 952,
+      "segments": 12,
+      "macro": 187
+    },
+    {
+      "seed": "RT0125",
+      "win": true,
+      "steps": 686,
+      "segments": 9,
+      "macro": 180
+    },
+    {
+      "seed": "RT0127",
+      "win": true,
+      "steps": 910,
+      "segments": 9,
+      "macro": 169
+    },
+    {
+      "seed": "RT0128",
+      "win": true,
+      "steps": 759,
+      "segments": 9,
+      "macro": 160
+    },
+    {
+      "seed": "RT0130",
+      "win": true,
+      "steps": 820,
+      "segments": 10,
+      "macro": 167
+    },
+    {
+      "seed": "RT0133",
+      "win": true,
+      "steps": 556,
+      "segments": 8,
+      "macro": 157
+    },
+    {
+      "seed": "RT0136",
+      "win": true,
+      "steps": 860,
+      "segments": 11,
+      "macro": 182
+    },
+    {
+      "seed": "RT0141",
+      "win": true,
+      "steps": 862,
+      "segments": 10,
+      "macro": 164
+    },
+    {
+      "seed": "RT0145",
+      "win": true,
+      "steps": 652,
+      "segments": 9,
+      "macro": 172
+    },
+    {
+      "seed": "RT0152",
+      "win": true,
+      "steps": 1025,
+      "segments": 13,
+      "macro": 175
+    },
+    {
+      "seed": "RT0162",
+      "win": true,
+      "steps": 843,
+      "segments": 11,
+      "macro": 190
+    },
+    {
+      "seed": "RT0167",
+      "win": true,
+      "steps": 837,
+      "segments": 11,
+      "macro": 187
+    },
+    {
+      "seed": "RT0171",
+      "win": true,
+      "steps": 1002,
+      "segments": 12,
+      "macro": 178
+    },
+    {
+      "seed": "RT0172",
+      "win": true,
+      "steps": 873,
+      "segments": 10,
+      "macro": 158
+    },
+    {
+      "seed": "RT0180",
+      "win": true,
+      "steps": 735,
+      "segments": 10,
+      "macro": 164
+    },
+    {
+      "seed": "RT0183",
+      "win": true,
+      "steps": 827,
+      "segments": 10,
+      "macro": 176
+    },
+    {
+      "seed": "RT0187",
+      "win": true,
+      "steps": 676,
+      "segments": 9,
+      "macro": 165
+    },
+    {
+      "seed": "RT0188",
+      "win": true,
+      "steps": 846,
+      "segments": 11,
+      "macro": 181
+    },
+    {
+      "seed": "RT0195",
+      "win": true,
+      "steps": 919,
+      "segments": 11,
+      "macro": 181
+    },
+    {
+      "seed": "RT0198",
+      "win": true,
+      "steps": 1151,
+      "segments": 13,
+      "macro": 181
+    },
+    {
+      "seed": "RT0201",
+      "win": true,
+      "steps": 928,
+      "segments": 11,
+      "macro": 178
+    },
+    {
+      "seed": "RT0202",
+      "win": true,
+      "steps": 932,
+      "segments": 12,
+      "macro": 163
+    },
+    {
+      "seed": "RT0209",
+      "win": true,
+      "steps": 785,
+      "segments": 10,
+      "macro": 171
+    },
+    {
+      "seed": "RT0210",
+      "win": true,
+      "steps": 913,
+      "segments": 11,
+      "macro": 174
+    },
+    {
+      "seed": "RT0212",
+      "win": true,
+      "steps": 1056,
+      "segments": 11,
+      "macro": 188
+    },
+    {
+      "seed": "RT0215",
+      "win": true,
+      "steps": 1002,
+      "segments": 10,
+      "macro": 184
+    },
+    {
+      "seed": "RT0218",
+      "win": true,
+      "steps": 825,
+      "segments": 10,
+      "macro": 178
+    },
+    {
+      "seed": "RT0222",
+      "win": true,
+      "steps": 1024,
+      "segments": 13,
+      "macro": 178
+    },
+    {
+      "seed": "RT0224",
+      "win": true,
+      "steps": 859,
+      "segments": 10,
+      "macro": 174
+    },
+    {
+      "seed": "RT0225",
+      "win": true,
+      "steps": 837,
+      "segments": 10,
+      "macro": 173
+    },
+    {
+      "seed": "RT0226",
+      "win": true,
+      "steps": 812,
+      "segments": 10,
+      "macro": 172
+    },
+    {
+      "seed": "RT0228",
+      "win": true,
+      "steps": 931,
+      "segments": 11,
+      "macro": 165
+    },
+    {
+      "seed": "RT0232",
+      "win": true,
+      "steps": 970,
+      "segments": 12,
+      "macro": 166
+    },
+    {
+      "seed": "RT0241",
+      "win": true,
+      "steps": 887,
+      "segments": 11,
+      "macro": 172
+    },
+    {
+      "seed": "RT0242",
+      "win": true,
+      "steps": 994,
+      "segments": 11,
+      "macro": 187
+    },
+    {
+      "seed": "RT0244",
+      "win": true,
+      "steps": 1050,
+      "segments": 11,
+      "macro": 175
+    },
+    {
+      "seed": "RT0247",
+      "win": true,
+      "steps": 909,
+      "segments": 11,
+      "macro": 175
+    },
+    {
+      "seed": "RT0257",
+      "win": true,
+      "steps": 767,
+      "segments": 10,
+      "macro": 168
+    },
+    {
+      "seed": "RT0258",
+      "win": true,
+      "steps": 833,
+      "segments": 10,
+      "macro": 166
+    },
+    {
+      "seed": "RT0261",
+      "win": true,
+      "steps": 1056,
+      "segments": 11,
+      "macro": 188
+    },
+    {
+      "seed": "RT0262",
+      "win": true,
+      "steps": 817,
+      "segments": 10,
+      "macro": 169
+    },
+    {
+      "seed": "RT0267",
+      "win": true,
+      "steps": 840,
+      "segments": 10,
+      "macro": 172
+    },
+    {
+      "seed": "RT0269",
+      "win": true,
+      "steps": 917,
+      "segments": 11,
+      "macro": 169
+    },
+    {
+      "seed": "RT0279",
+      "win": true,
+      "steps": 916,
+      "segments": 12,
+      "macro": 169
+    },
+    {
+      "seed": "RT0280",
+      "win": true,
+      "steps": 1050,
+      "segments": 12,
+      "macro": 166
+    },
+    {
+      "seed": "RT0283",
+      "win": true,
+      "steps": 744,
+      "segments": 10,
+      "macro": 173
+    },
+    {
+      "seed": "RT0284",
+      "win": true,
+      "steps": 897,
+      "segments": 11,
+      "macro": 164
+    },
+    {
+      "seed": "RT0285",
+      "win": true,
+      "steps": 840,
+      "segments": 10,
+      "macro": 165
+    },
+    {
+      "seed": "RT0288",
+      "win": true,
+      "steps": 829,
+      "segments": 10,
+      "macro": 176
+    },
+    {
+      "seed": "RT0290",
+      "win": true,
+      "steps": 839,
+      "segments": 11,
+      "macro": 166
+    },
+    {
+      "seed": "RT0293",
+      "win": true,
+      "steps": 941,
+      "segments": 11,
+      "macro": 178
+    },
+    {
+      "seed": "RT0296",
+      "win": true,
+      "steps": 739,
+      "segments": 9,
+      "macro": 164
+    },
+    {
+      "seed": "RT0298",
+      "win": true,
+      "steps": 823,
+      "segments": 10,
+      "macro": 182
+    },
+    {
+      "seed": "RT0300",
+      "win": true,
+      "steps": 861,
+      "segments": 10,
+      "macro": 171
+    },
+    {
+      "seed": "RT0302",
+      "win": true,
+      "steps": 928,
+      "segments": 10,
+      "macro": 167
+    },
+    {
+      "seed": "RT0306",
+      "win": true,
+      "steps": 728,
+      "segments": 10,
+      "macro": 167
+    },
+    {
+      "seed": "RT0312",
+      "win": true,
+      "steps": 813,
+      "segments": 10,
+      "macro": 184
+    },
+    {
+      "seed": "RT0313",
+      "win": true,
+      "steps": 968,
+      "segments": 10,
+      "macro": 169
+    },
+    {
+      "seed": "RT0314",
+      "win": true,
+      "steps": 737,
+      "segments": 10,
+      "macro": 191
+    },
+    {
+      "seed": "RT0316",
+      "win": true,
+      "steps": 921,
+      "segments": 11,
+      "macro": 182
+    },
+    {
+      "seed": "RT0319",
+      "win": true,
+      "steps": 994,
+      "segments": 11,
+      "macro": 176
+    },
+    {
+      "seed": "RT0320",
+      "win": true,
+      "steps": 750,
+      "segments": 9,
+      "macro": 160
+    },
+    {
+      "seed": "RT0329",
+      "win": true,
+      "steps": 761,
+      "segments": 10,
+      "macro": 176
+    },
+    {
+      "seed": "RT0330",
+      "win": true,
+      "steps": 1069,
+      "segments": 13,
+      "macro": 167
+    },
+    {
+      "seed": "RT0333",
+      "win": true,
+      "steps": 718,
+      "segments": 9,
+      "macro": 182
+    },
+    {
+      "seed": "RT0338",
+      "win": true,
+      "steps": 542,
+      "segments": 7,
+      "macro": 162
+    },
+    {
+      "seed": "RT0339",
+      "win": true,
+      "steps": 797,
+      "segments": 9,
+      "macro": 176
+    },
+    {
+      "seed": "RT0345",
+      "win": true,
+      "steps": 1040,
+      "segments": 12,
+      "macro": 163
+    },
+    {
+      "seed": "RT0347",
+      "win": true,
+      "steps": 871,
+      "segments": 10,
+      "macro": 182
+    },
+    {
+      "seed": "RT0348",
+      "win": true,
+      "steps": 842,
+      "segments": 11,
+      "macro": 190
+    },
+    {
+      "seed": "RT0351",
+      "win": true,
+      "steps": 910,
+      "segments": 11,
+      "macro": 184
+    },
+    {
+      "seed": "RT0356",
+      "win": true,
+      "steps": 795,
+      "segments": 10,
+      "macro": 167
+    },
+    {
+      "seed": "RT0363",
+      "win": true,
+      "steps": 935,
+      "segments": 12,
+      "macro": 169
+    },
+    {
+      "seed": "RT0364",
+      "win": true,
+      "steps": 987,
+      "segments": 13,
+      "macro": 175
+    },
+    {
+      "seed": "RT0367",
+      "win": true,
+      "steps": 813,
+      "segments": 10,
+      "macro": 167
+    },
+    {
+      "seed": "RT0375",
+      "win": true,
+      "steps": 741,
+      "segments": 9,
+      "macro": 168
+    },
+    {
+      "seed": "RT0379",
+      "win": true,
+      "steps": 746,
+      "segments": 9,
+      "macro": 164
+    },
+    {
+      "seed": "RT0383",
+      "win": true,
+      "steps": 983,
+      "segments": 12,
+      "macro": 184
+    },
+    {
+      "seed": "RT0390",
+      "win": true,
+      "steps": 937,
+      "segments": 11,
+      "macro": 171
+    },
+    {
+      "seed": "RT0398",
+      "win": true,
+      "steps": 865,
+      "segments": 9,
+      "macro": 157
+    },
+    {
+      "seed": "RT0399",
+      "win": true,
+      "steps": 912,
+      "segments": 11,
+      "macro": 187
+    },
+    {
+      "seed": "RT0406",
+      "win": true,
+      "steps": 800,
+      "segments": 10,
+      "macro": 173
+    },
+    {
+      "seed": "RT0408",
+      "win": true,
+      "steps": 712,
+      "segments": 10,
+      "macro": 179
+    },
+    {
+      "seed": "RT0410",
+      "win": true,
+      "steps": 1136,
+      "segments": 13,
+      "macro": 170
+    },
+    {
+      "seed": "RT0413",
+      "win": true,
+      "steps": 691,
+      "segments": 8,
+      "macro": 180
+    },
+    {
+      "seed": "RT0416",
+      "win": true,
+      "steps": 848,
+      "segments": 10,
+      "macro": 162
+    },
+    {
+      "seed": "RT0418",
+      "win": true,
+      "steps": 989,
+      "segments": 12,
+      "macro": 173
+    },
+    {
+      "seed": "RT0423",
+      "win": true,
+      "steps": 716,
+      "segments": 9,
+      "macro": 158
+    },
+    {
+      "seed": "RT0425",
+      "win": true,
+      "steps": 1076,
+      "segments": 14,
+      "macro": 180
+    },
+    {
+      "seed": "RT0433",
+      "win": true,
+      "steps": 1130,
+      "segments": 11,
+      "macro": 181
+    },
+    {
+      "seed": "RT0434",
+      "win": true,
+      "steps": 1002,
+      "segments": 12,
+      "macro": 160
+    },
+    {
+      "seed": "RT0441",
+      "win": true,
+      "steps": 952,
+      "segments": 11,
+      "macro": 184
+    },
+    {
+      "seed": "RT0442",
+      "win": true,
+      "steps": 817,
+      "segments": 9,
+      "macro": 171
+    },
+    {
+      "seed": "RT0446",
+      "win": true,
+      "steps": 589,
+      "segments": 8,
+      "macro": 178
+    },
+    {
+      "seed": "RT0447",
+      "win": true,
+      "steps": 902,
+      "segments": 10,
+      "macro": 191
+    },
+    {
+      "seed": "RT0454",
+      "win": true,
+      "steps": 726,
+      "segments": 9,
+      "macro": 170
+    },
+    {
+      "seed": "RT0463",
+      "win": true,
+      "steps": 871,
+      "segments": 11,
+      "macro": 160
+    },
+    {
+      "seed": "RT0472",
+      "win": true,
+      "steps": 1074,
+      "segments": 12,
+      "macro": 175
+    },
+    {
+      "seed": "RT0476",
+      "win": true,
+      "steps": 808,
+      "segments": 10,
+      "macro": 172
+    },
+    {
+      "seed": "RT0477",
+      "win": true,
+      "steps": 706,
+      "segments": 9,
+      "macro": 176
+    },
+    {
+      "seed": "RT0479",
+      "win": true,
+      "steps": 720,
+      "segments": 9,
+      "macro": 190
+    },
+    {
+      "seed": "RT0481",
+      "win": true,
+      "steps": 959,
+      "segments": 12,
+      "macro": 179
+    },
+    {
+      "seed": "RT0485",
+      "win": true,
+      "steps": 938,
+      "segments": 11,
+      "macro": 177
+    },
+    {
+      "seed": "RT0486",
+      "win": true,
+      "steps": 832,
+      "segments": 10,
+      "macro": 167
+    },
+    {
+      "seed": "RT0488",
+      "win": true,
+      "steps": 1162,
+      "segments": 13,
+      "macro": 176
+    },
+    {
+      "seed": "RT0489",
+      "win": true,
+      "steps": 935,
+      "segments": 12,
+      "macro": 179
+    },
+    {
+      "seed": "RT0492",
+      "win": true,
+      "steps": 1044,
+      "segments": 11,
+      "macro": 189
+    },
+    {
+      "seed": "RT0493",
+      "win": true,
+      "steps": 835,
+      "segments": 10,
+      "macro": 180
+    },
+    {
+      "seed": "RT0494",
+      "win": true,
+      "steps": 822,
+      "segments": 10,
+      "macro": 169
+    },
+    {
+      "seed": "RT0497",
+      "win": true,
+      "steps": 990,
+      "segments": 11,
+      "macro": 178
+    },
+    {
+      "seed": "RT0498",
+      "win": true,
+      "steps": 651,
+      "segments": 9,
+      "macro": 162
+    },
+    {
+      "seed": "RT0499",
+      "win": true,
+      "steps": 1016,
+      "segments": 11,
+      "macro": 174
+    },
+    {
+      "seed": "RT0500",
+      "win": true,
+      "steps": 949,
+      "segments": 12,
+      "macro": 177
+    },
+    {
+      "seed": "RT0501",
+      "win": true,
+      "steps": 778,
+      "segments": 10,
+      "macro": 175
+    },
+    {
+      "seed": "RT0507",
+      "win": true,
+      "steps": 803,
+      "segments": 11,
+      "macro": 167
+    },
+    {
+      "seed": "RT0514",
+      "win": true,
+      "steps": 961,
+      "segments": 11,
+      "macro": 179
+    },
+    {
+      "seed": "RT0524",
+      "win": true,
+      "steps": 980,
+      "segments": 12,
+      "macro": 172
+    },
+    {
+      "seed": "RT0525",
+      "win": true,
+      "steps": 598,
+      "segments": 8,
+      "macro": 177
+    },
+    {
+      "seed": "RT0526",
+      "win": true,
+      "steps": 903,
+      "segments": 11,
+      "macro": 171
+    },
+    {
+      "seed": "RT0529",
+      "win": true,
+      "steps": 764,
+      "segments": 9,
+      "macro": 166
+    },
+    {
+      "seed": "RT0532",
+      "win": true,
+      "steps": 877,
+      "segments": 11,
+      "macro": 169
+    },
+    {
+      "seed": "RT0533",
+      "win": true,
+      "steps": 843,
+      "segments": 10,
+      "macro": 167
+    },
+    {
+      "seed": "RT0534",
+      "win": true,
+      "steps": 682,
+      "segments": 8,
+      "macro": 184
+    },
+    {
+      "seed": "RT0535",
+      "win": true,
+      "steps": 753,
+      "segments": 9,
+      "macro": 174
+    },
+    {
+      "seed": "RT0538",
+      "win": true,
+      "steps": 1088,
+      "segments": 13,
+      "macro": 175
+    },
+    {
+      "seed": "RT0539",
+      "win": true,
+      "steps": 1100,
+      "segments": 13,
+      "macro": 179
+    },
+    {
+      "seed": "RT0541",
+      "win": true,
+      "steps": 807,
+      "segments": 10,
+      "macro": 162
+    },
+    {
+      "seed": "RT0549",
+      "win": true,
+      "steps": 806,
+      "segments": 9,
+      "macro": 179
+    },
+    {
+      "seed": "RT0552",
+      "win": true,
+      "steps": 712,
+      "segments": 9,
+      "macro": 176
+    },
+    {
+      "seed": "RT0553",
+      "win": true,
+      "steps": 889,
+      "segments": 11,
+      "macro": 167
+    },
+    {
+      "seed": "RT0556",
+      "win": true,
+      "steps": 838,
+      "segments": 10,
+      "macro": 164
+    },
+    {
+      "seed": "RT0557",
+      "win": true,
+      "steps": 896,
+      "segments": 10,
+      "macro": 159
+    },
+    {
+      "seed": "RT0559",
+      "win": true,
+      "steps": 1058,
+      "segments": 11,
+      "macro": 161
+    },
+    {
+      "seed": "RT0560",
+      "win": true,
+      "steps": 807,
+      "segments": 9,
+      "macro": 160
+    },
+    {
+      "seed": "RT0565",
+      "win": true,
+      "steps": 705,
+      "segments": 9,
+      "macro": 163
+    },
+    {
+      "seed": "RT0566",
+      "win": true,
+      "steps": 871,
+      "segments": 10,
+      "macro": 178
+    },
+    {
+      "seed": "RT0568",
+      "win": true,
+      "steps": 937,
+      "segments": 11,
+      "macro": 147
+    },
+    {
+      "seed": "RT0571",
+      "win": true,
+      "steps": 663,
+      "segments": 9,
+      "macro": 179
+    },
+    {
+      "seed": "RT0574",
+      "win": true,
+      "steps": 842,
+      "segments": 11,
+      "macro": 192
+    },
+    {
+      "seed": "RT0577",
+      "win": true,
+      "steps": 876,
+      "segments": 10,
+      "macro": 175
+    },
+    {
+      "seed": "RT0579",
+      "win": true,
+      "steps": 793,
+      "segments": 9,
+      "macro": 160
+    },
+    {
+      "seed": "RT0583",
+      "win": true,
+      "steps": 952,
+      "segments": 11,
+      "macro": 182
+    },
+    {
+      "seed": "RT0586",
+      "win": true,
+      "steps": 834,
+      "segments": 11,
+      "macro": 181
+    },
+    {
+      "seed": "RT0587",
+      "win": true,
+      "steps": 620,
+      "segments": 8,
+      "macro": 173
+    },
+    {
+      "seed": "RT0593",
+      "win": true,
+      "steps": 904,
+      "segments": 12,
+      "macro": 175
+    },
+    {
+      "seed": "RT0596",
+      "win": true,
+      "steps": 972,
+      "segments": 11,
+      "macro": 174
+    },
+    {
+      "seed": "RT0598",
+      "win": true,
+      "steps": 685,
+      "segments": 9,
+      "macro": 175
+    },
+    {
+      "seed": "RT0608",
+      "win": true,
+      "steps": 657,
+      "segments": 8,
+      "macro": 173
+    },
+    {
+      "seed": "RT0610",
+      "win": true,
+      "steps": 901,
+      "segments": 11,
+      "macro": 170
+    },
+    {
+      "seed": "RT0618",
+      "win": true,
+      "steps": 753,
+      "segments": 10,
+      "macro": 164
+    },
+    {
+      "seed": "RT0619",
+      "win": true,
+      "steps": 733,
+      "segments": 9,
+      "macro": 177
+    },
+    {
+      "seed": "RT0621",
+      "win": true,
+      "steps": 832,
+      "segments": 10,
+      "macro": 164
+    },
+    {
+      "seed": "RT0622",
+      "win": true,
+      "steps": 740,
+      "segments": 10,
+      "macro": 163
+    },
+    {
+      "seed": "RT0625",
+      "win": true,
+      "steps": 662,
+      "segments": 8,
+      "macro": 163
+    },
+    {
+      "seed": "RT0631",
+      "win": true,
+      "steps": 745,
+      "segments": 9,
+      "macro": 161
+    },
+    {
+      "seed": "RT0633",
+      "win": true,
+      "steps": 1073,
+      "segments": 12,
+      "macro": 157
+    },
+    {
+      "seed": "RT0635",
+      "win": true,
+      "steps": 920,
+      "segments": 10,
+      "macro": 165
+    },
+    {
+      "seed": "RT0637",
+      "win": true,
+      "steps": 1018,
+      "segments": 12,
+      "macro": 187
+    },
+    {
+      "seed": "RT0639",
+      "win": true,
+      "steps": 860,
+      "segments": 11,
+      "macro": 179
+    },
+    {
+      "seed": "RT0640",
+      "win": true,
+      "steps": 829,
+      "segments": 10,
+      "macro": 159
+    },
+    {
+      "seed": "RT0641",
+      "win": true,
+      "steps": 943,
+      "segments": 11,
+      "macro": 176
+    },
+    {
+      "seed": "RT0646",
+      "win": true,
+      "steps": 1205,
+      "segments": 14,
+      "macro": 196
+    },
+    {
+      "seed": "RT0653",
+      "win": true,
+      "steps": 982,
+      "segments": 13,
+      "macro": 189
+    },
+    {
+      "seed": "RT0657",
+      "win": true,
+      "steps": 1127,
+      "segments": 13,
+      "macro": 174
+    },
+    {
+      "seed": "RT0658",
+      "win": true,
+      "steps": 941,
+      "segments": 11,
+      "macro": 176
+    },
+    {
+      "seed": "RT0659",
+      "win": true,
+      "steps": 987,
+      "segments": 11,
+      "macro": 175
+    },
+    {
+      "seed": "RT0665",
+      "win": true,
+      "steps": 815,
+      "segments": 10,
+      "macro": 167
+    },
+    {
+      "seed": "RT0666",
+      "win": true,
+      "steps": 973,
+      "segments": 12,
+      "macro": 187
+    },
+    {
+      "seed": "RT0667",
+      "win": true,
+      "steps": 941,
+      "segments": 11,
+      "macro": 175
+    },
+    {
+      "seed": "RT0669",
+      "win": true,
+      "steps": 775,
+      "segments": 10,
+      "macro": 161
+    },
+    {
+      "seed": "RT0671",
+      "win": true,
+      "steps": 754,
+      "segments": 10,
+      "macro": 176
+    },
+    {
+      "seed": "RT0673",
+      "win": true,
+      "steps": 753,
+      "segments": 10,
+      "macro": 167
+    },
+    {
+      "seed": "RT0680",
+      "win": true,
+      "steps": 928,
+      "segments": 12,
+      "macro": 172
+    },
+    {
+      "seed": "RT0682",
+      "win": true,
+      "steps": 894,
+      "segments": 11,
+      "macro": 167
+    },
+    {
+      "seed": "RT0683",
+      "win": true,
+      "steps": 739,
+      "segments": 10,
+      "macro": 169
+    },
+    {
+      "seed": "RT0689",
+      "win": true,
+      "steps": 701,
+      "segments": 8,
+      "macro": 165
+    },
+    {
+      "seed": "RT0697",
+      "win": true,
+      "steps": 834,
+      "segments": 10,
+      "macro": 161
+    },
+    {
+      "seed": "RT0699",
+      "win": true,
+      "steps": 835,
+      "segments": 10,
+      "macro": 157
+    },
+    {
+      "seed": "RT0702",
+      "win": true,
+      "steps": 618,
+      "segments": 9,
+      "macro": 170
+    },
+    {
+      "seed": "RT0708",
+      "win": true,
+      "steps": 907,
+      "segments": 12,
+      "macro": 172
+    },
+    {
+      "seed": "RT0710",
+      "win": true,
+      "steps": 976,
+      "segments": 12,
+      "macro": 168
+    },
+    {
+      "seed": "RT0721",
+      "win": true,
+      "steps": 949,
+      "segments": 12,
+      "macro": 174
+    },
+    {
+      "seed": "RT0723",
+      "win": true,
+      "steps": 646,
+      "segments": 9,
+      "macro": 166
+    },
+    {
+      "seed": "RT0726",
+      "win": true,
+      "steps": 768,
+      "segments": 10,
+      "macro": 169
+    },
+    {
+      "seed": "RT0731",
+      "win": true,
+      "steps": 870,
+      "segments": 10,
+      "macro": 167
+    },
+    {
+      "seed": "RT0735",
+      "win": true,
+      "steps": 904,
+      "segments": 11,
+      "macro": 179
+    },
+    {
+      "seed": "RT0738",
+      "win": true,
+      "steps": 655,
+      "segments": 9,
+      "macro": 171
+    },
+    {
+      "seed": "RT0745",
+      "win": true,
+      "steps": 813,
+      "segments": 10,
+      "macro": 175
+    },
+    {
+      "seed": "RT0747",
+      "win": true,
+      "steps": 948,
+      "segments": 11,
+      "macro": 175
+    },
+    {
+      "seed": "RT0751",
+      "win": true,
+      "steps": 673,
+      "segments": 8,
+      "macro": 161
+    },
+    {
+      "seed": "RT0752",
+      "win": true,
+      "steps": 885,
+      "segments": 10,
+      "macro": 166
+    },
+    {
+      "seed": "RT0754",
+      "win": true,
+      "steps": 771,
+      "segments": 10,
+      "macro": 154
+    },
+    {
+      "seed": "RT0758",
+      "win": true,
+      "steps": 976,
+      "segments": 10,
+      "macro": 171
+    },
+    {
+      "seed": "RT0759",
+      "win": true,
+      "steps": 805,
+      "segments": 9,
+      "macro": 171
+    },
+    {
+      "seed": "RT0764",
+      "win": true,
+      "steps": 887,
+      "segments": 11,
+      "macro": 177
+    },
+    {
+      "seed": "RT0765",
+      "win": true,
+      "steps": 874,
+      "segments": 10,
+      "macro": 166
+    },
+    {
+      "seed": "RT0767",
+      "win": true,
+      "steps": 857,
+      "segments": 10,
+      "macro": 192
+    },
+    {
+      "seed": "RT0768",
+      "win": true,
+      "steps": 949,
+      "segments": 11,
+      "macro": 185
+    },
+    {
+      "seed": "RT0777",
+      "win": true,
+      "steps": 723,
+      "segments": 9,
+      "macro": 166
+    },
+    {
+      "seed": "RT0779",
+      "win": true,
+      "steps": 832,
+      "segments": 10,
+      "macro": 175
+    },
+    {
+      "seed": "RT0780",
+      "win": true,
+      "steps": 728,
+      "segments": 9,
+      "macro": 158
+    },
+    {
+      "seed": "RT0782",
+      "win": true,
+      "steps": 871,
+      "segments": 11,
+      "macro": 176
+    },
+    {
+      "seed": "RT0786",
+      "win": true,
+      "steps": 1045,
+      "segments": 12,
+      "macro": 163
+    },
+    {
+      "seed": "RT0788",
+      "win": true,
+      "steps": 871,
+      "segments": 11,
+      "macro": 193
+    },
+    {
+      "seed": "RT0789",
+      "win": true,
+      "steps": 1015,
+      "segments": 11,
+      "macro": 168
+    },
+    {
+      "seed": "RT0793",
+      "win": true,
+      "steps": 721,
+      "segments": 9,
+      "macro": 169
+    },
+    {
+      "seed": "RT0796",
+      "win": true,
+      "steps": 874,
+      "segments": 11,
+      "macro": 176
+    },
+    {
+      "seed": "RT0797",
+      "win": true,
+      "steps": 1131,
+      "segments": 13,
+      "macro": 171
+    },
+    {
+      "seed": "RT0800",
+      "win": true,
+      "steps": 649,
+      "segments": 8,
+      "macro": 167
+    },
+    {
+      "seed": "RT0804",
+      "win": true,
+      "steps": 825,
+      "segments": 10,
+      "macro": 174
+    },
+    {
+      "seed": "RT0809",
+      "win": true,
+      "steps": 640,
+      "segments": 8,
+      "macro": 160
+    },
+    {
+      "seed": "RT0812",
+      "win": true,
+      "steps": 934,
+      "segments": 11,
+      "macro": 166
+    },
+    {
+      "seed": "RT0815",
+      "win": true,
+      "steps": 673,
+      "segments": 9,
+      "macro": 175
+    },
+    {
+      "seed": "RT0826",
+      "win": true,
+      "steps": 795,
+      "segments": 10,
+      "macro": 173
+    },
+    {
+      "seed": "RT0827",
+      "win": true,
+      "steps": 703,
+      "segments": 9,
+      "macro": 162
+    },
+    {
+      "seed": "RT0830",
+      "win": true,
+      "steps": 668,
+      "segments": 9,
+      "macro": 162
+    },
+    {
+      "seed": "RT0832",
+      "win": true,
+      "steps": 856,
+      "segments": 9,
+      "macro": 157
+    },
+    {
+      "seed": "RT0833",
+      "win": true,
+      "steps": 973,
+      "segments": 11,
+      "macro": 170
+    },
+    {
+      "seed": "RT0835",
+      "win": true,
+      "steps": 939,
+      "segments": 10,
+      "macro": 175
+    },
+    {
+      "seed": "RT0839",
+      "win": true,
+      "steps": 1071,
+      "segments": 13,
+      "macro": 178
+    },
+    {
+      "seed": "RT0842",
+      "win": true,
+      "steps": 862,
+      "segments": 11,
+      "macro": 189
+    },
+    {
+      "seed": "RT0843",
+      "win": true,
+      "steps": 854,
+      "segments": 11,
+      "macro": 174
+    },
+    {
+      "seed": "RT0844",
+      "win": true,
+      "steps": 750,
+      "segments": 10,
+      "macro": 157
+    },
+    {
+      "seed": "RT0851",
+      "win": true,
+      "steps": 708,
+      "segments": 8,
+      "macro": 181
+    },
+    {
+      "seed": "RT0852",
+      "win": true,
+      "steps": 994,
+      "segments": 11,
+      "macro": 181
+    },
+    {
+      "seed": "RT0855",
+      "win": true,
+      "steps": 876,
+      "segments": 11,
+      "macro": 171
+    },
+    {
+      "seed": "RT0859",
+      "win": true,
+      "steps": 619,
+      "segments": 8,
+      "macro": 152
+    },
+    {
+      "seed": "RT0861",
+      "win": true,
+      "steps": 800,
+      "segments": 9,
+      "macro": 159
+    },
+    {
+      "seed": "RT0867",
+      "win": true,
+      "steps": 735,
+      "segments": 9,
+      "macro": 162
+    },
+    {
+      "seed": "RT0869",
+      "win": true,
+      "steps": 887,
+      "segments": 11,
+      "macro": 168
+    },
+    {
+      "seed": "RT0874",
+      "win": true,
+      "steps": 828,
+      "segments": 10,
+      "macro": 168
+    },
+    {
+      "seed": "RT0876",
+      "win": true,
+      "steps": 1003,
+      "segments": 11,
+      "macro": 174
+    },
+    {
+      "seed": "RT0882",
+      "win": true,
+      "steps": 1098,
+      "segments": 14,
+      "macro": 176
+    },
+    {
+      "seed": "RT0887",
+      "win": true,
+      "steps": 911,
+      "segments": 11,
+      "macro": 165
+    },
+    {
+      "seed": "RT0888",
+      "win": true,
+      "steps": 825,
+      "segments": 9,
+      "macro": 164
+    },
+    {
+      "seed": "RT0890",
+      "win": true,
+      "steps": 712,
+      "segments": 9,
+      "macro": 188
+    },
+    {
+      "seed": "RT0893",
+      "win": true,
+      "steps": 743,
+      "segments": 9,
+      "macro": 155
+    },
+    {
+      "seed": "RT0902",
+      "win": true,
+      "steps": 926,
+      "segments": 11,
+      "macro": 182
+    },
+    {
+      "seed": "RT0903",
+      "win": true,
+      "steps": 866,
+      "segments": 11,
+      "macro": 156
+    },
+    {
+      "seed": "RT0908",
+      "win": true,
+      "steps": 968,
+      "segments": 11,
+      "macro": 171
+    },
+    {
+      "seed": "RT0909",
+      "win": true,
+      "steps": 820,
+      "segments": 10,
+      "macro": 159
+    },
+    {
+      "seed": "RT0911",
+      "win": true,
+      "steps": 721,
+      "segments": 8,
+      "macro": 170
+    },
+    {
+      "seed": "RT0915",
+      "win": true,
+      "steps": 991,
+      "segments": 11,
+      "macro": 188
+    },
+    {
+      "seed": "RT0916",
+      "win": true,
+      "steps": 868,
+      "segments": 10,
+      "macro": 185
+    },
+    {
+      "seed": "RT0921",
+      "win": true,
+      "steps": 739,
+      "segments": 9,
+      "macro": 175
+    },
+    {
+      "seed": "RT0923",
+      "win": true,
+      "steps": 761,
+      "segments": 10,
+      "macro": 187
+    },
+    {
+      "seed": "RT0924",
+      "win": true,
+      "steps": 882,
+      "segments": 10,
+      "macro": 171
+    },
+    {
+      "seed": "RT0925",
+      "win": true,
+      "steps": 989,
+      "segments": 11,
+      "macro": 180
+    },
+    {
+      "seed": "RT0926",
+      "win": true,
+      "steps": 921,
+      "segments": 10,
+      "macro": 172
+    },
+    {
+      "seed": "RT0928",
+      "win": true,
+      "steps": 864,
+      "segments": 11,
+      "macro": 177
+    },
+    {
+      "seed": "RT0930",
+      "win": true,
+      "steps": 733,
+      "segments": 10,
+      "macro": 165
+    },
+    {
+      "seed": "RT0931",
+      "win": true,
+      "steps": 719,
+      "segments": 10,
+      "macro": 159
+    },
+    {
+      "seed": "RT0934",
+      "win": true,
+      "steps": 976,
+      "segments": 11,
+      "macro": 168
+    },
+    {
+      "seed": "RT0937",
+      "win": true,
+      "steps": 900,
+      "segments": 11,
+      "macro": 161
+    },
+    {
+      "seed": "RT0943",
+      "win": true,
+      "steps": 829,
+      "segments": 10,
+      "macro": 175
+    },
+    {
+      "seed": "RT0945",
+      "win": true,
+      "steps": 873,
+      "segments": 10,
+      "macro": 184
+    },
+    {
+      "seed": "RT0950",
+      "win": true,
+      "steps": 870,
+      "segments": 10,
+      "macro": 203
+    },
+    {
+      "seed": "RT0957",
+      "win": true,
+      "steps": 948,
+      "segments": 11,
+      "macro": 158
+    },
+    {
+      "seed": "RT0961",
+      "win": true,
+      "steps": 846,
+      "segments": 11,
+      "macro": 166
+    },
+    {
+      "seed": "RT0965",
+      "win": true,
+      "steps": 872,
+      "segments": 11,
+      "macro": 164
+    },
+    {
+      "seed": "RT0973",
+      "win": true,
+      "steps": 781,
+      "segments": 10,
+      "macro": 177
+    },
+    {
+      "seed": "RT0975",
+      "win": true,
+      "steps": 974,
+      "segments": 11,
+      "macro": 171
+    },
+    {
+      "seed": "RT0980",
+      "win": true,
+      "steps": 918,
+      "segments": 9,
+      "macro": 168
+    },
+    {
+      "seed": "RT0986",
+      "win": true,
+      "steps": 885,
+      "segments": 10,
+      "macro": 169
+    },
+    {
+      "seed": "RT0994",
+      "win": true,
+      "steps": 730,
+      "segments": 8,
+      "macro": 168
+    },
+    {
+      "seed": "RT0995",
+      "win": true,
+      "steps": 693,
+      "segments": 9,
+      "macro": 169
+    },
+    {
+      "seed": "RT0996",
+      "win": true,
+      "steps": 866,
+      "segments": 11,
+      "macro": 174
+    },
+    {
+      "seed": "RT0999",
+      "win": true,
+      "steps": 599,
+      "segments": 7,
+      "macro": 157
+    }
+  ]
+}

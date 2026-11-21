@@ -1,0 +1,250 @@
+diff --git a/src/Sts2Sim.Core/Models/Cards/Abundance.cs b/src/Sts2Sim.Core/Models/Cards/Abundance.cs
+index 3b30f37..4a27ff7 100644
+--- a/src/Sts2Sim.Core/Models/Cards/Abundance.cs
++++ b/src/Sts2Sim.Core/Models/Cards/Abundance.cs
+@@ -40,7 +40,7 @@ public sealed class Abundance : CardModel
+         CardModel? chosen = _generatedCandidates.FirstOrDefault();
+         if (chosen is null) return;
+         chosen.AssignOwner(Owner);
+-        chosen.MakeTemporaryFreeThisTurn();
++        chosen.SetToFreeThisTurn();     // 原版 SetToFreeThisTurn：本回合内或打出一次之前免费（打出后恢复原价）
+         await CardPileCmd.Generate(CombatState!, chosen, PileType.Hand);
+     }
+ 
+diff --git a/src/Sts2Sim.Core/Models/Cards/BulletTime.cs b/src/Sts2Sim.Core/Models/Cards/BulletTime.cs
+index 398232a..39710a0 100644
+--- a/src/Sts2Sim.Core/Models/Cards/BulletTime.cs
++++ b/src/Sts2Sim.Core/Models/Cards/BulletTime.cs
+@@ -17,7 +17,7 @@ public sealed class BulletTime : CardModel
+         {
+             if (!card.CostsXEnergy)
+             {
+-                card.MakeTemporaryFreeThisTurn();
++                card.SetToFreeThisTurn();     // 原版 SetToFreeThisTurn：本回合内或打出一次之前免费（打出后恢复原价）
+             }
+         }
+ 
+diff --git a/src/Sts2Sim.Core/Models/Cards/HeirloomHammer.cs b/src/Sts2Sim.Core/Models/Cards/HeirloomHammer.cs
+index 9c29c6b..188806e 100644
+--- a/src/Sts2Sim.Core/Models/Cards/HeirloomHammer.cs
++++ b/src/Sts2Sim.Core/Models/Cards/HeirloomHammer.cs
+@@ -36,7 +36,7 @@ public sealed class HeirloomHammer : CardModel, ICardDamageVariableProvider
+             1, 1, this, cancelable: false)).FirstOrDefault();
+         if (selected is not null)
+         {
+-            var clone = (CardModel)selected.MutableClone();
++            CardModel clone = selected.CreateClone();     // 原版 CreateClone：保留改费等可变状态
+             await CardPileCmd.Generate(combatState, clone, PileType.Hand);
+         }
+     }
+diff --git a/src/Sts2Sim.Core/Models/Cards/MadScience.cs b/src/Sts2Sim.Core/Models/Cards/MadScience.cs
+index b7a149a..b1cd804 100644
+--- a/src/Sts2Sim.Core/Models/Cards/MadScience.cs
++++ b/src/Sts2Sim.Core/Models/Cards/MadScience.cs
+@@ -123,7 +123,7 @@ public sealed class MadScience : CardModel, ICardDamageVariableProvider
+         {
+             return;
+         }
+-        generated.MakeTemporaryFreeThisTurn();
++        generated.SetToFreeThisTurn();     // 原版 SetToFreeThisTurn：本回合内或打出一次之前免费（打出后恢复原价）
+         await CardPileCmd.Generate(CombatState, generated, PileType.Hand);
+     }
+ 
+diff --git a/src/Sts2Sim.Core/Models/Potions/CardChoicePotionEffect.cs b/src/Sts2Sim.Core/Models/Potions/CardChoicePotionEffect.cs
+index d8d7198..52ec8fc 100644
+--- a/src/Sts2Sim.Core/Models/Potions/CardChoicePotionEffect.cs
++++ b/src/Sts2Sim.Core/Models/Potions/CardChoicePotionEffect.cs
+@@ -31,7 +31,7 @@ internal static class CardChoicePotionEffect
+         CardModel? selected = (await CardSelectCmd.SelectCardsAsync(combatState, recipient, generated, 0, 1, source, cancelable: true)).FirstOrDefault();
+         if (selected is not null)
+         {
+-            selected.MakeTemporaryFreeThisTurn();
++            selected.SetToFreeThisTurn();     // 原版 SetToFreeThisTurn：本回合内或打出一次之前免费（打出后恢复原价）
+             await CardPileCmd.Generate(combatState, selected, PileType.Hand, creator);
+         }
+     }
+diff --git a/src/Sts2Sim.Core/Models/Potions/LiquidMemories.cs b/src/Sts2Sim.Core/Models/Potions/LiquidMemories.cs
+index 019646a..c7b892f 100644
+--- a/src/Sts2Sim.Core/Models/Potions/LiquidMemories.cs
++++ b/src/Sts2Sim.Core/Models/Potions/LiquidMemories.cs
+@@ -18,7 +18,7 @@ public sealed class LiquidMemories : PotionModel
+             target.Player!.PlayerCombatState!.DiscardPile, 1, 1, this, cancelable: false)).FirstOrDefault();
+         if (selected is not null)
+         {
+-            selected.MakeTemporaryFreeThisTurn();
++            selected.SetToFreeThisTurn();     // 原版 SetToFreeThisTurn：本回合内或打出一次之前免费（打出后恢复原价）
+             CardPileCmd.Add(selected, PileType.Hand);
+         }
+ 
+diff --git a/src/Sts2Sim.Core/Models/Relics/BurningSticks.cs b/src/Sts2Sim.Core/Models/Relics/BurningSticks.cs
+index 8aeb5dd..67c88e8 100644
+--- a/src/Sts2Sim.Core/Models/Relics/BurningSticks.cs
++++ b/src/Sts2Sim.Core/Models/Relics/BurningSticks.cs
+@@ -28,7 +28,7 @@ public sealed class BurningSticks : RelicModel
+             return;
+         }
+ 
+-        CardModel copy = (CardModel)card.MutableClone();
++        CardModel copy = card.CreateClone();     // 原版 CreateClone：保留改费等可变状态
+         await CardPileCmd.Generate(card.CombatState!, copy, PileType.Hand);
+         _wasUsedThisCombat = true;
+     }
+diff --git a/src/Sts2Sim.Core/Models/Relics/Crossbow.cs b/src/Sts2Sim.Core/Models/Relics/Crossbow.cs
+index 9f1d37a..237eeb4 100644
+--- a/src/Sts2Sim.Core/Models/Relics/Crossbow.cs
++++ b/src/Sts2Sim.Core/Models/Relics/Crossbow.cs
+@@ -31,7 +31,7 @@ public sealed class Crossbow : RelicModel
+             return;
+         }
+ 
+-        generated.MakeTemporaryFreeThisTurn();
++        generated.SetToFreeThisTurn();     // 原版 SetToFreeThisTurn：本回合内或打出一次之前免费（打出后恢复原价）
+         await CardPileCmd.Generate(Owner.Creature.CombatState!, generated, PileType.Hand);
+     }
+ }
+diff --git a/src/Sts2Sim.Core/Models/Relics/MusicBox.cs b/src/Sts2Sim.Core/Models/Relics/MusicBox.cs
+index 53b70d7..8efffb7 100644
+--- a/src/Sts2Sim.Core/Models/Relics/MusicBox.cs
++++ b/src/Sts2Sim.Core/Models/Relics/MusicBox.cs
+@@ -22,8 +22,8 @@ public sealed class MusicBox : RelicModel
+     public override async Task AfterCardPlayed(CardPlay cardPlay)
+     {
+         if (!ReferenceEquals(cardPlay.Card, _cardBeingPlayed) || Owner.Creature.CombatState is null) return;
+-        var copy = (CardModel)cardPlay.Card.MutableClone();
+-        copy.AssignOwner(Owner);
++        // 原版 CardModel.CreateClone：保留本回合 / 打出前的改费等可变状态（打出时被设成免费的牌，复制品也免费）
++        CardModel copy = cardPlay.Card.CreateClone();
+         copy.AddKeywordInternal(CardKeyword.Ethereal);
+         await CardPileCmd.Generate(Owner.Creature.CombatState, copy, PileType.Hand, Owner);
+         _wasUsedThisTurn = true;
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Cards/AbundanceTests.cs b/tests/Sts2Sim.Core.Tests/Models/Cards/AbundanceTests.cs
+index 45be5d8..a7d79bd 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Cards/AbundanceTests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Cards/AbundanceTests.cs
+@@ -56,7 +56,7 @@ public sealed class AbundanceTests : IDisposable
+         Assert.Equal(3, abundance.GeneratedCandidates.Select(card => card.GetType()).Distinct().Count());
+         CardModel chosen = abundance.GeneratedCandidates[0];
+         Assert.Contains(chosen, player.PlayerCombatState!.Hand.Cards);
+-        Assert.True(chosen.TemporaryFreeThisTurn);
++        Assert.True((chosen.TemporaryCostOverrideThisTurnOrUntilPlayed == 0));
+         Assert.Equal(0, chosen.EnergyCost);
+     }
+ 
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Cards/BlankDeadCardBatchTests.cs b/tests/Sts2Sim.Core.Tests/Models/Cards/BlankDeadCardBatchTests.cs
+index 74dfc1c..36507a3 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Cards/BlankDeadCardBatchTests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Cards/BlankDeadCardBatchTests.cs
+@@ -92,7 +92,7 @@ public sealed class BlankDeadCardBatchTests : IDisposable
+ 
+         CardModel generated = Assert.Single(
+             player.PlayerCombatState!.Hand.Cards,
+-            card => card.TemporaryFreeThisTurn);
++            card => (card.TemporaryCostOverrideThisTurnOrUntilPlayed == 0));
+         Assert.IsNotType<Soot>(generated);
+     }
+ 
+@@ -117,7 +117,7 @@ public sealed class BlankDeadCardBatchTests : IDisposable
+ 
+         CardModel generated = Assert.Single(
+             player.PlayerCombatState!.Hand.Cards,
+-            card => card.TemporaryFreeThisTurn);
++            card => (card.TemporaryCostOverrideThisTurnOrUntilPlayed == 0));
+         Assert.Contains(generated.Id, characterPoolIds);
+         Assert.Same(player, generated.Owner);
+     }
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Events/GloryEventTests.cs b/tests/Sts2Sim.Core.Tests/Models/Events/GloryEventTests.cs
+index b209d44..b806274 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Events/GloryEventTests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Events/GloryEventTests.cs
+@@ -542,7 +542,7 @@ public sealed class GloryEventTests : IDisposable
+         else
+         {
+             CardModel generated = Assert.Single(player.PlayerCombatState!.Hand.Cards);
+-            Assert.True(generated.TemporaryFreeThisTurn);
++            Assert.True((generated.TemporaryCostOverrideThisTurnOrUntilPlayed == 0));
+         }
+     }
+ 
+@@ -567,7 +567,7 @@ public sealed class GloryEventTests : IDisposable
+         CardModel generated = Assert.Single(player.PlayerCombatState!.Hand.Cards);
+         Assert.Equal(Assert.Single(expected).Id, generated.Id);
+         Assert.Equal(probe.Counter - counterBefore, rng.Counter - counterBefore);
+-        Assert.True(generated.TemporaryFreeThisTurn);
++        Assert.True((generated.TemporaryCostOverrideThisTurnOrUntilPlayed == 0));
+     }
+ 
+     [Theory]
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Potions/CardChoicePotionFidelityTests.cs b/tests/Sts2Sim.Core.Tests/Models/Potions/CardChoicePotionFidelityTests.cs
+index 01be6db..bc60ac3 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Potions/CardChoicePotionFidelityTests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Potions/CardChoicePotionFidelityTests.cs
+@@ -77,7 +77,7 @@ public sealed class CardChoicePotionFidelityTests : IDisposable
+         CardModel selected = Assert.Single(player.PlayerCombatState!.Hand.Cards);
+         Assert.Same(source.Candidates[0], selected);
+         Assert.All(source.Candidates, card => Assert.Same(player, card.Owner));
+-        Assert.True(selected.TemporaryFreeThisTurn);
++        Assert.True(selected.CostsXEnergy || selected.TemporaryCostOverrideThisTurnOrUntilPlayed == 0);     // X 费牌不被本地改费覆盖（同 SetToFreeThisTurn）
+         Assert.Equal(0, selected.EnergyCost);
+         Assert.All(source.Candidates.Skip(1), card => Assert.Null(card.Pile));
+     }
+@@ -138,7 +138,7 @@ public sealed class CardChoicePotionFidelityTests : IDisposable
+         {
+             CardModel selected = Assert.Single(recipient.PlayerCombatState!.Hand.Cards);
+             Assert.Same(source.Candidates[0], selected);
+-            Assert.True(selected.TemporaryFreeThisTurn);
++            Assert.True((selected.TemporaryCostOverrideThisTurnOrUntilPlayed == 0));
+             Assert.Equal(0, selected.EnergyCost);
+         }
+     }
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Potions/CommonPotionBatch1Tests.cs b/tests/Sts2Sim.Core.Tests/Models/Potions/CommonPotionBatch1Tests.cs
+index b42d209..a84cefa 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Potions/CommonPotionBatch1Tests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Potions/CommonPotionBatch1Tests.cs
+@@ -249,7 +249,7 @@ public sealed class CommonPotionBatch1Tests : IDisposable
+             room.Engine.State.RunState.Rng.CombatCardGeneration.Counter,
+             room.Engine.State.RunState.Rng.CombatCardSelection.Counter,
+             selected.Pile!.Type,
+-            selected.TemporaryFreeThisTurn,
++            (selected.TemporaryCostOverrideThisTurnOrUntilPlayed == 0),
+             selected.EnergyCost);
+     }
+ 
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Potions/CommonPotionBatch2Tests.cs b/tests/Sts2Sim.Core.Tests/Models/Potions/CommonPotionBatch2Tests.cs
+index 8b25d8f..a624145 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Potions/CommonPotionBatch2Tests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Potions/CommonPotionBatch2Tests.cs
+@@ -209,7 +209,7 @@ public sealed class CommonPotionBatch2Tests : IDisposable
+             room.Engine.State.RunState.Rng.CombatCardGeneration.Counter,
+             room.Engine.State.RunState.Rng.CombatCardSelection.Counter,
+             selected.Pile!.Type,
+-            selected.TemporaryFreeThisTurn,
++            (selected.TemporaryCostOverrideThisTurnOrUntilPlayed == 0),
+             selected.EnergyCost);
+     }
+ 
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Potions/RarePotionBatch2Tests.cs b/tests/Sts2Sim.Core.Tests/Models/Potions/RarePotionBatch2Tests.cs
+index dad6d2c..fc80ecd 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Potions/RarePotionBatch2Tests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Potions/RarePotionBatch2Tests.cs
+@@ -381,7 +381,7 @@ public sealed class RarePotionBatch2Tests : IDisposable
+ 
+         Assert.Equal(CardPile.MaxCardsInHand, player.PlayerCombatState!.Hand.Cards.Count);
+         Assert.Contains(selected, player.PlayerCombatState.DiscardPile.Cards);
+-        Assert.True(selected.TemporaryFreeThisTurn);
++        Assert.True((selected.TemporaryCostOverrideThisTurnOrUntilPlayed == 0));
+         Assert.Equal(0, selected.EnergyCost);
+     }
+ 
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Relics/RareRelicBatch3Tests.cs b/tests/Sts2Sim.Core.Tests/Models/Relics/RareRelicBatch3Tests.cs
+index 40c38c0..fd1ceb4 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Relics/RareRelicBatch3Tests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Relics/RareRelicBatch3Tests.cs
+@@ -672,7 +672,7 @@ public sealed class RareRelicBatch3Tests : IDisposable
+ 
+         CardModel generated =
+             Assert.Single(
+-                player.PlayerCombatState!.Hand.Cards, card => card.TemporaryFreeThisTurn);
++                player.PlayerCombatState!.Hand.Cards, card => (card.TemporaryCostOverrideThisTurnOrUntilPlayed == 0));
+         Assert.False(generated.IsColorless);
+         Assert.Same(player, generated.Owner);
+         Assert.Equal(1, player.PlayerCombatState.CardsGeneratedThisCombat);

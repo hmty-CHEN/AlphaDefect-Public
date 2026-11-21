@@ -1,0 +1,76 @@
+[
+ {
+  "name": "regent_student_e8",
+  "src": "/root/distill/student_e8.pt",
+  "release": "weights-v2",
+  "dr": "Regent #29",
+  "obs_format": 20,
+  "vocab_n": 2286,
+  "total_steps": 2138656954,
+  "teachers": "Regent ensemble E8: raw weights of v53840, v47300, v48320, v49320, v50300, v51320, v52320, v53080, probability-averaged",
+  "notes": "Best Regent network. Student distilled from the probability-averaged ensemble E8 (8 snapshots spread over ~6,500 versions) with 4,000 steps of Adam 1e-4, initialized from the EMA weights of v54,603; the version field is that starting point. total_steps is the starting point's cumulative training decisions.",
+  "eval": "74.1% greedy on 1,000 W1 seeds; 77.2% (95% CI 74.5-79.7%) with Act-3 double-boss PIMC search on the same seeds (greedy, A10)"
+ },
+ {
+  "name": "silent_raw_v24620",
+  "src": "/root/release_v2/silent_src.pt",
+  "release": "weights-v2",
+  "dr": "Silent #1-#14",
+  "notes": "Silent learner (raw) weights at v24,620: trained from scratch since 2026-11-09 with Muon on the hidden 2-D weights and Adam elsewhere, observation format 23 from v19,901, skipping easy fights since v24,208. This is the network routine evaluation measures, and the trunk the combat-outcome heads were trained on.",
+  "eval": "63.2% over the 12 routine rounds v24,401-v24,599 (2,911/4,608; 384 P1 seeds per round, raw weights, greedy, A10); this exact version was not evaluated separately"
+ },
+ {
+  "name": "silent_ema_v24620",
+  "src": "/root/release_v2/silent_src.pt",
+  "state_key": "ema",
+  "release": "weights-v2",
+  "dr": "Silent #1-#14",
+  "notes": "EMA copy (decay 0.999 per version) of the Silent learner at v24,620. Not evaluated on the Silent. On the Regent the EMA copy beat the raw weights of the same version by 4.4 pp (Regent DR #24 addendum); on the Defect there was no difference (DR #265).",
+  "eval": "not evaluated"
+ },
+ {
+  "name": "silent_combat_outcome_heads_v24620",
+  "src": "/root/release_v2/silent_src.pt",
+  "kind": "co_heads",
+  "trunk": "silent_raw_v24620.pt",
+  "release": "weights-v2",
+  "dr": "Silent #14",
+  "calibration": {
+   "window": "v24208-v24620",
+   "definition": "mean of (actual HP after the fight / max HP at the start) minus the raw HP head's predicted mean, on eligible fights that were played; keys act<n>_<room>",
+   "hp_residual": {
+    "act1_Elite": {
+     "mean_residual": 0.0022,
+     "n": 25996
+    },
+    "act1_Monster": {
+     "mean_residual": 0.0053,
+     "n": 83107
+    },
+    "act2_Elite": {
+     "mean_residual": 0.0046,
+     "n": 21043
+    },
+    "act2_Monster": {
+     "mean_residual": 0.0032,
+     "n": 56752
+    },
+    "act3_Elite": {
+     "mean_residual": 0.003,
+     "n": 14585
+    },
+    "act3_Monster": {
+     "mean_residual": 0.0004,
+     "n": 37169
+    }
+   },
+   "potions": {
+    "potion_fights": 313454,
+    "predicted_use": 0.22,
+    "actual_use": 0.215
+   }
+  },
+  "notes": "Combat-outcome heads of the Silent at v24,620 (sts2rl.model.CombatOutcomeHeads): 41-bin distribution of HP after a won fight (fraction of max HP at the start) and per-potion use probability. They read the detached trunk embedding g of silent_raw_v24620.pt; used in training to sample outcomes of skipped fights (Silent DR #14).",
+  "eval": "played eligible fights v24,208-v24,620: HP residual +0.0004 to +0.0053 of max HP by (act, room); potions predicted 0.220 vs actual 0.215 (313,454 potion-fights)"
+ }
+]

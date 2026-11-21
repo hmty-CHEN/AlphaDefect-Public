@@ -1,0 +1,8 @@
+{
+ "engine": "rs",
+ "procs": 1,
+ "seconds": 20.0,
+ "steps_per_s": 7521.2,
+ "combats_per_s": 216.72,
+ "steps_per_combat": 34.7
+}

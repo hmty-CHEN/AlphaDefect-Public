@@ -1,0 +1,50 @@
+{
+  "started_at": "2026-10-29T18:43:14.239721+01:00",
+  "game_version": "v0.111.0",
+  "hot_root": "/home/chenqiyue/dev/sls2",
+  "delivery_root": "/mnt/c/主存储文件/脚本开发/sls2/观测审计/2026-10-29",
+  "scope": "只读实现审计与独立进程最小复现；不修改训练代码、配置、检查点或线上进程",
+  "files": {
+    "engine/Sts2Headless/Engine/Observation.cs": "2c793159dff54c3fc072feaef236e5e4b6fa82366437aad0a9cdfd86ccdd9c53",
+    "engine/Sts2Headless/Engine/RunSession.cs": "295b37361d78ea834dd712fef573b033c4b52a12e95221db8bc5f7ee05e9c0f2",
+    "engine/Sts2Headless/HeadlessFixes.cs": "1573f0d6ce543bf4f08b9ba81402b78dca03ff96dc5198e163f23f3688bc83ef",
+    "engine/Sts2Headless/AgentCardSelector.cs": "2d2d512417394804f5eb4889bd8b768b08ef4d30c1375553ca0a9ae7adfc77bc",
+    "python/sts2rl/features.py": "78ad7432e8f63633461fa0b533d0f33f37a43a5a7093e5593ece04ee4e6278c1",
+    "python/sts2rl/model.py": "39cfd0522d9525944cfbd5e6714fe1c918a0158024c17635011a77202849f0b0",
+    "python/sts2rl/replay.py": "055ea9e8bfd8c7ed8734f2ec7d101f96e0c84dc4fc9ed3c897042af83ce17b1d"
+  },
+  "prior_scheduled": [
+    "属性与身份绑定",
+    "随机伤害风险",
+    "苦痛种类",
+    "局外路线摘要",
+    "附魔失效状态",
+    "双 Boss 顺序",
+    "零球弹幕",
+    "防伤预演",
+    "遗物有效状态",
+    "选牌来源与出牌区",
+    "出牌触发额外自伤",
+    "遭遇历史",
+    "连打任务上下文",
+    "疯狂科学变体",
+    "被动触发次数（镀金缆线）"
+  ],
+  "finished_at": "2026-10-29T19:05:54.736171+01:00",
+  "current_files_at_finish": {
+    "engine/Sts2Headless/Engine/Observation.cs": "6153286fd5d696c1d4f47230b3865ed7a12bd132ea559b73605e3f6423c8a1a4",
+    "engine/Sts2Headless/Engine/RunSession.cs": "45036573fa50b6cf4252f23fff9a66b04eeda1b36ab07d941572c3734f78d688",
+    "engine/Sts2Headless/HeadlessFixes.cs": "1573f0d6ce543bf4f08b9ba81402b78dca03ff96dc5198e163f23f3688bc83ef",
+    "engine/Sts2Headless/AgentCardSelector.cs": "2d2d512417394804f5eb4889bd8b768b08ef4d30c1375553ca0a9ae7adfc77bc",
+    "python/sts2rl/features.py": "e6d575e2a1b91dac6957375d0f9bc9407829114ec0e3ce1cc4c85990fae81079",
+    "python/sts2rl/model.py": "36f375d6229ea2eca58f2e57bf2b43f032219d2abbc5b5e53d0f79a88625c50a",
+    "python/sts2rl/replay.py": "ddb1223422c043092bd0fb36a7194d22e5c95a832cd10b4af171586600973df3"
+  },
+  "runtime_tested_format": 14,
+  "runtime_source_sha256": "d216cb58b30ace0856bb0f38321e84a9c1d0a2b715d87389c5e365520e43a31c",
+  "local_reviewed_format": 15,
+  "version_note": "并发会话在开发v15；本轮没有构建或部署它。微型行为复现使用当前线上v14独立进程；状态类缺口另对v15源码复核。",
+  "round2_manifest": "round2/manifest.json",
+  "latest_pending_count": 0,
+  "latest_round": 2
+}

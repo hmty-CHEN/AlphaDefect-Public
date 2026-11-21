@@ -1,0 +1,43 @@
+{
+ "version": 165018,
+ "args": {
+  "cmd": "run",
+  "items": "../losses_e.json",
+  "ckpt": "/root/defect_v113/ck/student_e_v165018.pt",
+  "dll": "/root/paper_exp/b3agent/repo/engine/Sts2Headless/bin/Release/net9.0/Sts2Headless.dll",
+  "device": "cuda",
+  "threads": 2,
+  "seeds": "01AMHEPXK0,0VC1Z7RC6B,1QGJ5WW7LW,22N2DFTGGS,2MWTHRLG0V,47QAD1F7A5,4RQY1J90EM,4V4Q6H1EHQ,5JSHLP6032,66PXTNSJ90,6L5R1L6XQA,6SHA00VKNT,75AG4BE53D,7WG9HUKMK2,89VCJJNTF5,8R2RUWNZL0,8WZNFXWSJM,9W500H2R8S,AUQDAAE2BT,BNVJDERZA1,DJMYSHLUVW,E6KZ28G5Z0,EFM462Y2T6,ESDDDMWA7D,F3KULZEMMW,F6RB0VD2TC,FQEDL69VPB,G5BBXCL6HW,J17BQ486FH,JFCGMKG1PP,JJ0WGRCFDW,KVQWLKWBHM,KZMMDDEZG4,L5LJD47QDJ,LD808TDTZT,LU1JQPR012,M9MLVQ681A,MSPDKQUSFF,P049XK6FQF,PU5NK2WXRU,Q1E1NCS9H2,QHU9X5SRZS,QMYJMRA4UH,SNGJ5JC477,SS7QPKG1TT,T6D650ERX5,T777PCHETM,TT8S8RLJNA,TUXD1FW73N,TWW536WH4N,U4FCY94Q9C,U5NZ3MAWWG,ULKF9NDJ0X,UXLH7RVXX3,V5W494YFM2,XW7F6B1J73,Y1MUZE73X5,Y4UUGKACB2,Z28S52SVDT,Z3MS3BW87B,7AUY8BRQ6H,06XV752Z6N,QP7N5XMAHS",
+  "pre": "policy",
+  "real_mode": "run",
+  "policy_mode": "run",
+  "value_mode": "combat",
+  "tau": 0.9,
+  "pmin": 0.02,
+  "z": 2.0,
+  "k": 4,
+  "sims0": 4,
+  "rounds": 2,
+  "leaf": 12,
+  "procs": 4,
+  "shard": "0/2",
+  "nondeterministic": false,
+  "out": "../pimc_policy",
+  "search": true,
+  "setup_only": false,
+  "b1_from": null,
+  "limit": 0,
+  "again": false
+ },
+ "params": {
+  "tau": 0.9,
+  "k": 4,
+  "pmin": 0.02,
+  "sims0": 4,
+  "rounds": 2,
+  "z": 2.0,
+  "leaf": 12,
+  "max_steps": 600
+ },
+ "start": 1795285820
+}

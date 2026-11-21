@@ -1,0 +1,95 @@
+diff --git a/src/Sts2Sim.Core/Hooks/Hook.cs b/src/Sts2Sim.Core/Hooks/Hook.cs
+index 915f5c2..a1becbc 100644
+--- a/src/Sts2Sim.Core/Hooks/Hook.cs
++++ b/src/Sts2Sim.Core/Hooks/Hook.cs
+@@ -530,9 +530,24 @@ public static class Hook
+     {
+         if (combatState.IsOverOrEnding() && !combatState.IsStarting())
+             yield break;
+-        // Keep the simulator's existing run/combat composition here (deviation #31).
++        // 原版 Hook.IterateCombatHookListeners 就是 CombatState.IterateHookListeners：逐个生物先给能力，
++        // 玩家再接遗物、药水、充能球、各牌堆的牌。原来这里先给全部遗物、药水再给战斗里的监听者（偏离 #31），
++        // 同一时机的能力与遗物先后颠倒（如赤红披风掉血触发百年拼图抽牌要排在暖手套选牌之前）。
++        // 只给具体的 CombatState 换成原版顺序（集合不变）；整局层面另有的监听者（测试探针等，不是玩家的遗物、药水）照旧排在最前。
++        if (combatState is not CombatState concrete)
++        {
++            foreach (AbstractModel model in combatState.RunState.IterateHookListeners(combatState))
++                yield return model;
++            yield break;
++        }
++        List<AbstractModel> ordered = concrete.IterateHookListeners(includePlayerInventory: true).ToList();
++        var inCombat = new HashSet<AbstractModel>(ordered, ReferenceEqualityComparer.Instance);
++        List<AbstractModel> extra = combatState.RunState.IterateHookListeners(combatState)
++            .Where(model => !inCombat.Contains(model)).ToList();
+         // Actual dispatch loops apply lifecycle eligibility; this helper preserves raw capture.
+-        foreach (AbstractModel model in combatState.RunState.IterateHookListeners(combatState))
++        foreach (AbstractModel model in extra)
++            yield return model;
++        foreach (AbstractModel model in ordered)
+             yield return model;
+     }
+ 
+@@ -901,6 +916,13 @@ public static class Hook
+             (combatState as CombatState)?.Observer?.SideTurnEndListener(nameof(AfterSideTurnEnd), model, side, false);
+             model.InvokeExecutionFinished();
+         }
++        // 原版第二轮：AfterSideTurnEndLate
++        foreach (AbstractModel model in IterateCombatHookListeners(combatState))
++        {
++            if (!IsEligibleHookListener(model)) continue;
++            await model.AfterSideTurnEndLate(side, participants);
++            model.InvokeExecutionFinished();
++        }
+     }
+ 
+     public static async Task AfterEnergyReset(ICombatState combatState, Player player)
+diff --git a/src/Sts2Sim.Core/Models/AbstractModel.cs b/src/Sts2Sim.Core/Models/AbstractModel.cs
+index 1535346..c324c73 100644
+--- a/src/Sts2Sim.Core/Models/AbstractModel.cs
++++ b/src/Sts2Sim.Core/Models/AbstractModel.cs
+@@ -304,6 +304,12 @@ public abstract class AbstractModel : IComparable<AbstractModel>
+         return Task.CompletedTask;
+     }
+ 
++    /// <summary>原版 <c>AfterSideTurnEndLate</c>：所有监听者的 AfterSideTurnEnd 都结算完之后再逐个调用（瓦解在这里扣血，排在格挡盾之后）。</summary>
++    public virtual Task AfterSideTurnEndLate(CombatSide side, IEnumerable<Creature> participants)
++    {
++        return Task.CompletedTask;
++    }
++
+     public virtual Task AfterEnergyReset(Player player)
+     {
+         return Task.CompletedTask;
+diff --git a/src/Sts2Sim.Core/Models/Powers/DisintegrationPower.cs b/src/Sts2Sim.Core/Models/Powers/DisintegrationPower.cs
+index ad2bae5..9552dd3 100644
+--- a/src/Sts2Sim.Core/Models/Powers/DisintegrationPower.cs
++++ b/src/Sts2Sim.Core/Models/Powers/DisintegrationPower.cs
+@@ -10,9 +10,11 @@ public sealed class DisintegrationPower : PowerModel
+ {
+     public override PowerType Type => PowerType.Debuff;
+     public override PowerStackType StackType => PowerStackType.Counter;
+-    public override Task AfterSideTurnEnd(CombatSide side, IEnumerable<Creature> participants) =>
+-        side == Owner.Side
++    // 原版挂在 AfterSideTurnEndLate（同一时机的 AfterSideTurnEnd 全部结算完之后，如格挡盾先按扣血前的格挡判定），
++    // 伤害来源是自己
++    public override Task AfterSideTurnEndLate(CombatSide side, IEnumerable<Creature> participants) =>
++        participants.Contains(Owner)
+             ? CreatureCmd.Damage(Owner.CombatState!, [Owner], Amount,
+-                ValueProp.Unpowered, null, null, null)
++                ValueProp.Unpowered, Owner, null, null)
+             : Task.CompletedTask;
+ }
+diff --git a/src/Sts2Sim.Core/Models/Relics/Orichalcum.cs b/src/Sts2Sim.Core/Models/Relics/Orichalcum.cs
+index d1db74d..737cad7 100644
+--- a/src/Sts2Sim.Core/Models/Relics/Orichalcum.cs
++++ b/src/Sts2Sim.Core/Models/Relics/Orichalcum.cs
+@@ -24,7 +24,8 @@ public sealed class Orichalcum : RelicModel
+         return Task.CompletedTask;
+     }
+ 
+-    public override Task BeforeSideTurnEndEarly(
++    // 原版在 BeforeSideTurnEndVeryEarly 判定格挡是否为 0（早于覆甲等 BeforeSideTurnEndEarly 给的格挡）
++    public override Task BeforeSideTurnEndVeryEarly(
+         CombatSide side,
+         IEnumerable<Creature> participants)
+     {

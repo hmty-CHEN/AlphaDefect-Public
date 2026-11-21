@@ -1,0 +1,7 @@
+{
+  "batch": 81243,
+  "runs": 1000,
+  "phantasmal_gardeners_runs": 366,
+  "phantasmal_gardeners_battles": 374,
+  "note": "历史冻结批次，只用于覆盖面，不归因于当前模型。"
+}

@@ -1,0 +1,43 @@
+{
+ "version": 165018,
+ "args": {
+  "cmd": "run",
+  "items": "../losses_e.json",
+  "ckpt": "/root/defect_v113/ck/student_e_v165018.pt",
+  "dll": "/root/paper_exp/b3agent/repo/engine/Sts2Headless/bin/Release/net9.0/Sts2Headless.dll",
+  "device": "cuda",
+  "threads": 2,
+  "seeds": "1QGJ5WW7LW,F3KULZEMMW,75AG4BE53D,TUXD1FW73N,DJMYSHLUVW,JFCGMKG1PP,E6KZ28G5Z0,66PXTNSJ90,QHU9X5SRZS,6L5R1L6XQA,KVQWLKWBHM,2MWTHRLG0V,T777PCHETM,U4FCY94Q9C,EFM462Y2T6,4RQY1J90EM,TWW536WH4N,Y1MUZE73X5,JJ0WGRCFDW,J17BQ486FH,Q1E1NCS9H2,V5W494YFM2,ESDDDMWA7D,L5LJD47QDJ",
+  "pre": "policy",
+  "real_mode": "run",
+  "policy_mode": "run",
+  "value_mode": "combat",
+  "tau": 0.9,
+  "pmin": 0.02,
+  "z": 2.0,
+  "k": 4,
+  "sims0": 4,
+  "rounds": 2,
+  "leaf": 12,
+  "procs": 4,
+  "shard": "0/6",
+  "nondeterministic": false,
+  "out": "../pimc_policy_b",
+  "search": true,
+  "setup_only": false,
+  "b1_from": null,
+  "limit": 0,
+  "again": false
+ },
+ "params": {
+  "tau": 0.9,
+  "k": 4,
+  "pmin": 0.02,
+  "sims0": 4,
+  "rounds": 2,
+  "z": 2.0,
+  "leaf": 12,
+  "max_steps": 600
+ },
+ "start": 1795289982
+}

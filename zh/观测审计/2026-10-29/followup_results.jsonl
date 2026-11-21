@@ -1,0 +1,6 @@
+{"check": "metadata", "time": "2026-10-30T01:56:34.102243+08:00", "observation_sha256": "d216cb58b30ace0856bb0f38321e84a9c1d0a2b715d87389c5e365520e43a31c"}
+{"check": "F09", "format": 14, "enemy_hp": 40.0, "candidate_features": [0.0, 0.0, 0.0, 0.0, 42.0, 1.0, 42.0, 1.0], "actual_hp_after": 20.0, "actual_alive": true}
+{"check": "S17", "initial_card_features": [1.0, 0.0, -1.0, 0.0, 1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 6.0, 0.0, 0.0, 0.0], "discard_card_features": [1.0, 0.0, -1.0, 0.0, 0.0, 6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 6.0, 0.0, 0.0, 0.0], "zone": 5, "actual_first_damage": 6.0, "limitation": "只证明弃牌记录没有积累伤害；未声称整帧相同。"}
+{"check": "S04-toric", "upgrade": 0, "power_features": [[2.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]], "block_next_turn": 5.0}
+{"check": "S04-toric", "upgrade": 1, "power_features": [[2.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]], "block_next_turn": 7.0}
+{"check": "F06", "predicted_damage": 26.0, "actual_net_hp_loss": 21, "note": "再生在伤害结算前回血；需明确特征是总伤害还是净生命变化。"}

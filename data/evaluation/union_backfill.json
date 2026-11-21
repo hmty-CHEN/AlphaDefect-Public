@@ -1,0 +1,79 @@
+{
+ "accepted": [
+  {
+   "version": 146824,
+   "dir": "/home/chenqiyue/.local/share/sls2/ability_test/v146824-并集补测",
+   "time": 1793617200.1,
+   "gap": 146963,
+   "seeds": 1000,
+   "win_rate": 0.734,
+   "union_before": 974,
+   "union_after": 976,
+   "gain": 2,
+   "base_snapshots": 9
+  },
+  {
+   "version": 143097,
+   "dir": "/home/chenqiyue/.local/share/sls2/ability_test/v143097-并集补测",
+   "time": 1793620370.1,
+   "gap": 147404,
+   "seeds": 1000,
+   "win_rate": 0.746,
+   "union_before": 977,
+   "union_after": 980,
+   "gain": 3,
+   "base_snapshots": 11
+  },
+  {
+   "version": 142410,
+   "dir": "/home/chenqiyue/.local/share/sls2/ability_test/v142410-并集补测",
+   "time": 1793623416.3,
+   "gap": 147859,
+   "seeds": 1000,
+   "win_rate": 0.747,
+   "union_before": 983,
+   "union_after": 986,
+   "gain": 3,
+   "base_snapshots": 13
+  },
+  {
+   "version": 142089,
+   "dir": "/home/chenqiyue/.local/share/sls2/ability_test/v142089-并集补测",
+   "time": 1793627124.7,
+   "gap": 148300,
+   "seeds": 1000,
+   "win_rate": 0.753,
+   "union_before": 989,
+   "union_after": 990,
+   "gain": 1,
+   "base_snapshots": 15
+  },
+  {
+   "version": 140142,
+   "dir": "/home/chenqiyue/.local/share/sls2/ability_test/v140142-并集补测",
+   "time": 1793633424.6,
+   "gap": 148980,
+   "seeds": 1000,
+   "win_rate": 0.743,
+   "union_before": 991,
+   "union_after": 992,
+   "gain": 1,
+   "base_snapshots": 18
+  }
+ ],
+ "rejected": [
+  {
+   "version": 141980,
+   "dir": "/home/chenqiyue/.local/share/sls2/ability_test/v141980-并集补测",
+   "time": 1793630184.6,
+   "gap": 148538,
+   "seeds": 1000,
+   "win_rate": 0.733,
+   "union_before": 991,
+   "union_after": 991,
+   "gain": 0,
+   "base_snapshots": 17
+  }
+ ],
+ "failed": []
+}

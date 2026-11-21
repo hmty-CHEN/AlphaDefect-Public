@@ -1,0 +1,164 @@
+{
+ "n": 1000,
+ "wins": 719,
+ "deaths_top": [
+  [
+   "2:Boss:AEONGLASS_BOSS",
+   85
+  ],
+  [
+   "2:Boss:QUEEN_BOSS",
+   48
+  ],
+  [
+   "2:Boss:TEST_SUBJECT_BOSS",
+   44
+  ],
+  [
+   "1:Boss:KNOWLEDGE_DEMON_BOSS",
+   15
+  ],
+  [
+   "1:Boss:KAISER_CRAB_BOSS",
+   13
+  ],
+  [
+   "1:Boss:THE_INSATIABLE_BOSS",
+   9
+  ],
+  [
+   "0:Elite:PHANTASMAL_GARDENERS_ELITE",
+   6
+  ],
+  [
+   "1:Elite:ENTOMANCER_ELITE",
+   6
+  ],
+  [
+   "0:Boss:THE_KIN_BOSS",
+   4
+  ],
+  [
+   "1:Elite:INFESTED_PRISMS_ELITE",
+   4
+  ],
+  [
+   "0:Boss:SOUL_FYSH_BOSS",
+   4
+  ],
+  [
+   "2:Elite:MECHA_KNIGHT_ELITE",
+   4
+  ],
+  [
+   "2:Elite:KNIGHTS_ELITE",
+   4
+  ],
+  [
+   "0:Boss:LAGAVULIN_MATRIARCH_BOSS",
+   4
+  ],
+  [
+   "1:Elite:DECIMILLIPEDE_ELITE",
+   3
+  ]
+ ],
+ "act3_boss1": {
+  "AEONGLASS_BOSS": [
+   266,
+   291,
+   0.914
+  ],
+  "QUEEN_BOSS": [
+   285,
+   297,
+   0.96
+  ],
+  "TEST_SUBJECT_BOSS": [
+   304,
+   308,
+   0.987
+  ]
+ },
+ "act3_boss2_by_order": {
+  "AEONGLASS_BOSS->QUEEN_BOSS": [
+   116,
+   135,
+   0.859
+  ],
+  "AEONGLASS_BOSS->TEST_SUBJECT_BOSS": [
+   111,
+   131,
+   0.847
+  ],
+  "QUEEN_BOSS->AEONGLASS_BOSS": [
+   100,
+   140,
+   0.714
+  ],
+  "QUEEN_BOSS->TEST_SUBJECT_BOSS": [
+   125,
+   145,
+   0.862
+  ],
+  "TEST_SUBJECT_BOSS->AEONGLASS_BOSS": [
+   133,
+   153,
+   0.869
+  ],
+  "TEST_SUBJECT_BOSS->QUEEN_BOSS": [
+   134,
+   151,
+   0.887
+  ]
+ },
+ "boss2_by_entry_hp_pct": {
+  "0": [
+   4,
+   26,
+   0.154
+  ],
+  "20": [
+   43,
+   79,
+   0.544
+  ],
+  "40": [
+   120,
+   167,
+   0.719
+  ],
+  "60": [
+   208,
+   228,
+   0.912
+  ],
+  "80": [
+   344,
+   355,
+   0.969
+  ]
+ },
+ "boss2_by_potions": {
+  "0": [
+   16,
+   46,
+   0.348
+  ],
+  "1": [
+   142,
+   201,
+   0.706
+  ],
+  "2": [
+   303,
+   333,
+   0.91
+  ],
+  "3": [
+   258,
+   275,
+   0.938
+  ]
+ }
+}

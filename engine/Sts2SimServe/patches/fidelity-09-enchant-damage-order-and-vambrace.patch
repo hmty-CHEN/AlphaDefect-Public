@@ -1,0 +1,174 @@
+--- a/src/Sts2Sim.Core/Models/Relics/Vambrace.cs
++++ b/src/Sts2Sim.Core/Models/Relics/Vambrace.cs
+@@ -5,15 +5,23 @@
+ 
+ namespace Sts2Sim.Core.Models.Relics;
+ 
++/// <summary>
++/// sls2：照原版 Vambrace 移植。第一次从卡牌得到格挡时记下这张牌（TriggeringCard），这张牌这一次打出结束（AfterCardPlayed）之前，
++/// 它带来的格挡全部翻倍（包括附魔在打出时给的格挡，如灵巧），打出结束后才算本场用过。
++/// 原来在第一次翻倍时就标记用过，同一张牌随后的附魔格挡不再翻倍：充能电池+（10）带灵巧 3 算成 10 × 2 + 3 = 23，原版 (10 + 3) × 2 = 26。
++/// 原版在 AfterModifyingBlockAmount（修正后的格挡大于 0）里记 TriggeringCard；sts2-sim 没有这个钩子（偏离 #122），在乘算切片里返回 2 时记。
++/// </summary>
+ public sealed class Vambrace : RelicModel
+ {
+-    private bool _triggeredThisCombat;
++    private CardModel? _triggeringCard;
++    private bool _blockGainedThisCombat;
+ 
+     public override RelicRarity Rarity => RelicRarity.Uncommon;
+ 
+     public override Task BeforeCombatStart()
+     {
+-        _triggeredThisCombat = false;
++        _triggeringCard = null;
++        _blockGainedThisCombat = false;
+         return Task.CompletedTask;
+     }
+ 
+@@ -24,30 +32,56 @@
+         CardModel? cardSource,
+         CardPlay? cardPlay)
+     {
+-        if (_triggeredThisCombat ||
+-            amount <= 0m ||
+-            target != Owner.Creature ||
+-            cardSource?.Owner != Owner ||
+-            cardPlay?.Player != Owner)
++        if (!props.HasFlag(ValueProp.Move) ||
++            cardSource is null ||
++            (_triggeringCard is not null && !ReferenceEquals(_triggeringCard, cardSource)) ||
++            cardSource.Owner != Owner ||
++            _blockGainedThisCombat)
+         {
+             return 1m;
+         }
+ 
+-        // 偏离 #122：无 AfterModifyingBlockAmount；在乘算切片原子消费。后续 modifier 仍可能把最终格挡归零。
+-        _triggeredThisCombat = true;
++        // 只在真正打出时（cardPlay 不为空）记下触发的牌：观测编码器给手牌算格挡预览也会走到这里，
++        // 预览照原版按翻倍显示，但不能改状态（否则记下的是被预览的牌，真正打出的牌反而不翻倍；SIMX0001 搜索评测里每步存读档后格挡 26 对原版 39）
++        if (amount > 0m && cardPlay is not null)
++        {
++            _triggeringCard = cardSource;
++        }
+         return 2m;
+     }
+ 
++    public override Task AfterCardPlayed(CardPlay cardPlay)
++    {
++        if (cardPlay.Card.Owner == Owner && ReferenceEquals(cardPlay.Card, _triggeringCard) && !_blockGainedThisCombat)
++        {
++            _blockGainedThisCombat = true;
++        }
++        return Task.CompletedTask;
++    }
++
+     public override Task AfterCombatEnd()
+     {
+-        _triggeredThisCombat = false;
++        _triggeringCard = null;
++        _blockGainedThisCombat = false;
+         return Task.CompletedTask;
+     }
+ 
++    internal override void RestoreCombatCloneReferencesFrom(
++        RelicModel source,
++        IReadOnlyDictionary<CardModel, CardModel> cardMap)
++    {
++        base.RestoreCombatCloneReferencesFrom(source, cardMap);
++        if (source is Vambrace { _triggeringCard: { } original } && cardMap.TryGetValue(original, out CardModel? clone))
++        {
++            _triggeringCard = clone;
++        }
++    }
++
+     internal override void AppendCombatStateDescription(
+         ref global::Sts2Sim.Core.Combat.StateDescription.CombatStateDescriptionBuilder builder,
+         global::Sts2Sim.Core.Combat.StateDescription.CombatStateDescriptionContext context)
+     {
+-        builder.Append(_triggeredThisCombat);
++        builder.Append(_blockGainedThisCombat);
++        context.AppendCardReferences(ref builder, [_triggeringCard]);
+     }
+ }
+--- a/src/Sts2Sim.Core/Runs/Transplant/TransplantFieldRegistry.cs
++++ b/src/Sts2Sim.Core/Runs/Transplant/TransplantFieldRegistry.cs
+@@ -50,7 +50,7 @@
+         "RainbowRing._playedSkill", "RainbowRing._playedPower",
+         "RainbowRing._triggeredThisTurn", "Regalite._usedThisTurn",
+         "Shuriken._attacksThisTurn", "UnsettlingLamp._triggeringCard",
+-        "UnsettlingLamp._finished", "Vambrace._triggeredThisCombat",
++        "UnsettlingLamp._finished", "Vambrace._triggeringCard", "Vambrace._blockGainedThisCombat",
+         "LavaLamp._tookDamageThisCombat",
+         "PaelsEye._eligibleForExtraTurn", "RippleBasin._attackPlayedThisTurn",
+         "StoneCalendar._shouldTriggerThisTurn", "Toolbox._wasUsedThisCombat",
+--- a/src/Sts2Sim.Core/Combat/StateDescription/CombatPrivateStateRegistry.cs
++++ b/src/Sts2Sim.Core/Combat/StateDescription/CombatPrivateStateRegistry.cs
+@@ -43,7 +43,7 @@
+         "StoneCalendar._shouldTriggerThisTurn", "SwordOfStone._eliteVictories",
+         "Toolbox._wasUsedThisCombat", "TuningFork._skillsPlayed",
+         "UnsettlingLamp._triggeringCard", "UnsettlingLamp._finished",
+-        "Vambrace._triggeredThisCombat", "VenerableTeaSet._isArmed",
++        "Vambrace._triggeringCard", "Vambrace._blockGainedThisCombat", "VenerableTeaSet._isArmed",
+         "BoneTea._combatsLeft", "EmberTea._combatsLeft", "TeaOfDiscourtesy._combatsLeft",
+         "HistoryCourse._lastAttack", "HistoryCourse._lastAttackTurn",
+         "FakeHappyFlower._turnsSeen", "FakeOrichalcum._shouldTrigger",
+--- a/src/Sts2Sim.Core/Models/Enchantments/Instinct.cs
++++ b/src/Sts2Sim.Core/Models/Enchantments/Instinct.cs
+@@ -1,5 +1,4 @@
+ using Sts2Sim.Core.Entities.Cards;
+-using Sts2Sim.Core.Entities.Creatures;
+ using Sts2Sim.Core.ValueProps;
+ 
+ namespace Sts2Sim.Core.Models.Enchantments;
+@@ -8,6 +7,7 @@
+ {
+     public override bool CanEnchant(CardModel card) => base.CanEnchant(card) && card.Type == CardType.Attack;
+ 
+-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay) =>
+-        ReferenceEquals(cardSource, Owner) && props.IsPoweredAttack() ? 2m : 1m;
++    // sls2：原版 Instinct.EnchantDamageMultiplicative（由 Hook.ModifyDamage 在全部监听者之前作用于卡面伤害）。
++    // 原来写成监听者的 ModifyDamageMultiplicative，排在力量之后才乘：打击 6、力量 4 算成 (6 + 4) × 2 = 20，原版 6 × 2 + 4 = 16
++    public override decimal EnchantDamageMultiplicative(decimal amount, ValueProp props) => props.IsPoweredAttack() ? 2m : 1m;
+ }
+--- a/src/Sts2Sim.Core/Hooks/Hook.cs
++++ b/src/Sts2Sim.Core/Hooks/Hook.cs
+@@ -1737,6 +1737,18 @@
+         decimal result = damage;
+         List<AbstractModel> changed = new();
+ 
++        // sls2：原版 Hook.ModifyDamage 先用这张牌的附魔改卡面伤害（加成、再倍数），然后才走全部监听者的加法、乘法修正与上限
++        if (cardSource?.Enchantments.FirstOrDefault() is { } enchantment)
++        {
++            decimal before = result;
++            result += enchantment.EnchantDamageAdditive(result, props);
++            result *= enchantment.EnchantDamageMultiplicative(result, props);
++            if (result != before)
++            {
++                changed.Add(enchantment);
++            }
++        }
++
+         foreach (AbstractModel item in runState.IterateHookListeners(combatState))
+         {
+             if (!IsEligibleHookListener(item)) continue;
+--- a/src/Sts2Sim.Core/Models/EnchantmentModel.cs
++++ b/src/Sts2Sim.Core/Models/EnchantmentModel.cs
+@@ -71,13 +71,9 @@
+ 
+     public virtual decimal EnchantDamageMultiplicative(decimal amount, ValueProp props) => 1m;
+ 
+-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props,
+-        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay) =>
+-        ReferenceEquals(cardSource, _owner) ? EnchantDamageAdditive(amount, props) : 0m;
+-
+-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+-        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay) =>
+-        ReferenceEquals(cardSource, _owner) ? EnchantDamageMultiplicative(amount, props) : 1m;
++    // sls2：附魔的伤害加成与倍数不作为监听者参与（原来在力量等加法修正之后才乘，本能 ×2 时打击 6 + 力量 4 算成 20，原版是 6 × 2 + 4 = 16）。
++    // 原版 Hook.ModifyDamage 先用 cardSource.Enchantment 的 EnchantDamageAdditive、EnchantDamageMultiplicative 改卡面伤害，再走全部监听者；
++    // 现在同样放在 Hook.ModifyDamage 的开头。
+ 
+     public virtual bool CanEnchant(CardModel card)
+     {

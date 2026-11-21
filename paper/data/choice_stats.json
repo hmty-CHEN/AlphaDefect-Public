@@ -1,0 +1,1082 @@
+{
+ "Defect": {
+  "version": "v0.111.0",
+  "rounds": 12,
+  "versions": [
+   157424,
+   157951
+  ],
+  "runs": 4608,
+  "win_rate": 0.716796875,
+  "card_screens_per_run": 19.077256944444443,
+  "skip_rate_by_act": [
+   0.03627877677242011,
+   0.12431768999709311,
+   0.144621532034691
+  ],
+  "skip_rate": 0.09442826591436501,
+  "n_cards_compared": 80,
+  "spearman_vs_players": 0.6995780590717301,
+  "players": {
+   "runs": 23524,
+   "wins": 3085,
+   "through": "2026-11-21 12:31:16.513000"
+  },
+  "top_picks": [
+   [
+    "Echo Form",
+    99.4,
+    1509,
+    74.3
+   ],
+   [
+    "Defragment",
+    91.4,
+    1388,
+    66.1
+   ],
+   [
+    "Glacier",
+    87.1,
+    2745,
+    59.2
+   ],
+   [
+    "Chill",
+    81.6,
+    2593,
+    39.3
+   ],
+   [
+    "Thunder",
+    76.1,
+    2723,
+    27.6
+   ],
+   [
+    "FTL",
+    75.8,
+    2794,
+    24.9
+   ]
+  ],
+  "never_picked": [
+   [
+    "Hyperbeam",
+    1253,
+    17.6
+   ],
+   [
+    "Synchronize",
+    2435,
+    15.2
+   ],
+   [
+    "Gunk Up",
+    6350,
+    10.8
+   ],
+   [
+    "Consuming Shadow",
+    1123,
+    10.8
+   ]
+  ],
+  "more_than_players": [
+   [
+    "FTL",
+    75.8,
+    24.9
+   ],
+   [
+    "Go for the Eyes",
+    73.9,
+    24.6
+   ],
+   [
+    "Thunder",
+    76.1,
+    27.6
+   ],
+   [
+    "Coolant",
+    71.6,
+    27.7
+   ]
+  ],
+  "less_than_players": [
+   [
+    "Trash to Treasure",
+    9.2,
+    39.0
+   ],
+   [
+    "Darkness",
+    1.0,
+    27.8
+   ],
+   [
+    "Genetic Algorithm",
+    1.3,
+    26.2
+   ],
+   [
+    "Hologram",
+    8.7,
+    31.1
+   ]
+  ],
+  "ancient_screens": 13904,
+  "ancient_top": [
+   [
+    "Toasty Mittens",
+    100.0,
+    474
+   ],
+   [
+    "Pael's Blood",
+    100.0,
+    425
+   ],
+   [
+    "Alchemical Coffer",
+    100.0,
+    348
+   ],
+   [
+    "Stone Humidifier",
+    100.0,
+    276
+   ]
+  ],
+  "ancient_low": [
+   [
+    "Kaleidoscope",
+    0.0,
+    600
+   ],
+   [
+    "Hefty Tablet",
+    0.0,
+    552
+   ],
+   [
+    "Pael's Eye",
+    0.0,
+    528
+   ]
+  ],
+  "ancient_n": 103,
+  "ancient_always": 6,
+  "ancient_never": 28,
+  "relics_seen": 2159,
+  "relics_skipped": 25,
+  "per_run": {
+   "shop_card_buys": 3.8394097222222223,
+   "card_removals": 1.1167534722222223,
+   "smith_share_at_rest": 0.46173780092772554,
+   "potions_taken": 8.29318576388889,
+   "potions_discarded": 1.5041232638888888
+  }
+ },
+ "Regent": {
+  "version": "v0.111.0",
+  "rounds": 12,
+  "versions": [
+   54699,
+   55339
+  ],
+  "runs": 4608,
+  "win_rate": 0.6803385416666666,
+  "card_screens_per_run": 18.29861111111111,
+  "skip_rate_by_act": [
+   0.11772252950903804,
+   0.25956897137806784,
+   0.2757716360702038
+  ],
+  "skip_rate": 0.20437618595825427,
+  "n_cards_compared": 80,
+  "spearman_vs_players": 0.5380684481950305,
+  "players": {
+   "runs": 20361,
+   "wins": 3191,
+   "through": "2026-11-21 12:31:16.513000"
+  },
+  "top_picks": [
+   [
+    "Manifest Authority",
+    89.6,
+    2734,
+    39.8
+   ],
+   [
+    "Big Bang",
+    88.1,
+    1247,
+    76.9
+   ],
+   [
+    "Spectrum Shift",
+    83.6,
+    2575,
+    32.3
+   ],
+   [
+    "Tyranny",
+    83.6,
+    1387,
+    55.5
+   ],
+   [
+    "Arsenal",
+    81.4,
+    1546,
+    47.8
+   ],
+   [
+    "Make It So",
+    80.8,
+    1107,
+    30.8
+   ]
+  ],
+  "never_picked": [
+   [
+    "Sword Sage",
+    1215,
+    31.4
+   ],
+   [
+    "Seeking Edge",
+    1222,
+    27.2
+   ],
+   [
+    "The Smith",
+    1153,
+    26.3
+   ],
+   [
+    "Summon Forth",
+    2227,
+    25.3
+   ]
+  ],
+  "more_than_players": [
+   [
+    "Spectrum Shift",
+    83.6,
+    32.3
+   ],
+   [
+    "Make It So",
+    80.8,
+    30.8
+   ],
+   [
+    "Manifest Authority",
+    89.6,
+    39.8
+   ],
+   [
+    "Gamma Blast",
+    78.4,
+    29.3
+   ]
+  ],
+  "less_than_players": [
+   [
+    "Decisions, Decisions",
+    3.7,
+    39.1
+   ],
+   [
+    "Sword Sage",
+    0.5,
+    31.4
+   ],
+   [
+    "Royal Gamble",
+    1.7,
+    29.3
+   ],
+   [
+    "Seeking Edge",
+    0.0,
+    27.2
+   ]
+  ],
+  "ancient_screens": 13837,
+  "ancient_top": [
+   [
+    "Big Mushroom",
+    100.0,
+    694
+   ],
+   [
+    "Small Capsule",
+    100.0,
+    324
+   ],
+   [
+    "Lava Rock",
+    100.0,
+    288
+   ],
+   [
+    "Stone Humidifier",
+    100.0,
+    276
+   ]
+  ],
+  "ancient_low": [
+   [
+    "Fragrant Mushroom",
+    0.0,
+    694
+   ],
+   [
+    "Touch of Orobas",
+    0.0,
+    612
+   ],
+   [
+    "Tri-Boomerang",
+    0.0,
+    564
+   ]
+  ],
+  "ancient_n": 103,
+  "ancient_always": 7,
+  "ancient_never": 26,
+  "relics_seen": 3328,
+  "relics_skipped": 0,
+  "per_run": {
+   "shop_card_buys": 2.8211805555555554,
+   "card_removals": 1.1278211805555556,
+   "smith_share_at_rest": 0.4485788508557457,
+   "potions_taken": 8.359809027777779,
+   "potions_discarded": 2.291232638888889
+  }
+ },
+ "Silent": {
+  "version": "v0.111.0",
+  "rounds": 12,
+  "versions": [
+   26215,
+   26428
+  ],
+  "runs": 4608,
+  "win_rate": 0.6569010416666666,
+  "card_screens_per_run": 15.198350694444445,
+  "skip_rate_by_act": [
+   0.11991151903331243,
+   0.18767280615934323,
+   0.1765829021926583
+  ],
+  "skip_rate": 0.15579575634691722,
+  "n_cards_compared": 86,
+  "spearman_vs_players": 0.5237133827067314,
+  "players": {
+   "runs": 30861,
+   "wins": 5374,
+   "through": "2026-11-21 12:31:16.513000"
+  },
+  "top_picks": [
+   [
+    "Footwork",
+    92.1,
+    2942,
+    64.2
+   ],
+   [
+    "Coolheaded",
+    90.6,
+    53,
+    26.6
+   ],
+   [
+    "Afterimage",
+    89.8,
+    1286,
+    72.7
+   ],
+   [
+    "Noxious Fumes",
+    88.4,
+    2611,
+    38.7
+   ],
+   [
+    "Leap",
+    85.7,
+    63,
+    22.1
+   ],
+   [
+    "Adrenaline",
+    85.6,
+    1226,
+    74.3
+   ]
+  ],
+  "never_picked": [
+   [
+    "Knife Trap",
+    965,
+    38.2
+   ],
+   [
+    "Fan of Knives",
+    907,
+    36.9
+   ],
+   [
+    "Burst",
+    889,
+    32.6
+   ],
+   [
+    "Tracking",
+    861,
+    28.5
+   ]
+  ],
+  "more_than_players": [
+   [
+    "Coolheaded",
+    90.6,
+    26.6
+   ],
+   [
+    "Leap",
+    85.7,
+    22.1
+   ],
+   [
+    "Bubble Bubble",
+    77.0,
+    24.6
+   ],
+   [
+    "Noxious Fumes",
+    88.4,
+    38.7
+   ]
+  ],
+  "less_than_players": [
+   [
+    "Blade of Ink",
+    10.8,
+    50.0
+   ],
+   [
+    "Expose",
+    3.5,
+    42.3
+   ],
+   [
+    "Knife Trap",
+    0.0,
+    38.2
+   ],
+   [
+    "Fan of Knives",
+    0.4,
+    36.9
+   ]
+  ],
+  "ancient_screens": 13501,
+  "ancient_top": [
+   [
+    "Sai",
+    100.0,
+    394
+   ],
+   [
+    "Seal of Gold",
+    100.0,
+    280
+   ],
+   [
+    "Nutritious Oyster",
+    100.0,
+    240
+   ],
+   [
+    "Archaic Tooth",
+    99.8,
+    601
+   ]
+  ],
+  "ancient_low": [
+   [
+    "Hefty Tablet",
+    0.0,
+    552
+   ],
+   [
+    "Leafy Poultice",
+    0.0,
+    528
+   ],
+   [
+    "Dowsing Rod",
+    0.0,
+    528
+   ]
+  ],
+  "ancient_n": 103,
+  "ancient_always": 5,
+  "ancient_never": 30,
+  "relics_seen": 3374,
+  "relics_skipped": 26,
+  "per_run": {
+   "shop_card_buys": 3.2020399305555554,
+   "card_removals": 1.5303819444444444,
+   "smith_share_at_rest": 0.5960816028383596,
+   "potions_taken": 7.937065972222222,
+   "potions_discarded": 1.5483940972222223
+  }
+ },
+ "Fool": {
+  "version": "v0.113.1",
+  "rounds": 24,
+  "versions": [
+   23981,
+   24169
+  ],
+  "runs": 4608,
+  "win_rate": 0.603515625,
+  "card_screens_per_run": 16.364366319444443,
+  "skip_rate_by_act": [
+   0.11607115613462302,
+   0.2982637295395441,
+   0.2920053378624287
+  ],
+  "skip_rate": 0.21771188351214077,
+  "n_cards_compared": 79,
+  "spearman_vs_players": 0.7579600778967868,
+  "players": {
+   "runs": 3056,
+   "wins": 410,
+   "through": "2026-11-21 12:31:16.513000"
+  },
+  "top_picks": [
+   [
+    "Wah Ki",
+    96.9,
+    2587,
+    58.4
+   ],
+   [
+    "Wah Cho Ki",
+    96.2,
+    1598,
+    84.5
+   ],
+   [
+    "Motif",
+    92.1,
+    2674,
+    37.1
+   ],
+   [
+    "Wah Cho",
+    90.4,
+    2201,
+    62.6
+   ],
+   [
+    "Mythic Form",
+    89.3,
+    1148,
+    71.7
+   ],
+   [
+    "Wah Symphony",
+    86.8,
+    1368,
+    65.6
+   ]
+  ],
+  "never_picked": [
+   [
+    "Quiver",
+    1271,
+    38.8
+   ],
+   [
+    "Ki Verse",
+    1404,
+    26.0
+   ],
+   [
+    "Ennui",
+    1145,
+    24.1
+   ],
+   [
+    "Brace",
+    2057,
+    19.4
+   ]
+  ],
+  "more_than_players": [
+   [
+    "Motif",
+    92.1,
+    37.1
+   ],
+   [
+    "Ki Rest",
+    81.8,
+    33.0
+   ],
+   [
+    "Ki Whip",
+    73.3,
+    31.1
+   ],
+   [
+    "Cho Limbs",
+    84.7,
+    45.4
+   ]
+  ],
+  "less_than_players": [
+   [
+    "Quiver",
+    0.0,
+    38.8
+   ],
+   [
+    "Yah!",
+    1.3,
+    35.4
+   ],
+   [
+    "Rapid Shot",
+    1.5,
+    30.3
+   ],
+   [
+    "Ki Verse",
+    0.1,
+    26.0
+   ]
+  ],
+  "ancient_screens": 14071,
+  "ancient_top": [
+   [
+    "Archaic Tooth",
+    100.0,
+    639
+   ],
+   [
+    "Music Box",
+    100.0,
+    444
+   ],
+   [
+    "Pael's Blood",
+    100.0,
+    431
+   ],
+   [
+    "Jeweled Mask",
+    100.0,
+    410
+   ]
+  ],
+  "ancient_low": [
+   [
+    "Wuppy",
+    0.0,
+    1008
+   ],
+   [
+    "Hefty Tablet",
+    0.0,
+    672
+   ],
+   [
+    "Scroll Boxes",
+    0.0,
+    648
+   ]
+  ],
+  "ancient_n": 101,
+  "ancient_always": 8,
+  "ancient_never": 32,
+  "relics_seen": 3852,
+  "relics_skipped": 13,
+  "per_run": {
+   "shop_card_buys": 3.445095486111111,
+   "card_removals": 1.5364583333333333,
+   "smith_share_at_rest": 0.4443255859185063,
+   "potions_taken": 8.57400173611111,
+   "potions_discarded": 1.4522569444444444
+  }
+ },
+ "Ironclad": {
+  "version": "v0.113.1",
+  "rounds": 12,
+  "versions": [
+   24535,
+   24782
+  ],
+  "runs": 4608,
+  "win_rate": 0.6755642361111112,
+  "card_screens_per_run": 16.364583333333332,
+  "skip_rate_by_act": [
+   0.09677805366918958,
+   0.30046082949308756,
+   0.30355686594316544
+  ],
+  "skip_rate": 0.2108264375132612,
+  "n_cards_compared": 80,
+  "spearman_vs_players": 0.4665963431786217,
+  "players": {
+   "runs": 1961,
+   "wins": 214,
+   "through": "2026-11-21 12:31:16.513000"
+  },
+  "top_picks": [
+   [
+    "Battle Trance",
+    87.5,
+    2670,
+    56.2
+   ],
+   [
+    "Crimson Mantle",
+    86.3,
+    1440,
+    56.6
+   ],
+   [
+    "Stone Armor",
+    85.3,
+    2972,
+    19.0
+   ],
+   [
+    "Uppercut",
+    83.2,
+    2671,
+    40.7
+   ],
+   [
+    "Demon Form",
+    80.4,
+    1530,
+    38.9
+   ],
+   [
+    "Offering",
+    75.1,
+    1504,
+    75.8
+   ]
+  ],
+  "never_picked": [
+   [
+    "Dark Embrace",
+    1427,
+    40.9
+   ],
+   [
+    "Pact's End",
+    1374,
+    22.8
+   ],
+   [
+    "Forgotten Ritual",
+    1677,
+    18.5
+   ],
+   [
+    "Whirlwind",
+    1870,
+    18.2
+   ]
+  ],
+  "more_than_players": [
+   [
+    "Stone Armor",
+    85.3,
+    19.0
+   ],
+   [
+    "Aggression",
+    72.5,
+    26.0
+   ],
+   [
+    "Uppercut",
+    83.2,
+    40.7
+   ],
+   [
+    "Demon Form",
+    80.4,
+    38.9
+   ]
+  ],
+  "less_than_players": [
+   [
+    "Dark Embrace",
+    1.0,
+    40.9
+   ],
+   [
+    "Bloodletting",
+    20.7,
+    54.2
+   ],
+   [
+    "Second Wind",
+    3.3,
+    35.3
+   ],
+   [
+    "Burning Pact",
+    9.9,
+    39.7
+   ]
+  ],
+  "ancient_screens": 14423,
+  "ancient_top": [
+   [
+    "Big Mushroom",
+    100.0,
+    790
+   ],
+   [
+    "Large Capsule",
+    100.0,
+    372
+   ],
+   [
+    "Toasty Mittens",
+    100.0,
+    334
+   ],
+   [
+    "Stone Humidifier",
+    100.0,
+    312
+   ]
+  ],
+  "ancient_low": [
+   [
+    "Fragrant Mushroom",
+    0.0,
+    790
+   ],
+   [
+    "Wuppy",
+    0.0,
+    742
+   ],
+   [
+    "Winged Boots",
+    0.0,
+    636
+   ]
+  ],
+  "ancient_n": 103,
+  "ancient_always": 5,
+  "ancient_never": 25,
+  "relics_seen": 4379,
+  "relics_skipped": 31,
+  "per_run": {
+   "shop_card_buys": 2.6063368055555554,
+   "card_removals": 1.2944878472222223,
+   "smith_share_at_rest": 0.6327545821158629,
+   "potions_taken": 9.17751736111111,
+   "potions_discarded": 1.5047743055555556
+  }
+ },
+ "Necrobinder": {
+  "version": "v0.113.1",
+  "rounds": 24,
+  "versions": [
+   25656,
+   25867
+  ],
+  "runs": 4608,
+  "win_rate": 0.5857204861111112,
+  "card_screens_per_run": 16.22309027777778,
+  "skip_rate_by_act": [
+   0.11016534585656981,
+   0.252861562258314,
+   0.2554160039488839
+  ],
+  "skip_rate": 0.19495425116378617,
+  "n_cards_compared": 53,
+  "spearman_vs_players": 0.6711820674084825,
+  "players": {
+   "runs": 707,
+   "wins": 81,
+   "through": "2026-11-21 12:31:16.513000"
+  },
+  "top_picks": [
+   [
+    "Shroud",
+    87.1,
+    2539,
+    19.2
+   ],
+   [
+    "Deathbringer",
+    85.3,
+    2719,
+    43.2
+   ],
+   [
+    "Defy",
+    83.6,
+    7087,
+    52.1
+   ],
+   [
+    "Sleight of Flesh",
+    83.3,
+    2742,
+    30.5
+   ],
+   [
+    "Countdown",
+    73.0,
+    2547,
+    21.3
+   ],
+   [
+    "Fetch",
+    70.5,
+    2261,
+    35.1
+   ]
+  ],
+  "never_picked": [
+   [
+    "Snap",
+    5668,
+    15.8
+   ],
+   [
+    "Calcify",
+    1989,
+    12.8
+   ],
+   [
+    "Rattle",
+    1627,
+    12.5
+   ],
+   [
+    "Bury",
+    2113,
+    11.9
+   ]
+  ],
+  "more_than_players": [
+   [
+    "Shroud",
+    87.1,
+    19.2
+   ],
+   [
+    "Sleight of Flesh",
+    83.3,
+    30.5
+   ],
+   [
+    "Countdown",
+    73.0,
+    21.3
+   ],
+   [
+    "Scourge",
+    55.6,
+    10.3
+   ]
+  ],
+  "less_than_players": [
+   [
+    "Lethality",
+    18.2,
+    46.1
+   ],
+   [
+    "Capture Spirit",
+    3.8,
+    29.5
+   ],
+   [
+    "Delay",
+    28.4,
+    52.2
+   ],
+   [
+    "Danse Macabre",
+    4.5,
+    26.4
+   ]
+  ],
+  "ancient_screens": 13555,
+  "ancient_top": [
+   [
+    "Big Mushroom",
+    100.0,
+    645
+   ],
+   [
+    "Touch of Orobas",
+    100.0,
+    615
+   ],
+   [
+    "Fiddle",
+    100.0,
+    461
+   ],
+   [
+    "Pumpkin Candle",
+    100.0,
+    369
+   ]
+  ],
+  "ancient_low": [
+   [
+    "Wuppy",
+    0.0,
+    1036
+   ],
+   [
+    "Hefty Tablet",
+    0.0,
+    672
+   ],
+   [
+    "Fragrant Mushroom",
+    0.0,
+    645
+   ]
+  ],
+  "ancient_n": 102,
+  "ancient_always": 8,
+  "ancient_never": 28,
+  "relics_seen": 3287,
+  "relics_skipped": 26,
+  "per_run": {
+   "shop_card_buys": 3.379123263888889,
+   "card_removals": 1.4019097222222223,
+   "smith_share_at_rest": 0.6201192842942346,
+   "potions_taken": 7.856987847222222,
+   "potions_discarded": 1.3943142361111112
+  }
+ }
+}

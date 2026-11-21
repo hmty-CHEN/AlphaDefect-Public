@@ -1,0 +1,114 @@
+[
+ {
+  "name": "teacher_v130978",
+  "src": "~/.local/share/sls2/ability_test/v130978/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v130978; one of 16 uniformly spaced members (rank 1/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v134704",
+  "src": "~/.local/share/sls2/ability_test/v134704/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v134704; one of 16 uniformly spaced members (rank 2/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v138251",
+  "src": "~/.local/share/sls2/ability_test/v138251/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v138251; one of 16 uniformly spaced members (rank 3/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v141980",
+  "src": "~/.local/share/sls2/ability_test/v141980-并集补测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v141980; one of 16 uniformly spaced members (rank 4/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v143097",
+  "src": "~/.local/share/sls2/ability_test/v143097-并集补测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v143097; one of 16 uniformly spaced members (rank 5/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v145449",
+  "src": "~/.local/share/sls2/ability_test/v145449/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v145449; one of 16 uniformly spaced members (rank 6/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v146824",
+  "src": "~/.local/share/sls2/ability_test/v146824-并集补测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v146824; one of 16 uniformly spaced members (rank 7/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v148300",
+  "src": "~/.local/share/sls2/ability_test/v148300/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v148300; one of 16 uniformly spaced members (rank 8/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v149700_20261102_2330",
+  "src": "~/.local/share/sls2/ability_test/v149700-20261102-2330-首通探测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v149700-20261102-2330; one of 16 uniformly spaced members (rank 9/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v150216",
+  "src": "~/.local/share/sls2/ability_test/v150216-首通探测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v150216; one of 16 uniformly spaced members (rank 10/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v150632",
+  "src": "~/.local/share/sls2/ability_test/v150632-首通探测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v150632; one of 16 uniformly spaced members (rank 11/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v151094",
+  "src": "~/.local/share/sls2/ability_test/v151094-首通探测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v151094; one of 16 uniformly spaced members (rank 12/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v151414",
+  "src": "~/.local/share/sls2/ability_test/v151414-首通探测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v151414; one of 16 uniformly spaced members (rank 13/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v152822",
+  "src": "~/.local/share/sls2/ability_test/v152822-首通探测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v152822; one of 16 uniformly spaced members (rank 14/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v153877",
+  "src": "~/.local/share/sls2/ability_test/v153877-首通探测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v153877; one of 16 uniformly spaced members (rank 15/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ },
+ {
+  "name": "teacher_v156880",
+  "src": "~/.local/share/sls2/ability_test/v156880-首通探测/model.pt",
+  "release": "teacher-pool-v1",
+  "dr": "#272, #273",
+  "notes": "SL-pool snapshot v156880; one of 16 uniformly spaced members (rank 16/16) of the 62-snapshot pool, reconstructed with tools/ens_agree.py pick(62, 16, 'spread')."
+ }
+]

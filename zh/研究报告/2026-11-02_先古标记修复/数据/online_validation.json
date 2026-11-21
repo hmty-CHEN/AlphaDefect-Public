@@ -1,0 +1,109 @@
+{
+  "time": 1793596531.8810306,
+  "backup": "/root/.local/share/sls2/runs/defect/value_probe_deploy/ancient-marker-20261102T051430Z",
+  "old_actor_sha256": "2636758f733409e42d296ca6329252b3db111da17448f7bd168fead7b7e6da11",
+  "new_actor_sha256": "573f2279963b624ffd2840c4ebc81b1ce9f8804d0297fb78fe8b06f944dffbea",
+  "backup_checkpoint_sha256": "c6e29a019e4704861944665dfd909c98cd96f1e15fce14bbee7c7e26223a2cd5",
+  "config_sha256": "48cf600aa5d25e5c5f8dba3886c9fca36a33bf196d2e1ac898608f8839762f8e",
+  "config_unchanged": true,
+  "old_pid": 1821927,
+  "new_pid": 1874769,
+  "captured_utc": "2026-11-02T05:18:47Z",
+  "status": {
+    "time": 1793596717.9119856,
+    "started_at": 1792866001.9814644,
+    "version": 144617,
+    "total_steps": 5308130836,
+    "sps": 7539,
+    "progress": 0.4200000000000001,
+    "pid": 1874769,
+    "actors": 8,
+    "envs_per_actor": 42,
+    "learner_device": "cuda",
+    "actor_device": "cuda",
+    "model": {
+      "vocab_size": 4096,
+      "d": 256,
+      "layers": 6,
+      "heads": 4,
+      "ff_mult": 4,
+      "n_kinds": 16,
+      "n_zones": 16,
+      "n_actions": 32,
+      "n_decisions": 16,
+      "n_modes": 4,
+      "content_enchant": true,
+      "obs_v16": true,
+      "obs_v17": true,
+      "obs_v18": true,
+      "obs_v19": true
+    }
+  },
+  "config_unchanged_at_validation": true,
+  "post_restart_updates": [
+    {
+      "version": 144613,
+      "sps": 543,
+      "nan_skipped": 0,
+      "ancient_pi_n": 288
+    },
+    {
+      "version": 144614,
+      "sps": 1663,
+      "nan_skipped": 0,
+      "ancient_pi_n": 235
+    },
+    {
+      "version": 144615,
+      "sps": 12302,
+      "nan_skipped": 0,
+      "ancient_pi_n": 210
+    },
+    {
+      "version": 144616,
+      "sps": 6646,
+      "nan_skipped": 0,
+      "ancient_pi_n": 145
+    },
+    {
+      "version": 144617,
+      "sps": 7539,
+      "nan_skipped": 0,
+      "ancient_pi_n": 181
+    }
+  ],
+  "deployed_paris": "2026-11-02T06:15:31.881031+01:00",
+  "local_snapshot": {
+    "latest_version": 144612,
+    "ancient_group": {
+      "n": 288.0,
+      "ev": 0.7153196990856757,
+      "mse": 0.11140669295023464,
+      "rmse": 0.3337764116144738,
+      "mae": 0.26441218869553673,
+      "bias": -0.07118871725267834,
+      "target_var": 0.37353782170602656,
+      "residual_var": 0.10633885948615286,
+      "mean_target": 4.982862888111009,
+      "mean_value": 4.91167417085833,
+      "calibration_slope": 1.0207665908852694,
+      "invalid": 0.0
+    },
+    "sync": {
+      "time": 1793596744.6924806,
+      "ok": true
+    },
+    "errors": [],
+    "dashboard_has_ancient_row": true
+  },
+  "new_episode_examples": [
+    {
+      "file": "/mnt/c/主存储文件/脚本开发/sls2/runs/value_probe/b/episodes/5b756706aae8-0-23.npz",
+      "episode_id": "5b756706aae8-0-23",
+      "version_start": 144612,
+      "version_end": 144612,
+      "ancient_marked": 2,
+      "macro_n": 88
+    }
+  ]
+}

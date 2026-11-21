@@ -1,0 +1,44 @@
+{
+  "items": 47,
+  "by_status": {
+    "excluded": 14,
+    "covered_existing": 9,
+    "confirmed": 12,
+    "needs_semantics": 1,
+    "linked": 2,
+    "confirmed_static": 1,
+    "needs_reproduction": 7,
+    "excluded_static": 1
+  },
+  "runtime_checked_ids": [
+    "F01",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F09",
+    "S01",
+    "S02",
+    "S04",
+    "S17"
+  ],
+  "runtime_confirmed_ids": [
+    "F03",
+    "F04",
+    "F05",
+    "F09",
+    "S01",
+    "S02",
+    "S04",
+    "S17"
+  ],
+  "source_only_confirmed_ids": [
+    "F13",
+    "S05",
+    "S06",
+    "S07",
+    "S28"
+  ],
+  "note": "审计项可能共享根因；源码静态确认不等于运行复现或已量化胜率影响。"
+}

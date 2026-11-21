@@ -1,0 +1,1 @@
+{"probe": "momentum_recovery_probe.py", "attempt": 1, "result": "test_error", "error": "StopIteration", "reason": "测试假定全息影像一定暂停选牌；实际弃牌堆只有一张时引擎自动选择。", "resolution": "脚本增加自动选择分支后仅重跑该例；见momentum_results.jsonl。"}

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- 基于 sts2-sim（MIT，https://github.com/iRyougi/sts2-sim，对应游戏 v0.111.0）的搜索用战斗引擎：说与 Sts2Headless 相同的协议，另加保存/恢复状态。
+       sts2-sim 的位置用 Sts2SimDir 指定（本机 ~/dev/ext/sts2-sim，A 上 /root/ext/sts2-sim）。 -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <NoWarn>CS8600;CS8601;CS8602;CS8603;CS8604;CS8618;CS8625</NoWarn>
+    <Sts2SimDir Condition="'$(Sts2SimDir)' == ''">$(HOME)/dev/ext/sts2-sim</Sts2SimDir>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <TieredPGO>true</TieredPGO>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- 观测移植（按 观测移植清单.md 逐项做）完成前不参与编译 -->
+    <Compile Remove="ObsPort/**" Condition="'$(WithObs)' != 'true'" />
+  </ItemGroup>
+  <PropertyGroup Condition="'$(WithObs)' == 'true'">
+    <DefineConstants>$(DefineConstants);WITH_OBS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(Sts2SimDir)/src/Sts2Sim.Core/Sts2Sim.Core.csproj" />
+  </ItemGroup>
+</Project>

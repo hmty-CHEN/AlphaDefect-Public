@@ -1,0 +1,79 @@
+{
+  "checked_at_paris": "2026-11-03T16:54:34.817912+01:00",
+  "base_commit": "ee7bb8f68a1e5b80866dfa501b90471a110bdcb5",
+  "files": [
+    {
+      "path": "决策记录.md",
+      "size": 522632,
+      "sha256": "cbae9cdf8a10850bd82ad84d02bae50719657bd5eac501b16b5e53bc769c8f24"
+    },
+    {
+      "path": "python/sts2rl/train.py",
+      "size": 75007,
+      "sha256": "8dd2a291b80e991c86b9fa56d13aefad94871d657dc8b866e349c42c54b421f7"
+    },
+    {
+      "path": "python/sts2rl/actor.py",
+      "size": 73294,
+      "sha256": "2a5559f640d27b933bbcd1447203e75a8f4d7be6e4f00bf2ba5e041dd8e47565"
+    },
+    {
+      "path": "python/sts2rl/config.py",
+      "size": 36715,
+      "sha256": "92a109a59a76e7dcf85de14e270c70aa631d588dfc57e14769ae989515206d8b"
+    },
+    {
+      "path": "python/sts2rl/value_probe.py",
+      "size": 30763,
+      "sha256": "dd3b23b009c81337af5d1bc39699cc9a0c34f831b1dd8d46378f1b1ff45130cd"
+    },
+    {
+      "path": "tools/bv_assist.py",
+      "size": 6410,
+      "sha256": "d5222d23aaf8f7cdf6e41f296b18aa00e751b686b4e16c34254e4c7d82e22024"
+    },
+    {
+      "path": "tools/health/displacement.py",
+      "size": 2460,
+      "sha256": "69c0b91bd29c8e3ac5889999034657af6f0e025e54fe8848c127730e3d54f160"
+    },
+    {
+      "path": "engine/Sts2Headless/Engine/RunSession.cs",
+      "size": 48608,
+      "sha256": "2d33c2e04e5fb865ea8e379152b32be2f2b65e5d207d8dbf7f5cc1df65bebb65"
+    },
+    {
+      "path": "研究报告/2026-11-03_局外价值探针扩大样本诊断/诊断报告.md",
+      "size": 18427,
+      "sha256": "a75190c08d720c58f516268b96248d4fe904eb2544fff82406458cf4b026bc11"
+    },
+    {
+      "path": "研究报告/2026-11-03_局外价值探针扩大样本诊断/数据/analysis.json",
+      "size": 70737,
+      "sha256": "980e20dfdbde4af9602eb3ab590563eff0d494427116aac75998bab66bfeb628"
+    },
+    {
+      "path": "研究报告/2026-11-01_局外价值头独立评审/评审报告.md",
+      "size": 36956,
+      "sha256": "83755ae62b8d1f38b8906cd3b0aadc5e39080fac924fa2f78e1cba1ddc8b561f"
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/runs/remote/lite_a.json",
+      "snapshot": "lite_a.json",
+      "size": 48949,
+      "sha256": "10c31c26537f33e3634e7a4b4bbdb22542f2ee888bf62e9e76837fcaa8fc612d"
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/runs/remote/lite_b.json",
+      "snapshot": "lite_b.json",
+      "size": 73080,
+      "sha256": "7154740f84cdba0c27f63a0a8e947739fa63c4de2514a684693fc71952031fa1"
+    },
+    {
+      "path": "/home/chenqiyue/.local/share/sls2/runs/remote/markers.json",
+      "snapshot": "markers.json",
+      "size": 366,
+      "sha256": "a7d74d938c4f7389df438593ba4d619d432c6ab2d83962e0fbbc14c274a5ba6e"
+    }
+  ]
+}

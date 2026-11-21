@@ -1,0 +1,28 @@
+{
+  "checked_utc": "2026-11-03T15:53:10.855108+00:00",
+  "checked_paris": "2026-11-03T16:53:10.855108+01:00",
+  "source": "B 机当前 train_config.json、status.json、watchdog.json 与 STOP 文件存在性；SSH 只读",
+  "config": {
+    "gamma": 1.0, "lam": 0.95, "macro_lam": 0.95,
+    "macro_cross_segment": false, "macro_defer_lag": null,
+    "max_policy_lag": 6, "run_segment_steps": 64,
+    "combat_explore": {}, "explore_probs": {}, "bv_shaping": 0.0,
+    "lr": 0.000055, "minibatch": 4096, "grad_accum": 4,
+    "epochs": 2, "batch_steps": 65536,
+    "ent_coef": 0.01, "ent_coef_macro": 0.05, "ema_decay": 0.999
+  },
+  "last_log_version": 158842,
+  "watchdog": {"time": 1793721121, "alive": 0, "stop_flag": true},
+  "stop": true,
+  "stop_diag": true,
+  "checkpoint_rollback": {
+    "version": 158635,
+    "evidence": "决策记录 257、ee7bb8f 提交，以及 latest.pt 与目标备份的逐字节比较；未反序列化检查点",
+    "checked_utc": "2026-11-03T16:03:47.657320+00:00",
+    "backup_name": "v158635-20261103-2316-重启前.pt",
+    "same_bytes": true,
+    "latest_size": 289890246,
+    "note": "最后日志版本 158842 不是回退后的检查点版本；回退点已经经历势能试验"
+  },
+  "access_note": "首次普通权限 SSH 在本机报告系统配置所有者/权限错误；按正常审批对同一只读命令重试成功，没有绕过 SSH 配置或权限限制。"
+}

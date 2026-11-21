@@ -1,0 +1,87 @@
+[
+  {
+    "file": "python/sts2rl/value_probe.py",
+    "line": 25,
+    "text": "REWARD_KEYS = ('gamma', 'lam', 'macro_lam', 'win_reward', 'lose_reward', 'hp_coef', 'potion_coef', 'floor_reward',"
+  },
+  {
+    "file": "python/sts2rl/value_probe.py",
+    "line": 30,
+    "text": "BEHAVIOR_KEYS = ('explore_probs', 'explore_temper', 'explore_until', 'explore_offpolicy', 'combat_explore',"
+  },
+  {
+    "file": "python/sts2rl/value_probe.py",
+    "line": 39,
+    "text": "    rewards = {k: getattr(cfg, k, None) for k in REWARD_KEYS}"
+  },
+  {
+    "file": "python/sts2rl/value_probe.py",
+    "line": 40,
+    "text": "    behavior = {k: getattr(cfg, k, None) for k in BEHAVIOR_KEYS}"
+  },
+  {
+    "file": "python/sts2rl/actor.py",
+    "line": 546,
+    "text": "    if cfg.bv_shaping > 0 and cfg.bv_model:"
+  },
+  {
+    "file": "python/sts2rl/actor.py",
+    "line": 857,
+    "text": "                bv_phi = {}"
+  },
+  {
+    "file": "python/sts2rl/actor.py",
+    "line": 859,
+    "text": "                    bv_c = cfg.bv_shaping if cfg.bv_start is None else cfg.bv_shaping * float(np.clip((version - cfg.bv_start) / max(1, cfg.bv_ramp), 0, 1))"
+  },
+  {
+    "file": "python/sts2rl/actor.py",
+    "line": 865,
+    "text": "                        bv_phi = {k: float(bv_c * pb) for k, pb in zip(bk, bv_est(brows))}"
+  },
+  {
+    "file": "python/sts2rl/actor.py",
+    "line": 896,
+    "text": "                    if k in bv_phi:      # 构筑价值势能塑形，同上"
+  },
+  {
+    "file": "python/sts2rl/actor.py",
+    "line": 898,
+    "text": "                            reward_event(t, \"buildvalue_potential\", bv_phi[k] - t.bv_last)"
+  },
+  {
+    "file": "python/sts2rl/actor.py",
+    "line": 899,
+    "text": "                            t.rewards[-1] += bv_phi[k] - t.bv_last; t.bv_shaped += bv_phi[k] - t.bv_last"
+  },
+  {
+    "file": "python/sts2rl/actor.py",
+    "line": 900,
+    "text": "                        t.bv_last = bv_phi[k]"
+  },
+  {
+    "file": "python/sts2rl/actor.py",
+    "line": 1042,
+    "text": "            reward_event(t, \"buildvalue_potential_terminal\", -t.bv_last)"
+  },
+  {
+    "file": "tools/value_probe_summary.py",
+    "line": 102,
+    "text": "    batches=recent('batch',200);episodes=recent('episode',2000);errors=recent('error',5);legacy=recent('legacy',200)"
+  },
+  {
+    "file": "tools/value_probe_analysis.py",
+    "line": 160,
+    "text": "def fit_baseline(root,limit=1000):"
+  },
+  {
+    "file": "tools/value_probe_analysis.py",
+    "line": 191,
+    "text": "    ex.add_argument('--limit',type=int,default=256);ex.add_argument('--split',choices=['train','validation','test'],default='test')"
+  },
+  {
+    "file": "tools/value_probe_analysis.py",
+    "line": 193,
+    "text": "    bl=sub.add_parser('fit-baseline');bl.add_argument('--root',type=Path,required=True);bl.add_argument('--limit',type=int,default=1000)"
+  }
+]

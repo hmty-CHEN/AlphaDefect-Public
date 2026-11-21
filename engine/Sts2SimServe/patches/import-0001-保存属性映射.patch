@@ -1,0 +1,34 @@
+diff --git a/src/Sts2Sim.Core/Runs/Transplant/TransplantSavedProperties.cs b/src/Sts2Sim.Core/Runs/Transplant/TransplantSavedProperties.cs
+index b2cec31..eb2cc8d 100644
+--- a/src/Sts2Sim.Core/Runs/Transplant/TransplantSavedProperties.cs
++++ b/src/Sts2Sim.Core/Runs/Transplant/TransplantSavedProperties.cs
+@@ -12,10 +12,19 @@ internal static class TransplantSavedProperties
+ {
+     private sealed record Binding(string FieldName, string Group);
+ 
++    private static readonly HashSet<string> IgnoredNative = new(StringComparer.Ordinal)
++    {
++        "ArchaicTooth.StarterCard", "ArchaicTooth.AncientCard", "TheScythe.CurrentDamage",
++    };
++
+     private static readonly IReadOnlyDictionary<string, Binding> Bindings =
+         new Dictionary<string, Binding>(StringComparer.Ordinal)
+         {
+             ["SeaGlass.CharacterId"] = new("_characterId", "model_ids"),
++            // sls2 补丁（import-0001）：原版保存这几项，sts2-sim 原来没映射，导入整局存档时报 Unmapped（PIMC 评测 SIMS0105 等）
++            ["GeneticAlgorithm.CurrentBlock"] = new("_currentBlock", "ints"),
++            ["GeneticAlgorithm.IncreasedBlock"] = new("_increasedBlock", "ints"),
++            ["TheScythe.IncreasedDamage"] = new("_increasedDamage", "ints"),
+             ["BoneTea.CombatsLeft"] = new("_combatsLeft", "ints"),
+             ["BookOfFiveRings.CardsAdded"] = new("_cardsAdded", "ints"),
+             ["DustyTome.AncientCard"] = new("_ancientCard", "model_ids"),
+@@ -261,6 +270,9 @@ internal static class TransplantSavedProperties
+                     else relic.IsMelted = value.GetBoolean();
+                     continue;
+                 }
++                // sls2 补丁（import-0001）：只用来显示、或能由别的属性推出来的原版保存属性，跳过
++                // （古老牙齿的 StarterCard / AncientCard 只给遗物说明填牌名；镰刀的 CurrentDamage 恒为 13 + IncreasedDamage）
++                if (IgnoredNative.Contains(bindingKey)) continue;
+                 if (!Bindings.TryGetValue(bindingKey, out Binding? binding) || binding.Group != group.Name)
+                     throw new TransplantMappingException($"{path}.{name}", "Unmapped native saved property.");
+                 FieldInfo field = model.GetType().GetField(binding.FieldName,

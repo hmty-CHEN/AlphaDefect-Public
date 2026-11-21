@@ -1,0 +1,267 @@
+diff --git a/src/Sts2Sim.Core/Models/Relics/Bellows.cs b/src/Sts2Sim.Core/Models/Relics/Bellows.cs
+index dc9ce2a..561df6b 100644
+--- a/src/Sts2Sim.Core/Models/Relics/Bellows.cs
++++ b/src/Sts2Sim.Core/Models/Relics/Bellows.cs
+@@ -1,5 +1,6 @@
+ using Sts2Sim.Core.Combat;
+ using Sts2Sim.Core.Entities.Creatures;
++using Sts2Sim.Core.Entities.Players;
+ using Sts2Sim.Core.Entities.Relics;
+ 
+ namespace Sts2Sim.Core.Models.Relics;
+@@ -8,12 +9,10 @@ public sealed class Bellows : RelicModel
+ {
+     public override RelicRarity Rarity => RelicRarity.Rare;
+ 
+-    public override Task AfterSideTurnStart(
+-        CombatSide side,
+-        IReadOnlyList<Creature> participants)
++    // 原版挂在 AfterPlayerTurnStart（抽完手牌后、AfterSideTurnStart 之前），同一时机的遗物先后与随机数消耗顺序才和原版一样
++    public override Task AfterPlayerTurnStart(Player player)
+     {
+-        // 偏离 #123：无独立 AfterPlayerTurnStart；用摸牌后的 AfterSideTurnStart 过滤到持有者首回合。
+-        if (!participants.Contains(Owner.Creature) ||
++        if (player != Owner ||
+             Owner.PlayerCombatState?.TurnNumber != 1)
+         {
+             return Task.CompletedTask;
+diff --git a/src/Sts2Sim.Core/Models/Relics/BoneTea.cs b/src/Sts2Sim.Core/Models/Relics/BoneTea.cs
+index 1b2b180..c428aac 100644
+--- a/src/Sts2Sim.Core/Models/Relics/BoneTea.cs
++++ b/src/Sts2Sim.Core/Models/Relics/BoneTea.cs
+@@ -1,6 +1,7 @@
+ using Sts2Sim.Core.Combat;
+ using Sts2Sim.Core.Commands;
+ using Sts2Sim.Core.Entities.Creatures;
++using Sts2Sim.Core.Entities.Players;
+ using Sts2Sim.Core.Entities.Relics;
+ 
+ namespace Sts2Sim.Core.Models.Relics;
+@@ -15,12 +16,11 @@ public sealed class BoneTea : RelicModel
+ 
+     public int CombatsLeft => Math.Max(0, _combatsLeft);
+ 
+-    public override Task AfterSideTurnStart(
+-        CombatSide side,
+-        IReadOnlyList<Creature> participants)
++    // 原版挂在 AfterPlayerTurnStart（抽完手牌后、AfterSideTurnStart 之前），同一时机的遗物先后与随机数消耗顺序才和原版一样
++    public override Task AfterPlayerTurnStart(Player player)
+     {
+         if (IsUsedUp ||
+-            !participants.Contains(Owner.Creature) ||
++            player != Owner ||
+             Owner.PlayerCombatState?.TurnNumber != 1)
+         {
+             return Task.CompletedTask;
+diff --git a/src/Sts2Sim.Core/Models/Relics/ChoicesParadox.cs b/src/Sts2Sim.Core/Models/Relics/ChoicesParadox.cs
+index 49004f4..c2fdd0c 100644
+--- a/src/Sts2Sim.Core/Models/Relics/ChoicesParadox.cs
++++ b/src/Sts2Sim.Core/Models/Relics/ChoicesParadox.cs
+@@ -2,6 +2,7 @@ using Sts2Sim.Core.Combat;
+ using Sts2Sim.Core.Commands;
+ using Sts2Sim.Core.Entities.Cards;
+ using Sts2Sim.Core.Entities.Creatures;
++using Sts2Sim.Core.Entities.Players;
+ using Sts2Sim.Core.Entities.Relics;
+ using Sts2Sim.Core.Factories;
+ 
+@@ -11,9 +12,10 @@ public sealed class ChoicesParadox : RelicModel
+ {
+     public override RelicRarity Rarity => RelicRarity.Ancient;
+ 
+-    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants)
++    // 原版挂在 AfterPlayerTurnStart（抽完手牌后、AfterSideTurnStart 之前），同一时机的遗物先后与随机数消耗顺序才和原版一样
++    public override async Task AfterPlayerTurnStart(Player player)
+     {
+-        if (!participants.Contains(Owner.Creature) || Owner.PlayerCombatState?.TurnNumber != 1)
++        if (player != Owner || Owner.PlayerCombatState?.TurnNumber != 1)
+         {
+             return;
+         }
+diff --git a/src/Sts2Sim.Core/Models/Relics/FestivePopper.cs b/src/Sts2Sim.Core/Models/Relics/FestivePopper.cs
+index dfb8be6..1090523 100644
+--- a/src/Sts2Sim.Core/Models/Relics/FestivePopper.cs
++++ b/src/Sts2Sim.Core/Models/Relics/FestivePopper.cs
+@@ -1,6 +1,7 @@
+ using Sts2Sim.Core.Combat;
+ using Sts2Sim.Core.Commands;
+ using Sts2Sim.Core.Entities.Creatures;
++using Sts2Sim.Core.Entities.Players;
+ using Sts2Sim.Core.Entities.Relics;
+ using Sts2Sim.Core.ValueProps;
+ 
+@@ -10,12 +11,10 @@ public sealed class FestivePopper : RelicModel
+ {
+     public override RelicRarity Rarity => RelicRarity.Common;
+ 
+-    public override async Task AfterSideTurnStart(
+-        CombatSide side,
+-        IReadOnlyList<Creature> participants)
++    // 原版挂在 AfterPlayerTurnStart（抽完手牌后、AfterSideTurnStart 之前），同一时机的遗物先后与随机数消耗顺序才和原版一样
++    public override async Task AfterPlayerTurnStart(Player player)
+     {
+-        // 偏离 #113：无独立 AfterPlayerTurnStart；用 AfterSideTurnStart 保留持有者首回合一次的效果。
+-        if (!participants.Contains(Owner.Creature) ||
++        if (player != Owner ||
+             Owner.PlayerCombatState?.TurnNumber != 1)
+         {
+             return;
+diff --git a/src/Sts2Sim.Core/Models/Relics/GamblingChip.cs b/src/Sts2Sim.Core/Models/Relics/GamblingChip.cs
+index 9603e8e..8ea6fe0 100644
+--- a/src/Sts2Sim.Core/Models/Relics/GamblingChip.cs
++++ b/src/Sts2Sim.Core/Models/Relics/GamblingChip.cs
+@@ -2,6 +2,7 @@ using Sts2Sim.Core.Combat;
+ using Sts2Sim.Core.Commands;
+ using Sts2Sim.Core.Entities.Cards;
+ using Sts2Sim.Core.Entities.Creatures;
++using Sts2Sim.Core.Entities.Players;
+ using Sts2Sim.Core.Entities.Relics;
+ 
+ namespace Sts2Sim.Core.Models.Relics;
+@@ -10,12 +11,10 @@ public sealed class GamblingChip : RelicModel
+ {
+     public override RelicRarity Rarity => RelicRarity.Rare;
+ 
+-    public override async Task AfterSideTurnStart(
+-        CombatSide side,
+-        IReadOnlyList<Creature> participants)
++    // 原版挂在 AfterPlayerTurnStart（抽完手牌后、AfterSideTurnStart 之前），同一时机的遗物先后与随机数消耗顺序才和原版一样
++    public override async Task AfterPlayerTurnStart(Player player)
+     {
+-        // 偏离 #124：无独立 AfterPlayerTurnStart；用摸牌后的 AfterSideTurnStart 过滤到持有者首回合。
+-        if (!participants.Contains(Owner.Creature) ||
++        if (player != Owner ||
+             Owner.PlayerCombatState?.TurnNumber != 1)
+         {
+             return;
+diff --git a/src/Sts2Sim.Core/Models/Relics/MrStruggles.cs b/src/Sts2Sim.Core/Models/Relics/MrStruggles.cs
+index dabaf9d..3d3f7a7 100644
+--- a/src/Sts2Sim.Core/Models/Relics/MrStruggles.cs
++++ b/src/Sts2Sim.Core/Models/Relics/MrStruggles.cs
+@@ -1,6 +1,7 @@
+ using Sts2Sim.Core.Combat;
+ using Sts2Sim.Core.Commands;
+ using Sts2Sim.Core.Entities.Creatures;
++using Sts2Sim.Core.Entities.Players;
+ using Sts2Sim.Core.Entities.Relics;
+ using Sts2Sim.Core.ValueProps;
+ 
+@@ -10,11 +11,10 @@ public sealed class MrStruggles : RelicModel
+ {
+     public override RelicRarity Rarity => RelicRarity.Event;
+ 
+-    public override Task AfterSideTurnStart(
+-        CombatSide side,
+-        IReadOnlyList<Creature> participants)
++    // 原版挂在 AfterPlayerTurnStart（抽完手牌后、AfterSideTurnStart 之前），同一时机的遗物先后与随机数消耗顺序才和原版一样
++    public override Task AfterPlayerTurnStart(Player player)
+     {
+-        if (!participants.Contains(Owner.Creature))
++        if (player != Owner)
+         {
+             return Task.CompletedTask;
+         }
+diff --git a/src/Sts2Sim.Core/Models/Relics/ToastyMittens.cs b/src/Sts2Sim.Core/Models/Relics/ToastyMittens.cs
+index bfdaaea..f4fd903 100644
+--- a/src/Sts2Sim.Core/Models/Relics/ToastyMittens.cs
++++ b/src/Sts2Sim.Core/Models/Relics/ToastyMittens.cs
+@@ -1,6 +1,7 @@
+ using Sts2Sim.Core.Combat;
+ using Sts2Sim.Core.Commands;
+ using Sts2Sim.Core.Entities.Creatures;
++using Sts2Sim.Core.Entities.Players;
+ using Sts2Sim.Core.Entities.Relics;
+ using Sts2Sim.Core.Models.Powers;
+ 
+@@ -10,9 +11,11 @@ public sealed class ToastyMittens : RelicModel
+ {
+     public override RelicRarity Rarity => RelicRarity.Ancient;
+ 
+-    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants)
++    // 原版挂在 AfterPlayerTurnStart（抽完手牌后、AfterSideTurnStart 之前），不是 AfterSideTurnStart：
++    // 时机晚了会排到赤牛（AfterSideTurnStart 给活力）之后，能力列表的先后顺序就和原版不同
++    public override async Task AfterPlayerTurnStart(Player player)
+     {
+-        if (side != CombatSide.Player || !participants.Contains(Owner.Creature)) return;
++        if (player != Owner) return;
+         CardModel? card = (await CardSelectCmd.FromHand(Owner.Creature.CombatState!, Owner,
+             Owner.PlayerCombatState!.Hand.Cards, 1, 1, this, cancelable: false)).SingleOrDefault();
+         if (card is not null)
+diff --git a/src/Sts2Sim.Core/Models/Relics/VexingPuzzlebox.cs b/src/Sts2Sim.Core/Models/Relics/VexingPuzzlebox.cs
+index 89b93cf..1125678 100644
+--- a/src/Sts2Sim.Core/Models/Relics/VexingPuzzlebox.cs
++++ b/src/Sts2Sim.Core/Models/Relics/VexingPuzzlebox.cs
+@@ -2,6 +2,7 @@ using Sts2Sim.Core.Combat;
+ using Sts2Sim.Core.Commands;
+ using Sts2Sim.Core.Entities.Cards;
+ using Sts2Sim.Core.Entities.Creatures;
++using Sts2Sim.Core.Entities.Players;
+ using Sts2Sim.Core.Entities.Relics;
+ using Sts2Sim.Core.Factories;
+ 
+@@ -11,14 +12,12 @@ public sealed class VexingPuzzlebox : RelicModel
+ {
+     public override RelicRarity Rarity => RelicRarity.Rare;
+ 
+-    public override async Task AfterSideTurnStart(
+-        CombatSide side,
+-        IReadOnlyList<Creature> participants)
++    // 原版挂在 AfterPlayerTurnStart（抽完手牌后、AfterSideTurnStart 之前），同一时机的遗物先后与随机数消耗顺序才和原版一样
++    public override async Task AfterPlayerTurnStart(Player player)
+     {
+-        // 偏离 #131：无独立 AfterPlayerTurnStart；用摸牌后的 AfterSideTurnStart 过滤到持有者首回合。
+         // 该条的后半段（"CharacterModel 尚无 CardPool 映射且当前只启用 Regent"）已于 2026-09-08
+         // 销案（偏离 #303）：现按权威源码走 Owner.Character.CardPool + CardFactory.GetDistinctForCombat。
+-        if (!participants.Contains(Owner.Creature) ||
++        if (player != Owner ||
+             Owner.PlayerCombatState?.TurnNumber != 1)
+         {
+             return;
+@@ -36,7 +35,7 @@ public sealed class VexingPuzzlebox : RelicModel
+             return;
+         }
+ 
+-        generated.MakeTemporaryFreeThisTurn();
++        generated.SetToFreeThisTurn();     // 原版 SetToFreeThisTurn：本回合内或打出一次之前免费（打出后恢复原价）
+         await CardPileCmd.Generate(Owner.Creature.CombatState!, generated, PileType.Hand);
+     }
+ }
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Cards/CardSelectionMigrationATests.cs b/tests/Sts2Sim.Core.Tests/Models/Cards/CardSelectionMigrationATests.cs
+index a5e056d..6ac1d80 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Cards/CardSelectionMigrationATests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Cards/CardSelectionMigrationATests.cs
+@@ -106,7 +106,7 @@ public sealed class CardSelectionMigrationATests : IDisposable
+             relic.AssignOwner(player);
+             model = relic;
+             expected = hand;
+-            await relic.AfterSideTurnStart(CombatSide.Player, new[] { player.Creature });
++            await relic.AfterPlayerTurnStart(player);     // 原版暖手套挂在 AfterPlayerTurnStart
+         }
+         else if (effect is "LiquidMemories" or "TouchOfInsanity" or "DropletOfPrecognition")
+         {
+diff --git a/tests/Sts2Sim.Core.Tests/Models/Events/HiveFidelityRound2ExistingTests.cs b/tests/Sts2Sim.Core.Tests/Models/Events/HiveFidelityRound2ExistingTests.cs
+index 31056d6..7abae33 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/Events/HiveFidelityRound2ExistingTests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/Events/HiveFidelityRound2ExistingTests.cs
+@@ -269,7 +269,7 @@ public sealed class HiveFidelityRound2ExistingTests : IDisposable
+         await PowerCmd.Apply<NoDrawPower>(room.Engine.State, player.Creature, 1m, player.Creature, null);
+         await CardPileCmd.Draw(room.Engine.State, 5, player, fromHandDraw: true);
+ 
+-        await Hook.AfterSideTurnStart(room.Engine.State, CombatSide.Player, [player.Creature]);
++        await Hook.AfterPlayerTurnStart(room.Engine.State, player);     // 原版暖手套挂在 AfterPlayerTurnStart
+ 
+         Assert.Empty(player.PlayerCombatState!.Hand.Cards);
+         Assert.Equal(2, Assert.Single(player.Creature.Powers.OfType<StrengthPower>()).Amount);
+diff --git a/tests/Sts2Sim.Core.Tests/Models/SelectionMigrationBcdfTests.cs b/tests/Sts2Sim.Core.Tests/Models/SelectionMigrationBcdfTests.cs
+index 7eeaac4..3648aa2 100644
+--- a/tests/Sts2Sim.Core.Tests/Models/SelectionMigrationBcdfTests.cs
++++ b/tests/Sts2Sim.Core.Tests/Models/SelectionMigrationBcdfTests.cs
+@@ -106,7 +106,7 @@ public sealed class SelectionMigrationBcdfTests : IDisposable
+             if (relicEffect)
+             {
+                 var relic = (GamblingChip)ModelDb.Relic<GamblingChip>().MutableClone(); relic.AssignOwner(player);
+-                await relic.AfterSideTurnStart(CombatSide.Player, new[] { player.Creature });
++                await relic.AfterPlayerTurnStart(player);     // 原版赌博筹码挂在 AfterPlayerTurnStart
+             }
+             else
+             {

@@ -1,0 +1,67 @@
+{
+ "engine": "rs-search",
+ "specs": 30,
+ "import_spec": {
+  "n": 30,
+  "mean_us": 4775.0,
+  "p50_us": 4137.9,
+  "p95_us": 7492.0,
+  "max_us": 23497.8
+ },
+ "clone": {
+  "n": 600,
+  "mean_us": 77.5,
+  "p50_us": 74.6,
+  "p95_us": 119.9,
+  "max_us": 288.6
+ },
+ "reseed": {
+  "n": 600,
+  "mean_us": 26.9,
+  "p50_us": 24.3,
+  "p95_us": 40.7,
+  "max_us": 1073.0
+ },
+ "batch_step_1": {
+  "n": 600,
+  "mean_us": 213.8,
+  "p50_us": 210.2,
+  "p95_us": 334.0,
+  "max_us": 585.9
+ },
+ "batch_frame_1": {
+  "n": 600,
+  "mean_us": 170.3,
+  "p50_us": 159.2,
+  "p95_us": 265.3,
+  "max_us": 361.3
+ },
+ "drop": {
+  "n": 600,
+  "mean_us": 67.3,
+  "p50_us": 60.9,
+  "p95_us": 96.2,
+  "max_us": 3616.3
+ },
+ "clone_reseed_step_per_world_32": {
+  "n": 30,
+  "mean_us": 257.5,
+  "p50_us": 262.9,
+  "p95_us": 340.4,
+  "max_us": 354.5
+ },
+ "batch_step_32_per_item": {
+  "n": 30,
+  "mean_us": 115.1,
+  "p50_us": 111.5,
+  "p95_us": 163.9,
+  "max_us": 168.8
+ },
+ "batch_frame_32_per_item": {
+  "n": 30,
+  "mean_us": 96.9,
+  "p50_us": 96.0,
+  "p95_us": 147.1,
+  "max_us": 147.3
+ }
+}

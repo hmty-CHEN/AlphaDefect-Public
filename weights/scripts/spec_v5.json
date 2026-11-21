@@ -1,0 +1,11 @@
+[
+ {
+  "name": "fool_ema_v24181",
+  "src": "~/.local/share/sls2/live/ckpt-fool/v24181-20261117-愚者格式27-训练滑动平均.pt",
+  "weights": "ema",
+  "release": "weights-v5",
+  "dr": "Fool #1-#26",
+  "notes": "The Fool network used in the livestream from 2026-11-17: the learner's EMA copy (decay 0.999 per version) at v24,181, the last version before Fool training was paused (Fool DR #26). Trained from scratch from 2026-11-13, on game v0.113.0 and from v23,982 on v0.113.1 (content catalog v0.113.1); observation format 27; Muon on the hidden 2-D weights and Adam elsewhere, both with Schedule-Free averaging since Fool DR #16; carries the candidate-conditioned future-readout head (future_head, Fool DR #25). In live play it runs greedily outside combat and with a 32-simulation tree search in boss and elite fights (docs/25). Exported from the live checkpoint with machine-specific settings removed; every tensor is bit-identical to it.",
+  "eval": "62.1% greedy on the first 3,000 P2-future seeds (A10, whole runs); 68.4% (2,051 / 3,000; Wilson 95% CI 66.7-70.0%) with 32-simulation tree search in every boss and elite fight on the same seeds, +6.2 +/- 0.9 pp over its own greedy play (paired); the three batches of 1,000 gave 68.1%, 68.3% and 68.7%. Searching every fight instead gave 67.7% (-0.7 +/- 0.9 pp, not significant)."
+ }
+]

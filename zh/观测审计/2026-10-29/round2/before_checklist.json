@@ -1,0 +1,254 @@
+[
+  {
+    "id": "F01",
+    "title": "回合末手牌自伤与失去生命的分类",
+    "likelihood": "中",
+    "impact": "高",
+    "basis": "11 种 HasTurnEndInHandEffect；对照 Damage/HpLoss 和特殊 Regret",
+    "status": "excluded",
+    "evidence": [
+      "behavior_results.jsonl: F01"
+    ],
+    "result": "11种回合末手牌分别构造5张：预演与实际掉血全部一致；不代表叠加特殊触发器后仍保证一致。",
+    "recommendation": "维持现状；复杂交互另登记，不因单个关键字推测错误。",
+    "review_level": "runtime"
+  },
+  {
+    "id": "F02",
+    "title": "防伤顺序：缓冲、无实体、钨棒、多段",
+    "likelihood": "中",
+    "impact": "高",
+    "basis": "已有修正；检查额外组合是否会重复套用或漏段",
+    "status": "covered_existing",
+    "evidence": [
+      "engine/Sts2Headless/Engine/Observation.cs: Loss/Hit"
+    ],
+    "result": "缓冲、无实体、钨棒及按段结算已在第183条安排并实现；本轮静态核对，没有发现独立的新顺序缺陷。",
+    "recommendation": "不重复列入新修改。",
+    "review_level": "static"
+  },
+  {
+    "id": "F03",
+    "title": "敌人护甲、易伤与伤害上限对被动伤害的修正",
+    "likelihood": "高",
+    "impact": "高",
+    "basis": "EndTurnPreview 直接加 orb.PassiveVal 后与 hp+block 比较",
+    "status": "confirmed",
+    "evidence": [
+      "behavior_results.jsonl: F03"
+    ],
+    "result": "硬化外壳限制本回合失血20：重锤候选32，实际20；同回合闪电预演3，实际0。",
+    "recommendation": "区分卡面伤害、预计扣血、每回合剩余承伤上限；被动预演使用目标侧规则。",
+    "review_level": "runtime"
+  },
+  {
+    "id": "F04",
+    "title": "毒与其他敌方回合开始效果",
+    "likelihood": "高",
+    "impact": "中",
+    "basis": "文档明确不计毒；需分清预演范围与安全判断",
+    "status": "confirmed",
+    "evidence": [
+      "behavior_results.jsonl: F04; PoisonPower.AfterSideTurnStart"
+    ],
+    "result": "毒29、敌人27血且准备攻击8：预演掉8血，实际毒先结算击杀、掉0。原文档明确未计敌人回合开始效果，这是已知估计范围导致的安全判断缺口。",
+    "recommendation": "补“敌人行动之前”的确定结算，或为预演注明覆盖范围/有效性。不要把Doom误当成行动前触发。",
+    "review_level": "runtime"
+  },
+  {
+    "id": "F05",
+    "title": "额外回合是否跳过敌人攻击",
+    "likelihood": "高",
+    "impact": "高",
+    "basis": "来袭伤害列表总按本轮所有攻击累加",
+    "status": "confirmed",
+    "evidence": [
+      "behavior_results.jsonl: F05; PaelsEye.ShouldTakeExtraTurn"
+    ],
+    "result": "佩尔之眼未触发且本回合未手动出牌：直接结束获得额外回合，预演掉26，实际0。",
+    "recommendation": "增加是否将获得额外回合，并按真实时序处理消耗手牌和跳过敌方行动。",
+    "review_level": "runtime"
+  },
+  {
+    "id": "F06",
+    "title": "回合末增益、减益、回复与净血量口径",
+    "likelihood": "中",
+    "impact": "中",
+    "basis": "Regen/手牌弱化等是否只属缺少派生值",
+    "status": "needs_semantics",
+    "evidence": [
+      "followup_results.jsonl: F06; RegenPower.BeforeSideTurnEndEarly"
+    ],
+    "result": "再生5时预演伤害26，净失血21。当前数值可能表示总伤害，不能直接以净血量差判为实现错误。",
+    "recommendation": "明确字段口径；如有价值，再单独增加预计治疗和净生命变化。",
+    "review_level": "runtime"
+  },
+  {
+    "id": "F07",
+    "title": "无法获得格挡与非卡牌格挡",
+    "likelihood": "中",
+    "impact": "中",
+    "basis": "NoBlockPower/Shadowmeld 是否影响冰霜和遗物",
+    "status": "excluded",
+    "evidence": [
+      "behavior_results.jsonl: F07; NoBlockPower.ModifyBlockMultiplicative"
+    ],
+    "result": "NoBlockPower明确不限制Unpowered或无cardSource格挡。惊恐后的冰霜场景预演22、实际22。",
+    "recommendation": "不把“无法格挡”文本泛化为所有格挡来源。",
+    "review_level": "runtime"
+  },
+  {
+    "id": "F08",
+    "title": "自动出牌、虚无消耗和回合末手牌变化",
+    "likelihood": "中",
+    "impact": "中",
+    "basis": "EndTurnPreview 读取手牌时点与真实顺序",
+    "status": "linked",
+    "evidence": [
+      "CombatManager.DoTurnEnd/FlushPlayerHand; S02"
+    ],
+    "result": "基础自伤处理已由F01验证；临时保留/奇巧遗漏归S02。其他虚无触发连锁只静态检查，不声称穷尽组合。",
+    "recommendation": "优先处理已复现S02，不另造重复问题。",
+    "review_level": "static"
+  },
+  {
+    "id": "F09",
+    "title": "终结、复活和多形态的击杀标志",
+    "likelihood": "高",
+    "impact": "高",
+    "basis": "候选 kill 标志仅总伤害与 hp+block 比较",
+    "status": "confirmed",
+    "evidence": [
+      "followup_results.jsonl: F09"
+    ],
+    "result": "鬼祟珊瑚群剩40血，重锤+候选总伤42且击杀标志1，实际仅失血20、仍存活。实验体多形态已有独立记录，不作为新缺口。",
+    "recommendation": "击杀标志按目标实际承伤约束计算，或将标志改为明确的粗略上界。与F03合并修复。",
+    "review_level": "runtime"
+  },
+  {
+    "id": "F10",
+    "title": "直伤段数、范围攻击、重放与 X 费",
+    "likelihood": "高",
+    "impact": "高",
+    "basis": "候选只读 Damage/CalculatedDamage 与 Repeat/CalculatedHits",
+    "status": "linked",
+    "evidence": [
+      "S01; manifest.prior_scheduled; Observation.EndTurnPreview"
+    ],
+    "result": "基础重放缺失归S01；零球弹幕、疯狂科学及镀金缆线已安排。X费不参与背包估计在文档中明确，是派生计算覆盖不足，未新增无法区分局面的证据。",
+    "recommendation": "优先S01，避免把每种推导困难都列成必修观测缺失。",
+    "review_level": "static"
+  },
+  {
+    "id": "F11",
+    "title": "药水动态数值和目标效果",
+    "likelihood": "中",
+    "impact": "中",
+    "basis": "Potion 仅位置、可用、价格；静态先验可能覆盖定值",
+    "status": "excluded",
+    "evidence": [
+      "entity_inventory.csv: Potions; state_checks.json:S21"
+    ],
+    "result": "扫描65种药水后，未在常规单人Defect路径确认新的药水自身公开可变状态丢失。被药水施加的状态归S01等实体记录问题。",
+    "recommendation": "不机械添加所有药水数值列。",
+    "review_level": "static"
+  },
+  {
+    "id": "F12",
+    "title": "选牌结果预览、临时费用与目标用途",
+    "likelihood": "中",
+    "impact": "中",
+    "basis": "已补来源；结果费用在选择后改变",
+    "status": "covered_existing",
+    "evidence": [
+      "决策记录185; Observation.AddSelectPrompt"
+    ],
+    "result": "实际发起者与打出牌堆已在v14；选中后临时免费等结果预览是前轮已提到但未实施的候选，非本轮新发现。",
+    "recommendation": "保留后续候选，避免重复申报。",
+    "review_level": "static"
+  },
+  {
+    "id": "F13",
+    "title": "完整商店货架与暂不可买商品",
+    "likelihood": "高",
+    "impact": "中",
+    "basis": "AddShopEntries 跳过买不起条目；extra 不进模型",
+    "status": "confirmed_static",
+    "evidence": [
+      "RunSession.AddShopEntries; Snapshot.Shelf; features.collate_ragged"
+    ],
+    "result": "买不起的卡/遗物被AddShopEntries过滤，完整货架仅在extra供回放，模型组批不读extra。会影响污浊药水换钱后的购买规划；未证明某次离店选择因此错误。",
+    "recommendation": "将公开完整货架作为不可选实体，候选仍只保留合法购买；优先级低于确定性错误。",
+    "review_level": "static"
+  },
+  {
+    "id": "F14",
+    "title": "局外有效能量、球位和条件性资源",
+    "likelihood": "中",
+    "impact": "中",
+    "basis": "Global 能量/球位仅战斗时填；遗物可部分推导",
+    "status": "needs_reproduction",
+    "evidence": [
+      "Observation.Encode Global; Player.MaxEnergy/BaseOrbSlotCount"
+    ],
+    "result": "局外能量上限/球位字段为0，部分有效值可由遗物推导。未找到当前自然玩法中相同其余输入而基础上限不同的强反例。",
+    "recommendation": "只作可能有用的派生特征，暂不列必修。",
+    "review_level": "static"
+  },
+  {
+    "id": "F15",
+    "title": "路线摘要极值是否来自不同路径",
+    "likelihood": "中",
+    "impact": "中",
+    "basis": "多列独立求 min/max，不能推为同一路同时可达",
+    "status": "excluded",
+    "evidence": [
+      "Observation.RouteFrom; 观测格式.md"
+    ],
+    "result": "路线摘要每列独立求极值，与文档的各自最少/最多语义一致。只有将这些列误当成同一路可同时实现才会出错，本轮未发现这种承诺。",
+    "recommendation": "可考虑将来增加组合约束，但当前不足以认定错误。",
+    "review_level": "static"
+  },
+  {
+    "id": "F16",
+    "title": "特权信息与公开观测隔离",
+    "likelihood": "低",
+    "impact": "高",
+    "basis": "actor 请求特权，策略前向是否依赖 tok_priv",
+    "status": "excluded_static",
+    "evidence": [
+      "python/sts2rl/model.py: forward_phi; features.collate_ragged"
+    ],
+    "result": "模型的公开_encode和候选打分不读取tok_priv；真实抽牌顺序、预抽遭遇及随机分支汇总在策略打分之后只进入value。此次仅静态核对当前实现。",
+    "recommendation": "维持公开/特权隔离；不因此声称所有搜索插件也已验证。",
+    "review_level": "static"
+  },
+  {
+    "id": "F17",
+    "title": "同版本号回退后的回放与评测归属",
+    "likelihood": "高",
+    "impact": "中",
+    "basis": "重复版本存在，必须以时间与分支辨认",
+    "status": "covered_existing",
+    "evidence": [
+      "决策记录193; manifest.json"
+    ],
+    "result": "多次回退确实复用版本号，旧回放不可仅按版本号认定属于当前训练。第193条已改复测备份按时间选择；审计使用冻结RT批次并记录hash/时间。",
+    "recommendation": "后续结果保留分支/时间/hash；不将旧RT成绩归因于新观测。",
+    "review_level": "static"
+  },
+  {
+    "id": "F18",
+    "title": "已安排问题是否重复列为新发现",
+    "likelihood": "低",
+    "impact": "低",
+    "basis": "对照 manifest.prior_scheduled 和当前 v15 改动",
+    "status": "covered_existing",
+    "evidence": [
+      "manifest.json; state_checks.json"
+    ],
+    "result": "旧问题逐一对照安排，状态检查S18-S20/S26-S27及manifest保留既有安排。v15开发与v14线上测试分别标注。",
+    "recommendation": "最终结论只突出新的已复现问题。",
+    "review_level": "static"
+  }
+]
