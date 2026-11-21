@@ -105,7 +105,16 @@ class Runner:
         if not remote:      # 共用推理进程时本分片不载网络、不建显卡上下文（reports/PIMC推理侧提速.md 第九节）
             net = PolicyValueNet(ModelConfig(**blob["config"]["model"])).eval().to(a.device)
             state = blob.get("ema_state") if a.ema and blob.get("ema_state") else blob["state"]
-            load_state(net, state)
+            # 换游戏版本的旧检查点（2026-11-21，论文补充实验：故障机器人 v0.111.0 的网络在 v0.113.1 上搜索）：同 tools/ability_test.load_net，
+            # 内容先验按特征名对齐、检查点之后追加的词表行清零。在当前版本练的检查点（content_names 相同、vocab_n 等于词表大小）上两步都不起作用
+            load_state(net, state, blob.get("content_names"))
+            from sts2rl.catalog import Catalog
+            from sts2rl.model import zero_new_vocab
+            old_n, vocab_n = blob.get("vocab_n") or 1873, Catalog().vocab_size
+            if old_n < vocab_n:
+                with torch.no_grad():
+                    n_unk = zero_new_vocab(net, old_n, vocab_n)
+                print(f"词表 {old_n} → {vocab_n} 项：新增 ID 的嵌入行已清零（其中 {n_unk} 个旧版记 <unk> 的取 <unk> 那一行）", flush=True)
         self.net = net
         self.residual = None
         if a.residual:

@@ -92,7 +92,14 @@ class RunTreeRunner(T.TreeRunner):
         self.rw = {k: float(c.get(k) or 0.0) for k in ("floor_reward", "act1_boss_reward", "act2_boss_reward", "act3_boss_reward",
                                                       "victory_reward", "act3_boss2_reward")}
         zero = {k: c.get(k) for k in ("run_hp_shaping", "run_potion_coef", "combat_dmg_coef", "wp_shaping", "bv_shaping", "relic_coef")}
-        print(f"整局奖励（检查点配置）：{self.rw}；应为 0 的项：{zero}；milestone_from {c.get('milestone_from')}", flush=True)
+        # 里程碑撤掉（决策记录 271，故障机器人第 164,606 版起）：训练时层数、各幕 Boss、第三幕第一个 Boss 的奖励按 ms_scale 发，撤掉的部分在通关时一次补回
+        # （按这一局原本能拿到的里程碑合计），价值头学的就是这个口径。模拟里照同样记（2026-11-22，论文补充实验：故障机器人在 v0.113.1 上树搜索）：
+        # 路上的里程碑 × ms_scale，通关时补 (1 − ms_scale) × (根之前这一局已得的里程碑 + 模拟里得的)。没有 milestone_from 的检查点 ms_scale = 1，与原来逐位相同
+        ver = int(self.version)
+        mf, mr = c.get("milestone_from"), int(c.get("milestone_ramp") or 500)
+        self.ms_scale = 1.0 if mf is None or ver < mf else (0.0 if mr <= 0 else 1.0 - min(1.0, (ver - mf) / mr))
+        self.ms_root = 0.0
+        print(f"整局奖励（检查点配置）：{self.rw}；应为 0 的项：{zero}；milestone_from {mf}（ramp {mr}，第 {ver} 版的里程碑系数 {self.ms_scale}）", flush=True)
         self.ctx = {}
         self.lab = None     # --labels：run() 打开的标签文件
         self.map_bias = {kv.split("=")[0]: float(kv.split("=")[1]) for kv in (a.map_bias or "").split(",") if "=" in kv}
@@ -103,16 +110,18 @@ class RunTreeRunner(T.TreeRunner):
 
     def _path_reward(self, w: dict, o) -> None:
         """这一帧相对上一帧拿到的奖励，累加进 w["acc"]（同 actor 的记法）。"""
-        rw, ctx = self.rw, self.ctx
+        rw, ctx, ms = self.rw, self.ctx, self.ms_scale
         if o.floor > w["floor"]:
-            w["acc"] += rw["floor_reward"] * (o.floor - w["floor"])
+            m = rw["floor_reward"] * (o.floor - w["floor"]); w["acc"] += ms * m; w["ms"] = w.get("ms", 0.0) + m
         for act in range(w["act"] + 1, o.act + 1):
-            w["acc"] += {1: rw["act1_boss_reward"], 2: rw["act2_boss_reward"]}.get(act, 0.0)
+            m = {1: rw["act1_boss_reward"], 2: rw["act2_boss_reward"]}.get(act, 0.0); w["acc"] += ms * m; w["ms"] = w.get("ms", 0.0) + m
         # 第三幕第一个 Boss：这场打完（离开战斗或已进到下一层）且没死，发 act3_boss_reward（只发一次）
         if ctx.get("boss3_first") and not w.get("b3") and not o.done and (not o.in_combat or o.floor > ctx["floor0"]):
-            w["acc"] += rw["act3_boss_reward"]; w["b3"] = True
+            m = rw["act3_boss_reward"]; w["acc"] += ms * m; w["ms"] = w.get("ms", 0.0) + m; w["b3"] = True
         if o.done and o.victory and not o.stuck:
             w["acc"] += rw["victory_reward"] + rw["act3_boss2_reward"]
+            if ms < 1.0:        # 撤掉的里程碑在通关时补回（同 actor._finish 的 milestone_back）
+                w["acc"] += (1.0 - ms) * (self.ms_root + w.get("ms", 0.0))
         w["floor"], w["act"] = max(w["floor"], int(o.floor)), max(w["act"], int(o.act))
 
     @staticmethod
@@ -146,7 +155,7 @@ class RunTreeRunner(T.TreeRunner):
                 w = queue.pop(0)
                 k0 = w["key0"]
                 rootn.N[k0] = rootn.N.get(k0, 0) + 1
-                w.update(cand=first[k0], edge=(rootn, k0), path=[(rootn, k0)], acc=0.0, floor=int(root.floor), act=int(root.act))
+                w.update(cand=first[k0], edge=(rootn, k0), path=[(rootn, k0)], acc=0.0, floor=int(root.floor), act=int(root.act), ms=0.0)
                 self._dispatch(j, w, base, hist, 1.0)
                 busy[j] = w
             if not busy:
@@ -308,7 +317,7 @@ class RunTreeRunner(T.TreeRunner):
     def play_run(self, seed: str) -> dict:
         a, X, torch = self.a, self.X, self.torch
         base = {"op": "reset", "mode": "run", "character": a.character, "ascension": 10, "seed": seed, "snapshots": True,
-                "route_summary": True, **EXTRA}
+                "route_summary": True, **EXTRA, **a.req_extra_d}
         self.cur_key = ("run", seed)
         self.real.send({**base, "labels": False})
         o, raw, err = self.recv(self.real)
@@ -343,6 +352,8 @@ class RunTreeRunner(T.TreeRunner):
                 fight_ctx = {"boss3_first": room == "Boss" and int(c.get("act", -1)) == 2 and act3_bosses == 1, "floor0": int(o.floor)}
             n = int(o.num_actions)
             sel = a.all_rooms or room in a.room_set
+            if a.act_set is not None:       # --acts（2026-11-21）：只搜这几幕的这些房间；不给时与原来完全相同
+                sel = sel and fight is not None and int(fight["act"]) in a.act_set
             cm = a.net_mode == "combat" and o.in_combat and sel     # 这场战斗整场交给战斗模式（搜或不搜）
             hy = a.net_mode == "hybrid" and o.in_combat and sel     # 混合：出手与先验用整局模式，搜索的估值用战斗模式
             act3 = room == "Boss" and fight is not None and fight["act"] == 2
@@ -368,6 +379,12 @@ class RunTreeRunner(T.TreeRunner):
             if (in_fight or is_macro) and n > 1 and self.gated(p):
                 ts = time.perf_counter()
                 dec_seed = zlib.crc32(f"{seed}:{nsteps}:{a.policy_seed}".encode()) & 0x3FFFFFFF
+                # 根之前这一局按原系数已得的里程碑（同 actor 的 ms_full：层数从 0 起算、进第二三幕各补上一幕 Boss、第三幕第一个 Boss 打赢后补 act3_boss_reward），
+                # 只在 ms_scale < 1 时用到
+                rw_ = self.rw
+                self.ms_root = (rw_["floor_reward"] * int(o.floor) + (rw_["act1_boss_reward"] if int(o.act) >= 1 else 0.0)
+                                + (rw_["act2_boss_reward"] if int(o.act) >= 2 else 0.0)
+                                + (rw_["act3_boss_reward"] if act3_bosses >= 2 or (act3_bosses == 1 and room != "Boss") else 0.0))
                 self.ctx = ({"cm": True, "act3": act3, "hybrid": hy} if (cm or hy) else fight_ctx) if in_fight else {"macro": True, "floor0": int(o.floor)}
                 sims0, self.a.sims = self.a.sims, (self.a.sims if in_fight else a.macro_sims)
                 res = self.search(base, hist, root, p, dec_seed)
@@ -419,6 +436,8 @@ def run(a) -> None:
     k, n = map(int, a.shard.split("/"))
     a.k_shard = k
     a.room_set = set(a.rooms.split(","))
+    a.act_set = {int(x) for x in a.acts.split(",")} if a.acts else None
+    a.req_extra_d = json.loads(a.req_extra) if a.req_extra else {}     # 实机与推演的 reset 都带（base 传给 _world_reqs）
     a.all_rooms = "all" in a.room_set           # 所有战斗都搜（普通怪、精英、Boss，以及没有战斗快照的战斗）
     os.makedirs(a.out, exist_ok=True)
     seeds = json.loads(Path(a.seeds).read_text(encoding="utf-8"))["seeds"][: a.runs]
@@ -430,7 +449,7 @@ def run(a) -> None:
             if l.strip():
                 done.add(json.loads(l)["seed"])
     todo = [s for s in todo if s not in done]
-    print(f"分片 {k}/{n}：{len(todo)} 局待打（搜索房间 {a.rooms}，{a.sims} 次模拟，λ {a.lam}）", flush=True)
+    print(f"分片 {k}/{n}：{len(todo)} 局待打（搜索房间 {a.rooms}，{a.sims} 次模拟，λ {a.lam}{'，reset 另加 ' + json.dumps(a.req_extra_d) if a.req_extra_d else ''}）", flush=True)
     if not todo:
         return
     R = RunTreeRunner(a)
@@ -459,6 +478,8 @@ def parse(argv: list[str] | None = None):
     ap.add_argument("--seeds", required=True); ap.add_argument("--runs", type=int, default=1000); ap.add_argument("--ckpt", required=True)
     ap.add_argument("--out", required=True); ap.add_argument("--shard", default="0/1"); ap.add_argument("--character", default="FOOL")
     ap.add_argument("--rooms", default="Boss", help="哪些房间的战斗用搜索（逗号分隔：Boss、Elite、Monster）；all 为所有战斗")
+    ap.add_argument("--acts", default="", help="只在这几幕搜（逗号分隔，0 起：2 为第三幕），与 --rooms 同时成立；如 --rooms Boss --acts 2 为只搜第三幕两个 Boss，"
+                    "同 v0.111.0 三个角色 PIMC 的范围（2026-11-21，论文补充实验 4）。默认空：各幕都搜，与原来完全相同")
     ap.add_argument("--net-mode", choices=["run", "combat", "hybrid"], default="run",
                     help="--rooms 里的战斗用哪个模式的网络：run 为整局模式（默认，回传整局价值）；combat 为战斗模式（整场战斗贪心与搜索都用它，记分同题目，λ 宜用 0.03）；"
                          "hybrid 为出手与搜索先验用整局模式、叶子估值与记分用战斗模式")
@@ -475,6 +496,7 @@ def parse(argv: list[str] | None = None):
     ap.add_argument("--max-depth", type=int, default=200)
     ap.add_argument("--no-reseed-rewards", action="store_true", help="推演的 reseed 不换战后奖励（复现 2026-11-17 以前带漏口的结果）")
     ap.add_argument("--map-bias", default="", help="选路偏置：节点类型=加分（对数概率上），逗号分隔，如 Elite=1.0；局外适应搜索的探针（2026-11-17）")
+    ap.add_argument("--req-extra", default="", help='reset 另加的键（JSON），如 \'{"obs_format": 28}\' 给格式 28 时练的检查点（同 ability_test --req-extra，2026-11-21）')
     ap.add_argument("--replays", default="", help="每局另存整局回放到这个目录（胜率小模型的带搜索数据）；默认不存")
     ap.add_argument("--labels", action="store_true",
                     help="每个搜过的根写一行到 labels_s<分片>.jsonl：根帧原始字节与改进后的分布（训练中用搜索的试点，sts2rl/search_kl.py 读）")

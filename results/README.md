@@ -79,7 +79,6 @@ The Silent's trunk records in `table3/table3_silent_w1_trunk.csv` come from the 
 
 ## Not yet included (2026-11-22)
 
-- Defect student e on game v0.113.1 with tree search in boss and elite fights (RV1 first 1,000): running at the time of export.
 
 ## Other results in this folder
 
@@ -88,3 +87,4 @@ The Silent's trunk records in `table3/table3_silent_w1_trunk.csv` come from the 
 | `live/` | Table 5, Section 3.3 | `runs.jsonl`, the livestream's run log of the released game (one line per completed run, 2,030 lines to 2026-11-21); `python3 results/live/table5.py` recounts Table 5 from the line ranges in the paper's source comments: 801 runs, 595 wins, 596.0 expected. |
 | `solver_baseline/` | Section 3.4 | the Defect's network on the 241 positions given to CombatSolver, under the same redrawn outcomes: per-position results of every arm (`agent_*.jsonl`, `full_*.jsonl`), the solver's per-position results that survive (`solver_known147.jsonl`, `solver_raw/`), `report.txt` with all counts and tests, and the tool (`scripts/boss3_agent.py`, SHA-256 in `boss3_agent.sha256`). Defect log DR #294. |
 | `defect_v0.113.1_W1/` | Section 3.2 | the Defect's network on game v0.113.1, greedy, first 1,000 W1 seeds: 769 wins. |
+| `defect_v0.113.1_RV1/` | Section 3.2 | the Defect's network on game v0.113.1, first 1,000 RV1 seeds: greedy (`run_search.py --sims 0`) 748/1,000; tree search in boss and elite fights 812/999 (seed 12ULG38TZZ is missing: a rollout engine crashes reproducibly while cloning the state; greedy won it); paired on 999 seeds +6.5 points, 133 vs 68, p = 5.3e-6. Needs the two fixes of `tools/future/` from 2026-11-22: old-version checkpoints are loaded as `ability_test` loads them, and simulated returns follow the network's milestone convention. |
