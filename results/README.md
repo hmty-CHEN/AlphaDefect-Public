@@ -77,9 +77,6 @@ The Defect's records of Table 3 (both arms) and 826 of the Regent's 1,000 were n
 
 The Silent's trunk records in `table3/table3_silent_w1_trunk.csv` come from the PIMC items file, which covers the 862 seeds that reached the first Act-3 boss; the other 138 seeds were lost before it in both arms, so their `win` is 0 and their `floor`/`act` are blank. The re-run file gives the floor of every run and matches the original trunk on all 1,000 seeds.
 
-## Not yet included (2026-11-22)
-
-
 ## Other results in this folder
 
 | Folder | Paper | Content |
