@@ -2,7 +2,7 @@
 两组同种子逐局配对：胜率差、配对比例差的 Wald 95% 区间、精确 McNemar 检验（只一方赢的种子上做双侧二项检验，p = 0.5）。
 
 每组给 名字=路径，路径为 ability_test / run_search 的结果目录（读其中 runs_s*.jsonl 与 *.jsonl）或单个 jsonl 文件、或 glob；
-每行要有 seed 与 win。--seeds 给种子池（json 的 seeds 或每行一个种子的文本），--n 取前 n 个：只统计这些种子，并报告缺了哪些。
+每行要有 seed 与 win；也可以是 CSV（列至少有 seed、win）。--seeds 给种子池（json 的 seeds 或每行一个种子的文本），--n 取前 n 个：只统计这些种子，并报告缺了哪些。
 
     python3 tools/paper_stats.py --seeds tools/remote/seed_pool_rv1.json --n 1000 greedy=out/greedy search=out/search
     python3 tools/paper_stats.py ... --pairs greedy:search          # 只比这几对（默认两两都比）
@@ -56,7 +56,7 @@ def load_arm(path: str) -> tuple[dict, dict]:
     """返回 ({种子: 是否通关}, 统计)。同一种子出现多次时取最后一行，并计数。"""
     files: list[str] = []
     if os.path.isdir(path):
-        files = sorted(set(glob.glob(os.path.join(path, "runs_s*.jsonl")) + glob.glob(os.path.join(path, "*.jsonl"))))
+        files = sorted(set(glob.glob(os.path.join(path, "runs_s*.jsonl")) + glob.glob(os.path.join(path, "*.jsonl")) + glob.glob(os.path.join(path, "*.csv"))))
     elif any(ch in path for ch in "*?["):
         files = sorted(glob.glob(path))
     else:
@@ -64,6 +64,15 @@ def load_arm(path: str) -> tuple[dict, dict]:
     res: dict[str, bool] = {}
     dup = stuck = bad = 0
     for f in files:
+        if f.endswith(".csv"):      # 导出的 CSV（paper-release-export/results/，列至少有 seed、win）
+            import csv
+            for r in csv.DictReader(open(f, encoding="utf-8")):
+                s = str(r["seed"])
+                if s in res:
+                    dup += 1
+                res[s] = str(r["win"]).strip().lower() in ("1", "true")
+                stuck += str(r.get("stuck") or "0").strip().lower() in ("1", "true")
+            continue
         for line in open(f, encoding="utf-8"):
             if not line.strip():
                 continue
