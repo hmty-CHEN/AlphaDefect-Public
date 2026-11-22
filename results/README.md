@@ -9,6 +9,8 @@ This folder holds the per-seed outcomes and seed lists behind the win rates in T
 - `../paper/scripts/paper_stats.py` — the script that computes the paper's statistics (Wilson 95% intervals; paired difference with a paired Wald 95% interval; exact McNemar test).
 - `SOURCES.sha256` — SHA-256 of every source file each CSV was built from, with its original machine and path.
 
+`pimc` in file names and descriptions below is the code's name for the paper's rollout search over sampled worlds (Section 2.3, Appendix A.6), the search used for the v0.111.0 characters.
+
 CSV columns:
 
 | Column | Meaning |

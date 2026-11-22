@@ -6,7 +6,7 @@ This repository holds what the paper *AlphaDefect: Expert-Level AI for Slay the 
 
 ## Results
 
-Win rates (%) at Ascension 10 in the headless engine, greedy play and with search, with the fresh-seed retests (paper, Tables 3 and 4). Search: PIMC in the two Act-3 boss fights on v0.111.0; information-set tree search in all boss and elite fights on v0.113.1.
+Win rates (%) at Ascension 10 in the headless engine, greedy play and with search, with the fresh-seed retests (paper, Tables 3 and 4). Search: rollout search over sampled worlds in the two Act-3 boss fights on v0.111.0 (called PIMC in the code and in file names); information-set tree search in all boss and elite fights on v0.113.1.
 
 | Character | Game | Network | Greedy | Search | Retest on fresh seeds (greedy / search) |
 |---|---|---|---|---|---|
