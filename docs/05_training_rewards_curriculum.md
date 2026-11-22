@@ -34,6 +34,8 @@ A full run is ~800 steps. Originally actors sent a run only when it ended, and t
 
 ## 5. Learning rate and batch history (the noise-reduction story)
 
+The noise-reduction steps below, and the later rule of halving the learning rate and doubling the batch when progress stalls, follow Beukman et al., *Preventing Learning Stagnation in PPO by Scaling to 1 Million Parallel Environments* ([arXiv:2603.06009](https://arxiv.org/abs/2603.06009), accepted to RLC 2026): PPO plateaus when its policy updates are too large for the noise in their sample-based estimates, and smaller steps or more samples per update reduce that noise (paper, Section 2.3).
+
 | Date | Change | Outcome | DR |
 |---|---|---|---|
 | 10-26 | LR 3e-4 → 1.5e-4 (in a fork) | fork adopted as main line | #108–#109 |

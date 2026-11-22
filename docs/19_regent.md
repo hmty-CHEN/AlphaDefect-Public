@@ -84,6 +84,8 @@ Only #19 shows a gain against the pre-change trend. Act-3 first-boss passes went
 
 ### Noise reduction (Regent DR #21, #23)
 
+The rule follows Beukman et al. ([arXiv:2603.06009](https://arxiv.org/abs/2603.06009)); see docs/05, section 5.
+
 By v43,999 the 12-round evaluation average had stayed within 44.6–46.7% since v40,800. The per-step noise temperature (LR ÷ √minibatch) was 6.3e-6, about 1.8 times the Defect's before its DR #222. Halving the LR (to 3.1e-6) and doubling the batch raised training clears from 29.55% ± 0.25 to 36.88% ± 0.65 within about 230 versions. Evaluation rose from 45.8% to 55.8% over the next 12 rounds (SE of the difference ~1.0), a larger step than the Defect's, and nothing else changed until v45,281. By segment, evaluation then read 57.7% after #21, 61.9% after #22, 64.2% after #23, 65.6% after #24 up to v51,400, and 66.8% after that.
 
 ### The Muon trial (Regent DR #25, #27)
