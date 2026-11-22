@@ -17,7 +17,7 @@ Win rates (%) at Ascension 10 in the headless engine, greedy play and with searc
 | Ironclad | v0.113.1 | EMA, update 24,782 | 67.9 | 73.1 | 66.5 / – |
 | Necrobinder | v0.113.1 | raw, update 25,875 | 63.1 | 67.6 | tested only on fresh seeds (RV1) |
 
-In 801 runs of the released game, played through a mod on a public livestream, the networks won 595 against 596.0 expected from these headless results.
+In 866 runs of the released game, played through a mod on a public livestream (to 2026-11-22 08:38 CET), the networks won 645 against 643.5 expected from these headless results.
 
 ## Repository layout
 
