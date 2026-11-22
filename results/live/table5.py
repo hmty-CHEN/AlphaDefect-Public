@@ -4,7 +4,8 @@ Line numbers are 1-based lines of runs.jsonl (the livestream's run log, recounte
 row 2026-11-22, cut at line 2055, the run that ended 2026-11-22 08:38 CET). Every completed run in each range
 counts, including runs resumed after a crash ("loads" non-empty), except the one exhibition run on a preset seed
 ("exhibition": true). Expected wins use the headless win rate of the same network and setting (Table 3; the
-Silent's earlier checkpoint v24,721: 69.5% with search on 1,000 seeds).
+Silent's earlier checkpoint v24,721: 69.5% with search on 1,000 seeds; the Fool's first five runs, played with the
+search before the reward-leak fix: 2,051/3,000, the others 2,039/3,000 after the fix).
 
 The 95% interval of (wins - expected) / runs treats each live run as an independent Bernoulli(p) with p the
 headless rate of its row, and adds the sampling error of each headless rate from its m test seeds:
@@ -21,7 +22,8 @@ ROWS = [  # name, first line, last line, version filter, headless wins, headless
     ("Regent, Act-3 search", 1235, 1385, None, 772, 1000),
     ("Silent v24,721, Act-3 search", 1386, 1482, 24721, 695, 1000),
     ("Silent v26,428, Act-3 search", 1386, 1482, 26428, 740, 1000),
-    ("Fool, boss and elite search", 1741, 1990, None, 2051, 3000),
+    ("Fool, first five runs (search before the leak fix)", 1741, 1745, None, 2051, 3000),
+    ("Fool, boss and elite search (after the fix)", 1746, 1990, None, 2039, 3000),
     ("Ironclad, boss and elite search", 1991, 2055, None, 731, 1000),
 ]
 tot_n = tot_w = tot_e = tot_var = 0.0

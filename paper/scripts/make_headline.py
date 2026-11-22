@@ -33,9 +33,9 @@ plt.rcParams.update({
 })
 
 CHARS = ["Defect", "Regent", "Silent", "Fool", "Ironclad", "Necrobinder"]
-GREEDY = {"Defect": (1151, 1500), "Regent": (741, 1000), "Silent": (713, 1000), "Fool": (1864, 3000),
+GREEDY = {"Defect": (1151, 1500), "Regent": (741, 1000), "Silent": (713, 1000), "Fool": (1866, 3000),
           "Ironclad": (679, 1000), "Necrobinder": (631, 1000)}   # 亡灵：v25,875 在 RV1 前 1,000 个新种子上（11-22 补测）   # 铁甲：R1 上与搜索同种子（11-21 补测）
-SEARCH = {"Defect": (1205, 1500), "Regent": (772, 1000), "Silent": (740, 1000), "Fool": (2051, 3000),
+SEARCH = {"Defect": (1205, 1500), "Regent": (772, 1000), "Silent": (740, 1000), "Fool": (2039, 3000),
           "Ironclad": (731, 1000), "Necrobinder": (676, 1000)}
 # 玩家：v0.111.0 三个角色用正文 3.5 节的数（10-26、11-06、11-09 取得）；v0.113.1 三个角色用同版本的数
 # （.notes/data/codex/cards_*_solo_a10_v0.113.1.json，2026-11-21 取得：愚者 410/3,056，铁甲 214/1,961，亡灵 81/707）
