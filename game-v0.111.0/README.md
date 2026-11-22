@@ -1,6 +1,6 @@
 # Code for game v0.111.0 (the Defect, the Regent and the Silent)
 
-The paper's v0.111.0 rows (Table 3: the Defect, the Regent and the Silent, greedy and with PIMC in the two Act-3 boss fights; Table 4: the retests of the Regent and the Silent) were produced with this code. It is the `main` branch of the project's collaborator repository (code as of 2026-11-12, when the Silent update of the working repository was copied in), unchanged except for the redactions listed in [NOTICE.md](../NOTICE.md) and the addition described below.
+The paper's v0.111.0 rows (Table 3: the Defect, the Regent and the Silent, greedy and with the rollout search in the two Act-3 boss fights, called PIMC in this code; Table 4: the retests of the Regent and the Silent) were produced with this code. It is the `main` branch of the project's collaborator repository (code as of 2026-11-12, when the Silent update of the working repository was copied in), unchanged except for the redactions listed in [NOTICE.md](../NOTICE.md) and the addition described below.
 
 The top-level code of this repository is the later version for game v0.113.1. Its engine is built against the v0.113.1 game code and does not run v0.111.0; use this folder for v0.111.0.
 

@@ -24,7 +24,7 @@ In 866 runs of the released game, played through a mod on a public livestream (t
 | Path | Content |
 |---|---|
 | `engine/`, `python/`, `tools/` | the system for game **v0.113.1** (the Fool, the Ironclad, the Necrobinder): headless C# host with in-place state cloning, observation encoder (formats up to 29), training system, information-set tree search (`tools/future/`), evaluation and analysis tools |
-| `game-v0.111.0/` | the system for game **v0.111.0** (the Defect, the Regent, the Silent), including the PIMC search on sts2-sim ([README](game-v0.111.0/README.md)) |
+| `game-v0.111.0/` | the system for game **v0.111.0** (the Defect, the Regent, the Silent), including the rollout search on sts2-sim (called PIMC in the code) ([README](game-v0.111.0/README.md)) |
 | `rust-engine/` | our Rust reimplementation of the combat rules, used briefly and then withdrawn (paper, Section 4) |
 | `weights/` | model card, manifests and checksums; the network files are release assets ([README](weights/README.md)) |
 | `seeds/` | the test seed lists of the paper's tables |
@@ -69,13 +69,14 @@ For v0.111.0, do the same inside `game-v0.111.0/` with `V=v0.111.0`. [docs/17](d
 
 | Paper row | Code | Network (release, file) | Seeds | Per-seed results |
 |---|---|---|---|---|
-| Table 3, Defect | `game-v0.111.0/`: `tools/sim_pimc_eval.py` (greedy trunk and PIMC) | `weights-v1`, `student_e_v165018.pt` | W1, entries 6,901–8,400 (`seeds/W1_6901-8400.txt`) | `results/table3/` |
+| Table 3, Defect | `game-v0.111.0/`: `tools/sim_pimc_eval.py` (greedy trunk and rollout search) | `weights-v1`, `student_e_v165018.pt` | W1, entries 6,901–8,400 (`seeds/W1_6901-8400.txt`) | `results/table3/` |
 | Table 3, Regent | same | `weights-v2`, `regent_student_e8.pt` | W1, first 1,000 | `results/table3/` |
 | Table 3, Silent | same | `weights-v4`, `silent_ema_v26428.pt` | W1, first 1,000 | `results/table3/` |
 | Table 3, Fool | top level: `tools/future/run_search.py` (`--sims 0` greedy; `--sims 32 --rooms Boss,Elite`) | `weights-v5`, `fool_ema_v24181.pt` | P2-future, first 3,000 | `results/table3/` |
 | Table 3, Ironclad | top level: `tools/ability_test.py` (greedy), `tools/future/run_search.py` (search) | `weights-v6`, `ironclad_ema_v24782.pt` | R1 | `results/table3/` |
 | Table 3, Necrobinder | top level: `tools/future/run_search.py` (`--sims 0` greedy; `--sims 32 --rooms Boss,Elite`) | `weights-v6`, `necrobinder_raw_v25875.pt` | RV1, first 1,000 | `results/table3/` |
 | Table 4 (retests) | as in Table 3 | as in Table 3 | RV1, first 1,000 | `results/table4/` |
+| Section 3.2 (the Defect's network on v0.113.1) | top level: `tools/ability_test.py` (W1); `tools/future/run_search.py` (`--sims 0` greedy; `--sims 32 --rooms Boss,Elite`) on RV1 | `weights-v1`, `student_e_v165018.pt` | W1, first 1,000; RV1, first 1,000 | `results/defect_v0.113.1_W1/`, `results/defect_v0.113.1_RV1/` |
 | Table 5 (released game) | the livestream mod (not released) | as in Table 3 | the game's own seeds | `results/live/` (`python3 results/live/table5.py`) |
 | Table 6 (where greedy runs are lost) | greedy runs of Tables 3 and 4 on RV1 (`results/losses/death_rooms.py` counts them) | as in Table 3 | RV1, first 1,000 | `results/losses/` |
 | Section 3.4 (solver positions) | `results/solver_baseline/scripts/` | `weights-v1`, `student_e_v165018.pt` | 241 positions | `results/solver_baseline/` |
