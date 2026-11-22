@@ -28,7 +28,7 @@ In 866 runs of the released game, played through a mod on a public livestream (t
 | `rust-engine/` | our Rust reimplementation of the combat rules, used briefly and then withdrawn (paper, Section 4) |
 | `weights/` | model card, manifests and checksums; the network files are release assets ([README](weights/README.md)) |
 | `seeds/` | the test seed lists of the paper's tables |
-| `results/` | per-seed results behind Tables 3–6, Section 3.4 and Appendix B (the distilled students against their starting checkpoints), with scripts that recount them |
+| `results/` | per-seed results behind Tables 3, 4, 6 and 7, Sections 3.2 and 3.5 and Appendices B (the distilled students against their starting checkpoints) and E (the Silent's network on v0.113.1), with scripts that recount them |
 | `paper/` | scripts that regenerate the paper's figures and appendix tables, with their inputs ([README](paper/README.md)) |
 | `data/` | learner logs, routine evaluations, per-seed capability tests and exams of the Defect, the Regent and the Silent ([README](data/README.md)) |
 | `docs/` | English documentation written during the project ([index](docs/README.md)) |
@@ -77,9 +77,10 @@ For v0.111.0, do the same inside `game-v0.111.0/` with `V=v0.111.0`. [docs/17](d
 | Table 3, Necrobinder | top level: `tools/future/run_search.py` (`--sims 0` greedy; `--sims 32 --rooms Boss,Elite`) | `weights-v6`, `necrobinder_raw_v25875.pt` | RV1, first 1,000 | `results/table3/` |
 | Table 4 (retests) | as in Table 3 | as in Table 3 | RV1, first 1,000 | `results/table4/` |
 | Section 3.2 (the Defect's network on v0.113.1) | top level: `tools/ability_test.py` (W1); `tools/future/run_search.py` (`--sims 0` greedy; `--sims 32 --rooms Boss,Elite`) on RV1 | `weights-v1`, `student_e_v165018.pt` | W1, first 1,000; RV1, first 1,000 | `results/defect_v0.113.1_W1/`, `results/defect_v0.113.1_RV1/` |
-| Table 5 (released game) | the livestream mod (not released) | as in Table 3 | the game's own seeds | `results/live/` (`python3 results/live/table5.py`) |
-| Table 6 (where greedy runs are lost) | greedy runs of Tables 3 and 4 on RV1 (`results/losses/death_rooms.py` counts them) | as in Table 3 | RV1, first 1,000 | `results/losses/` |
-| Section 3.4 (solver positions) | `results/solver_baseline/scripts/` | `weights-v1`, `student_e_v165018.pt` | 241 positions | `results/solver_baseline/` |
+| Appendix E (the Silent's network on v0.113.1) | top level: `tools/future/run_search.py` (`--sims 0 --character SILENT --req-extra '{"obs_format": 23}'`) | `weights-v4`, `silent_ema_v26428.pt` | RV1, first 3,000 | `results/silent_v0.113.1_RV1/` |
+| Table 6 (released game) | the livestream mod (not released) | as in Table 3 | the game's own seeds | `results/live/` (`python3 results/live/table6.py`) |
+| Table 7 (where greedy runs are lost) | greedy runs of Tables 3 and 4 on RV1 (`results/losses/death_rooms.py` counts them) | as in Table 3 | RV1, first 1,000 | `results/losses/` |
+| Section 3.5 (solver positions) | `results/solver_baseline/scripts/` | `weights-v1`, `student_e_v165018.pt` | 241 positions | `results/solver_baseline/` |
 | Appendix B (students against their starting checkpoints) | `game-v0.111.0/`: `tools/ability_test.py`, stall rules off | `weights-v1` / `weights-v2` students; starting checkpoints in `weights-v7` | RV1 first 1,000; W1 as in Table 3 | `results/distillation/` |
 
 Greedy evaluations are deterministic given the seed, the network and the batch size, and repeat game by game on the same hardware. Across devices, rare near-ties between candidates can flip a decision (paper, Appendix D). The paper's statistics (Wilson intervals, paired Wald intervals, exact McNemar tests) are computed by `paper/scripts/paper_stats.py`; [results/README](results/README.md) gives the commands, the expected totals and the checksums.

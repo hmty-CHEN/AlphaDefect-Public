@@ -1,4 +1,4 @@
-"""Recount Table 5 of the paper (runs in the released game) from runs.jsonl.
+"""Recount Table 6 of the paper (runs in the released game) from runs.jsonl.
 
 Line numbers are 1-based lines of runs.jsonl (the livestream's run log, recounted 2026-11-21; the Ironclad's
 row 2026-11-22, cut at line 2055, the run that ended 2026-11-22 08:38 CET). Every completed run in each range

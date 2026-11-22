@@ -11,7 +11,7 @@ All pools except P2-future were drawn with `tools/seed_pool.py`: 10 characters, 
 | `P1.json` | 1,000 (384 marked `eval`) | 2026-11-01 23:03:01 +0100 | routine evaluation during training: the `eval` list (384 seeds) or its first 192 | `b3d41ab974bb148c…` |
 | `P1_eval_first384.txt` | 384 | the `eval` list of P1 | routine evaluation of the Regent, Silent and Ironclad | `e4f1999801310304…` |
 | `P1_eval_first192.txt` | 192 | first 192 of the `eval` list | routine evaluation of the Fool and Necrobinder | `036cf618f492fae4…` |
-| `RV1.json` | 5,000 | 2026-11-21 18:37:30 +0100, committed before any result | Fresh seeds, not used for any choice. First 1,000: Table 4, the Necrobinder's row of Table 3, the Defect on v0.113.1 (Section 3.2), Table 6 and the students against their starting checkpoints (Appendix B); first 3,000: the Fool's greedy run of Table 4 | `11a1a4f3964dbfed…` |
+| `RV1.json` | 5,000 | 2026-11-21 18:37:30 +0100, committed before any result | Fresh seeds, not used for any choice. First 1,000: Table 4, the Necrobinder's row of Table 3, the Defect on v0.113.1 (Section 3.2), Table 7 and the students against their starting checkpoints (Appendix B); first 3,000: the Fool's greedy run of Table 4 and the Silent's network on v0.113.1 (Appendix E) | `11a1a4f3964dbfed…` |
 | `AB1.json` | 1,000 | 2026-11-21 19:03:03 +0100 | final evaluation of the training ablation (not yet run) | `92152e2f4348caaa…` |
 
 Training games use seeds of a different form (`R<actor>_<integer>`), so no pool seed is played during training.
