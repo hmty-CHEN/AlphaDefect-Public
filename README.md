@@ -87,7 +87,7 @@ Greedy evaluations are deterministic given the seed, the network and the batch s
 
 ## How this project was made
 
-One person, Chen Qiyue, set the goals, chose among approaches and approved every change to the training runs. AI coding assistants (mainly Claude Code) wrote nearly all of the code, ran the experiments and wrote most of the records, under that direction. [docs/16](docs/16_how_the_project_was_run.md) explains how this worked and how to read the records; the decision logs in `zh/` quote every instruction verbatim. Code comments and the original records are in Chinese; [docs/glossary.md](docs/glossary.md) maps the terms.
+One person, Qiyue Chen, set the goals, chose among approaches and approved every change to the training runs. AI coding assistants (mainly Claude Code) wrote nearly all of the code, ran the experiments and wrote most of the records, under that direction. [docs/16](docs/16_how_the_project_was_run.md) explains how this worked and how to read the records; the decision logs in `zh/` quote every instruction verbatim. Code comments and the original records are in Chinese; [docs/glossary.md](docs/glossary.md) maps the terms.
 
 ## License
 
