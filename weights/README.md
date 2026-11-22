@@ -9,6 +9,7 @@ The weight files are attached to **GitHub Releases** of this repository, not com
 - **`weights-v4`** (2026-11-12): the Silent's strongest network so far (EMA weights of v26,428, after training resumed), the raw weights of the same version and its combat-outcome heads (~160 MB). See [below](#the-silent-2026-11-12-weights-v4).
 - **`weights-v5`** (2026-11-17): the Fool network the livestream plays (EMA weights of v24,181, game v0.113.1, observation format 27; ~78 MB). Its code, the search and the engine are on branch `game-v0.113.0`. See [below](#the-fool-live-weights-v5).
 - **`weights-v6`** (2026-11-21): the Ironclad network of the AlphaDefect paper (EMA weights of v24,782) with the raw weights of the same version, and the Necrobinder's raw weights at v25,875 (game v0.113.1, observation format 28; ~235 MB). Their code is on branch `game-v0.113.0` ([docs/26](../docs/26_ironclad_and_necrobinder.md)). See [below](#the-ironclad-and-the-necrobinder-weights-v6).
+- **`weights-v7`** (2026-11-22): the starting checkpoints of the two distilled students, the Defect's main line at v165,018 (raw weights) and the Regent's EMA weights at v54,603 (game v0.111.0; ~155 MB), for the paper's comparison of each student with its starting checkpoint. See [below](#starting-checkpoints-of-the-distilled-students-weights-v7).
 
 ```bash
 gh release download weights-v1 -R hmty-CHEN/AlphaDefect-Public -D weights/files          # core set
@@ -18,12 +19,14 @@ gh release download weights-v3 -R hmty-CHEN/AlphaDefect-Public -D weights/files_
 gh release download weights-v4 -R hmty-CHEN/AlphaDefect-Public -D weights/files_v4       # Silent, v26,428
 gh release download weights-v5 -R hmty-CHEN/AlphaDefect-Public -D weights/files_v5       # Fool, v24,181 (live)
 gh release download weights-v6 -R hmty-CHEN/AlphaDefect-Public -D weights/files_v6       # Ironclad v24,782, Necrobinder v25,875
+gh release download weights-v7 -R hmty-CHEN/AlphaDefect-Public -D weights/files_v7       # starting checkpoints of the students
 cd weights/files && sha256sum -c ../SHA256SUMS_core.txt
 cd ../files_v2 && sha256sum -c ../SHA256SUMS_v2.txt
 cd ../files_v3 && sha256sum -c ../SHA256SUMS_v3.txt
 cd ../files_v4 && sha256sum -c ../SHA256SUMS_v4.txt
 cd ../files_v5 && sha256sum -c ../SHA256SUMS_v5.txt
 cd ../files_v6 && sha256sum -c ../SHA256SUMS_v6.txt
+cd ../files_v7 && sha256sum -c ../SHA256SUMS_v7.txt
 ```
 
 `MANIFEST_core.json` and `MANIFEST_teacher_pool.json` list every file with version, observation format, model flags, parameter count, size, SHA-256, evaluation and notes. `scripts/export_checkpoint.py` (with `spec_*.json`) is how they were produced.
@@ -203,11 +206,22 @@ How to use them:
 - **Greedy play**: `tools/ability_test.py --character IRONCLAD --ckpt ironclad_ema_v24782.pt --req-extra '{"obs_format": 28, "loop_cut": true, "stall_turns": 20}'`. The Ironclad's default on that branch is format 29, so the reset has to ask for format 28; the loop cut and the stall rule are those of the 1,000-seed tests. For the Necrobinder, `--character NECROBINDER` (its default there is format 28). On 2026-11-21, on a CPU, the branch's engine and tools matched the recorded 1,000-seed test (GPU) in 45 of 48 runs on the first 24 W1 seeds; the other three differ because of floating-point near-ties between devices and batch sizes, not the code ([docs/26 §5](../docs/26_ironclad_and_necrobinder.md#5-checks-for-this-commit)).
 - **Checks for this release**: every exported tensor is bit-identical to its source backup (SHA-256 `50f1a155…` for the Ironclad, the checkpoint its 1,000-seed tests used; `161d8cec…` for the Necrobinder, taken at the pause), and each file played two greedy A10 runs with its line's training code on 2026-11-21 (all six won).
 
+## Starting checkpoints of the distilled students (`weights-v7`)
+
+Released 2026-11-22, for the paper's Appendix B: each distilled student compared with the checkpoint it started from, greedily on the same seeds (per-seed results in `results/distillation/`). Both are game v0.111.0 networks; use the code in `game-v0.111.0/` as for `weights-v1` and `weights-v2` (stall rules off, as in Table 3).
+
+| File | Character | Version | Obs format | Size | Evaluation (greedy, A10, whole runs) | Notes | SHA-256 (first 16) |
+|---|---|---:|---:|---:|---|---|---|
+| `defect_main_v165018.pt` | Defect | 165,018 | 19 | 78 MB | 71.4% (714 / 1,000) on the first 1,000 RV1 seeds; 71.3% (1,070 / 1,500) on W1 entries 6,901–8,400. Student e on the same seeds: 77.8% and 76.7% (+6.4 and +5.4 pp; exact McNemar p = 1.6e-4 and 1.4e-4) | Raw main-line weights at v165,018, as stored before the distillation (Defect DR #274). Unlike student e, it uses the extended attention over non-combat records (`macro_attend`, DR #262), which the student dropped | `380b5360ab39a7ac` |
+| `regent_ema_v54603.pt` | Regent | 54,603 | 20 | 78 MB | 75.8% (758 / 1,000) on the first 1,000 RV1 seeds; 72.4% (724 / 1,000) on the first 1,000 W1 seeds. Student e8 on the same seeds: 74.9% and 74.1% (−0.9 and +1.7 pp; p = 0.61 and 0.33) | The learner's EMA weights at v54,603, from which student e8 was distilled (Regent DR #29) | `8244d56d62f8723f` |
+
+Both files were exported with `scripts/export_checkpoint.py` (`spec_v7.json`); every tensor is bit-identical to the source file that the 2026-11-22 tests loaded.
+
 ## Not included
 
 - The latest main-line checkpoint at pause (v169,666), the Act-3 specialist branches (DR #287) and the full set of ~270 archived evaluation checkpoints remain on the owner's machines; ask if you need them.
 - Optimizer states (available for some milestone checkpoints on request).
-- For the Regent: the ensemble E8's eight snapshots, the EMA weights of v53,840 and v54,603, the full checkpoint series and the Regent win-probability model (Regent DR #30) are on the owner's machines.
+- For the Regent: the ensemble E8's eight snapshots, the EMA weights of v53,840, the full checkpoint series and the Regent win-probability model (Regent DR #30) are on the owner's machines.
 - For the Fool: full checkpoints (with optimizer, EMA and Muon state), the raw weights of v24,181, the 1,000-version weight average L1000 the stream used before, and the per-seed results of the 3,000-seed tests stay on the training machines; ask if you need them.
 - For the Ironclad: full checkpoints (with optimizer, EMA and Muon state), the training after v24,782 (observation format 29 from v25,463) and its ensembles, and the per-seed results stay on the training machine; ask if you need them.
 - For the Necrobinder: the EMA weights of v25,875, full checkpoints and the per-seed results of its routine evaluations stay on the training machine.

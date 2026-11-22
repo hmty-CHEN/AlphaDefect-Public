@@ -10,7 +10,7 @@ Win rates (%) at Ascension 10 in the headless engine, greedy play and with searc
 
 | Character | Game | Network | Greedy | Search | Retest on fresh seeds (greedy / search) |
 |---|---|---|---|---|---|
-| Defect | v0.111.0 | distilled (student e) | 76.7 | 80.3 | not retested (its seeds were not used for choices) |
+| Defect | v0.111.0 | distilled (student e) | 76.7 | 80.3 | 77.8 / – (its seeds had not been used for choices; greedy only) |
 | Regent | v0.111.0 | distilled (student e8) | 74.1 | 77.2 | 74.9 / 80.5 |
 | Silent | v0.111.0 | EMA, update 26,428 | 71.3 | 74.0 | 71.2 / 73.6 |
 | Fool | v0.113.1 | EMA, update 24,181 | 62.1 | 68.4 | 62.5 / 66.7 |

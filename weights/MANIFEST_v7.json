@@ -1,0 +1,71 @@
+[
+ {
+  "file": "defect_main_v165018.pt",
+  "version": 165018,
+  "obs_format": 19,
+  "vocab_n": 2286,
+  "total_steps": 6698310938,
+  "character": null,
+  "weights": "raw",
+  "params": 19408392,
+  "bytes": 77699111,
+  "sha256": "380b5360ab39a7ac202cafd8c353646c64645bb7b3b9143519454f9cba1056b5",
+  "model_flags": {
+   "content_enchant": true,
+   "content_upgrade": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true,
+   "future_content": true,
+   "value_hl": true,
+   "combat_aux": true,
+   "macro_attend": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Starting checkpoint of the Defect's distilled student e (weights-v1, student_e_v165018.pt): the raw main-line weights at v165,018 as stored before the distillation (training machine B: runs/defect/latest.pt.蒸馏前-v165018; optimizer and EMA copy dropped, every tensor bit-identical). Unlike student e, it uses the extended attention over non-combat records (macro_attend, Defect DR #262), which the student dropped. Game v0.111.0; observation format 19.",
+  "eval": "71.4% greedy (714 / 1,000) on the first 1,000 RV1 seeds and 71.3% (1,070 / 1,500) on W1 entries 6,901-8,400 (A10, whole runs, stall rules off, ability_test 6 x 16 on an RTX 5090, 2026-11-22); student e on the same seeds: 77.8% and 76.7% (+6.4 and +5.4 pp, exact McNemar p = 1.6e-4 and 1.4e-4).",
+  "release": "weights-v7",
+  "dr": "Defect #274"
+ },
+ {
+  "file": "regent_ema_v54603.pt",
+  "version": 54603,
+  "obs_format": 20,
+  "vocab_n": 2286,
+  "total_steps": 2138656954,
+  "character": "REGENT",
+  "weights": "ema",
+  "params": 19408136,
+  "bytes": 77697587,
+  "sha256": "8244d56d62f8723f2bc3467a0d1ba6a5eac987aff002bdca28fa2407ea7b9161",
+  "model_flags": {
+   "content_enchant": true,
+   "content_upgrade": true,
+   "obs_v16": true,
+   "obs_v17": true,
+   "obs_v18": true,
+   "obs_v19": true,
+   "future_content": true,
+   "value_hl": true,
+   "combat_aux": true
+  },
+  "arch": {
+   "d": 256,
+   "layers": 6,
+   "heads": 4,
+   "ff_mult": 4,
+   "vocab_size": 4096
+  },
+  "notes": "Starting point of the Regent's distilled student e8 (weights-v2, regent_student_e8.pt): the learner's EMA weights at v54,603 (training machine B: /root/ens_test/ck/e54603.pt; every tensor bit-identical). total_steps is that of v54,603, as for the student. Game v0.111.0; observation format 20.",
+  "eval": "75.8% greedy (758 / 1,000) on the first 1,000 RV1 seeds and 72.4% (724 / 1,000) on the first 1,000 W1 seeds (A10, whole runs, stall rules off, RTX 5090, 2026-11-22); student e8 on the same seeds: 74.9% and 74.1% (-0.9 and +1.7 pp, p = 0.61 and 0.33).",
+  "release": "weights-v7",
+  "dr": "Regent #29"
+ }
+]
