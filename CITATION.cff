@@ -8,6 +8,8 @@ authors:
     given-names: Taian
   - family-names: Komiyama
     given-names: Junpei
+  - family-names: Huang
+    given-names: Haobo
 license: MIT
 repository-code: "https://github.com/hmty-CHEN/AlphaDefect-Public"
 preferred-citation:
@@ -20,5 +22,7 @@ preferred-citation:
       given-names: Taian
     - family-names: Komiyama
       given-names: Junpei
+    - family-names: Huang
+      given-names: Haobo
   year: 2026
   notes: "arXiv identifier to be added on publication."

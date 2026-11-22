@@ -2,7 +2,7 @@
 
 Reinforcement-learning agents for **Slay the Spire 2** at Ascension 10. For each of the six characters, one network makes every decision of a run, in combat and outside it. It is trained with PPO against the game's own rules, run headlessly, and can guide a decision-time search in the hardest fights.
 
-This repository holds what the paper *AlphaDefect: Expert-Level AI for Slay the Spire 2* (Chen, Yu and Komiyama, 2026; arXiv link to be added) reports on: the code, all trained networks, the seed lists, per-seed results, training logs, and the project's full working record.
+This repository holds what the paper *AlphaDefect: Expert-Level AI for Slay the Spire 2* (Chen, Yu, Komiyama and Huang, 2026; arXiv link to be added) reports on: the code, all trained networks, the seed lists, per-seed results, training logs, and the project's full working record.
 
 ## Results
 
@@ -28,7 +28,7 @@ In 866 runs of the released game, played through a mod on a public livestream (t
 | `rust-engine/` | our Rust reimplementation of the combat rules, used briefly and then withdrawn (paper, Section 4) |
 | `weights/` | model card, manifests and checksums; the network files are release assets ([README](weights/README.md)) |
 | `seeds/` | the test seed lists of the paper's tables |
-| `results/` | per-seed results behind Tables 3, 4 and 5 and Section 3.4, with scripts that recount them |
+| `results/` | per-seed results behind Tables 3–6, Section 3.4 and Appendix B (the distilled students against their starting checkpoints), with scripts that recount them |
 | `paper/` | scripts that regenerate the paper's figures and appendix tables, with their inputs ([README](paper/README.md)) |
 | `data/` | learner logs, routine evaluations, per-seed capability tests and exams of the Defect, the Regent and the Silent ([README](data/README.md)) |
 | `docs/` | English documentation written during the project ([index](docs/README.md)) |
@@ -77,7 +77,9 @@ For v0.111.0, do the same inside `game-v0.111.0/` with `V=v0.111.0`. [docs/17](d
 | Table 3, Necrobinder | top level: `tools/future/run_search.py` (`--sims 0` greedy; `--sims 32 --rooms Boss,Elite`) | `weights-v6`, `necrobinder_raw_v25875.pt` | RV1, first 1,000 | `results/table3/` |
 | Table 4 (retests) | as in Table 3 | as in Table 3 | RV1, first 1,000 | `results/table4/` |
 | Table 5 (released game) | the livestream mod (not released) | as in Table 3 | the game's own seeds | `results/live/` (`python3 results/live/table5.py`) |
+| Table 6 (where greedy runs are lost) | greedy runs of Tables 3 and 4 on RV1 (`results/losses/death_rooms.py` counts them) | as in Table 3 | RV1, first 1,000 | `results/losses/` |
 | Section 3.4 (solver positions) | `results/solver_baseline/scripts/` | `weights-v1`, `student_e_v165018.pt` | 241 positions | `results/solver_baseline/` |
+| Appendix B (students against their starting checkpoints) | `game-v0.111.0/`: `tools/ability_test.py`, stall rules off | `weights-v1` / `weights-v2` students; starting checkpoints in `weights-v7` | RV1 first 1,000; W1 as in Table 3 | `results/distillation/` |
 
 Greedy evaluations are deterministic given the seed, the network and the batch size, and repeat game by game on the same hardware. Across devices, rare near-ties between candidates can flip a decision (paper, Appendix D). The paper's statistics (Wilson intervals, paired Wald intervals, exact McNemar tests) are computed by `paper/scripts/paper_stats.py`; [results/README](results/README.md) gives the commands, the expected totals and the checksums.
 
