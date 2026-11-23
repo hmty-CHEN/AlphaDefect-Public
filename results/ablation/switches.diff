@@ -1,0 +1,260 @@
+# Training-system switches of the ablations (Section 3.3), as diffs against the training system they were written for
+# (Ironclad training code, observation format 28). Commit ac4b58d9: privileged, macro_chain, obs_format (A2, A3; not reported);
+# run_fraction 1.0, already in the code, is the branch without combat practice (A1). Commit 48e13208: no_entity_id (E1) and
+# no_engine_preview (E3) at the network's input. Default values leave behaviour unchanged.
+
+diff --git a/python/sts2rl/actor.py b/python/sts2rl/actor.py
+index cdb4ca20..098572ad 100644
+--- a/python/sts2rl/actor.py
++++ b/python/sts2rl/actor.py
+@@ -694,13 +694,14 @@ def _actor_loop(rank: int, cfg, weights_path: str, out_queue, stop_event) -> Non
+                 spec["seed"] = grp["seed"]; spec["grp"] = cfg.run_group; grp["left"] -= 1
+             a = int(rng.choice(len(start_p), p=start_p)) if start_p[0] < 1 else 0
+             # privileged：只有训练采集要特权特征（抽牌顺序、预抽的遭遇、怪物抽签推演），只给价值网络；评测、实机、搜索都不要（决策记录 161）
+-            req = {"op": "reset", "mode": "run", "snapshots": True, "route_summary": cfg.route_summary, "privileged": True,
++            # cfg.privileged（消融开关，默认 True）：False 时整局与练习都不要特权特征，价值头只看公开信息
++            req = {"op": "reset", "mode": "run", "snapshots": True, "route_summary": cfg.route_summary, "privileged": bool(cfg.privileged),
+                    **{k: v for k, v in spec.items() if k != "grp"}}
+             req.update(cfg.cut_flags())         # 局面重复截断、跨回合无进展判输（引擎 RunSession.LoopCut、StallTurns）
+             req.update(bonus_flags)             # 训练加血（铁甲战士决策记录第 24 条），关闭时为空
+-            if cfg.model.future_content:
++            if cfg.model.future_content and cfg.privileged:
+                 req["future_content"] = True    # 整局预生成内容（决策记录 259）：战斗外的帧多出类型 17 的记录，只进价值头
+-            if cfg.model.oracle:
++            if cfg.model.oracle and cfg.privileged:
+                 req["oracle"] = True            # 预知记录（决策记录 280）：战斗外的帧多出类型 20 的记录，只进价值头
+             if cfg.manual_gold_start is not None and rng.random() < ramp(cfg.manual_gold_start, cfg.manual_gold_span, version):
+                 req["auto_gold"] = False        # 金币改由策略领（决策记录 160），按版本逐步提高这样开局的比例
+@@ -723,7 +724,7 @@ def _actor_loop(rank: int, cfg, weights_path: str, out_queue, stop_event) -> Non
+             trajs[i] = Trajectory(MODE_COMBAT, version, spec)
+             trajs[i].label_view = None
+             trajs[i].pq_v = None
+-            trajs[i].req = {"op": "reset", "mode": "combat", "spec": spec, "privileged": True, **cfg.cut_flags(), **bonus_flags}
++            trajs[i].req = {"op": "reset", "mode": "combat", "spec": spec, "privileged": bool(cfg.privileged), **cfg.cut_flags(), **bonus_flags}
+             if value_probe:
+                 value_probe.begin(trajs[i])
+             env.send(i, trajs[i].req)
+@@ -737,7 +738,7 @@ def _actor_loop(rank: int, cfg, weights_path: str, out_queue, stop_event) -> Non
+             trajs[i] = Trajectory(MODE_COMBAT, version, spec)
+             trajs[i].label_view = view
+             trajs[i].pq_v = pv
+-            trajs[i].req = {"op": "reset", "mode": "combat", "spec": spec, "privileged": True, **cfg.cut_flags(), **bonus_flags}
++            trajs[i].req = {"op": "reset", "mode": "combat", "spec": spec, "privileged": bool(cfg.privileged), **cfg.cut_flags(), **bonus_flags}
+             if value_probe:
+                 value_probe.begin(trajs[i])
+             env.send(i, trajs[i].req)
+diff --git a/python/sts2rl/config.py b/python/sts2rl/config.py
+index aaca84c5..db138dbd 100644
+--- a/python/sts2rl/config.py
++++ b/python/sts2rl/config.py
+@@ -138,6 +138,12 @@ class TrainConfig:
+     # 整局（A10 Defect）：每个采集进程中这一比例的引擎打整局，其余打战斗课程。
+     # 0.3 → 0.5（构筑训练起）：战斗课程已稳定，重心移到整局里的路线、抓牌、事件、商店
+     run_fraction: float = 0.5
++    # 消融开关（2026-11-21，论文补充实验第二部分；默认 True，与原来完全相同）：训练采集的 reset 是否要特权特征（抽牌顺序、预抽的遭遇、怪物抽签推演，
++    # 以及 model.future_content / model.oracle 的整局预生成内容与预知记录，都只进价值头）。False 时与评测、实机、搜索一样不要，价值头只看公开信息
++    privileged: bool = True
++    # 指定观测格式（2026-11-21，论文补充实验第二部分；默认 0 为引擎按角色的默认格式，与原来完全相同）：非 0 时训练采集与常规评测的 reset 都带
++    # "obs_format"（经 cut_flags 并进请求），检查点记这个格式。消融重跑铁甲前 0.8B 用 28（当时的默认；现在的代码铁甲默认 29）
++    obs_format: int = 0
+     floor_reward: float = 0.02      # 每多到一层
+     # 打过幕末 Boss（进入下一幕）的额外奖励。第一幕 Boss 是主要卡点，打过它比整个第一幕的爬层奖励（16 × 0.02）还值钱；
+     # 第三幕 Boss 即通关，见 victory_reward
+@@ -376,6 +382,10 @@ class TrainConfig:
+     # 非战斗决策（整局里战斗之外的选路线、抓牌、事件、商店、休息处）：优势只沿这些决策的序列计算，
+     # 中间的战斗步的奖励并入下一段。原来与战斗步一起按 λ=0.95 逐步衰减，一场战斗几十步，抓牌几乎只看得到下一场战斗。
+     macro_lam: float = 0.95         # 非战斗决策序列上的 λ（约 20 个决策 ≈ 5 层）
++    # 消融开关（2026-11-21，论文补充实验 paper/.notes/补充实验_2026-11.md 第二部分；默认 True，与原来完全相同）：
++    # False 时不走上面的局外决策链（gae_macro），局外步与战斗步一样按逐步 GAE（γ、lam）在整局里算优势，即“单一时间尺度”；
++    # 战斗步按场截断另由 combat_fight_boot 等三项控制，做单一时间尺度对照时一并关掉。要求 macro_cross_segment 关（跨段的局外链没有逐步的对应）
++    macro_chain: bool = True
+     # 局外决策的优势跨段计算（2026-11-03，决策记录 255；用户：“局外决策的优势跨段计算，不在段边界截断”）：整局分段提交（run_segment_steps）时，
+     # 原来每段末尾用下一段第一个决策的价值自举，局外决策链每约 4 层就被截断一次。开了以后学习端先把每段的局外决策存起来（按采集端的局编号 gid），
+     # 等这一局最后一段到了再沿整条局外决策链算 λ 优势，放进当批训练；战斗步照旧按段及时训练。局外步因此要等整局打完才入训（一局约 7 版），
+@@ -593,4 +603,5 @@ class TrainConfig:
+         """reset 请求里的两个截断开关（局面重复截断、跨回合无进展判输）；evaluating 时判输线用 eval_stall_turns（没给时同 stall_turns）。
+         都关时为空，请求与原来完全相同。"""
+         st = self.eval_stall_turns if evaluating and self.eval_stall_turns is not None else self.stall_turns
+-        return {**({"loop_cut": True} if self.loop_cut else {}), **({"stall_turns": int(st)} if st and st > 0 else {})}
++        return {**({"loop_cut": True} if self.loop_cut else {}), **({"stall_turns": int(st)} if st and st > 0 else {}),
++                **({"obs_format": int(self.obs_format)} if self.obs_format else {})}
+diff --git a/python/sts2rl/train.py b/python/sts2rl/train.py
+index 1cd7e94f..c9d51e2d 100644
+--- a/python/sts2rl/train.py
++++ b/python/sts2rl/train.py
+@@ -438,7 +438,7 @@ def save_checkpoint(path: Path, net, opt, cfg, version: int, progress: float, to
+         print(f"第 {version} 版参数里有非有限值，不保存检查点（保留上一份）", flush=True)
+         return
+     tmp = path.with_suffix(".tmp")
+-    torch.save({"version": version, "progress": progress, "total_steps": total_steps, "phi_steps": phi_steps, "vocab_n": vocab_n, "obs_format": format_for(cfg.character), "state": net.state_dict(),
++    torch.save({"version": version, "progress": progress, "total_steps": total_steps, "phi_steps": phi_steps, "vocab_n": vocab_n, "obs_format": int(cfg.obs_format) or format_for(cfg.character), "state": net.state_dict(),
+                 "content_names": list(getattr(net, "content_names", ())), "catalog_version": CATALOG_VERSION,
+                 "opt": opt.adam_state_dict() if hasattr(opt, "adam_state_dict") else opt.state_dict(),     # 免调度时存成普通 Adam 也能载入的样子
+                 "config": cfg.to_dict(), **(extra or {})}, tmp)
+@@ -1004,6 +1004,8 @@ def main(argv=None):
+     group_c = 0.0                   # 同组基线的控制变量系数（逐版滑动平均，从 0 起：先不加噪声，等估出来再用）
+     if cfg.combat_anchor_rows not in ("combat", "macro", "all"):
+         raise SystemExit(f"combat_anchor_rows 只能是 combat / macro / all（现在是 {cfg.combat_anchor_rows!r}）")
++    if not cfg.macro_chain and cfg.macro_cross_segment:
++        raise SystemExit("macro_chain 关（单一时间尺度消融）要求 macro_cross_segment 关：跨段的局外链没有逐步 GAE 的对应")
+     if cfg.macro_seg_adv and not cfg.macro_cross_segment:
+         raise SystemExit("macro_seg_adv 要求 macro_cross_segment（局外步仍要等整局、按组放行，决策记录 269）")
+     if cfg.run_group > 1 and not cfg.macro_cross_segment:
+@@ -1123,7 +1125,7 @@ def main(argv=None):
+                             luck[0] += int(m_.sum()); luck[1] += float(lk.sum()); luck[2] += float((lk * lk).sum())
+                             luck[3] += float((d0 * d0).sum()); luck[4] += float(((d0 - cfg.gamma * lk) ** 2).sum())
+             for t, a_, r_ in zip(trajs, advs, rets):
+-                if not t.get("deferred"):
++                if not t.get("deferred") and cfg.macro_chain:     # macro_chain 关（消融）：局外步保留上面逐步 GAE 的结果
+                     gae_macro(t["values"], t["rewards"], t["macro"], cfg.macro_lam, a_, r_, t["forced"], t.get("boot", 0.0))
+                 r_[t["legacy"]] = t["values"][t["legacy"]]      # 价值目标取原值：这一步的回报是被改选的动作的，不是策略的（只对旧办法的轨迹）
+             # 战斗收尾落差按幕去均值（愚者决策记录第 8 条）：只动战斗步，局外步的优势已由 gae_macro 改写
+diff --git a/python/sts2rl/model.py b/python/sts2rl/model.py
+index 2ec48e8a..fe6388ff 100644
+--- a/python/sts2rl/model.py
++++ b/python/sts2rl/model.py
+@@ -100,6 +100,17 @@ class ModelConfig:
+     # 打开后旧检查点照常载入、上线时输出不变。格式 28 及以前的帧这几列补 0
+     obs_v29: bool = False
+     fh_detach: bool = False     # 为真时读数头读 z 的 detach 副本（辅助损失不传回主干）
++    # 消融：去掉实体编码（2026-11-23，论文补充实验，paper/.notes/补充实验_2026-11.md“观测编码消融”）。为真时网络看不到游戏内容是什么：
++    # 卡牌、遗物、药水、能力、怪物、招式、充能球、附魔、遭遇、事件的词表 ID 在进网络前一律换成 <unk>（ENTITY_ID_KINDS 的记录 ID、
++    # ENTITY_AUX_KINDS 的附加 ID、头部的 Boss 与上一场遭遇、换回遗物、特权的预抽遭遇），所以编号嵌入与内容表都只剩 <unk> 那一行；
++    # 地图节点类型、选项类别、角色、候选的替代项键等结构信息与全部数值特征照旧。随检查点的 config 保存，评测按它建网络，同样换掉
++    no_entity_id: bool = False
++    # 消融：去掉引擎算好的后果（同上，论文 3.x“观测与网络”列的三项及其直接对应）。为真时这些列在进网络前清零：
++    # 卡牌（记录类型 4、13）16–17 按当前状态算的伤害与格挡（基础值 5–6 保留）；生物（类型 2）16–19 回合结束预演
++    # （敌人：被动伤害、扣掉后的生命、本回合最多还能打多少、能否打死；玩家：充能球格挡、现在结束回合预计掉血、回合结束自伤、其他回合结束格挡）；
++    # 出牌与用药水候选的 4–7（对目标的伤害预览、段数、总伤害、能否打死）；所有候选的 8–13（当场格挡、冰霜被动变化、做完就结束回合预计掉血、
++    # 剩余生命、当场能量、进手张数）。怪物意图（生物 6–8、招式记录）与头部照旧
++    no_engine_preview: bool = False
+ 
+ 
+ # 预知记录的编码数：类别（0–11）× 本类里的先后（0–3）；子类（稀有度、是否升级、房间类型等，0–31）另一张表。见 features.collate_ragged
+@@ -125,6 +136,60 @@ def packed_meta(core_idx: np.ndarray, core_mask: np.ndarray) -> dict:
+             "pk_seg": np.repeat(np.arange(B, dtype=np.int64), L), "pk_T": int(offsets[-1]), "pk_max": int(L.max(initial=N_POOLS))}
+ 
+ 
++# 去掉实体编码（ModelConfig.no_entity_id）时换成 <unk> 的字段（记录类型见 观测格式.md 第三节）：
++# 记录 ID：2 生物、3 能力、4 卡牌、5 遗物、6 药水、7 充能球、10 招式、12 选牌说明（发起选牌的卡牌等）、13 已选的牌、16 出怪池（遭遇）、17 整局预生成内容
++# 附加 ID：4、12、13 的附魔，8 地图节点的任务标记（遗物或卡牌），9 选项附带的遗物（生物的附加 ID 是站位序号，不换）
++# 保留：1 全局（角色）、8 地图节点类型、9 选项类别（事件选项、休息处、奖励类型）、14 路线摘要（节点类型）
++ENTITY_ID_KINDS = (2, 3, 4, 5, 6, 7, 10, 12, 13, 16, 17)
++ENTITY_AUX_KINDS = (4, 8, 9, 12, 13)
++
++
++def mask_entity_ids(b: dict) -> dict:
++    """把一批输入里游戏内容的词表 ID 换成 <unk>（大于 1 的；0 填充与 1 照旧），返回浅拷贝的新字典，不改原来的张量。"""
++    out = dict(b)
++    ti = b["tok_ints"]
++    kind, ids, zone, owner, aux = ti.unbind(-1)
++    unk = torch.ones_like(ids)
++    ent = torch.zeros_like(kind, dtype=torch.bool)
++    for k in ENTITY_ID_KINDS:
++        ent |= kind == k
++    enta = torch.zeros_like(kind, dtype=torch.bool)
++    for k in ENTITY_AUX_KINDS:
++        enta |= kind == k
++    ids = torch.where(ent & (ids > 1), unk, ids)
++    aux = torch.where(enta & (aux > 1), unk, aux)
++    out["tok_ints"] = torch.stack([kind, ids, zone, owner, aux], -1)
++    for key in ("glob_boss", "glob_last", "gain_id", "priv_enc"):
++        t = b.get(key)
++        if isinstance(t, torch.Tensor) and t.numel():
++            out[key] = torch.where(t > 1, torch.ones_like(t), t)
++    return out
++
++
++def mask_engine_preview(b: dict) -> dict:
++    """把引擎算好的后果（ModelConfig.no_engine_preview 的那些列）清零，返回浅拷贝的新字典，不改原来的张量。"""
++    out = dict(b)
++    tf, kind = b["tok_feats"], b["tok_ints"][:, 0]
++    col = torch.arange(tf.shape[1], device=tf.device)
++    m = (((kind == 2)[:, None] & (col >= 16) & (col < 20))
++         | (((kind == 4) | (kind == 13))[:, None] & (col >= 16) & (col < 18)))
++    out["tok_feats"] = tf.masked_fill(m, 0)
++    cf, act = b["cand_feats"], b["cand_ints"][:, 0]
++    cc = torch.arange(cf.shape[1], device=cf.device)
++    mc = (((act == 2) | (act == 3))[:, None] & (cc >= 4) & (cc < 8)) | ((cc >= 8) & (cc < 14))[None, :]
++    out["cand_feats"] = cf.masked_fill(mc, 0)
++    return out
++
++
++def ablate_inputs(cfg: "ModelConfig", b: dict) -> dict:
++    """观测编码消融（no_entity_id、no_engine_preview）：都没打开时原样返回。"""
++    if cfg.no_entity_id:
++        b = mask_entity_ids(b)
++    if cfg.no_engine_preview:
++        b = mask_engine_preview(b)
++    return b
++
++
+ class PolicyValueNet(nn.Module):
+     def __init__(self, cfg: ModelConfig):
+         super().__init__()
+@@ -512,6 +577,8 @@ class PolicyValueNet(nn.Module):
+ 
+     def deck_score(self, b: dict) -> torch.Tensor:
+         """牌组打分的对数几率（sigmoid 后为 0–1 的 Boss 成绩预测）；b 应由 deck_view 的局面组成。"""
++        if self.cfg.no_entity_id or self.cfg.no_engine_preview:
++            b = ablate_inputs(self.cfg, b)
+         return self.phi_mlp(self._encode(b)[2]).squeeze(-1)
+ 
+     def forward(self, b: dict) -> tuple[torch.Tensor, torch.Tensor]:
+@@ -529,6 +596,8 @@ class PolicyValueNet(nn.Module):
+         """forward_phi 再加学习端要的附加输出（决策记录 261）：v_scalar 数值价值头、hl_logits 分类价值头、aux 战斗短程辅助头（没打开的不给）。"""
+         if bool(b.get("attend", False)) != self.cfg.macro_attend:
+             raise RuntimeError(f"组批的局外注意力扩展（attend={b.get('attend', False)}）与网络配置 macro_attend={self.cfg.macro_attend} 不一致（决策记录 262）")
++        if self.cfg.no_entity_id or self.cfg.no_engine_preview:
++            b = ablate_inputs(self.cfg, b)
+         rec = self._recycle(b) if self.cfg.recycle else None
+         e, ctx, g = self._encode(b, rec)
+         d = e.shape[1]
+@@ -601,6 +670,8 @@ class PolicyValueNet(nn.Module):
+         """推理专用的前向（搜索、评测；2026-11-16，tools/pimc_infer.py）：只算策略对数几率与价值，与 forward 的这两项逐位相同。
+         不算牌组打分、战斗辅助头这些只给学习端的输出；分类价值头只在 hl_beta 不为 0 时算（为 0 时 value + 0 ×（v_hl − value）就是 value）。
+         hl_beta 是否为 0 由 infer_ready() 读一次记下（显卡上每次读要等显卡）；没调过 infer_ready 时照常算分类头。"""
++        if self.cfg.no_entity_id or self.cfg.no_engine_preview:
++            b = ablate_inputs(self.cfg, b)
+         rec = self._recycle(b) if self.cfg.recycle else None
+         e, ctx, g = self._encode_checked(b, rec)
+         logits, _ = self._cand_logits(b, e, ctx, g, None if rec is None else rec["cand"])
+diff --git a/tools/remote/ablation/make_configs.py b/tools/remote/ablation/make_configs.py
+index 3bf3f314..8f93d780 100644
+--- a/tools/remote/ablation/make_configs.py
++++ b/tools/remote/ablation/make_configs.py
+@@ -42,6 +42,9 @@ ARMS = {
+     "A1": {"run_fraction": 1.0},
+     "A2": {"macro_chain": False, "combat_fight_boot": False, "combat_fight_boot_map": False, "combat_fight_center": False},
+     "A3": {"privileged": False},
++    # 观测编码消融（2026-11-23，用户：“观测编码现在被列为最重要的消融实验”，两条线各占一台）：网络输入端的开关（model.py ModelConfig）
++    "E1": {"model": {"no_entity_id": True}},
++    "E3": {"model": {"no_engine_preview": True}},
+ }
+ COMMON = {"obs_format": 28}
+ # 与机器有关、照原线 C 的值（6 × 27 个引擎，显卡推理与学习）；桥接不开
+@@ -67,7 +70,10 @@ def build(arm: str, seed: int, run_dir: str, end: int = END_STEPS, from_seg: str
+         nxt = SEGMENTS[i + 1][1] if i + 1 < len(SEGMENTS) and SEGMENTS[i + 1][1] < end else end
+         cfg.update(MACHINE)
+         cfg.update(COMMON)
+-        cfg.update(ARMS[arm])
++        ov = dict(ARMS[arm]); mo = ov.pop("model", None)
++        cfg.update(ov)
++        if mo:
++            cfg["model"] = {**cfg["model"], **mo}
+         cfg.update(run_dir=run_dir, seed=int(seed), total_steps=int(nxt))
+         out.append({"name": name, "start": start, "end": nxt, "commit": commit, "cfg": cfg})
+     return out
+diff --git a/tools/remote/ablation/run_arm.sh b/tools/remote/ablation/run_arm.sh
+index 500189ad..6a83eb1f 100755
+--- a/tools/remote/ablation/run_arm.sh
++++ b/tools/remote/ablation/run_arm.sh
+@@ -23,7 +23,7 @@ PY="$D/.venv/bin/python -I"
+ exec 9>"$RUN/.driver.lock"; flock -n 9 || { echo "已有驱动在跑 $TAG"; exit 0; }
+ # 引擎找得到词表与无副作用遗物表才起（2026-11-22：deploy-abl 编完改名，引擎载入空词表，第一次起训全部作废；见 check_engine_paths.sh）
+ bash "$D/tools/remote/ablation/check_engine_paths.sh" "$D" >> "$RUN/driver.log" 2>&1 || { log "引擎路径核对没过，不起（见上一行）"; exit 1; }
+-[ -f "$CFG/plan.txt" ] || $PY "$D/tools/remote/ablation/make_configs.py" --arm "$ARM" --seed "$SEED" --run-dir "$RUN" --out "$CFG" --from-seg "$FROM_SEG" >> "$RUN/driver.log" 2>&1 \
++[ -f "$CFG/plan.txt" ] || $PY "$D/tools/remote/ablation/make_configs.py" --arm "$ARM" --seed "$SEED" --run-dir "$RUN" --out "$CFG" --from-seg "$FROM_SEG" ${END:+--end "$END"} >> "$RUN/driver.log" 2>&1 \
+   || { log "生成配置失败"; exit 1; }
+ if [ -n "$INIT_CKPT" ] && [ ! -f "$RUN/latest.pt" ]; then
+   cp "$INIT_CKPT" "$RUN/latest.pt" && log "起点检查点 $INIT_CKPT（sha256 $(sha256sum "$INIT_CKPT" | cut -c1-16)…）→ latest.pt" || { log "拷起点检查点失败"; exit 1; }

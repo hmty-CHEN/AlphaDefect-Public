@@ -641,3 +641,51 @@ b64a4afe518a2c449689a3554c9679ad495219c8fd46be5ce5b1a643183e0c56  f:/root/hh/eva
 358a4766789cf1dfd02b575b001db5fca684069e4e4f17bacf75ec88e33896ed  f:/root/hh/eval/out/T2_silent113_rv1_greedy/runs_s57.jsonl
 6ed4af567e8bc6e2abaedc9ddba6fafaf65c0fbf5804fd3d52d3ca15bc021e51  f:/root/hh/eval/out/T2_silent113_rv1_greedy/runs_s58.jsonl
 081431a979c9c1fb3c9825e1f540ad227eab298765027e3735b48e590cd21742  f:/root/hh/eval/out/T2_silent113_rv1_greedy/runs_s59.jsonl
+
+## ablation/A0_068B_raw.csv
+c7d9fc696f4f1324e573816bbf4c6df653f261801eeb9116bb9df02812285f3c  local: .notes/data/ablation_ab1/A0_S7_raw.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/A0_068B_ema.csv
+cf5fd37f323979c4391059b94600a45b84ec9e605a2fd014afc0e9c59c548f0a  local: .notes/data/ablation_ab1/A0_S7_ema.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/A0_074B_raw.csv
+4b9017553a9fb5d62a623935fec2ab886bc636f744200fa0fb0a6f513713fa62  local: .notes/data/ablation_ab1/A0_S8_raw.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/A0_074B_ema.csv
+0af92ee94b4d1103174ff3dc0e578205027528ba961f7c728faa50d0630ae4a2  local: .notes/data/ablation_ab1/A0_S8_ema.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/E1_068B_raw.csv
+65084f7541c36bf9d6520aa9baa540d82295accb1fb9cdc67732b9e6d46bc514  local: .notes/data/ablation_ab1/E1_S7_raw.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/E1_068B_ema.csv
+eb937e2958a0cd34d3ae4c92c2b5e44073f4fb0a77497d3a4fe84e2a7a0c370c  local: .notes/data/ablation_ab1/E1_S7_ema.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/E1_074B_raw.csv
+fef4a9f7455c520adf0103765e9a3bf0616543c32ebf46da312486a3620ba48a  local: .notes/data/ablation_ab1/E1_S8_raw.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/E1_074B_ema.csv
+5142a9f1042160608ada34b460979beda433abea070d4e5db32e40806b98b1d9  local: .notes/data/ablation_ab1/E1_S8_ema.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/E3_068B_raw.csv
+ec79934376cd131b760aea3da8afc748ad39958563c3d27fb79993651298f98d  local: .notes/data/ablation_ab1/E3_S7_raw.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/E3_068B_ema.csv
+18b7d6ce9eeb22efb799e744126bd45f820f6a7d46d81629aba2a499ae7f55ed  local: .notes/data/ablation_ab1/E3_S7_ema.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/E3_074B_raw.csv
+f4315c46236b0211abc485898cab61c774656aaecedfc4a9c2ab9c28a44526e3  local: .notes/data/ablation_ab1/E3_S8_raw.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/E3_074B_ema.csv
+a164fc2881257a73dd79e45f3f69037bc9f2a94c0c8ba4aba1a22a471d490c87  local: .notes/data/ablation_ab1/E3_S8_ema.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/A1_068B_raw.csv
+2f854ebf12d173e7f6a7354a9c8c62a4ed2530975f1b559222e1ef2058471944  local: .notes/data/ablation_ab1/A1_S7_raw.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/A1_068B_ema.csv
+9032390b0029ecd8b35b97a065b9cfa67e35b092837146f2cd1101a23fe1b2ac  local: .notes/data/ablation_ab1/A1_S7_ema.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/A1_074B_raw.csv
+c712372344cc2a94950ad9feb7ffde5e398ff2de4fe39c801dc836516655398a  local: .notes/data/ablation_ab1/A1_S8_raw.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)
+
+## ablation/A1_074B_ema.csv
+888dd38b821ee6c7b18b55a288aadc50283faed8d5216fc1f3594697ad10f416  local: .notes/data/ablation_ab1/A1_S8_ema.jsonl (exported by finalize_abl.py from B:/root/paper_exp/abl_eval/)

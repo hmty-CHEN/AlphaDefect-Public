@@ -5,9 +5,10 @@ Scripts that regenerate the paper's figures and its card-and-relic tables from t
 | Script | Output (paper) | Inputs |
 |---|---|---|
 | `scripts/make_headline.py` | `figures/headline.pdf` (Figure 1) | win rates of Table 3 and Section 3.6, written in the script with their sources |
+| `scripts/make_ablation_curves.py` | `figures/ablation_curves.pdf` (Figure 5) | `results/ablation/routine_curves.csv` |
 | `scripts/make_learning_curves.py` | `figures/learning_curves.pdf` (Figure 4) | `data/training/learner_log_*.csv.gz`, `data/evaluation/routine_eval_*.jsonl.gz`, `data/evaluation/seed_outcomes_capability_tests.csv.gz` (the Defect, the Regent, the Silent); `paper/data/curves_v0113_raw.json` and `lr_v0113_raw.json` (the Fool, the Ironclad, the Necrobinder) |
-| `scripts/choice_stats.py` | `figures/card_picks.pdf` (Figure 5), `data/choice_stats.json`; prints the numbers of Appendix C | routine evaluations as above; `paper/data/choices_v0113_raw.json`; `paper/data/codex/` (players); `paper/data/vocab.json` |
-| `scripts/make_choices_tex.py` | `tables/appendix_choices_tables.tex` (Tables 8–10) | `paper/data/choice_stats.json` |
+| `scripts/choice_stats.py` | `figures/card_picks.pdf` (Figure 6), `data/choice_stats.json`; prints the numbers of Appendix C | routine evaluations as above; `paper/data/choices_v0113_raw.json`; `paper/data/codex/` (players); `paper/data/vocab.json` |
+| `scripts/make_choices_tex.py` | `tables/appendix_choices_tables.tex` (Tables 10–12) | `paper/data/choice_stats.json` |
 | `scripts/paper_stats.py` | prints Wilson intervals, paired differences and exact McNemar tests | per-seed result files (see `results/`) |
 
 ## Data in `paper/data/`
