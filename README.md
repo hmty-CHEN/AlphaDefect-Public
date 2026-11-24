@@ -2,7 +2,7 @@
 
 Reinforcement-learning agents for **Slay the Spire 2** at Ascension 10. For each of the six characters, one network makes every decision of a run, in combat and outside it. It is trained with PPO against the game's own rules, run headlessly, and can guide a decision-time search in the hardest fights.
 
-This repository holds what the paper *AlphaDefect: Expert-Level AI for Slay the Spire 2* (Chen, Yu, Komiyama and Huang, 2026; arXiv link to be added) reports on: the code, all trained networks, the seed lists, per-seed results, training logs, and the project's full working record.
+This repository holds what the paper *AlphaDefect: Expert-Level AI for Slay the Spire 2* (Chen, Yu, Komiyama and Huang, 2026; [arXiv:2611.31076](https://arxiv.org/abs/2611.31076)) reports on: the code, all trained networks, the seed lists, per-seed results, training logs, and the project's full working record.
 
 ## Results
 
@@ -96,4 +96,17 @@ The project's own code, documents, data and network weights are released under t
 
 ## Citation
 
-See [CITATION.cff](CITATION.cff). The arXiv identifier will be added when the paper is public.
+The paper is [arXiv:2611.31076](https://arxiv.org/abs/2611.31076). See also [CITATION.cff](CITATION.cff).
+
+```bibtex
+@misc{chen2026alphadefect,
+  title         = {AlphaDefect: Expert-Level AI for Slay the Spire 2},
+  author        = {Chen, Qiyue and Yu, Taian and Komiyama, Junpei and Huang, Haobo},
+  year          = {2026},
+  eprint        = {2611.31076},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  doi           = {10.48550/arXiv.2611.31076},
+  url           = {https://arxiv.org/abs/2611.31076}
+}
+```

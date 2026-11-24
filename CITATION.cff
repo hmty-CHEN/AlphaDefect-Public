@@ -25,4 +25,9 @@ preferred-citation:
     - family-names: Huang
       given-names: Haobo
   year: 2026
-  notes: "arXiv identifier to be added on publication."
+  doi: "10.48550/arXiv.2611.31076"
+  url: "https://arxiv.org/abs/2611.31076"
+  identifiers:
+    - type: other
+      value: "arXiv:2611.31076"
+      description: "arXiv identifier"
