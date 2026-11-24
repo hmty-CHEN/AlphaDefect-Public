@@ -13,7 +13,7 @@ authors:
 license: MIT
 repository-code: "https://github.com/hmty-CHEN/AlphaDefect-Public"
 preferred-citation:
-  type: article
+  type: generic
   title: "AlphaDefect: Expert-Level AI for Slay the Spire 2"
   authors:
     - family-names: Chen
