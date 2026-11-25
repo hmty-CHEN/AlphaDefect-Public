@@ -42,6 +42,8 @@ def main() -> None:
     ap.add_argument("--out", required=True)
     ap.add_argument("--file", default="combats.jsonl")
     ap.add_argument("--privileged", action="store_true", help="reset 带 privileged（帧里有抽牌堆真实顺序）")
+    ap.add_argument("--obs-format", type=int, default=None,
+                    help="reset 带 obs_format（检查点训练时的观测格式与角色默认格式不同时用，如愚者第 24,181 版是 27、v0.114.0 主线愚者默认 29）")
     ap.add_argument("--explore", type=float, default=0.0,
                     help="战斗里每个决策以这个概率改为按策略分布采样（温度 --temp），其余贪心：走出贪心路线以外的局面（搜索改选后会走到的那类），给对拍找分歧")
     ap.add_argument("--temp", type=float, default=1.0)
@@ -50,9 +52,14 @@ def main() -> None:
                     help='JSON，{"层数:战斗内第几个决策": 动作下标}：复现搜索臂改选后的路线（找搜索评测里镜像不一致的原因）')
     a = ap.parse_args()
     torch.set_num_threads(2)
-    blob = torch.load(a.ckpt, map_location="cpu", weights_only=False)
-    net = PolicyValueNet(ModelConfig(**blob["config"]["model"])).eval()
-    load_state(net, blob["state"])
+    # 载入照 ability_test.load_net：内容先验按特征名对齐、检查点之后新增的词表 ID 的嵌入行清零（不清零是建网时的随机值）
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from ability_test import load_net
+    net, blob = load_net(a.ckpt)
+    net.eval()
+    # 局外帧扩展注意力（cfg.macro_attend）的网络组批要带 attend=True，否则输入喂错（ability_test.EnsembleNet.from_ragged 的说明；
+    # 2026-11-25 用铁甲战士第 24,782 版打 v0.114.0 语料时没带，1 局只走到第 5 层）
+    attend = bool(getattr(net, "cfg", None) and net.cfg.macro_attend)
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     fh = open(out / a.file, "a", encoding="utf-8")
     env = Sts2Env(dll=Path(a.dll))
@@ -63,13 +70,13 @@ def main() -> None:
 
     def greedy(o) -> int:
         with torch.no_grad():
-            logits, _ = net(collate_ragged(Ragged.from_obs([o], np.array([MODE_RUN]))).to("cpu"))
+            logits, _ = net(collate_ragged(Ragged.from_obs([o], np.array([MODE_RUN])), attend=attend).to("cpu"))
         return int(logits[0, :o.num_actions].argmax())
 
     def explore(o, rng) -> int:
         """按 --explore 的概率采样（温度 --temp），否则贪心。"""
         with torch.no_grad():
-            logits, _ = net(collate_ragged(Ragged.from_obs([o], np.array([MODE_RUN]))).to("cpu"))
+            logits, _ = net(collate_ragged(Ragged.from_obs([o], np.array([MODE_RUN])), attend=attend).to("cpu"))
         lg = logits[0, :o.num_actions].float()
         if o.num_actions > 1 and rng.random() < a.explore:
             p = torch.softmax(lg / a.temp, -1).numpy()
@@ -81,8 +88,9 @@ def main() -> None:
 
     for s in range(a.start, a.start + a.seeds):
         seed = f"{a.prefix}{s:04d}"
-        req = {"op": "reset", "mode": "run", "character": a.character, "ascension": 10, "seed": seed, "route_summary": True}
+        req = {"op": "reset", "mode": "run", "character": a.character, "ascension": 10, "seed": seed, "route_summary": True, "snapshots": True}
         if a.privileged: req["privileged"] = True
+        if a.obs_format is not None: req["obs_format"] = a.obs_format
         raw, o = request(req)
         n_comb, steps = 0, 0
         rng = np.random.default_rng(s * 7919 + 17)
