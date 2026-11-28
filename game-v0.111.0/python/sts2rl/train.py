@@ -875,6 +875,7 @@ def main(argv=None):
             # 各类练习这一批的 [结束局数, 收到步数, 入训步数, 胜场, 战损合计（战斗练习：血量变化占最大生命，负为掉血）]（决策记录 197，只统计）
             cur: dict[str, list[float]] = {}
             phi_fresh = []      # 这一批新到的打分标签：训练打分头之前先打一次分，看它在没见过的局面上的区分能力
+            engine_err_n = 0    # 这一批里采集端报来的引擎报错局数（这些局已作废，不在 ended 里）
             t_collect = time.time()
             while n_steps < cfg.batch_steps:
                 # 刚启动时引擎要一起初始化（v0.111.0 起 192 个引擎同时启动要 60 多秒），收到第一条轨迹之前多等一会
@@ -886,6 +887,9 @@ def main(argv=None):
                 got_any = True
                 if kind == "error":
                     raise RuntimeError(f"采集进程 {rank} 出错：\n{item}")
+                if kind == "engine_error":      # 引擎报错的局已在采集端作废、没有轨迹；只计数，并入这一版的 stuck（监督脚本的 0.1% 报警线按它算）
+                    engine_err_n += 1
+                    continue
                 item["remote"] = rank >= REMOTE_RANK0       # 远程采集机（bridge.py）的采集进程编号从 REMOTE_RANK0 起
                 if item["mode"] == MODE_RUN:
                     run_items.append(item)
@@ -1408,7 +1412,7 @@ def main(argv=None):
                    # 双机协同：这一版用到的步数里来自远程采集机的，以及桥的流量（上一版以来）
                    "cur": {k: [int(a), int(b), int(c), int(d), round(e, 2)] for k, (a, b, c, d, e) in sorted(cur.items())}, "macro_eff": macro_eff, "macro_diag": mdiag, "health": health,
                    "remote_used": int(sum(int(t["fresh"].sum()) for t in trajs if t.get("remote"))), **(bridge.stats() if bridge is not None else {}),
-                   "stuck": int(sum(t["stuck"] for t in ended)), "progress": round(progress, 3),
+                   "stuck": int(sum(t["stuck"] for t in ended)) + engine_err_n, "engine_errors": engine_err_n, "progress": round(progress, 3),
                    "lag": round(float(np.mean([version - 1 - t["vers"][-1] for t in ended])), 2),
                    "t_collect": round(t_collect, 2), "t_learn": round(t_learn, 2), "t_prep": round(t_prep, 2), "t_ppo": round(t_ppo, 2), "t_mb_wait": round(timing.get("wait", 0.0), 2), "epochs": epochs_done, **{k: round(v, 4) for k, v in stats.items()}}
             if flush_cards:
