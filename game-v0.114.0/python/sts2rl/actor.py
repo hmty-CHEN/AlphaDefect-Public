@@ -742,6 +742,8 @@ def _actor_loop(rank: int, cfg, weights_path: str, out_queue, stop_event) -> Non
                 value_probe.begin(trajs[i])
             env.send(i, trajs[i].req)
 
+    engine_errors = [0]     # 本采集进程累计的引擎报错数（只在日志里报；详情见 stuck.jsonl 与引擎日志的 [error-detail]）
+
     def log_stuck(t: Trajectory, reason: str, detail: str = "") -> None:
         """卡住的局记一行到 run_dir/stuck.jsonl（2026-10-27 起）：原因、哪一版、开局请求原文、依次走过的动作、最后几步的决策类型，
         照着重放（reset 请求带 "replay": actions）就能复现。引擎判卡住、引擎报错的，引擎日志里另有带游戏报错全文的 [stuck-detail] / [error-detail]。"""
@@ -782,11 +784,14 @@ def _actor_loop(rank: int, cfg, weights_path: str, out_queue, stop_event) -> Non
     def receive(i: int, o) -> None:
         t = trajs[i]
         if isinstance(o, EngineError):
-            # 引擎报错：这一局按卡住结束（记为失败），开下一局；不让整个采集进程退出
-            print(f"采集进程 {rank} 引擎 {i} 报错，本局按卡住结束：{str(o).splitlines()[0][:200]}", flush=True)
-            log_stuck(t, "引擎报错", str(o))
-            hp = t.hp_start if t.hp_start is not None else 0
-            end(t, SimpleNamespace(victory=False, stuck=True, hp=hp, floor=t.floor, act=t.act))
+            # 引擎报错（宿主抛异常，多半是新移植的牌/事件分支有问题）：这一局整局作废，开下一局；不让整个采集进程退出。
+            # 不能走 end()/_finish()：那样会按 boot=0 的死亡败局（再加 lose_reward）送给学习端，模型会学成“选这张牌 = 必死”，
+            # 课程统计也会把这场战斗记成输（2026-11-28 外部移植方发现）。已经分段送出的前几段是真实走过的转移，照旧；
+            # 学习端按局编号等后续段的局外决策（macro_pending）超时（macro_defer_ttl）后自行清掉，不会拿它们当终局。
+            engine_errors[0] += 1
+            print(f"采集进程 {rank} 引擎 {i} 报错（累计 {engine_errors[0]} 次），本局作废、不送学习端：{str(o).splitlines()[0][:200]}", flush=True)
+            log_stuck(t, "引擎报错（本局作废）", str(o))
+            _put(out_queue, ("engine_error", rank, {"err": str(o).splitlines()[0][:200] if str(o) else ""}))
             start(i)
             return
         if t.mode == MODE_RUN and o.extra and "combat" in o.extra:
